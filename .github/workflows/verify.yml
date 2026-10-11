@@ -1,0 +1,17 @@
+name: M1 offline foundation
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+      - name: Restore, build, focused tests, secret gate, formatting
+        shell: pwsh
+        run: ./scripts/verify.ps1 -Locked

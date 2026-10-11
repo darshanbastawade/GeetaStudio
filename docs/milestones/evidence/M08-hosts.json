@@ -1,0 +1,13 @@
+{
+  "milestone": "M08",
+  "staffHttp": 200,
+  "portsFree": true,
+  "webWorkflowLink": true,
+  "ownedHostsStopped": true,
+  "webHttp": 200,
+  "apiHostedWorkerRestart": true,
+  "liveCalls": 0,
+  "verifiedUtc": "2026-10-10T23:03:20.2234061+00:00",
+  "rawFixturePromptAbsentFromOperationalLog": true,
+  "freshInteractiveF5": false
+}

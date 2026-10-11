@@ -1,0 +1,63 @@
+@page "/"
+@rendermode InteractiveServer
+@inject ApiHealthClient Api
+@inject IWebHostEnvironment HostEnvironment
+@inject IConfiguration Configuration
+
+<PageTitle>Geeta Studio</PageTitle>
+
+<main>
+    <p class="eyebrow">ContentOS / Geeta Studio</p>
+    <h1>Engineering foundation</h1>
+    <p><a href="http://localhost:5100/staff/workflows">Draft workflows and human review</a></p>
+    <p>A working local shell for the API, web app, and background worker.</p>
+    @if (HostEnvironment.IsDevelopment())
+    {
+        <p class="fixture">Development / fixture mode. Local runtime probes and original AI drafts use controlled fixtures. Live calls require an explicitly enabled provider profile and budget.</p>
+    }
+    <section aria-labelledby="api-heading">
+        <h2 id="api-heading">API connection</h2>
+        <p role="status" aria-live="polite">@(_result?.Message ?? "Checking API…")</p>
+        @if (_result is { Reachable: true, Health: not null })
+        {
+            <p>Last check: @_result.Health.CheckedAtUtc.ToLocalTime().ToString("g") (your server's local time).</p>
+        }
+        <button @onclick="RefreshAsync" disabled="@_checking">@(_checking ? "Checking…" : "Check again")</button>
+    </section>
+    <section aria-labelledby="content-heading">
+        <h2 id="content-heading">Content foundations</h2>
+        <p>Geeta and a synthetic learning universe share versioned content, editorial review, and export operations. Your tenant membership controls access; a universe identifies a topic.</p>
+        <p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/') + "/api/v1/core/tenants")">Inspect your tenants in the secured staff API</a> using your Windows account. Local examples contain synthetic text, not verified scripture.</p>
+    </section>
+    <section aria-labelledby="sources-heading">
+        <h2 id="sources-heading">Sources and permissions</h2>
+        <p>Register editions, import text files, review permissions, and track revocation impacts.</p>
+        <p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/') + "/staff/sources")">Open the secured source registry</a> using your Windows account.</p>
+    </section>
+    <section aria-labelledby="reader-heading">
+        <h2 id="reader-heading">Geeta source reader</h2>
+        <p>Read approved Sanskrit and published translation with edition locators, rights and honest corpus coverage.</p>
+        <p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/') + "/staff/read")">Open the secured chapter reader</a> using your Windows account.</p>
+    </section>
+    <p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/') + "/staff/knowledge")">Open knowledge and evidence search</a> using your Windows account.</p>
+    <p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/') + "/staff/evidence")">Open evidence and interpretation review</a> using your Windows account.</p>
+    <p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/') + "/staff/ai")">Open AI tasks and budgets</a> using your Windows account.</p>
+    <p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/' ) + "/staff/lessons")">Compare audience lessons and review translations</a> using your Windows account.</p>
+    <p>SQL-backed runtime jobs and provider routes are managed through the secured staff API. With runtime disabled, the worker remains idle.</p>
+</main>
+
+@code {
+    private ApiHealthResult? _result;
+    private bool _checking;
+
+    protected override Task OnInitializedAsync() => RefreshAsync();
+
+    private async Task RefreshAsync()
+    {
+        _checking = true;
+        try { _result = await Api.CheckAsync(); }
+        finally { _checking = false; }
+    }
+}
+
+

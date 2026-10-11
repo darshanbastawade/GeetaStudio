@@ -1,0 +1,31 @@
+# .NET build and local IDE output
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+TestResults/
+coverage/
+
+# Local credentials and environment overrides
+.env
+.env.*
+!.env.example
+**/secrets.json
+**/appsettings.Local.json
+*.pfx
+*.p12
+*.key
+
+# Runtime output, local databases, caches, and generated media
+.local/
+artifacts/
+logs/
+*.log
+*.mdf
+*.ldf
+*.bak
+
+# OS metadata
+Thumbs.db
+.DS_Store

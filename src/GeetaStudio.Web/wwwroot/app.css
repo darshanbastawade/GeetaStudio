@@ -1,0 +1,11 @@
+:root { font-family: system-ui, sans-serif; color: #23342f; background: #f6f5ef; }
+body { margin: 0; }
+main { max-width: 760px; margin: 4rem auto; padding: 0 1.5rem; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+.eyebrow { text-transform: uppercase; letter-spacing: .1em; color: #536c60; }
+.fixture { padding: 1rem; background: #fff1cc; border-radius: .5rem; }
+section { margin: 2rem 0; padding: 1.5rem; background: white; border: 1px solid #d3dfd7; border-radius: .75rem; }
+button { padding: .7rem 1rem; border: 0; border-radius: .4rem; color: white; background: #285b47; cursor: pointer; }
+button:disabled { opacity: .6; cursor: wait; }
+button:focus-visible, a:focus-visible { outline: 3px solid #b9751b; outline-offset: 3px; }
+#blazor-error-ui { display: none; position: fixed; bottom: 0; background: #fff1cc; padding: 1rem; width: 100%; }

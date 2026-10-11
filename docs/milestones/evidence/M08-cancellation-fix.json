@@ -1,0 +1,33 @@
+{
+  "verifiedDate": "2026-10-11",
+  "finding": "P1 workflow cancellation before AI admission",
+  "status": "Fixed",
+  "offline": {
+    "format": "Passed",
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "passed": 71,
+    "skipped": 0,
+    "failed": 0
+  },
+  "focusedSql": {
+    "ai": 10,
+    "passed": 25,
+    "skipped": 0,
+    "failed": 0,
+    "workflow": 15
+  },
+  "originalCounterexample": {
+    "liveCalls": 0,
+    "finalWorkflowState": "Cancelled",
+    "fixVerified": true,
+    "noAiBefore": true,
+    "stateAtCancel": "Cancelled",
+    "providerSubmittedAfterCancellation": false
+  },
+  "migration": "None",
+  "broadSqlRegression": "Unresolved; not rerun during focused fix",
+  "interactiveDebug": "Not rerun",
+  "liveProvider": "Not run",
+  "nextMilestone": "M09 Not Started"
+}

@@ -1,0 +1,51 @@
+{
+  "verifiedDate": "2026-10-11",
+  "milestones": [
+    "M05",
+    "M06",
+    "M07",
+    "M08"
+  ],
+  "offline": {
+    "passed": 70,
+    "failed": 0
+  },
+  "sql": {
+    "total": 38,
+    "passed": 35,
+    "failed": 3,
+    "skipped": 0,
+    "byMilestone": {
+      "M05": {
+        "passed": 9,
+        "failed": 0
+      },
+      "M06": {
+        "passed": 4,
+        "failed": 3
+      },
+      "M07": {
+        "passed": 10,
+        "failed": 0
+      },
+      "M08": {
+        "passed": 12,
+        "failed": 0
+      }
+    }
+  },
+  "cancellation": {
+    "scenario": "cancel-before-tool-dispatch-and-AI-admission",
+    "noAiBefore": true,
+    "stateAtCancel": "Cancelled",
+    "providerSubmittedAfterCancellation": true,
+    "aiOutcome": "Success",
+    "fixtureSpent": 0.00006,
+    "currency": "USD",
+    "finalWorkflowState": "Cancelled",
+    "bugReproduced": true
+  },
+  "liveCalls": 0,
+  "implementationPatched": false,
+  "signOff": false
+}

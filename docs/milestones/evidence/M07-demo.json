@@ -1,0 +1,247 @@
+﻿{
+    "milestone":  "M07",
+    "tier":  "OfflineVerified",
+    "verifiedUtc":  "2026-10-10T17:56:03.3501831+00:00",
+    "tenantId":  "e1fd48b9-434b-cbac-2efc-0b979070bf61",
+    "universeId":  "dc1ef7c7-4511-a29c-b929-eebda69d26b2",
+    "first":  {
+                  "id":  "f1b1a31d-e113-4c60-ad3d-e5eb653eed42",
+                  "operationId":  "feb4ac49-cbf8-4558-8984-ff8b7e29097d",
+                  "state":  "Completed",
+                  "outcome":  "Success",
+                  "snapshot":  {
+                                   "routeId":  "bd189aab-f93b-48b5-aac6-4cc82cb5e84a",
+                                   "route":  {
+                                                 "task":  "draft",
+                                                 "version":  "fixture-d4609b7723b240288ba77c7395f2546c",
+                                                 "profiles":  [
+                                                                  "b7d4be76-1b09-4648-9d4d-1df6e51a30e4"
+                                                              ],
+                                                 "runLimit":  0.1,
+                                                 "currency":  "USD",
+                                                 "deadlineSeconds":  60,
+                                                 "structured":  true,
+                                                 "streaming":  true,
+                                                 "tools":  false,
+                                                 "classification":  "Public",
+                                                 "region":  "local",
+                                                 "maxRetentionDays":  0,
+                                                 "allowTraining":  false,
+                                                 "policyVersion":  "owned-policy.v1",
+                                                 "promptVersion":  "generated-text.v1"
+                                             },
+                                   "profiles":  [
+                                                    {
+                                                        "id":  "b7d4be76-1b09-4648-9d4d-1df6e51a30e4",
+                                                        "connectionId":  "a61a7f1b-a2ef-4310-b1af-871ea64765e1",
+                                                        "settings":  {
+                                                                         "adapter":  "fixture.text.a",
+                                                                         "model":  "fixture-a.v1",
+                                                                         "capability":  "ai.text",
+                                                                         "locale":  "en-IN",
+                                                                         "structured":  true,
+                                                                         "streaming":  true,
+                                                                         "tools":  false,
+                                                                         "maxInputBytes":  32768,
+                                                                         "maxOutputTokens":  128,
+                                                                         "pricing":  {
+                                                                                         "version":  "fixture-d4609b7723b240288ba77c7395f2546c",
+                                                                                         "currency":  "USD",
+                                                                                         "inputPerMillion":  1,
+                                                                                         "cachedInputPerMillion":  0.25,
+                                                                                         "outputPerMillion":  1
+                                                                                     },
+                                                                         "policy":  {
+                                                                                        "classifications":  [
+                                                                                                                "Public",
+                                                                                                                "Internal"
+                                                                                                            ],
+                                                                                        "region":  "local",
+                                                                                        "retentionDays":  0,
+                                                                                        "training":  false,
+                                                                                        "policyVersion":  "owned-policy.v1"
+                                                                                    },
+                                                                         "qualification":  "OfflineVerified",
+                                                                         "evidenceReference":  "fixture:M07-original-fiction",
+                                                                         "scenario":  "success"
+                                                                     }
+                                                    }
+                                                ],
+                                   "locale":  "en-IN",
+                                   "requestHash":  "F1BE9A5BA2CA667A0DF90E96266712ED691EFE6602C031F0D605D7B731EB9A1B",
+                                   "sourceIds":  [
+
+                                                 ],
+                                   "outputLabel":  "GeneratedDraft"
+                               },
+                  "reserved":  0.00000000,
+                  "spent":  0.00006000,
+                  "output":  {
+                                 "text":  "Fixture A: an original calm conversation.",
+                                 "citations":  [
+
+                                               ]
+                             },
+                  "attempts":  [
+                                   {
+                                       "id":  "026bbece-d690-4259-a5f9-1f06ca44c9d4",
+                                       "number":  1,
+                                       "profileId":  "b7d4be76-1b09-4648-9d4d-1df6e51a30e4",
+                                       "connectionId":  "a61a7f1b-a2ef-4310-b1af-871ea64765e1",
+                                       "state":  "Completed",
+                                       "outcome":  "Success",
+                                       "usage":  {
+                                                     "inputTokens":  40,
+                                                     "cachedInputTokens":  0,
+                                                     "outputTokens":  20
+                                                 },
+                                       "ceiling":  0.00138300,
+                                       "cost":  0.00006000,
+                                       "providerRequestId":  "fixture-a-026bbece-d690-4259-a5f9-1f06ca44c9d4",
+                                       "reconciliationEvidence":  null
+                                   }
+                               ],
+                  "sourceCitations":  [
+
+                                      ]
+              },
+    "second":  {
+                   "id":  "330ea84c-811b-49ea-92a9-4e547d953624",
+                   "operationId":  "5ff372b4-d53d-464c-80b2-ba53cbadcdcc",
+                   "state":  "Completed",
+                   "outcome":  "Success",
+                   "snapshot":  {
+                                    "routeId":  "0745c99a-6e1c-4e9c-8c6a-c71180fcf059",
+                                    "route":  {
+                                                  "task":  "draft",
+                                                  "version":  "fixture-d4609b7723b240288ba77c7395f2546c",
+                                                  "profiles":  [
+                                                                   "d03bf3cd-5055-49db-ac98-40fea2a31d30"
+                                                               ],
+                                                  "runLimit":  0.1,
+                                                  "currency":  "USD",
+                                                  "deadlineSeconds":  60,
+                                                  "structured":  true,
+                                                  "streaming":  true,
+                                                  "tools":  false,
+                                                  "classification":  "Public",
+                                                  "region":  "local",
+                                                  "maxRetentionDays":  0,
+                                                  "allowTraining":  false,
+                                                  "policyVersion":  "owned-policy.v1",
+                                                  "promptVersion":  "generated-text.v1"
+                                              },
+                                    "profiles":  [
+                                                     {
+                                                         "id":  "d03bf3cd-5055-49db-ac98-40fea2a31d30",
+                                                         "connectionId":  "2f3284b4-bab9-46ea-bed6-988e4863580a",
+                                                         "settings":  {
+                                                                          "adapter":  "fixture.text.b",
+                                                                          "model":  "fixture-b.v1",
+                                                                          "capability":  "ai.text",
+                                                                          "locale":  "en-IN",
+                                                                          "structured":  true,
+                                                                          "streaming":  true,
+                                                                          "tools":  false,
+                                                                          "maxInputBytes":  32768,
+                                                                          "maxOutputTokens":  128,
+                                                                          "pricing":  {
+                                                                                          "version":  "fixture-d4609b7723b240288ba77c7395f2546c",
+                                                                                          "currency":  "USD",
+                                                                                          "inputPerMillion":  1,
+                                                                                          "cachedInputPerMillion":  0.25,
+                                                                                          "outputPerMillion":  1
+                                                                                      },
+                                                                          "policy":  {
+                                                                                         "classifications":  [
+                                                                                                                 "Public",
+                                                                                                                 "Internal"
+                                                                                                             ],
+                                                                                         "region":  "local",
+                                                                                         "retentionDays":  0,
+                                                                                         "training":  false,
+                                                                                         "policyVersion":  "owned-policy.v1"
+                                                                                     },
+                                                                          "qualification":  "OfflineVerified",
+                                                                          "evidenceReference":  "fixture:M07-original-fiction",
+                                                                          "scenario":  "success"
+                                                                      }
+                                                     }
+                                                 ],
+                                    "locale":  "en-IN",
+                                    "requestHash":  "1E034B612725B5B21D733AF17A250A1A64B92C88F123EDFB3EBC4B3647B32B7C",
+                                    "sourceIds":  [
+
+                                                  ],
+                                    "outputLabel":  "GeneratedDraft"
+                                },
+                   "reserved":  0.00000000,
+                   "spent":  0.00008300,
+                   "output":  {
+                                  "text":  "Fixture B: listen, consider alternatives, then choose.",
+                                  "citations":  [
+
+                                                ]
+                              },
+                   "attempts":  [
+                                    {
+                                        "id":  "6c6aa941-12cd-4ca1-acba-8e5295ba2dbd",
+                                        "number":  1,
+                                        "profileId":  "d03bf3cd-5055-49db-ac98-40fea2a31d30",
+                                        "connectionId":  "2f3284b4-bab9-46ea-bed6-988e4863580a",
+                                        "state":  "Completed",
+                                        "outcome":  "Success",
+                                        "usage":  {
+                                                      "inputTokens":  55,
+                                                      "cachedInputTokens":  0,
+                                                      "outputTokens":  28
+                                                  },
+                                        "ceiling":  0.00138300,
+                                        "cost":  0.00008300,
+                                        "providerRequestId":  "fixture-b-6c6aa941-12cd-4ca1-acba-8e5295ba2dbd",
+                                        "reconciliationEvidence":  null
+                                    }
+                                ],
+                   "sourceCitations":  [
+
+                                       ]
+               },
+    "replayId":  "f1b1a31d-e113-4c60-ad3d-e5eb653eed42",
+    "unsupportedHttp":  400,
+    "concurrentStatuses":  [
+                               200,
+                               400
+                           ],
+    "budgetAfter":  {
+                        "id":  "91980c51-0db1-414f-8913-a6ff71c339c9",
+                        "capability":  "ai.text",
+                        "currency":  "INR",
+                        "startsUtc":  "2026-10-10T17:44:17.8370656+00:00",
+                        "endsUtc":  "2026-10-11T17:45:17.8370656+00:00",
+                        "limit":  0.00300000,
+                        "reserved":  0.00000000,
+                        "spent":  0.00017907,
+                        "rowVersion":  "AAAAAAAADSU="
+                    },
+    "rollbackRoute":  "bd189aab-f93b-48b5-aac6-4cc82cb5e84a",
+    "routedEmbeddingIndex":  {
+                                 "id":  "9c98d42c-374a-49f0-a42c-2858aa0c502f",
+                                 "key":  "m07-d4609b7723b240288ba77c7395f2546c",
+                                 "manifestId":  "dfc37945-ff7b-4498-936e-7d6a4afaefe7",
+                                 "locale":  "en-IN",
+                                 "adapter":  "sql-hybrid-v1",
+                                 "model":  "ai-embedding:547f71df-e059-4221-a431-3a13a858c533:d12d8907-9fb1-4e31-888c-337003befdc0",
+                                 "embeddingSpaceId":  "572620209DBA97E8B812120B70CBA478DCA7FAEB3AFBF886E20387C0CEAE1F35",
+                                 "dimensions":  128,
+                                 "normalization":  "l2",
+                                 "chunking":  "verse-component-v1",
+                                 "state":  "Ready",
+                                 "chunks":  25,
+                                 "error":  null,
+                                 "validationEvidence":  null,
+                                 "validationJson":  null,
+                                 "rowVersion":  "AAAAAAAADjQ="
+                             },
+    "liveCalls":  0,
+    "productionQualified":  false
+}

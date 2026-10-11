@@ -1,0 +1,11 @@
+{
+  "version": "M07-original-fiction.v1",
+  "provenance": "Original ContentOS demonstration prompts; no scripture, third-party text or personal data.",
+  "classification": "Public",
+  "reviewEvidence": "fixture:M07-original-fiction",
+  "cases": [
+    {"task": "draft", "prompt": "Write an original calm conversation.", "expectedAny": ["calm", "listen"]},
+    {"task": "draft", "prompt": "Draft a thoughtful original conversation about considering alternatives.", "expectedAny": ["conversation", "alternatives"]}
+  ],
+  "qualityScope": "Small transparent keyword/structured-output proxy only. Human editorial quality and live vendor qualification remain separate."
+}

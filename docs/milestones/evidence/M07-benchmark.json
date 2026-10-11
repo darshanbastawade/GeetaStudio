@@ -1,0 +1,63 @@
+﻿{
+    "fixture":  "M07-original-fiction.v1",
+    "qualityScope":  "Small transparent keyword/structured-output proxy only. Human editorial quality and live vendor qualification remain separate.",
+    "verifiedUtc":  "2026-10-10T17:56:04.8398427+00:00",
+    "routingChanged":  false,
+    "liveEnabled":  false,
+    "results":  [
+                    {
+                        "task":  "draft",
+                        "runId":  "e00be7c3-8033-4a53-9e31-43c00b7389fd",
+                        "routeId":  "bd189aab-f93b-48b5-aac6-4cc82cb5e84a",
+                        "routeVersion":  "fixture-d4609b7723b240288ba77c7395f2546c",
+                        "outcome":  "Success",
+                        "available":  true,
+                        "elapsedMs":  188,
+                        "structuredQuality":  true,
+                        "keywordQuality":  true,
+                        "humanQuality":  "NotReviewed",
+                        "cost":  0.00006000,
+                        "unresolvedReservation":  0.00000000,
+                        "currency":  "USD",
+                        "attempts":  [
+                                         {
+                                             "outcome":  "Success",
+                                             "profileId":  "b7d4be76-1b09-4648-9d4d-1df6e51a30e4",
+                                             "usage":  {
+                                                           "inputTokens":  40,
+                                                           "cachedInputTokens":  0,
+                                                           "outputTokens":  20
+                                                       },
+                                             "cost":  0.00006000
+                                         }
+                                     ]
+                    },
+                    {
+                        "task":  "draft",
+                        "runId":  "f44a8b80-b9fa-4b8e-86ad-8809e015b333",
+                        "routeId":  "bd189aab-f93b-48b5-aac6-4cc82cb5e84a",
+                        "routeVersion":  "fixture-d4609b7723b240288ba77c7395f2546c",
+                        "outcome":  "Success",
+                        "available":  true,
+                        "elapsedMs":  154,
+                        "structuredQuality":  true,
+                        "keywordQuality":  true,
+                        "humanQuality":  "NotReviewed",
+                        "cost":  0.00006000,
+                        "unresolvedReservation":  0.00000000,
+                        "currency":  "USD",
+                        "attempts":  [
+                                         {
+                                             "outcome":  "Success",
+                                             "profileId":  "b7d4be76-1b09-4648-9d4d-1df6e51a30e4",
+                                             "usage":  {
+                                                           "inputTokens":  40,
+                                                           "cachedInputTokens":  0,
+                                                           "outputTokens":  20
+                                                       },
+                                             "cost":  0.00006000
+                                         }
+                                     ]
+                    }
+                ]
+}

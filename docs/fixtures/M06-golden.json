@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Project owner",
+  "reviewEvidence": "manual:M06-project-owner-confirmation-2026-10-10",
+  "reviewScope": "Two retrieval relevance/no-answer labels confirmed by the project owner in this chat; no additional scholarly or model-quality review.",
+  "edition": "Besant 1922, Wikisource revision 9204505",
+  "questions": [
+    {
+      "query": "Where did the opposing armies gather?",
+      "expectedChapter": 1,
+      "expectedVerse": 1,
+      "kind": "Translation",
+      "locale": "en-IN",
+      "noAnswer": false
+    },
+    {
+      "query": "How do I bake a pizza?",
+      "expectedChapter": null,
+      "expectedVerse": null,
+      "kind": "Translation",
+      "locale": "en-IN",
+      "noAnswer": true
+    }
+  ]
+}

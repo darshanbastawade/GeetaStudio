@@ -1,0 +1,11 @@
+{
+  "readiness": "Ready",
+  "evidencePage": 200,
+  "web": 200,
+  "rubricsReadable": true,
+  "quotation": 422,
+  "history": 422,
+  "stale": "StaleInheritedEvidence",
+  "affected": 2,
+  "worker": "SQL runtime started"
+}

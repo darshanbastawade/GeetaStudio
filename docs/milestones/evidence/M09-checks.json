@@ -1,0 +1,70 @@
+{
+  "verifiedDate": "2026-10-11",
+  "milestone": "M09",
+  "implementation": "Implemented",
+  "status": "In Progress",
+  "reason": "Combined SQL regression remains failed; fixture qualification does not authorize public release.",
+  "lockedRestore": "Passed",
+  "build": {
+    "warnings": 0,
+    "errors": 0,
+    "passed": true
+  },
+  "offline": {
+    "skipped": 0,
+    "failed": 0,
+    "passed": 74
+  },
+  "sqlRuns": [
+    {
+      "total": 98,
+      "failed": 6,
+      "passed": 92
+    },
+    {
+      "total": 98,
+      "failed": 1,
+      "passed": 97
+    },
+    {
+      "total": 98,
+      "finalCombined": true,
+      "failed": 6,
+      "passed": 92
+    }
+  ],
+  "focusedM09": {
+    "offlineCases": 3,
+    "passed": 10,
+    "failed": 0,
+    "durationSeconds": 32,
+    "skipped": 0,
+    "sqlCases": 7
+  },
+  "format": "Passed",
+  "pendingCoreModelChanges": false,
+  "pendingRuntimeModelChanges": false,
+  "javaScriptSyntax": "Passed",
+  "mockDomHandlers": "Passed",
+  "powershellAndVsCodeSyntax": "Passed",
+  "windowsFixtureDemo": "Passed",
+  "restrictedDevelopmentApi": "Passed",
+  "windowsStaffHttpStatus": 200,
+  "draftDevelopmentProfiles": 12,
+  "ownedApisStopped": true,
+  "ports5100And5200Free": true,
+  "preservedDevelopment": {
+    "characters": 8,
+    "runtimeMigrationHistory": 3,
+    "coreMigrationHistory": 9,
+    "runtimeJobs": 10,
+    "universes": 3,
+    "corpusVerseRecords": 50
+  },
+  "migration": "20261011015856_M9Lessons",
+  "liveCalls": 0,
+  "humanMultilingualQualityVerified": false,
+  "interactiveM09F5Verified": false,
+  "publicReleaseQualified": false,
+  "M10Started": false
+}

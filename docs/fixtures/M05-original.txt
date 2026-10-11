@@ -1,0 +1,3 @@
+Original viewpoint A: the traveller should share tea.
+Original viewpoint B: the traveller should keep tea for later.
+Corrected original viewpoint A: sharing tea is an optional suggestion.

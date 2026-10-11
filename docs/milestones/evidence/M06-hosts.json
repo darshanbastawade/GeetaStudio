@@ -1,0 +1,8 @@
+{
+  "readiness": "Ready",
+  "staffKnowledge": 200,
+  "web": 200,
+  "linkPresent": true,
+  "indexWorker": "API-hosted durable SQL background processor",
+  "worker": "Existing runtime worker starts separately"
+}

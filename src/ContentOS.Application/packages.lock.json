@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "contentos.contracts": {
+        "type": "Project"
+      },
+      "contentos.domain": {
+        "type": "Project",
+        "dependencies": {
+          "Vendor.DeliberateM0Probe": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}

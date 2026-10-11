@@ -1,0 +1,12 @@
+{
+  "milestone": "M07",
+  "verifiedUtc": "2026-10-10T17:56:06.6832945+00:00",
+  "readiness": "Ready",
+  "staffHttp": 200,
+  "webHttp": 200,
+  "webAiLink": true,
+  "workerStarted": true,
+  "rawFixturePromptAbsentFromOperationalLog": true,
+  "freshInteractiveF5": false,
+  "liveCalls": 0
+}

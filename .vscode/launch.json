@@ -1,0 +1,123 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Geeta Studio: all",
+      "stopAll": true,
+      "preLaunchTask": "Geeta Studio: build",
+      "configurations": [
+        "Geeta Studio: Api (compound)",
+        "Geeta Studio: Web (compound)",
+        "Geeta Studio: Worker (compound)"
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "type": "coreclr",
+      "cwd": "${workspaceFolder}/src/GeetaStudio.Api",
+      "justMyCode": true,
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "preLaunchTask": "Geeta Studio: build",
+      "args": [],
+      "program": "${workspaceFolder}/src/GeetaStudio.Api/bin/Debug/net10.0/GeetaStudio.Api.dll",
+      "request": "launch",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5100"
+      },
+      "name": "Geeta Studio: Api"
+    },
+    {
+      "type": "coreclr",
+      "cwd": "${workspaceFolder}/src/GeetaStudio.Web",
+      "justMyCode": true,
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "preLaunchTask": "Geeta Studio: build",
+      "args": [],
+      "program": "${workspaceFolder}/src/GeetaStudio.Web/bin/Debug/net10.0/GeetaStudio.Web.dll",
+      "request": "launch",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5200"
+      },
+      "name": "Geeta Studio: Web"
+    },
+    {
+      "type": "coreclr",
+      "cwd": "${workspaceFolder}/src/GeetaStudio.Worker",
+      "justMyCode": true,
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "preLaunchTask": "Geeta Studio: build",
+      "args": [],
+      "program": "${workspaceFolder}/src/GeetaStudio.Worker/bin/Debug/net10.0/GeetaStudio.Worker.dll",
+      "request": "launch",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "name": "Geeta Studio: Worker"
+    },
+    {
+      "type": "coreclr",
+      "cwd": "${workspaceFolder}/src/GeetaStudio.Api",
+      "justMyCode": true,
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "args": [],
+      "program": "${workspaceFolder}/src/GeetaStudio.Api/bin/Debug/net10.0/GeetaStudio.Api.dll",
+      "request": "launch",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5100"
+      },
+      "name": "Geeta Studio: Api (compound)",
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "type": "coreclr",
+      "cwd": "${workspaceFolder}/src/GeetaStudio.Web",
+      "justMyCode": true,
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "args": [],
+      "program": "${workspaceFolder}/src/GeetaStudio.Web/bin/Debug/net10.0/GeetaStudio.Web.dll",
+      "request": "launch",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5200"
+      },
+      "name": "Geeta Studio: Web (compound)",
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "type": "coreclr",
+      "cwd": "${workspaceFolder}/src/GeetaStudio.Worker",
+      "justMyCode": true,
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "args": [],
+      "program": "${workspaceFolder}/src/GeetaStudio.Worker/bin/Debug/net10.0/GeetaStudio.Worker.dll",
+      "request": "launch",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "name": "Geeta Studio: Worker (compound)",
+      "presentation": {
+        "hidden": true
+      }
+    }
+  ]
+}

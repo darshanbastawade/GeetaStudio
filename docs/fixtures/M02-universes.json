@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "locales": [{"id":"en-IN","name":"English (India)"},{"id":"hi-IN","name":"Hindi (India)"}],
+  "universes": [
+    {
+      "key":"geeta","name":"Geeta","tenantKey":"local",
+      "terminology":{"teaching":"Geeta teaching","subject":"Concept"},
+      "subjectTypes":["concept"],
+      "sourceRules":{"Canonical":"Canonical sources must be cited and verified separately from interpretation.","Translation":"License and translator attribution required.","Interpretation":"Label interpretation and preserve its source lineage.","Fiction":"Original fiction; never present invented text as scripture."},
+      "editorialPolicies":{"review":"Human review before approval.","rights":"Unverified rights block approval.","cast":"Cast is selected from data and frozen by revision; assets require separate approval."},
+      "audiences":[{"key":"children","name":"Children","minAge":6,"maxAge":12},{"key":"teens","name":"Teens","minAge":13,"maxAge":19},{"key":"young-adults","name":"Young adults","minAge":20,"maxAge":29},{"key":"adults","name":"Adults","minAge":30,"maxAge":120}],
+      "subjects":[{"key":"action-and-responsibility","type":"concept","name":"Action and responsibility"}],
+      "characters":[
+        {"key":"dhairy","displayName":"Dhairy","lifeStage":"Child","biography":"Curious, energetic child and experimenter; generous and ambitious, sometimes impatient or attached to recognition.","aliases":[]},
+        {"key":"neerja","displayName":"Neerja","lifeStage":"Child","biography":"Inventive, observant child and problem-solver; has her own goals, sometimes overplans or struggles to admit a mistake.","aliases":["Neeraja"]},
+        {"key":"dadaji","displayName":"Dadaji","lifeStage":"OlderAdult","biography":"Warm, playful mentor with hobbies, memories and mistakes; asks useful questions and keeps learning.","aliases":[]},
+        {"key":"shakuni","displayName":"Shakuni","lifeStage":"Imaginary","biography":"Fictional, witty trickster and imaginary commentator who sells persuasive shortcuts.","aliases":[]},
+        {"key":"tara","displayName":"Tara","lifeStage":"Teen","biography":"Approximately 17; creative, outspoken, capable and seeking independence while valuing approval.","aliases":[]},
+        {"key":"kabir","displayName":"Kabir","lifeStage":"YoungAdult","biography":"Approximately 22; resourceful, humorous and ambitious, with uncertainty about his direction.","aliases":[]},
+        {"key":"meera","displayName":"Meera","lifeStage":"Adult","biography":"Approximately 36; capable professional/business owner, generous but sometimes overcommitted.","aliases":[]}
+      ]
+    },
+    {
+      "key":"synthetic","name":"Synthetic learning fixture","tenantKey":"local",
+      "terminology":{"teaching":"Synthetic lesson","subject":"Scenario"},"subjectTypes":["scenario"],
+      "sourceRules":{"Synthetic":"Deterministic invented fixture; not factual evidence or scripture."},
+      "editorialPolicies":{"review":"Review synthetic drafts.","rights":"Synthetic fixture rights only."},
+      "audiences":[{"key":"general","name":"Fixture audience","minAge":6,"maxAge":120}],
+      "subjects":[{"key":"collaboration","type":"scenario","name":"Synthetic collaboration"}],
+      "characters":[{"key":"fixture-guide","displayName":"Fixture Guide","lifeStage":"Adult","biography":"Synthetic guide for reusable-domain tests; no historical or religious claims.","aliases":[]}]
+    },
+    {
+      "key":"private-fixture","name":"Tenant isolation fixture","tenantKey":"isolated",
+      "terminology":{"subject":"Private scenario"},"subjectTypes":["scenario"],
+      "sourceRules":{"Synthetic":"Private security fixture only."},"editorialPolicies":{"review":"Private review."},
+      "audiences":[{"key":"private","name":"Private fixture audience","minAge":6,"maxAge":120}],
+      "subjects":[{"key":"private-concept","type":"scenario","name":"Private synthetic concept"}],"characters":[]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+    "competingPids":  [
+                          21912,
+                          6604
+                      ],
+    "crashedPid":  21912,
+    "state":  "Completed",
+    "operationId":  "27d4663f-18e8-4cb4-9ad0-16f351e657d5",
+    "jobId":  "7c72f70c-2ea1-4e96-8924-c555c138e3d1",
+    "effects":  1,
+    "attempts":  2,
+    "restartedPid":  2904,
+    "firstState":  "LeaseExpired",
+    "recoveredByReconciliation":  true
+}

@@ -1,0 +1,24 @@
+namespace ContentOS.Contracts;
+
+public sealed record ConceptTermInput(string Locale, string Text, string Kind);
+public sealed record RegisterConcept(Guid OperationId, string Key, Guid SnapshotId, IReadOnlyList<ConceptTermInput> Terms, Guid? ClaimRevisionId = null);
+public sealed record RegisterConceptRelation(Guid OperationId, Guid FromId, Guid ToId, string Kind, Guid SnapshotId, Guid? ClaimRevisionId = null);
+public sealed record ReviewKnowledge(string ExpectedRowVersion, string Status, string EvidenceReference);
+public sealed record ConceptView(Guid Id, string Key, Guid SnapshotId, Guid? ClaimRevisionId, IReadOnlyList<ConceptTermInput> Terms, string ReviewStatus, string? Reviewer, string? ReviewEvidence, string RowVersion);
+public sealed record RelationView(Guid Id, Guid FromId, Guid ToId, string Kind, Guid SnapshotId, string ReviewStatus, string RowVersion);
+public sealed record KnowledgeGraph(IReadOnlyList<ConceptView> Concepts, IReadOnlyList<RelationView> Relations);
+public sealed record QueueKnowledgeIndex(Guid OperationId, string Key, Guid ManifestId, string Locale, string Territory, string Adapter, string Model);
+public sealed record KnowledgeIndexView(Guid Id, string Key, Guid ManifestId, string Locale, string Adapter, string Model, string EmbeddingSpaceId, int Dimensions, string Normalization, string Chunking, string State, int Chunks, string? Error, string? ValidationEvidence, string? ValidationJson, string RowVersion);
+public sealed record KnowledgeQuestion(string Query, Guid? ExpectedCorpusTextId);
+public sealed record ValidateKnowledgeIndex(string ExpectedRowVersion, string EvidenceReference, IReadOnlyList<KnowledgeQuestion> Questions);
+public sealed record ActivateKnowledgeIndex(Guid OperationId, string Alias, Guid IndexId, string ExpectedRowVersion, string QueryEmbeddingSpaceId);
+public sealed record KnowledgeAliasView(Guid Id, string Key, string Locale, Guid? ActiveIndexId, Guid? PreviousIndexId, string RowVersion);
+public sealed record KnowledgeQuery(string Alias, string Query, string Locale, string Territory, string EmbeddingSpaceId, int Limit = 5, IntendedUse? Use = null);
+public sealed record KnowledgeHit(Guid ChunkId, Guid CorpusTextId, Guid SnapshotId, Guid ManifestId, int CorpusVersion, string Edition, int Chapter, int Verse, string VariantKey, string Label, string ExactText, int Start, int Length, string Sha256, string SourceLocator, CitationExport Citation, double Score);
+public sealed record KnowledgeResult(string Outcome, Guid IndexId, string EmbeddingSpaceId, string Adapter, IReadOnlyList<KnowledgeHit> Evidence, string Model, int Dimensions, string Normalization, string Chunking);
+public sealed record ConceptFeature(Guid Id, Guid SnapshotId, Guid? ClaimRevisionId, IReadOnlyList<ConceptTermInput> Terms, IReadOnlyList<Guid> Related);
+public sealed record EmbeddingRequest(string Model, int Dimensions, string Normalization, string Text, string Locale, IReadOnlyList<ConceptFeature> Graph, Guid? TenantId = null, string? Actor = null, Guid? UniverseId = null);
+public sealed record OwnedEmbedding(float[] Vector, string[] Features);
+public sealed record RankedCandidate(Guid ChunkId, float[] Vector, string[] Features);
+public sealed record KnowledgeRanking(OwnedEmbedding Query, IReadOnlyList<RankedCandidate> Candidates, int Limit);
+public sealed record KnowledgeScore(Guid ChunkId, double Score);

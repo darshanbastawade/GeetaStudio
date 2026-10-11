@@ -1,0 +1,351 @@
+{
+  "tasks": [
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "label": "Geeta Studio: restore",
+      "args": [
+        "restore",
+        "GeetaStudio.sln",
+        "--locked-mode"
+      ],
+      "command": "dotnet",
+      "type": "process"
+    },
+    {
+      "command": "dotnet",
+      "type": "process",
+      "group": {
+        "isDefault": true,
+        "kind": "build"
+      },
+      "dependsOn": "Geeta Studio: restore",
+      "dependsOrder": "sequence",
+      "problemMatcher": "$msCompile",
+      "args": [
+        "build",
+        "GeetaStudio.sln",
+        "--no-restore"
+      ],
+      "label": "Geeta Studio: build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "type": "process",
+      "group": {
+        "isDefault": true,
+        "kind": "test"
+      },
+      "label": "Geeta Studio: focused tests",
+      "dependsOn": "Geeta Studio: build",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "GeetaStudio.sln",
+        "--no-build",
+        "--no-restore"
+      ]
+    },
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "label": "Geeta Studio: verify",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/verify.ps1",
+        "-Locked"
+      ],
+      "command": "powershell",
+      "type": "process"
+    },
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "type": "process",
+      "label": "Geeta Studio: run Api",
+      "dependsOn": "Geeta Studio: build",
+      "command": "dotnet",
+      "presentation": {
+        "panel": "dedicated"
+      },
+      "args": [
+        "run",
+        "--project",
+        "src/GeetaStudio.Api",
+        "--no-build",
+        "--launch-profile",
+        "Development"
+      ]
+    },
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "type": "process",
+      "label": "Geeta Studio: run Web",
+      "dependsOn": "Geeta Studio: build",
+      "command": "dotnet",
+      "presentation": {
+        "panel": "dedicated"
+      },
+      "args": [
+        "run",
+        "--project",
+        "src/GeetaStudio.Web",
+        "--no-build",
+        "--launch-profile",
+        "Development"
+      ]
+    },
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "type": "process",
+      "label": "Geeta Studio: run Worker",
+      "dependsOn": "Geeta Studio: build",
+      "command": "dotnet",
+      "presentation": {
+        "panel": "dedicated"
+      },
+      "args": [
+        "run",
+        "--project",
+        "src/GeetaStudio.Worker",
+        "--no-build",
+        "--launch-profile",
+        "Development"
+      ]
+    },
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "label": "Geeta Studio: verify SQL",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/verify.ps1",
+        "-Locked",
+        "-Sql"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "label": "Geeta Studio: migrate M1 database",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/db-update.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "label": "Geeta Studio: M1 runtime demo",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/runtime-demo.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: seed core fixtures",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/db-update.ps1",
+        "-SeedCore"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M2 core demo",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/core-demo.ps1"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M3 sources demo",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/sources-demo.ps1"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M4 corpus sample",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/corpus-demo.ps1"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "command": "powershell",
+      "problemMatcher": [],
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/evidence-demo.ps1"
+      ],
+      "label": "Geeta Studio: M5 evidence demo",
+      "type": "process",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
+    {
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/knowledge-demo.ps1"
+      ],
+      "type": "process",
+      "label": "Geeta Studio: M6 knowledge demo",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
+    {
+      "command": "powershell",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "type": "shell",
+      "problemMatcher": [],
+      "label": "Geeta Studio: M7 AI demo",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".\\scripts\\ai-demo.ps1"
+      ]
+    },
+    {
+      "command": "powershell",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "type": "shell",
+      "problemMatcher": [],
+      "label": "Geeta Studio: M7 AI benchmark",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".\\scripts\\ai-benchmark.ps1"
+      ]
+    },
+    {
+      "label": "Geeta Studio: M8 workflow demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".\\scripts\\workflow-demo.ps1"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M9 lesson fixture demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".\\scripts\\lesson-demo.ps1",
+        "-ManageApi"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "version": "2.0.0"
+}

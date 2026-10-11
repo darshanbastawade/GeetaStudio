@@ -1,0 +1,22 @@
+{
+    "schemaVersion":  1,
+    "checkedAtUtc":  "2026-10-10T13:03:12.6496153+00:00",
+    "universes":  [
+                      {
+                          "universe":  "geeta",
+                          "contentId":  "85000776-12fa-4f3b-8ed0-792370f5fcb4",
+                          "revisionCount":  2,
+                          "replayPreservedId":  true,
+                          "staleUpdate":  409
+                      },
+                      {
+                          "universe":  "synthetic",
+                          "contentId":  "58eb41b4-9f1c-4a01-9af6-1e9f5f17a750",
+                          "revisionCount":  2,
+                          "replayPreservedId":  true,
+                          "staleUpdate":  409
+                      }
+                  ],
+    "crossTenantRead":  403,
+    "liveProviderCalls":  0
+}

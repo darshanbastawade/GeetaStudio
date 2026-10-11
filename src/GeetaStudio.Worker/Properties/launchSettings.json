@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Development": {
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "commandName": "Project"
+    }
+  }
+}

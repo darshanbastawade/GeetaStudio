@@ -1,0 +1,21 @@
+﻿{
+    "run":  "1fd9d74c-65fd-4422-b8bf-180fffcc84f5",
+    "apiPidAfter":  32628,
+    "newPromptVersion":  2,
+    "oldRoute":  "9d956445-880f-44be-b5b2-b00974b8d350",
+    "workerRestartVerified":  true,
+    "completedState":  "Completed",
+    "aiRun":  "f447f5bb-106d-4670-a20a-54404ea626f7",
+    "oldPromptVersion":  1,
+    "attemptsBefore":  1,
+    "apiPidBefore":  4764,
+    "milestone":  "M08",
+    "verifiedUtc":  "2026-10-10T23:00:45.1585201+00:00",
+    "newRoute":  "efae3775-41ff-4e8e-9e66-2231c5c2d71d",
+    "checkpointSchema":  "workflow-checkpoint.v1",
+    "liveCalls":  0,
+    "staffHttp":  200,
+    "fixtureReviewNotPublication":  true,
+    "reviewState":  "AwaitingReview",
+    "attemptsAfter":  1
+}

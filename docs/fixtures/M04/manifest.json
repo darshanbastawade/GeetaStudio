@@ -1,0 +1,4915 @@
+{
+  "key": "besant-1922-wikisource-v1",
+  "version": 1,
+  "edition": "Annie Besant, Bhagavad-Gita, fourth edition, G. A. Natesan & Co., 1922; Wikisource transcription",
+  "baselineTarget": 700,
+  "inventory": [
+    {
+      "chapter": 1,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 35,
+      "variantKey": "",
+      "baselineVerse": 35,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 36,
+      "variantKey": "",
+      "baselineVerse": 36,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 37,
+      "variantKey": "",
+      "baselineVerse": 37,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 38,
+      "variantKey": "",
+      "baselineVerse": 38,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 39,
+      "variantKey": "",
+      "baselineVerse": 39,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 40,
+      "variantKey": "",
+      "baselineVerse": 40,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 41,
+      "variantKey": "",
+      "baselineVerse": 41,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 42,
+      "variantKey": "",
+      "baselineVerse": 42,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 43,
+      "variantKey": "",
+      "baselineVerse": 43,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 44,
+      "variantKey": "",
+      "baselineVerse": 44,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 45,
+      "variantKey": "",
+      "baselineVerse": 45,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 46,
+      "variantKey": "",
+      "baselineVerse": 46,
+      "note": ""
+    },
+    {
+      "chapter": 1,
+      "verse": 47,
+      "variantKey": "",
+      "baselineVerse": 47,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 35,
+      "variantKey": "",
+      "baselineVerse": 35,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 36,
+      "variantKey": "",
+      "baselineVerse": 36,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 37,
+      "variantKey": "",
+      "baselineVerse": 37,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 38,
+      "variantKey": "",
+      "baselineVerse": 38,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 39,
+      "variantKey": "",
+      "baselineVerse": 39,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 40,
+      "variantKey": "",
+      "baselineVerse": 40,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 41,
+      "variantKey": "",
+      "baselineVerse": 41,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 42,
+      "variantKey": "",
+      "baselineVerse": 42,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 43,
+      "variantKey": "",
+      "baselineVerse": 43,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 44,
+      "variantKey": "",
+      "baselineVerse": 44,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 45,
+      "variantKey": "",
+      "baselineVerse": 45,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 46,
+      "variantKey": "",
+      "baselineVerse": 46,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 47,
+      "variantKey": "",
+      "baselineVerse": 47,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 48,
+      "variantKey": "",
+      "baselineVerse": 48,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 49,
+      "variantKey": "",
+      "baselineVerse": 49,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 50,
+      "variantKey": "",
+      "baselineVerse": 50,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 51,
+      "variantKey": "",
+      "baselineVerse": 51,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 52,
+      "variantKey": "",
+      "baselineVerse": 52,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 53,
+      "variantKey": "",
+      "baselineVerse": 53,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 54,
+      "variantKey": "",
+      "baselineVerse": 54,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 55,
+      "variantKey": "",
+      "baselineVerse": 55,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 56,
+      "variantKey": "",
+      "baselineVerse": 56,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 57,
+      "variantKey": "",
+      "baselineVerse": 57,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 58,
+      "variantKey": "",
+      "baselineVerse": 58,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 59,
+      "variantKey": "",
+      "baselineVerse": 59,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 60,
+      "variantKey": "",
+      "baselineVerse": 60,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 61,
+      "variantKey": "",
+      "baselineVerse": 61,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 62,
+      "variantKey": "",
+      "baselineVerse": 62,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 63,
+      "variantKey": "",
+      "baselineVerse": 63,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 64,
+      "variantKey": "",
+      "baselineVerse": 64,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 65,
+      "variantKey": "",
+      "baselineVerse": 65,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 66,
+      "variantKey": "",
+      "baselineVerse": 66,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 67,
+      "variantKey": "",
+      "baselineVerse": 67,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 68,
+      "variantKey": "",
+      "baselineVerse": 68,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 69,
+      "variantKey": "",
+      "baselineVerse": 69,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 70,
+      "variantKey": "",
+      "baselineVerse": 70,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 71,
+      "variantKey": "",
+      "baselineVerse": 71,
+      "note": ""
+    },
+    {
+      "chapter": 2,
+      "verse": 72,
+      "variantKey": "",
+      "baselineVerse": 72,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 35,
+      "variantKey": "",
+      "baselineVerse": 35,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 36,
+      "variantKey": "",
+      "baselineVerse": 36,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 37,
+      "variantKey": "",
+      "baselineVerse": 37,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 38,
+      "variantKey": "",
+      "baselineVerse": 38,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 39,
+      "variantKey": "",
+      "baselineVerse": 39,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 40,
+      "variantKey": "",
+      "baselineVerse": 40,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 41,
+      "variantKey": "",
+      "baselineVerse": 41,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 42,
+      "variantKey": "",
+      "baselineVerse": 42,
+      "note": ""
+    },
+    {
+      "chapter": 3,
+      "verse": 43,
+      "variantKey": "",
+      "baselineVerse": 43,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 35,
+      "variantKey": "",
+      "baselineVerse": 35,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 36,
+      "variantKey": "",
+      "baselineVerse": 36,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 37,
+      "variantKey": "",
+      "baselineVerse": 37,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 38,
+      "variantKey": "",
+      "baselineVerse": 38,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 39,
+      "variantKey": "",
+      "baselineVerse": 39,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 40,
+      "variantKey": "",
+      "baselineVerse": 40,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 41,
+      "variantKey": "",
+      "baselineVerse": 41,
+      "note": ""
+    },
+    {
+      "chapter": 4,
+      "verse": 42,
+      "variantKey": "",
+      "baselineVerse": 42,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 5,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 35,
+      "variantKey": "",
+      "baselineVerse": 35,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 36,
+      "variantKey": "",
+      "baselineVerse": 36,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 37,
+      "variantKey": "",
+      "baselineVerse": 37,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 38,
+      "variantKey": "",
+      "baselineVerse": 38,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 39,
+      "variantKey": "",
+      "baselineVerse": 39,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 40,
+      "variantKey": "",
+      "baselineVerse": 40,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 41,
+      "variantKey": "",
+      "baselineVerse": 41,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 42,
+      "variantKey": "",
+      "baselineVerse": 42,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 43,
+      "variantKey": "",
+      "baselineVerse": 43,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 44,
+      "variantKey": "",
+      "baselineVerse": 44,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 45,
+      "variantKey": "",
+      "baselineVerse": 45,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 46,
+      "variantKey": "",
+      "baselineVerse": 46,
+      "note": ""
+    },
+    {
+      "chapter": 6,
+      "verse": 47,
+      "variantKey": "",
+      "baselineVerse": 47,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 7,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 8,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": ""
+    },
+    {
+      "chapter": 9,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 35,
+      "variantKey": "",
+      "baselineVerse": 35,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 36,
+      "variantKey": "",
+      "baselineVerse": 36,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 37,
+      "variantKey": "",
+      "baselineVerse": 37,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 38,
+      "variantKey": "",
+      "baselineVerse": 38,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 39,
+      "variantKey": "",
+      "baselineVerse": 39,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 40,
+      "variantKey": "",
+      "baselineVerse": 40,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 41,
+      "variantKey": "",
+      "baselineVerse": 41,
+      "note": ""
+    },
+    {
+      "chapter": 10,
+      "verse": 42,
+      "variantKey": "",
+      "baselineVerse": 42,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 35,
+      "variantKey": "",
+      "baselineVerse": 35,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 36,
+      "variantKey": "",
+      "baselineVerse": 36,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 37,
+      "variantKey": "",
+      "baselineVerse": 37,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 38,
+      "variantKey": "",
+      "baselineVerse": 38,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 39,
+      "variantKey": "",
+      "baselineVerse": 39,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 40,
+      "variantKey": "",
+      "baselineVerse": 40,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 41,
+      "variantKey": "",
+      "baselineVerse": 41,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 42,
+      "variantKey": "",
+      "baselineVerse": 42,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 43,
+      "variantKey": "",
+      "baselineVerse": 43,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 44,
+      "variantKey": "",
+      "baselineVerse": 44,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 45,
+      "variantKey": "",
+      "baselineVerse": 45,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 46,
+      "variantKey": "",
+      "baselineVerse": 46,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 47,
+      "variantKey": "",
+      "baselineVerse": 47,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 48,
+      "variantKey": "",
+      "baselineVerse": 48,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 49,
+      "variantKey": "",
+      "baselineVerse": 49,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 50,
+      "variantKey": "",
+      "baselineVerse": 50,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 51,
+      "variantKey": "",
+      "baselineVerse": 51,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 52,
+      "variantKey": "",
+      "baselineVerse": 52,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 53,
+      "variantKey": "",
+      "baselineVerse": 53,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 54,
+      "variantKey": "",
+      "baselineVerse": 54,
+      "note": ""
+    },
+    {
+      "chapter": 11,
+      "verse": 55,
+      "variantKey": "",
+      "baselineVerse": 55,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 12,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 13,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 13,
+      "verse": 35,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": "Besant chapter 13 numbering is offset by its opening Arjuna question."
+    },
+    {
+      "chapter": 14,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 14,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 15,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 16,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 17,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 1,
+      "variantKey": "",
+      "baselineVerse": 1,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 2,
+      "variantKey": "",
+      "baselineVerse": 2,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 3,
+      "variantKey": "",
+      "baselineVerse": 3,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 4,
+      "variantKey": "",
+      "baselineVerse": 4,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 5,
+      "variantKey": "",
+      "baselineVerse": 5,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 6,
+      "variantKey": "",
+      "baselineVerse": 6,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 7,
+      "variantKey": "",
+      "baselineVerse": 7,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 8,
+      "variantKey": "",
+      "baselineVerse": 8,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 9,
+      "variantKey": "",
+      "baselineVerse": 9,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 10,
+      "variantKey": "",
+      "baselineVerse": 10,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 11,
+      "variantKey": "",
+      "baselineVerse": 11,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 12,
+      "variantKey": "",
+      "baselineVerse": 12,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 13,
+      "variantKey": "",
+      "baselineVerse": 13,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 14,
+      "variantKey": "",
+      "baselineVerse": 14,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 15,
+      "variantKey": "",
+      "baselineVerse": 15,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 16,
+      "variantKey": "",
+      "baselineVerse": 16,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 17,
+      "variantKey": "",
+      "baselineVerse": 17,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 18,
+      "variantKey": "",
+      "baselineVerse": 18,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 19,
+      "variantKey": "",
+      "baselineVerse": 19,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 20,
+      "variantKey": "",
+      "baselineVerse": 20,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 21,
+      "variantKey": "",
+      "baselineVerse": 21,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 22,
+      "variantKey": "",
+      "baselineVerse": 22,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 23,
+      "variantKey": "",
+      "baselineVerse": 23,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 24,
+      "variantKey": "",
+      "baselineVerse": 24,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 25,
+      "variantKey": "",
+      "baselineVerse": 25,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 26,
+      "variantKey": "",
+      "baselineVerse": 26,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 27,
+      "variantKey": "",
+      "baselineVerse": 27,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 28,
+      "variantKey": "",
+      "baselineVerse": 28,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 29,
+      "variantKey": "",
+      "baselineVerse": 29,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 30,
+      "variantKey": "",
+      "baselineVerse": 30,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 31,
+      "variantKey": "",
+      "baselineVerse": 31,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 32,
+      "variantKey": "",
+      "baselineVerse": 32,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 33,
+      "variantKey": "",
+      "baselineVerse": 33,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 34,
+      "variantKey": "",
+      "baselineVerse": 34,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 35,
+      "variantKey": "",
+      "baselineVerse": 35,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 36,
+      "variantKey": "",
+      "baselineVerse": 36,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 37,
+      "variantKey": "",
+      "baselineVerse": 37,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 38,
+      "variantKey": "",
+      "baselineVerse": 38,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 39,
+      "variantKey": "",
+      "baselineVerse": 39,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 40,
+      "variantKey": "",
+      "baselineVerse": 40,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 41,
+      "variantKey": "",
+      "baselineVerse": 41,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 42,
+      "variantKey": "",
+      "baselineVerse": 42,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 43,
+      "variantKey": "",
+      "baselineVerse": 43,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 44,
+      "variantKey": "",
+      "baselineVerse": 44,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 45,
+      "variantKey": "",
+      "baselineVerse": 45,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 46,
+      "variantKey": "",
+      "baselineVerse": 46,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 47,
+      "variantKey": "",
+      "baselineVerse": 47,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 48,
+      "variantKey": "",
+      "baselineVerse": 48,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 49,
+      "variantKey": "",
+      "baselineVerse": 49,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 50,
+      "variantKey": "",
+      "baselineVerse": 50,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 51,
+      "variantKey": "",
+      "baselineVerse": 51,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 52,
+      "variantKey": "",
+      "baselineVerse": 52,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 53,
+      "variantKey": "",
+      "baselineVerse": 53,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 54,
+      "variantKey": "",
+      "baselineVerse": 54,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 55,
+      "variantKey": "",
+      "baselineVerse": 55,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 56,
+      "variantKey": "",
+      "baselineVerse": 56,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 57,
+      "variantKey": "",
+      "baselineVerse": 57,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 58,
+      "variantKey": "",
+      "baselineVerse": 58,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 59,
+      "variantKey": "",
+      "baselineVerse": 59,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 60,
+      "variantKey": "",
+      "baselineVerse": 60,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 61,
+      "variantKey": "",
+      "baselineVerse": 61,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 62,
+      "variantKey": "",
+      "baselineVerse": 62,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 63,
+      "variantKey": "",
+      "baselineVerse": 63,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 64,
+      "variantKey": "",
+      "baselineVerse": 64,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 65,
+      "variantKey": "",
+      "baselineVerse": 65,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 66,
+      "variantKey": "",
+      "baselineVerse": 66,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 67,
+      "variantKey": "",
+      "baselineVerse": 67,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 68,
+      "variantKey": "",
+      "baselineVerse": 68,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 69,
+      "variantKey": "",
+      "baselineVerse": 69,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 70,
+      "variantKey": "",
+      "baselineVerse": 70,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 71,
+      "variantKey": "",
+      "baselineVerse": 71,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 72,
+      "variantKey": "",
+      "baselineVerse": 72,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 73,
+      "variantKey": "",
+      "baselineVerse": 73,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 74,
+      "variantKey": "",
+      "baselineVerse": 74,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 75,
+      "variantKey": "",
+      "baselineVerse": 75,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 76,
+      "variantKey": "",
+      "baselineVerse": 76,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 77,
+      "variantKey": "",
+      "baselineVerse": 77,
+      "note": ""
+    },
+    {
+      "chapter": 18,
+      "verse": 78,
+      "variantKey": "",
+      "baselineVerse": 78,
+      "note": ""
+    },
+    {
+      "chapter": 13,
+      "verse": 1,
+      "variantKey": "opening-arjuna-question",
+      "baselineVerse": null,
+      "note": "Besant 4th edition includes the opening Arjuna question, producing 35 chapter-13 records. Baseline 13.1 maps to this edition's 13.2; cross-edition readings are not harmonized."
+    }
+  ]
+}

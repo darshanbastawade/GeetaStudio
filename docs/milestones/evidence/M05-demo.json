@@ -1,0 +1,192 @@
+{
+    "checkedAtUtc":  "2026-10-10T16:18:36.5820661+00:00",
+    "tenantId":  "e1fd48b9-434b-cbac-2efc-0b979070bf61",
+    "universeId":  "600b37c6-43d7-948b-11c7-024cb2bf2306",
+    "left":  "a2eeb7e7-dd61-49fc-80e7-8b1705aac4ef",
+    "right":  "c6a24ef6-deb2-492b-bd7f-ea07c0c949b5",
+    "disagreement":  "96be4a0f-febd-4fdb-930e-678b1abb8b3e",
+    "inventedQuoteStatus":  422,
+    "unsupportedHistoricalStatus":  422,
+    "before":  {
+                   "eligible":  true,
+                   "reason":  "Eligible",
+                   "labels":  [
+                                  {
+                                      "claimRevisionId":  "a2eeb7e7-dd61-49fc-80e7-8b1705aac4ef",
+                                      "contentRevisionId":  "0a784a2d-0184-4589-b660-d5e726304fda",
+                                      "start":  0,
+                                      "length":  53,
+                                      "label":  "Interpretation",
+                                      "author":  "Original fixture critic A",
+                                      "tradition":  "Original fictional fixture viewpoints",
+                                      "uncertainty":  "Contested",
+                                      "effectiveVersion":  1
+                                  }
+                              ]
+               },
+    "stale":  {
+                  "eligible":  false,
+                  "reason":  "StaleInheritedEvidence",
+                  "labels":  [
+
+                             ]
+              },
+    "impact":  {
+                   "claimRevisionId":  "a2eeb7e7-dd61-49fc-80e7-8b1705aac4ef",
+                   "contentRevisionIds":  [
+                                              "0a784a2d-0184-4589-b660-d5e726304fda",
+                                              "cb61823f-6abf-4ae9-8ea4-444856d40ae5"
+                                          ],
+                   "corrections":  [
+                                       {
+                                           "id":  "5f674561-9468-4845-a646-7b8bbf9d2213",
+                                           "claimRevisionId":  "a2eeb7e7-dd61-49fc-80e7-8b1705aac4ef",
+                                           "reason":  "Replace overly prescriptive original viewpoint with an optional suggestion",
+                                           "evidenceReference":  "fixture:M05-correction",
+                                           "status":  "Superseded",
+                                           "replacementRevisionId":  "9954e44a-49ce-4a79-bdc2-b4df49815798"
+                                       }
+                                   ]
+               },
+    "supersededHistory":  {
+                              "id":  "f6b2812e-65b3-4b02-bef4-d2b705b23fba",
+                              "key":  "m05-A-66bfd0e4f74640178c5c8195b9bc324a",
+                              "currentVersion":  2,
+                              "rowVersion":  "AAAAAAAACs0=",
+                              "revisions":  [
+                                                {
+                                                    "id":  "a2eeb7e7-dd61-49fc-80e7-8b1705aac4ef",
+                                                    "version":  1,
+                                                    "type":  "Interpretation",
+                                                    "label":  "Interpretation",
+                                                    "locale":  "en-IN",
+                                                    "statement":  "Original viewpoint A: the traveller should share tea.",
+                                                    "author":  "Original fixture critic A",
+                                                    "tradition":  "Original fictional fixture viewpoints",
+                                                    "uncertainty":  "Contested",
+                                                    "rubricId":  "318aa207-3324-4ee0-901a-3f771b6189b3",
+                                                    "reviewStatus":  "Approved",
+                                                    "quality":  "Attributed",
+                                                    "outcome":  "Contested",
+                                                    "reviewer":  "DESKTOP-EF1NCS7\\darsh",
+                                                    "reviewEvidence":  "fixture:M05-controlled-original-review",
+                                                    "rowVersion":  "AAAAAAAACpg=",
+                                                    "evidence":  [
+                                                                     {
+                                                                         "id":  "dfc17d03-2626-4c13-a1c5-82ee895262db",
+                                                                         "snapshotId":  "787d067f-e828-4868-8640-b33f34a4396f",
+                                                                         "corpusTextId":  null,
+                                                                         "start":  0,
+                                                                         "length":  53,
+                                                                         "exactText":  "Original viewpoint A: the traveller should share tea.",
+                                                                         "sha256":  "04B7BA06025EA8FA6097C9DB964D5E791F13FCBCA6021729738C41BAFB44A299",
+                                                                         "locator":  "Original fixture line",
+                                                                         "relation":  "Supporting"
+                                                                     }
+                                                                 ]
+                                                },
+                                                {
+                                                    "id":  "9954e44a-49ce-4a79-bdc2-b4df49815798",
+                                                    "version":  2,
+                                                    "type":  "Interpretation",
+                                                    "label":  "Interpretation",
+                                                    "locale":  "en-IN",
+                                                    "statement":  "Corrected original viewpoint A: sharing tea is an optional suggestion.",
+                                                    "author":  "Original fixture critic A, corrected",
+                                                    "tradition":  "Original fictional fixture viewpoints",
+                                                    "uncertainty":  "Contested",
+                                                    "rubricId":  "318aa207-3324-4ee0-901a-3f771b6189b3",
+                                                    "reviewStatus":  "Approved",
+                                                    "quality":  "Attributed",
+                                                    "outcome":  "Contested",
+                                                    "reviewer":  "DESKTOP-EF1NCS7\\darsh",
+                                                    "reviewEvidence":  "fixture:M05-controlled-original-review",
+                                                    "rowVersion":  "AAAAAAAACtI=",
+                                                    "evidence":  [
+                                                                     {
+                                                                         "id":  "919c6b44-7637-428c-8539-c0b5bf11379b",
+                                                                         "snapshotId":  "787d067f-e828-4868-8640-b33f34a4396f",
+                                                                         "corpusTextId":  null,
+                                                                         "start":  117,
+                                                                         "length":  70,
+                                                                         "exactText":  "Corrected original viewpoint A: sharing tea is an optional suggestion.",
+                                                                         "sha256":  "5A5BA739EF7E8C92C299F3F835B40E304499D8C5D42602214F5E3C755E0AA733",
+                                                                         "locator":  "Original fixture line",
+                                                                         "relation":  "Supporting"
+                                                                     }
+                                                                 ]
+                                                }
+                                            ]
+                          },
+    "staleExportStatus":  422,
+    "rightExport":  {
+                        "schemaVersion":  1,
+                        "tenantId":  "e1fd48b9-434b-cbac-2efc-0b979070bf61",
+                        "universeId":  "600b37c6-43d7-948b-11c7-024cb2bf2306",
+                        "content":  {
+                                        "id":  "1da8423f-cf50-4901-a830-9e1b6a7f35bc",
+                                        "tenantId":  "e1fd48b9-434b-cbac-2efc-0b979070bf61",
+                                        "universeId":  "600b37c6-43d7-948b-11c7-024cb2bf2306",
+                                        "subjectId":  "f6d3ee48-9401-d2a5-2c94-9691f803efe1",
+                                        "audienceId":  "572187e7-f1c6-1b2f-d414-83077eda6340",
+                                        "localeId":  "en-IN",
+                                        "currentVersion":  1,
+                                        "editorialState":  "Draft",
+                                        "publicKnowledge":  false,
+                                        "rowVersion":  "AAAAAAAACrg=",
+                                        "createdUtc":  "2026-10-10T16:18:32.8112265+00:00",
+                                        "updatedUtc":  "2026-10-10T16:18:32.8118204+00:00",
+                                        "revisions":  [
+                                                          {
+                                                              "id":  "abb35452-b759-4880-8a6d-c76bf65cf82d",
+                                                              "version":  1,
+                                                              "operationId":  "7af70931-1fbc-4792-bd45-e4175c5ccd7a",
+                                                              "title":  "M05 original attributed interpretation",
+                                                              "body":  "Original viewpoint B: the traveller should keep tea for later.",
+                                                              "kind":  "Interpretation",
+                                                              "rightsStatus":  "Licensed",
+                                                              "provenance":  "Original fictional M05 fixture",
+                                                              "createdUtc":  "2026-10-10T16:18:32.8112347+00:00"
+                                                          }
+                                                      ],
+                                        "evidenceLabels":  null
+                                    },
+                        "citations":  [
+                                          {
+                                              "snapshotId":  "787d067f-e828-4868-8640-b33f34a4396f",
+                                              "editionId":  "c3eb24d2-e0a5-44b3-bb2a-09559030d481",
+                                              "permissionId":  "493697eb-2569-4757-ad0c-2f87814f93da",
+                                              "citation":  "ContentOS fixture author. M05 original fictional evidence fixture. v1. ContentOS local demo. Original fixture lines; not scripture or historical reporting",
+                                              "requiredAttribution":  "ContentOS original fictional M05 fixture; no third-party text",
+                                              "sha256":  "D89B88E712C022F262314835084C9A37F9F4F3FA0D4DC4C947C74DAB7653476E",
+                                              "evidenceReference":  "fixture:M05-original-file",
+                                              "snapshotRetained":  true
+                                          }
+                                      ],
+                        "provenance":  [
+                                           {
+                                               "id":  "fbff8080-b6cf-4a06-89e1-b08773d6ecc2",
+                                               "snapshotId":  "787d067f-e828-4868-8640-b33f34a4396f",
+                                               "parentRevisionId":  null,
+                                               "contentRevisionId":  "abb35452-b759-4880-8a6d-c76bf65cf82d",
+                                               "assetReferenceId":  null,
+                                               "relation":  "claim-evidence"
+                                           }
+                                       ],
+                        "evidenceLabels":  [
+                                               {
+                                                   "claimRevisionId":  "c6a24ef6-deb2-492b-bd7f-ea07c0c949b5",
+                                                   "contentRevisionId":  "abb35452-b759-4880-8a6d-c76bf65cf82d",
+                                                   "start":  0,
+                                                   "length":  62,
+                                                   "label":  "Interpretation",
+                                                   "author":  "Original fixture critic B",
+                                                   "tradition":  "Original fictional fixture viewpoints",
+                                                   "uncertainty":  "Contested",
+                                                   "effectiveVersion":  1
+                                               }
+                                           ]
+                    },
+    "liveProviderCalls":  0,
+    "externalPublications":  0
+}
