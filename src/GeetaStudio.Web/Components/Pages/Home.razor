@@ -1,4 +1,4 @@
-@page "/"
+@page "/development"
 @rendermode InteractiveServer
 @inject ApiHealthClient Api
 @inject IWebHostEnvironment HostEnvironment
@@ -9,6 +9,8 @@
 <main>
     <p class="eyebrow">ContentOS / Geeta Studio</p>
     <h1>Engineering foundation</h1>
+    <p><a href="http://localhost:5100/staff/factory">Plan evergreen journeys and generate review drafts</a></p>
+    <p><a href="http://localhost:5100/staff/characters">Characters, casting and episode stories</a></p>
     <p><a href="http://localhost:5100/staff/workflows">Draft workflows and human review</a></p>
     <p>A working local shell for the API, web app, and background worker.</p>
     @if (HostEnvironment.IsDevelopment())
@@ -44,6 +46,8 @@
     <p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/') + "/staff/ai")">Open AI tasks and budgets</a> using your Windows account.</p>
     <p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/' ) + "/staff/lessons")">Compare audience lessons and review translations</a> using your Windows account.</p>
     <p>SQL-backed runtime jobs and provider routes are managed through the secured staff API. With runtime disabled, the worker remains idle.</p>
+<p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/' ) + "/staff/evaluation")">Review quality evaluations and release gates</a> using your Windows account.</p>
+<p><a href="@(Configuration["Api:BaseAddress"]!.TrimEnd('/' ) + "/staff/editorial")">Review drafts, lineage and editorial approvals</a> using your Windows account.</p>
 </main>
 
 @code {
@@ -59,5 +63,3 @@
         finally { _checking = false; }
     }
 }
-
-

@@ -119,17 +119,18 @@ public sealed partial class CoreDbContext(DbContextOptions<CoreDbContext> option
         m.Entity<CoreOperation>().HasOne<ContentItem>().WithMany().HasForeignKey(x => x.ContentId).OnDelete(DeleteBehavior.Restrict);
         m.Entity<CoreEvent>().HasOne<ContentRevision>().WithMany().HasForeignKey(x => x.RevisionId).OnDelete(DeleteBehavior.Restrict);
         ConfigureSources(m);
-        ConfigureCorpus(m); ConfigureEvidence(m); ConfigureKnowledge(m); ConfigureAi(m); ConfigureWorkflows(m); ConfigureLessons(m);
+        ConfigureCorpus(m); ConfigureEvidence(m); ConfigureKnowledge(m); ConfigureAi(m); ConfigureWorkflows(m); ConfigureLessons(m); ConfigureRegistry(m); ConfigureFactory(m); ConfigureEvaluation(m); ConfigureEditorial(m); ConfigureRead(m);
     }
     public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
     {
+        foreach (var entry in ChangeTracker.Entries()) { ValidateRegistryChange(entry); ValidateFactoryChange(entry); ValidateEvaluationChange(entry); ValidateEditorialChange(entry); ValidateReadChange(entry); }
         if (ChangeTracker.Entries().Any(e => e.State == EntityState.Deleted && e.Entity is LessonProfile or LessonBundle or LessonMemory or LessonVariant or LessonCommand)) throw new InvalidOperationException("Lesson history cannot be deleted.");
         foreach (var e in ChangeTracker.Entries().Where(e => e.State is EntityState.Added or EntityState.Modified))
         {
             if (e.State == EntityState.Modified && e.Entity is ContentRevision or CharacterRevision or UniversePack or PackTerm or PackSubjectType or SourceRule or EditorialPolicy or PackAudience or PackCharacter or EpisodeCastEntry or PresentationProfile)
                 throw new InvalidOperationException("Revisions, pack versions and frozen cast entries are immutable.");
             ValidateSourceChange(e);
-            ValidateCorpusChange(e); ValidateEvidenceChange(e); ValidateKnowledgeChange(e); ValidateAiChange(e); ValidateWorkflowChange(e); ValidateLessonChange(e);
+            ValidateCorpusChange(e); ValidateEvidenceChange(e); ValidateKnowledgeChange(e); ValidateAiChange(e); ValidateWorkflowChange(e); ValidateLessonChange(e); ValidateRegistryChange(e);
             if (e.Entity is CoreRecord record) record.UpdatedUtc = DateTimeOffset.UtcNow;
             foreach (var p in e.Properties)
                 if (p.CurrentValue is DateTimeOffset instant) p.CurrentValue = instant.ToUniversalTime();
@@ -206,4 +207,3 @@ public sealed class CoreDesignFactory : IDesignTimeDbContextFactory<CoreDbContex
             "Server=localhost;Database=GeetaStudio_Dev;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;",
             sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", "core")).Options);
 }
-

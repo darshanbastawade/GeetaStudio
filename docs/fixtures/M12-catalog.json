@@ -1,0 +1,58 @@
+{
+  "reviewRubric": {
+    "privacy": "Age-appropriate aggregate evidence; no child identifiers",
+    "scores": [
+      "FaithfulMeaning",
+      "Usefulness",
+      "Readability",
+      "AgeSuitability"
+    ],
+    "minimumAcceptance": 4,
+    "castFeedback": [
+      "CharacterAppeal",
+      "Understanding"
+    ],
+    "range": "1-5",
+    "version": "rubric.v1"
+  },
+  "languageQualification": "None; only English staff fixture responses tested",
+  "developmentCases": 100,
+  "source": "src/ContentOS.Integrations/EvaluationFixtureCatalog.cs",
+  "requiredCategories": [
+    "real-citation",
+    "missing-citation",
+    "conflicting-interpretation",
+    "translation",
+    "age-adaptation",
+    "humor",
+    "adversarial-source",
+    "no-answer",
+    "minority-topic",
+    "edge-topic",
+    "unseen-guest",
+    "guest-promotion",
+    "alias",
+    "retired-character",
+    "wrong-voice",
+    "wrong-life-stage",
+    "continuity",
+    "forced-connection",
+    "unavailable-transcript",
+    "repeated-unverified-claim"
+  ],
+  "contextVariantsPerFamily": 6,
+  "releaseGates": [
+    "100 genuine reviewed Development cases",
+    "20 genuine reviewed HeldOut cases",
+    "Zero deterministic failures",
+    "All release-sample human reviews accepted",
+    "Actual non-fixture M07 execution qualification",
+    "Pinned measured retrieval and latency targets"
+  ],
+  "heldOutCases": 20,
+  "independentScenarioFamilies": 20,
+  "goldenStatus": "Controlled fixtures, not a human-approved release dataset",
+  "version": "m12-fixture-catalog.v1",
+  "humanReview": "Pending",
+  "fixtureReview": "Recorded explicitly by evaluation-demo"
+}

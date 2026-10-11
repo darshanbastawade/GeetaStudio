@@ -1,4 +1,6 @@
-# Windows and VS Code development — M0 foundation through M09
+For the M14 reader, private fixture preview and attach debugging, see [M14_LOCAL_RUN](M14_LOCAL_RUN.md).
+
+# Windows and VS Code development — M0 foundation through M12
 
 For audience lessons, reviewed translation memory and casting, follow [M9_LOCAL_RUN](M9_LOCAL_RUN.md). For current workflows, review and worker restart/debugging, follow [M8_LOCAL_RUN](M8_LOCAL_RUN.md). For AI tasks, provider routes, budget accounting and debugging, follow [M7_LOCAL_RUN](M7_LOCAL_RUN.md). For knowledge retrieval/index migration/debugging, follow [M6_LOCAL_RUN](M6_LOCAL_RUN.md). For claim/evidence setup/demo/debugging, follow [M5_LOCAL_RUN](M5_LOCAL_RUN.md). For corpus setup/demo/debugging, follow [M4_LOCAL_RUN](M4_LOCAL_RUN.md); [M3_LOCAL_RUN](M3_LOCAL_RUN.md) covers sources. For core setup/demo/debugging, follow [M2_LOCAL_RUN](M2_LOCAL_RUN.md); [M1_LOCAL_RUN](M1_LOCAL_RUN.md) covers runtime recovery. The M0 instructions below describe the database-free, runtime-disabled baseline. To select it after M1 provisioning, set `$env:Runtime__Enabled = 'false'` separately in the API and worker terminals; remove that override to return to M1.
 
@@ -104,3 +106,16 @@ M1 is implemented. Follow [the verified M1 setup/run/debug/recovery runbook](M1_
 ## M03 source registry
 
 Use [M3_LOCAL_RUN.md](M3_LOCAL_RUN.md) for source registration/review, intended-use export and revocation demonstration. The existing API/Web/Worker Development profiles and **Geeta Studio: all** F5 compound are retained. Run scripts/db-update.ps1 -ProvisionRuntime, scripts/verify.ps1 -Locked -Sql, start hosts, then scripts/sources-demo.ps1. The source staff page is http://localhost:5100/staff/sources. M03 Windows HTTP passed; interactive UI/F5 was not repeated.
+
+## M10 characters and casting
+
+See [M10 local run/debug guide](M10_LOCAL_RUN.md). Staff page: http://localhost:5100/staff/characters. The existing compound remains; the M10 fixture task requires port5100 free. Fresh interactive M10 F5 and visual QA are not verified.
+
+## M11 evergreen draft factory
+See [M11 run/debug guide](M11_LOCAL_RUN.md). Staff page: http://localhost:5100/staff/factory. Existing API Development/VS Code profiles enable the local processor. The dedicated fixture demo task requires5100 free and restarts only its own hosts. Genuine editorial/source/media and fresh interactive-debug/visual qualification remain separate.
+
+## M12 quality evaluation
+See [M12 local run/debug guide](M12_LOCAL_RUN.md). Staff page http://localhost:5100/staff/evaluation. Existing F5 compound retained; the M12 evaluation fixture task requires5100 free. Human labels/release acceptance and live/native-language/age-feedback/production qualification remain open.
+
+## M13 editorial workbench
+See [M13 local run/debug guide](M13_LOCAL_RUN.md). Staff page http://localhost:5100/staff/editorial. Existing F5 compound retained; the M13 editorial fixture demo task requires5100 free. Real human qualification and actual platform publication/remediation remain blocked. Fresh interactive M13 debug/visual checks are unverified.

@@ -1,0 +1,166 @@
+{
+  "verifiedDate": "2026-10-11",
+  "implementation": "Implemented",
+  "offlineStatus": "Offline Verified",
+  "build": {
+    "warnings": 0,
+    "lockedRestore": true,
+    "errors": 0
+  },
+  "offline": {
+    "skipped": 0,
+    "passed": 83,
+    "failed": 0,
+    "formatPassed": true,
+    "log": ".local/M13-final-offline.log"
+  },
+  "focusedM13": {
+    "sqlCases": 9,
+    "offlineCases": 1,
+    "passed": 10,
+    "skipped": 0,
+    "trx": "M13-resume-focused.trx",
+    "failed": 0
+  },
+  "precedingBroad": {
+    "trx": "M13-resume-full.trx",
+    "failures": [
+      "Two source-test SQL timeouts",
+      "M12 valid citation-GUID privacy false positive, subsequently fixed"
+    ],
+    "passed": 131,
+    "skipped": 0,
+    "total": 134,
+    "failed": 3
+  },
+  "finalTargeted": {
+    "sqlCases": 10,
+    "failure": "Audio fixture dataset setup SQL timeout; repaired M12 SQL case passed",
+    "passed": 9,
+    "skipped": 0,
+    "trx": "M13-final-current.trx",
+    "failed": 1
+  },
+  "isolatedTimeoutRecheck": {
+    "skipped": 0,
+    "passed": 3,
+    "failed": 0,
+    "unchangedAssertionsAndTimeouts": true,
+    "trx": "M13-resource-recheck.trx"
+  },
+  "finalCombinedSql": {
+    "failed": 0,
+    "passed": 134,
+    "status": "Passed",
+    "trx": "M13-final-full.trx",
+    "duration": "8m18s",
+    "skipped": 0,
+    "log": ".local/M13-final-full-sql.log"
+  },
+  "windowsDemo": {
+    "passed": true,
+    "ownedHostsStopped": true,
+    "source": "M13-demo.json",
+    "liveCalls": 0
+  },
+  "development": {
+    "source": "M13-development.json",
+    "passed": true
+  },
+  "preservation": {
+    "passed": true,
+    "source": "M13-preservation.json",
+    "sourcePermissionsUnchanged": true
+  },
+  "migrations": [
+    "20261011061744_M13Editorial",
+    "20261011064722_M13Attempts"
+  ],
+  "pendingModels": {
+    "core": false,
+    "runtime": false,
+    "checkedBeforeCastAndPrivacyOnlyChanges": false,
+    "finalChecked": true
+  },
+  "syntax": {
+    "vsCodeJson": true,
+    "powerShell": true,
+    "mockDom": true,
+    "javaScript": true,
+    "gitDiff": true,
+    "windowsDoctor": true
+  },
+  "humanRelease": "Blocked: genuine M12 human dataset/release acceptance remains pending",
+  "unverified": [
+    "Fresh M13 interactive F5/breakpoints",
+    "Browser visual/mobile/accessibility",
+    "Hosted CI/cold cache",
+    "Live providers/production media",
+    "Actual platform publication/remediation",
+    "Production restore/load/privacy qualification"
+  ],
+  "m14Started": false,
+  "reviewFixes": {
+    "date": "2026-10-11",
+    "status": "Offline Verified",
+    "policy": "editorial.v2",
+    "findings": {
+      "audienceBinding": "Fixed",
+      "factoryCastReapproval": "Fixed",
+      "factoryAncestorFingerprint": "Fixed",
+      "assetLineageCorrection": "Fixed"
+    },
+    "build": {
+      "lockedRestore": true,
+      "errors": 0,
+      "warnings": 0
+    },
+    "offline": {
+      "failed": 0,
+      "passed": 83,
+      "skipped": 0
+    },
+    "sql": {
+      "duration": "6m55s",
+      "failed": 0,
+      "passed": 138,
+      "skipped": 0
+    },
+    "focused": {
+      "failed": 0,
+      "passed": 14,
+      "sql": 13,
+      "offline": 1,
+      "trx": "M13-review-fixes-final-focused.trx",
+      "skipped": 0
+    },
+    "newSqlRegressions": 4,
+    "format": true,
+    "coreModel": true,
+    "runtimeModel": true,
+    "windowsDoctor": true,
+    "diffCheck": true,
+    "windowsDemo": {
+      "liveCalls": 0,
+      "ownedHostsStopped": true,
+      "passed": true,
+      "source": "M13-demo.json"
+    },
+    "schemaChanges": false,
+    "credentialsChanged": false,
+    "sourcePermissionsChanged": false,
+    "oldApprovalHistoryPreserved": true,
+    "oldApprovalsExpired": true,
+    "fullLog": ".local/M13-review-fixes-final-full.log",
+    "windowsLog": ".local/M13-review-fixes-windows.log",
+    "unverified": [
+      "Fresh interactive F5/breakpoints",
+      "Visual/mobile/accessibility",
+      "Genuine human release reviews",
+      "Live providers/production media",
+      "Actual platform publication/remediation",
+      "Hosted CI/production qualification"
+    ],
+    "m14Started": false
+  }
+}

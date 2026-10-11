@@ -1,0 +1,18 @@
+{
+    "humanReleaseEvidenceWritten":  false,
+    "copyOnlyChecksumBackup":  true,
+    "readBindingsExact":  true,
+    "verifyOnly":  true,
+    "actualIsolatedRestore":  true,
+    "date":  "2026-10-11",
+    "sourcePermissionsExact":  true,
+    "restoredCounts":  {
+                           "reader.ReadOperation":  13,
+                           "reader.ReadCollection":  7,
+                           "sources.SourcePermission":  2418,
+                           "editorial.EditorialApproval":  180,
+                           "reader.ReadPiece":  6,
+                           "reader.ReadEvidence":  0
+                       },
+    "productionAssetRecoveryQualified":  false
+}

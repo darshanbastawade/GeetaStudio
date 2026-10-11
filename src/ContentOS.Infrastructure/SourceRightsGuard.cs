@@ -41,7 +41,7 @@ public sealed class SourceRightsGuard(CoreDbContext db) : ISourceRightsGuard
             AiProcessing = use.AiProcessing || use.Purpose == "Generate"
         };
         var p = e.PermissionId is Guid permission ? await db.SourcePermissions.AsNoTracking().SingleAsync(p => p.Id == permission, ct) : null;
-        var reason = SourceRules.Decide(p?.Status ?? "Unknown", w.Revoked || e.Revoked, s.ReviewStatus == "Approved",
+        var reason = await db.EditorialCorrections.AnyAsync(x => x.SnapshotId == snapshot, ct) ? "SourceCorrectionRequiresReplacement" : SourceRules.Decide(p?.Status ?? "Unknown", w.Revoked || e.Revoked, s.ReviewStatus == "Approved",
             p?.ExpiresUtc, DateTimeOffset.UtcNow,
             p != null && await db.PermissionLanguages.AnyAsync(x => x.PermissionId == p.Id && x.Value == use.Language, ct),
             p != null && await db.PermissionTerritories.AnyAsync(x => x.PermissionId == p.Id && x.Value == use.Territory, ct),
@@ -96,6 +96,7 @@ public sealed class SourceRightsGuard(CoreDbContext db) : ISourceRightsGuard
         if (!owner && !granted && !publicRead) throw new CoreAccessException();
         if (use.Purpose is "Publish" or "Generate" or "Translate" or "Adapt" && member.Permission is not ("Administrator" or "Editor")) throw new CoreAccessException();
         if (use.Language != content.LocaleId) throw new RuntimeValidationException("Intended language must match the content locale.");
+        if (use.Purpose is "Export" or "Publish") await EditorialBinding.AssertExport(db, scope, revision, use.Purpose, ct);
         var lineage = await LineageAsync(revision, ct);
         if (lineage.Snapshots.Count == 0 && (r.Kind is not ("Fiction" or "Synthetic") || r.RightsStatus is not ("Owned" or "Synthetic")))
             throw new RightsBlockedException("MissingReviewedEvidence");

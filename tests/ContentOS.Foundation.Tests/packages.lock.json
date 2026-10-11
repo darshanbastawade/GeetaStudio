@@ -710,7 +710,8 @@
       "geetastudio.web": {
         "type": "Project",
         "dependencies": {
-          "ContentOS.Contracts": "[1.0.0, )"
+          "ContentOS.Contracts": "[1.0.0, )",
+          "Microsoft.AspNetCore.Authentication.Negotiate": "[10.0.12, )"
         }
       }
     }

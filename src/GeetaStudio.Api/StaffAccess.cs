@@ -11,7 +11,7 @@ public sealed class StaffAccess(IConfiguration configuration) : IClaimsTransform
         // Only explicit staff mappings grant product roles; Windows group names cannot grant them implicitly.
         var roles = new ClaimsIdentity(principal.Claims.Where(c => c.Type != ClaimTypes.Role && c.Type != ClaimTypes.GroupSid),
             principal.Identity.AuthenticationType, ClaimTypes.Name, ClaimTypes.Role);
-        foreach (var role in new[] { "Administrator", "Operator", "Reader" })
+        foreach (var role in new[] { "Administrator", "Operator", "Reader", "Author", "Editor", "Publisher" })
         {
             if (configuration.GetSection("Staff:" + role).Get<string[]>()?.Contains(principal.Identity.Name, StringComparer.OrdinalIgnoreCase) == true)
                 roles.AddClaim(new Claim(ClaimTypes.Role, role));

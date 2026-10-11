@@ -6,7 +6,8 @@
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DOTNET_ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Development",
+        "Factory__WorkerEnabled": "true"
       },
       "dotnetRunMessages": true
     }

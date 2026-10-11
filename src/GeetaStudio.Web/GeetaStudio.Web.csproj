@@ -8,4 +8,5 @@
   <ItemGroup>
     <ProjectReference Include="../ContentOS.Contracts/ContentOS.Contracts.csproj" />
   </ItemGroup>
+  <ItemGroup><PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="10.0.12" /></ItemGroup>
 </Project>

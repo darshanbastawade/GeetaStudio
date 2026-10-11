@@ -213,13 +213,14 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
     }
     public async Task<KnowledgeResult> RetrieveAsync(CoreScope s, Guid u, KnowledgeQuery r, CancellationToken ct)
     {
-        db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct); await Access(s, u, false, ct);
+        var ownsTransaction = db.Database.CurrentTransaction == null; if (ownsTransaction) db.ChangeTracker.Clear();
+        await using var tx = ownsTransaction ? await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct) : null; await Access(s, u, false, ct);
         var alias = await db.KnowledgeAliases.AsNoTracking().SingleOrDefaultAsync(a => a.UniverseId == u && a.Locale == r.Locale && a.Key == r.Alias, ct);
         if (alias?.ActiveIndexId == null) throw new KnowledgeBlockedException("NoActiveIndex");
         var index = await Index(u, alias.ActiveIndexId.Value, ct);
         if (index.ValidationEvidence == null) throw new KnowledgeBlockedException("UnvalidatedIndex");
         if (index.EmbeddingSpaceId != r.EmbeddingSpaceId) throw new KnowledgeBlockedException("EmbeddingSpaceMismatch");
-        var result = await Search(s, index, r.Query, r.Territory, r.Limit, ct, r.Use); Audit(s, index.Id, "knowledge.retrieved"); await Save(ct); await tx.CommitAsync(ct); return result;
+        var result = await Search(s, index, r.Query, r.Territory, r.Limit, ct, r.Use); Audit(s, index.Id, "knowledge.retrieved"); await Save(ct); if (tx != null) await tx.CommitAsync(ct); return result;
     }
     public async Task ValidateAsync(CoreScope s, Guid u, Guid id, ValidateKnowledgeIndex r, CancellationToken ct)
     {

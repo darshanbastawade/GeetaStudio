@@ -26,7 +26,8 @@
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DOTNET_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://localhost:5100"
+        "ASPNETCORE_URLS": "http://localhost:5100",
+        "Factory__WorkerEnabled": "true"
       },
       "name": "Geeta Studio: Api"
     },
@@ -75,7 +76,8 @@
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DOTNET_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://localhost:5100"
+        "ASPNETCORE_URLS": "http://localhost:5100",
+        "Factory__WorkerEnabled": "true"
       },
       "name": "Geeta Studio: Api (compound)",
       "presentation": {
@@ -118,6 +120,20 @@
       "presentation": {
         "hidden": true
       }
+    },
+    {
+      "name": "Geeta Studio: M14 attach Api",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "name": "Geeta Studio: M14 attach Web",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
     }
   ]
 }

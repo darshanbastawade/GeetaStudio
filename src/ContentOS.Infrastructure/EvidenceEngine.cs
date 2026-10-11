@@ -271,6 +271,7 @@ public sealed class EvidenceEngine(CoreDbContext db) : IEvidenceEngine
         var inherited = await db.ClaimLinks.Where(l => parents.Contains(l.ContentRevisionId)).Select(l => l.ClaimRevisionId).Distinct().ToListAsync(ct);
         foreach (var id in inherited)
         {
+            if (await db.EditorialCorrections.AnyAsync(x => x.ClaimRevisionId == id, ct)) return new(false, "EditorialClaimCorrectionRequiresReplacement", []);
             var old = await db.ClaimRevisions.AsNoTracking().SingleAsync(x => x.Id == id, ct);
             if (await db.Claims.AnyAsync(c => c.Id == old.ClaimId && c.CurrentVersion != old.Version, ct) ||
                 await db.ClaimCorrections.AnyAsync(c => c.ClaimRevisionId == id && c.Status == "Open", ct)) return new(false, "StaleInheritedEvidence", []);
@@ -283,6 +284,7 @@ public sealed class EvidenceEngine(CoreDbContext db) : IEvidenceEngine
             if (link.Start < end || revision.Body[end..link.Start].Any(c => !char.IsWhiteSpace(c))) return new(false, "UnlabeledContent", labels);
             var claim = await db.ClaimRevisions.AsNoTracking().SingleAsync(x => x.Id == link.ClaimRevisionId, ct);
             var head = await db.Claims.AsNoTracking().SingleAsync(x => x.Id == claim.ClaimId, ct);
+            if (await db.EditorialCorrections.AnyAsync(x => x.ClaimRevisionId == claim.Id, ct)) return new(false, "EditorialClaimCorrectionRequiresReplacement", []);
             if (head.CurrentVersion != claim.Version) return new(false, "StaleClaim", labels);
             if (await db.ClaimCorrections.AnyAsync(c => c.ClaimRevisionId == claim.Id && c.Status == "Open", ct)) return new(false, "CorrectionPending", labels);
             if (claim.ReviewStatus != "Approved") return new(false, "InsufficientEvidence", labels);

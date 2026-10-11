@@ -18,9 +18,12 @@ builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNe
 builder.Services.AddTransient<IClaimsTransformation, StaffAccess>();
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy("StaffAuthor", p => p.RequireAuthenticatedUser().RequireRole("Administrator", "Author", "Editor"));
+    options.AddPolicy("StaffEditor", p => p.RequireAuthenticatedUser().RequireRole("Administrator", "Editor"));
+    options.AddPolicy("StaffCms", p => p.RequireAuthenticatedUser().RequireRole("Administrator", "Author", "Editor", "Publisher"));
     options.AddPolicy("StaffAdmin", p => p.RequireAuthenticatedUser().RequireRole("Administrator"));
     options.AddPolicy("StaffOperate", p => p.RequireAuthenticatedUser().RequireRole("Administrator", "Operator"));
-    options.AddPolicy("StaffRead", p => p.RequireAuthenticatedUser().RequireRole("Administrator", "Operator", "Reader"));
+    options.AddPolicy("StaffRead", p => p.RequireAuthenticatedUser().RequireRole("Administrator", "Operator", "Reader", "Author", "Editor", "Publisher"));
 });
 var enabled = builder.Configuration.GetValue<bool>("Runtime:Enabled");
 if (enabled)
@@ -36,7 +39,10 @@ if (enabled)
     builder.Services.AddOwnedWorkflows();
     builder.Services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationA>();
     builder.Services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationB>();
-    builder.Services.AddLessons();
+    builder.Services.AddLessons(); builder.Services.AddUniverseRegistry();
+    builder.Services.AddSingleton<IFactoryTemplate, LocalDraftTemplateA>(); builder.Services.AddSingleton<IFactoryTemplate, LocalDraftTemplateB>(); builder.Services.AddDraftFactory(); builder.Services.AddQualityEvaluation(); builder.Services.AddEditorialWorkbench(); builder.Services.AddReadWorkbench(); foreach (var key in new[] { "evaluation.fixture.a.v1", "evaluation.fixture.b.v1", "evaluation.fabricated.v1", "evaluation.unsafe.v1", "evaluation.fluent-failure.v1" }) builder.Services.AddSingleton<IEvaluationAdapter>(new EvaluationFixtureAdapter(key));
+    if (builder.Configuration.GetValue("Read:RetentionWorkerEnabled", true)) builder.Services.AddHostedService<ReadRetention>();
+    if (builder.Configuration.GetValue("Factory:WorkerEnabled", false)) builder.Services.AddHostedService<FactoryProcessor>();
     if (builder.Configuration.GetValue("Workflows:WorkerEnabled", true)) builder.Services.AddHostedService<WorkflowProcessor>();
     builder.Services.AddSingleton<IKnowledgeRankingAdapter, SqlHybridRanking>();
     builder.Services.AddSingleton<IKnowledgeRankingAdapter, IndependentFixtureRanking>();
@@ -44,6 +50,8 @@ if (enabled)
     foreach (var key in RuntimeRules.Adapters)
         builder.Services.AddScoped<ITestOperationProvider>(s => new TestOperationProvider(key, s.GetRequiredService<ITestEffectLedger>()));
 }
+builder.Services.AddReadLimits();
+builder.Logging.AddFilter("Microsoft.AspNetCore.Hosting.Diagnostics", LogLevel.Warning);
 builder.WebHost.ConfigureKestrel(o => o.Limits.MaxRequestBodySize = 131072);
 var app = builder.Build();
 if (!app.Environment.IsDevelopment()) app.UseHttpsRedirection();
@@ -52,7 +60,7 @@ app.Use(async (context, next) =>
     try
     {
         await next(context);
-        if (enabled && context.Response.StatusCode is 401 or 403 && (context.Request.Path.StartsWithSegments("/api/v1/runtime") || context.Request.Path.StartsWithSegments("/api/v1/core") || context.Request.Path.StartsWithSegments("/api/v1/sources") || context.Request.Path.StartsWithSegments("/api/v1/corpus") || context.Request.Path.StartsWithSegments("/api/v1/evidence") || context.Request.Path.StartsWithSegments("/api/v1/knowledge") || context.Request.Path.StartsWithSegments("/api/v1/ai") || context.Request.Path.StartsWithSegments("/api/v1/workflows") || context.Request.Path.StartsWithSegments("/api/v1/lessons")))
+        if (enabled && context.Response.StatusCode is 401 or 403 && (context.Request.Path.StartsWithSegments("/api/v1/runtime") || context.Request.Path.StartsWithSegments("/api/v1/core") || context.Request.Path.StartsWithSegments("/api/v1/sources") || context.Request.Path.StartsWithSegments("/api/v1/corpus") || context.Request.Path.StartsWithSegments("/api/v1/evidence") || context.Request.Path.StartsWithSegments("/api/v1/knowledge") || context.Request.Path.StartsWithSegments("/api/v1/ai") || context.Request.Path.StartsWithSegments("/api/v1/workflows") || context.Request.Path.StartsWithSegments("/api/v1/lessons") || context.Request.Path.StartsWithSegments("/api/v1/registry") || context.Request.Path.StartsWithSegments("/api/v1/factory") || context.Request.Path.StartsWithSegments("/api/v1/evaluation") || context.Request.Path.StartsWithSegments("/api/v1/editorial") || context.Request.Path.StartsWithSegments("/api/v1/read-admin")))
             await context.RequestServices.GetRequiredService<IRuntimeStore>().AuditAsync(context.User.Identity?.Name ?? "anonymous", "admin.access-denied", null,
                 System.Diagnostics.Activity.Current?.TraceId.ToString() ?? context.TraceIdentifier, context.RequestAborted);
     }
@@ -89,11 +97,17 @@ app.Use(async (context, next) =>
         await context.Response.WriteAsJsonAsync(new { error = "Runtime unavailable. Inspect redacted operational state and readiness." });
     }
 });
-app.UseAuthentication(); app.UseAuthorization();
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/api/v1/read") || context.Request.Path.StartsWithSegments("/api/v1/read-preview") || context.Request.Path.StartsWithSegments("/api/v1/read-admin"))
+    { context.Response.Headers.CacheControl = "no-store"; context.Response.Headers["X-Content-Type-Options"] = "nosniff"; }
+    await next(context);
+});
+app.UseRouting(); app.UseAuthentication(); app.UseAuthorization(); app.UseRateLimiter();
 // Integrated authentication is ambient in browsers. A custom action header prevents cross-site form submissions.
 app.Use(async (context, next) =>
 {
-    if (HttpMethods.IsPost(context.Request.Method) && (context.Request.Path.StartsWithSegments("/api/v1/runtime") || context.Request.Path.StartsWithSegments("/api/v1/core") || context.Request.Path.StartsWithSegments("/api/v1/sources") || context.Request.Path.StartsWithSegments("/api/v1/corpus") || context.Request.Path.StartsWithSegments("/api/v1/evidence") || context.Request.Path.StartsWithSegments("/api/v1/knowledge") || context.Request.Path.StartsWithSegments("/api/v1/ai") || context.Request.Path.StartsWithSegments("/api/v1/workflows") || context.Request.Path.StartsWithSegments("/api/v1/lessons"))
+    if (HttpMethods.IsPost(context.Request.Method) && (context.Request.Path.StartsWithSegments("/api/v1/runtime") || context.Request.Path.StartsWithSegments("/api/v1/core") || context.Request.Path.StartsWithSegments("/api/v1/sources") || context.Request.Path.StartsWithSegments("/api/v1/corpus") || context.Request.Path.StartsWithSegments("/api/v1/evidence") || context.Request.Path.StartsWithSegments("/api/v1/knowledge") || context.Request.Path.StartsWithSegments("/api/v1/ai") || context.Request.Path.StartsWithSegments("/api/v1/workflows") || context.Request.Path.StartsWithSegments("/api/v1/lessons") || context.Request.Path.StartsWithSegments("/api/v1/registry") || context.Request.Path.StartsWithSegments("/api/v1/factory") || context.Request.Path.StartsWithSegments("/api/v1/evaluation") || context.Request.Path.StartsWithSegments("/api/v1/editorial") || context.Request.Path.StartsWithSegments("/api/v1/read-admin"))
         && context.Request.Headers["X-ContentOS-Staff"] != "1")
     {
         context.Response.StatusCode = 400;
@@ -108,8 +122,6 @@ app.MapGet("/health/live", () => new HealthStatus("GeetaStudio.Api", "Healthy", 
 if (app.Environment.IsDevelopment())
     app.MapGet("/api/v1/development/status", () => new DevelopmentStatus("Development", true,
         enabled ? "M1 local deterministic adapters; SQL-backed runtime enabled." : "M0 fixture: runtime disabled; no database required.")).AllowAnonymous();
-if (enabled) { app.MapRuntime(); app.MapCore(); app.MapSources(); app.MapCorpus(); app.MapEvidence(); app.MapKnowledge(); app.MapAi(); app.MapWorkflows(); app.MapLessons(); }
+if (enabled) { app.MapRuntime(); app.MapCore(); app.MapSources(); app.MapCorpus(); app.MapEvidence(); app.MapKnowledge(); app.MapAi(); app.MapWorkflows(); app.MapLessons(); app.MapRegistry(); app.MapFactory(); app.MapEvaluation(); app.MapEditorial(); app.MapRead(); }
 else app.MapGet("/health/ready", () => Results.Json(new { status = "RuntimeDisabled" }, statusCode: 503));
 app.Run();
-
-

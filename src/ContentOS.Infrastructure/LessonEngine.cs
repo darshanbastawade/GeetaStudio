@@ -200,7 +200,9 @@ public sealed partial class LessonEngine(CoreDbContext db, ITranslationProvider 
         await Access(s, u, false, ct);
         return await (from c in db.Characters
                       join r in db.CharacterRevisions on c.Id equals r.CharacterId
-                      where c.UniverseId == u && c.Status == "Active" && r.FictionalStatus == "Fictional" &&
+                      where c.UniverseId == u && c.Status == "Active" && c.PersistenceScope != "EpisodeOnly" && r.FictionalStatus == "Fictional" &&
+                      !db.RegistryRevisions.Any(p => p.Kind == "Character" && p.CharacterId == c.Id && p.ReviewStatus != "Approved" &&
+                          !db.RegistryRevisions.Any(n => n.Kind == "Character" && n.CharacterId == c.Id && n.Version > p.Version)) &&
                       !db.CharacterRevisions.Any(x => x.CharacterId == c.Id && x.Version > r.Version)
                       orderby c.Key
                       select new LessonCastCandidate(c.Id, r.Id, r.DisplayName, r.LifeStage, "Available")).Take(200).ToListAsync(ct);
@@ -272,7 +274,9 @@ public sealed partial class LessonEngine(CoreDbContext db, ITranslationProvider 
         }, ct);
     public async Task<LessonVariantView> ExportAsync(CoreScope s, Guid u, Guid id, CancellationToken ct)
     {
-        db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct);
+        var ownsTransaction = db.Database.CurrentTransaction == null;
+        if (ownsTransaction) db.ChangeTracker.Clear();
+        await using var tx = ownsTransaction ? await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct) : null;
         var view = await InspectAsync(s, u, id, ct);
         if (view.OutputWithheld) throw new RightsBlockedException("LessonEvidenceIneligible");
         if (view.ReviewStatus != "Approved" || view.ReviewEvidence?.StartsWith("manual:") != true ||
@@ -290,7 +294,7 @@ public sealed partial class LessonEngine(CoreDbContext db, ITranslationProvider 
             if (verified.ReviewEvidence?.StartsWith("manual:") != true) throw new RuntimeValidationException("Fixture claims cannot qualify a lesson release.", "HumanReviewRequired");
         }
         await Recheck(s, u, view.Snapshot.Bundle, view.Snapshot.Locale.Rules.Locale!.Locale, "Export", ct);
-        await tx.CommitAsync(ct);
+        if (tx != null) await tx.CommitAsync(ct);
         return view; // This is an export gate, never a publishing operation.
     }
 }

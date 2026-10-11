@@ -86,12 +86,12 @@ public sealed partial class AiService(CoreDbContext db, RuntimeDbContext runtime
     }
     public async Task ActivateAsync(CoreScope s, Guid id, CancellationToken ct)
     {
-        db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct); await Lock(s, ct); await Access(s, true, ct);
+        var ownsTransaction = db.Database.CurrentTransaction == null; if (ownsTransaction) db.ChangeTracker.Clear(); await using var tx = ownsTransaction ? await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct) : null; await Lock(s, ct); await Access(s, true, ct);
         var row = await db.AiRoutes.SingleOrDefaultAsync(x => x.Id == id && x.TenantId == s.TenantId, ct) ?? throw new CoreAccessException(); var r = Decode<AiRouteSettings>(row.SettingsJson);
         foreach (var p in await Profiles(s, r.Profiles, ct)) { Compatible(r, p.Settings); if (await Admission(p, false, ct) != "Success") throw new RuntimeValidationException("Route provider currently unavailable."); }
         var head = await db.AiRouteHeads.SingleOrDefaultAsync(x => x.TenantId == s.TenantId && x.Task == row.Task, ct);
         if (head == null) db.AiRouteHeads.Add(new() { Id = Guid.NewGuid(), TenantId = s.TenantId, Task = row.Task, RouteId = id }); else head.RouteId = id;
-        Audit(s, id, "ai.route-activate-or-rollback"); await Save(ct); await tx.CommitAsync(ct);
+        Audit(s, id, "ai.route-activate-or-rollback"); await Save(ct); if (tx != null) await tx.CommitAsync(ct);
     }
     public async Task<IReadOnlyList<AiRouteView>> RoutesAsync(CoreScope s, CancellationToken ct)
     {

@@ -1,0 +1,19 @@
+{
+    "verifiedDate":  "2026-10-11",
+    "windowsStaffPageStatus":  200,
+    "actualApiWorkerRestarted":  true,
+    "approvedFixturePilotPlans":  2,
+    "approvedFixtureVerseInputs":  2,
+    "generatedDrafts":  12,
+    "firstAcceptedArtifactPreserved":  true,
+    "businessReplayStable":  true,
+    "generationCost":  0.0000,
+    "generatedCoverage":  12,
+    "reviewedCoverage":  0,
+    "publishedCoverage":  0,
+    "publiclyUsableCoverage":  0,
+    "fixtureOnly":  true,
+    "humanQualityVerified":  false,
+    "liveCalls":  0,
+    "ownedHostsStopped":  true
+}

@@ -251,6 +251,7 @@ public sealed class ContentCoreStore(CoreDbContext db) : IContentCore
         CoreRules.Transition(item.EditorialState, request.State, revision.RightsStatus);
         if (request.State == "Approved")
         {
+            if (await db.EditorialItems.AnyAsync(x => x.ContentId == id, ct)) throw new EvidenceBlockedException("ManagedContentRequiresEditorialWorkbenchApproval");
             var use = new IntendedUse("Export", item.LocaleId, "IN", "Text");
             await new SourceRightsGuard(db).CheckAsync(scope, revision.Id, use, ct);
             var gate = await new EvidenceEngine(db).CheckContentAsync(scope, revision.Id, use, ct);
@@ -274,6 +275,7 @@ public sealed class ContentCoreStore(CoreDbContext db) : IContentCore
         SourceRules.Use(use.Purpose, use.Language, use.Territory, use.Format);
         if (use.Purpose != "Export") throw new RuntimeValidationException("Export requires an Export intended use.");
         var content = await ViewAsync(item, ct);
+        if (await db.EditorialItems.AnyAsync(x => x.ContentId == id, ct)) content = content with { Revisions = content.Revisions.Where(x => x.Version == item.CurrentVersion).ToArray() };
         var citations = new List<CitationExport>(); var edges = new List<ProvenanceExport>(); var labels = new List<ClaimLabelView>();
         foreach (var revision in content.Revisions)
         {

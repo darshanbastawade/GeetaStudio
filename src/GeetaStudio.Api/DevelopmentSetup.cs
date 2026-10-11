@@ -155,6 +155,36 @@ public static class DevelopmentSetup
                     await using var permission = new SqlCommand($"GRANT SELECT, INSERT, UPDATE ON OBJECT::[workflow].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection());
                     await permission.ExecuteNonQueryAsync();
                 }
+                await using (var readGrant = new SqlCommand($"GRANT SELECT, INSERT, UPDATE ON OBJECT::[reader].[ReadCollection] TO [{login}]; GRANT SELECT, INSERT, UPDATE, DELETE ON OBJECT::[reader].[ReadEventCount] TO [{login}];", (SqlConnection)db.Database.GetDbConnection())) await readGrant.ExecuteNonQueryAsync();
+                foreach (var table in new[] { "ReadPiece", "ReadEvidence", "ReadOperation" })
+                {
+                    await using var readGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[reader].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await readGrant.ExecuteNonQueryAsync();
+                }
+                foreach (var table in new[] { "EditorialItem", "EditorialCopy", "EditorialCorrectionTask", "EditorialTrend" })
+                {
+                    await using var editorialGrant = new SqlCommand($"GRANT SELECT, INSERT, UPDATE ON OBJECT::[editorial].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await editorialGrant.ExecuteNonQueryAsync();
+                }
+                foreach (var table in new[] { "EditorialApproval", "EditorialAsset", "EditorialCorrectionRecord", "EditorialOperation", "EditorialHistory", "EditorialAttempt" })
+                {
+                    await using var editorialGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[editorial].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await editorialGrant.ExecuteNonQueryAsync();
+                }
+                foreach (var table in new[] { "EvaluationDataset", "EvaluationCandidate", "EvaluationRun", "EvaluationReview", "EvaluationAdvice", "EvaluationOperation" })
+                {
+                    await using var evaluationGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[evaluation].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection());
+                    await evaluationGrant.ExecuteNonQueryAsync();
+                }
+                foreach (var table in new[] { "FactoryPlan", "FactoryBatch", "FactoryWork", "FactoryArtifact" })
+                {
+                    await using var factoryGrant = new SqlCommand($"GRANT SELECT, INSERT, UPDATE ON OBJECT::[factory].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection());
+                    await factoryGrant.ExecuteNonQueryAsync();
+                }
+                await using (var factoryGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[factory].[FactoryOperation] TO [{login}];", (SqlConnection)db.Database.GetDbConnection())) await factoryGrant.ExecuteNonQueryAsync();
+                foreach (var table in new[] { "RegistryRevision", "RegistryEpisode" })
+                {
+                    await using var permission = new SqlCommand($"GRANT SELECT, INSERT, UPDATE ON OBJECT::[registry].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection());
+                    await permission.ExecuteNonQueryAsync();
+                }
+                await using (var permission = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[registry].[RegistryOperation] TO [{login}];", (SqlConnection)db.Database.GetDbConnection())) await permission.ExecuteNonQueryAsync();
                 foreach (var table in new[] { "LessonProfile", "LessonMemory", "LessonVariant" })
                 {
                     await using var permission = new SqlCommand($"GRANT SELECT, INSERT, UPDATE ON OBJECT::[lessons].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection());
@@ -193,5 +223,3 @@ public static class DevelopmentSetup
         finally { if (File.Exists(temporary)) File.Delete(temporary); }
     }
 }
-
-

@@ -1,0 +1,16 @@
+{
+    "verifiedDate":  "2026-10-11",
+    "database":  "GeetaStudio_Dev",
+    "privateRestrictedApiConfigurationUsed":  true,
+    "windowsStaffPageStatus":  200,
+    "scopedEvaluationReadsPassed":  true,
+    "inventoryCounts":  {
+                            "datasets":  0,
+                            "candidates":  0,
+                            "reports":  0
+                        },
+    "humanApprovalFabricated":  false,
+    "sourcePermissionsChanged":  false,
+    "liveCalls":  0,
+    "ownedApiStopped":  true
+}

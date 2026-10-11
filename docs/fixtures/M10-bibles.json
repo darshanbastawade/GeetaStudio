@@ -1,0 +1,475 @@
+[
+  {
+    "universeKey": "geeta",
+    "characters": [
+      {
+        "arcState": "Proposed initial direction, not a completed story arc",
+        "pronunciationGuide": "Human language review required",
+        "presentationStyles": [
+          "Default"
+        ],
+        "visualAnchor": "fictional-dhairy-identity-v1",
+        "speechStyle": "Respectful, original fictional dialogue",
+        "voiceAnchor": "fictional-dhairy-voice-v1",
+        "flaws": [
+          "has limits and learns from mistakes"
+        ],
+        "persistenceScope": "Core",
+        "locales": [
+          "en-IN"
+        ],
+        "storyDevice": "OrdinaryFiction",
+        "audienceKeys": [
+          "children",
+          "m09-children"
+        ],
+        "roles": [
+          "Lead"
+        ],
+        "situationTags": [
+          "games",
+          "collaboration"
+        ],
+        "continuityTags": [
+          "original-timeline"
+        ],
+        "key": "dhairy",
+        "skillTags": [
+          "reflection"
+        ],
+        "traits": [
+          "curious",
+          "energetic",
+          "generous"
+        ],
+        "goals": [
+          "action"
+        ],
+        "objectives": [
+          "understand-context",
+          "responsibility"
+        ]
+      },
+      {
+        "arcState": "Proposed initial direction, not a completed story arc",
+        "pronunciationGuide": "Human language review required",
+        "presentationStyles": [
+          "Default"
+        ],
+        "visualAnchor": "fictional-neerja-identity-v1",
+        "speechStyle": "Respectful, original fictional dialogue",
+        "voiceAnchor": "fictional-neerja-voice-v1",
+        "flaws": [
+          "has limits and learns from mistakes"
+        ],
+        "persistenceScope": "Core",
+        "locales": [
+          "en-IN"
+        ],
+        "storyDevice": "OrdinaryFiction",
+        "audienceKeys": [
+          "children",
+          "m09-children"
+        ],
+        "roles": [
+          "Lead"
+        ],
+        "situationTags": [
+          "teamwork",
+          "collaboration"
+        ],
+        "continuityTags": [
+          "original-timeline"
+        ],
+        "key": "neerja",
+        "skillTags": [
+          "reflection"
+        ],
+        "traits": [
+          "inventive",
+          "observant",
+          "independent"
+        ],
+        "goals": [
+          "fairness"
+        ],
+        "objectives": [
+          "understand-context",
+          "responsibility"
+        ]
+      },
+      {
+        "arcState": "Proposed initial direction, not a completed story arc",
+        "pronunciationGuide": "Human language review required",
+        "presentationStyles": [
+          "Default"
+        ],
+        "visualAnchor": "fictional-dadaji-identity-v1",
+        "speechStyle": "Respectful, original fictional dialogue",
+        "voiceAnchor": "fictional-dadaji-voice-v1",
+        "flaws": [
+          "has limits and learns from mistakes"
+        ],
+        "persistenceScope": "Core",
+        "locales": [
+          "en-IN"
+        ],
+        "storyDevice": "OrdinaryFiction",
+        "audienceKeys": [
+          "children",
+          "teens",
+          "young-adults",
+          "adults",
+          "m09-children",
+          "m09-youth",
+          "m09-adult"
+        ],
+        "roles": [
+          "Mentor"
+        ],
+        "situationTags": [
+          "questions",
+          "collaboration"
+        ],
+        "continuityTags": [
+          "original-timeline"
+        ],
+        "key": "dadaji",
+        "skillTags": [
+          "reflection"
+        ],
+        "traits": [
+          "warm",
+          "playful",
+          "fallible"
+        ],
+        "goals": [
+          "reflection"
+        ],
+        "objectives": [
+          "understand-context",
+          "responsibility"
+        ]
+      },
+      {
+        "arcState": "Proposed initial direction, not a completed story arc",
+        "pronunciationGuide": "Human language review required",
+        "presentationStyles": [
+          "Coach",
+          "Guru",
+          "Adviser"
+        ],
+        "visualAnchor": "fictional-shakuni-identity-v1",
+        "speechStyle": "Respectful, original fictional dialogue",
+        "voiceAnchor": "fictional-shakuni-voice-v1",
+        "flaws": [
+          "has limits and learns from mistakes"
+        ],
+        "persistenceScope": "Core",
+        "locales": [
+          "en-IN"
+        ],
+        "storyDevice": "FictionalFlawedReasoning",
+        "audienceKeys": [
+          "children",
+          "teens",
+          "young-adults",
+          "adults",
+          "m09-children",
+          "m09-youth",
+          "m09-adult"
+        ],
+        "roles": [
+          "Trickster"
+        ],
+        "situationTags": [
+          "temptation",
+          "collaboration"
+        ],
+        "continuityTags": [
+          "original-timeline"
+        ],
+        "key": "shakuni",
+        "skillTags": [
+          "reflection"
+        ],
+        "traits": [
+          "witty",
+          "persuasive",
+          "fictional"
+        ],
+        "goals": [
+          "responsibility"
+        ],
+        "objectives": [
+          "understand-context",
+          "responsibility"
+        ]
+      },
+      {
+        "arcState": "Proposed initial direction, not a completed story arc",
+        "pronunciationGuide": "Human language review required",
+        "presentationStyles": [
+          "Default"
+        ],
+        "visualAnchor": "fictional-tara-identity-v1",
+        "speechStyle": "Respectful, original fictional dialogue",
+        "voiceAnchor": "fictional-tara-voice-v1",
+        "flaws": [
+          "has limits and learns from mistakes"
+        ],
+        "persistenceScope": "Core",
+        "locales": [
+          "en-IN"
+        ],
+        "storyDevice": "OrdinaryFiction",
+        "audienceKeys": [
+          "teens",
+          "m09-youth"
+        ],
+        "roles": [
+          "Lead"
+        ],
+        "situationTags": [
+          "peer-pressure",
+          "collaboration"
+        ],
+        "continuityTags": [
+          "original-timeline"
+        ],
+        "key": "tara",
+        "skillTags": [
+          "reflection"
+        ],
+        "traits": [
+          "creative",
+          "outspoken",
+          "capable"
+        ],
+        "goals": [
+          "independence"
+        ],
+        "objectives": [
+          "understand-context",
+          "responsibility"
+        ]
+      },
+      {
+        "arcState": "Proposed initial direction, not a completed story arc",
+        "pronunciationGuide": "Human language review required",
+        "presentationStyles": [
+          "Default"
+        ],
+        "visualAnchor": "fictional-kabir-identity-v1",
+        "speechStyle": "Respectful, original fictional dialogue",
+        "voiceAnchor": "fictional-kabir-voice-v1",
+        "flaws": [
+          "has limits and learns from mistakes"
+        ],
+        "persistenceScope": "Core",
+        "locales": [
+          "en-IN"
+        ],
+        "storyDevice": "OrdinaryFiction",
+        "audienceKeys": [
+          "young-adults",
+          "m09-youth"
+        ],
+        "roles": [
+          "Lead"
+        ],
+        "situationTags": [
+          "career",
+          "collaboration"
+        ],
+        "continuityTags": [
+          "original-timeline"
+        ],
+        "key": "kabir",
+        "skillTags": [
+          "reflection"
+        ],
+        "traits": [
+          "resourceful",
+          "humorous",
+          "ambitious"
+        ],
+        "goals": [
+          "direction"
+        ],
+        "objectives": [
+          "understand-context",
+          "responsibility"
+        ]
+      },
+      {
+        "arcState": "Proposed initial direction, not a completed story arc",
+        "pronunciationGuide": "Human language review required",
+        "presentationStyles": [
+          "Default"
+        ],
+        "visualAnchor": "fictional-meera-identity-v1",
+        "speechStyle": "Respectful, original fictional dialogue",
+        "voiceAnchor": "fictional-meera-voice-v1",
+        "flaws": [
+          "has limits and learns from mistakes"
+        ],
+        "persistenceScope": "Core",
+        "locales": [
+          "en-IN"
+        ],
+        "storyDevice": "OrdinaryFiction",
+        "audienceKeys": [
+          "adults",
+          "m09-adult"
+        ],
+        "roles": [
+          "Lead"
+        ],
+        "situationTags": [
+          "work",
+          "collaboration"
+        ],
+        "continuityTags": [
+          "original-timeline"
+        ],
+        "key": "meera",
+        "skillTags": [
+          "reflection"
+        ],
+        "traits": [
+          "capable",
+          "generous",
+          "overcommitted"
+        ],
+        "goals": [
+          "boundaries"
+        ],
+        "objectives": [
+          "understand-context",
+          "responsibility"
+        ]
+      }
+    ],
+    "bible": {
+      "continuityRules": [
+        "Keep canonical life stage and stable identity",
+        "Permanent biography and relationships require registry revision",
+        "Every protagonist makes their own choices",
+        "Fiction is separate from scripture and historical evidence"
+      ],
+      "humorStyles": [
+        "None",
+        "Gentle",
+        "Satire"
+      ],
+      "title": "Geeta fictional universe bible",
+      "forbiddenAttributions": [
+        "scripture says",
+        "Krishna said:",
+        "this is historical fact"
+      ],
+      "audiences": [],
+      "satireLabel": "Fictional satire — editorial escalation required",
+      "preferredMinSpeakers": 2,
+      "disabledSubjectTags": [
+        "real-suffering"
+      ],
+      "setting": "Geeta original teaching stories",
+      "humorEnabled": true,
+      "preferredMaxSpeakers": 4,
+      "forbiddenPhrases": [
+        "laugh at disability",
+        "inferior religious community",
+        "joke about victims",
+        "fictional scene is scripture"
+      ]
+    }
+  },
+  {
+    "universeKey": "synthetic",
+    "characters": [
+      {
+        "arcState": "Proposed initial direction, not a completed story arc",
+        "pronunciationGuide": "Human language review required",
+        "presentationStyles": [
+          "Default"
+        ],
+        "visualAnchor": "fictional-fixture-guide-identity-v1",
+        "speechStyle": "Respectful, original fictional dialogue",
+        "voiceAnchor": "fictional-fixture-guide-voice-v1",
+        "flaws": [
+          "has limits and learns from mistakes"
+        ],
+        "persistenceScope": "Core",
+        "locales": [
+          "en-IN"
+        ],
+        "storyDevice": "OrdinaryFiction",
+        "audienceKeys": [
+          "general"
+        ],
+        "roles": [
+          "Lead"
+        ],
+        "situationTags": [
+          "collaboration",
+          "collaboration"
+        ],
+        "continuityTags": [
+          "original-timeline"
+        ],
+        "key": "fixture-guide",
+        "skillTags": [
+          "reflection"
+        ],
+        "traits": [
+          "thoughtful",
+          "helpful",
+          "fictional"
+        ],
+        "goals": [
+          "context"
+        ],
+        "objectives": [
+          "understand-context",
+          "responsibility"
+        ]
+      }
+    ],
+    "bible": {
+      "continuityRules": [
+        "Keep canonical life stage and stable identity",
+        "Permanent biography and relationships require registry revision",
+        "Every protagonist makes their own choices",
+        "Fiction is separate from scripture and historical evidence"
+      ],
+      "humorStyles": [
+        "None",
+        "Gentle",
+        "Satire"
+      ],
+      "title": "Synthetic learning fixture fictional universe bible",
+      "forbiddenAttributions": [
+        "scripture says",
+        "Krishna said:",
+        "this is historical fact"
+      ],
+      "audiences": [],
+      "satireLabel": "Fictional satire — editorial escalation required",
+      "preferredMinSpeakers": 2,
+      "disabledSubjectTags": [
+        "real-suffering"
+      ],
+      "setting": "Synthetic learning fixture original teaching stories",
+      "humorEnabled": true,
+      "preferredMaxSpeakers": 4,
+      "forbiddenPhrases": [
+        "laugh at disability",
+        "inferior religious community",
+        "joke about victims",
+        "fictional scene is scripture"
+      ]
+    }
+  }
+]

@@ -1,0 +1,21 @@
+@page "/"
+@inject ReadClient Reader
+<PageTitle>Geeta Studio — read, reflect, practise</PageTitle>
+<HeadContent><meta name="description" content="Read reviewed teachings with their sources, find a practical takeaway, and follow a learning journey." /></HeadContent>
+<div class="reader" data-read-root data-enhance-nav="false">
+    <a class="skip" href="#reading">Skip to reading</a>
+    <header class="read-header"><a href="/" class="brand">Geeta Studio</a><span>Read · Reflect · Practise</span></header>
+    <main id="reading">
+        <p class="eyebrow">A considered reading practice</p><h1>One verse. A little more clarity.</h1>
+        <p class="read-intro">Explore the text, see where an explanation comes from, and carry one thoughtful action into your day.</p>
+        @if (_error) { <p role="status">The reading library is temporarily unavailable. Please try again.</p> }
+        else if (_collections.Length == 0) { <section><h2>A reviewed library is being prepared</h2><p>Published collections will appear here once their content and release reviews are complete.</p></section> }
+        else { <div class="read-grid">@foreach (var c in _collections) { <article><h2><a href="@("/read/"+c.Key)">@c.Title</a></h2><p>@c.Pieces reviewed variants</p><a href="@("/read/"+c.Key)">Start reading →</a></article> }</div> }
+        <section><h2>Your reading belongs to you</h2><p>Bookmarks and progress stay on this device. They are optional and are not linked to an account. You can clear them at any time.</p><button type="button" data-clear-reading>Clear device bookmarks and progress</button><ul data-device-list></ul><p data-device-status role="status"></p></section>
+    </main><footer>No advertising profiles. No account required to read published content.</footer>
+</div>
+@code {
+    private ReadCollectionSummary[] _collections = [];
+    private bool _error;
+    protected override async Task OnInitializedAsync() { try { _collections = await Reader.Directory(); } catch (HttpRequestException) { _error = true; } catch (TaskCanceledException) { _error = true; } }
+}

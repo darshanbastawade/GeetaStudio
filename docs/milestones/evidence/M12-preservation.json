@@ -1,0 +1,15 @@
+{
+    "verifiedDate":  "2026-10-11",
+    "database":  "GeetaStudio_Dev",
+    "Characters":  8,
+    "Universes":  3,
+    "CorpusVerses":  50,
+    "RuntimeJobs":  10,
+    "CoreMigrations":  12,
+    "RuntimeMigrations":  3,
+    "EvaluationDatasets":  0,
+    "EvaluationRuns":  0,
+    "sourcePermissionsChanged":  false,
+    "databaseReset":  false,
+    "liveCalls":  0
+}

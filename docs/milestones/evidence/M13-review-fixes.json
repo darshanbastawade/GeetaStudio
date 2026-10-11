@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-11",
+  "status": "Offline Verified",
+  "policy": "editorial.v2",
+  "findings": {
+    "audienceBinding": "Fixed",
+    "factoryCastReapproval": "Fixed",
+    "factoryAncestorFingerprint": "Fixed",
+    "assetLineageCorrection": "Fixed"
+  },
+  "build": {
+    "lockedRestore": true,
+    "errors": 0,
+    "warnings": 0
+  },
+  "offline": {
+    "failed": 0,
+    "passed": 83,
+    "skipped": 0
+  },
+  "sql": {
+    "duration": "6m55s",
+    "failed": 0,
+    "passed": 138,
+    "skipped": 0
+  },
+  "focused": {
+    "failed": 0,
+    "passed": 14,
+    "sql": 13,
+    "offline": 1,
+    "trx": "M13-review-fixes-final-focused.trx",
+    "skipped": 0
+  },
+  "newSqlRegressions": 4,
+  "format": true,
+  "coreModel": true,
+  "runtimeModel": true,
+  "windowsDoctor": true,
+  "diffCheck": true,
+  "windowsDemo": {
+    "liveCalls": 0,
+    "ownedHostsStopped": true,
+    "passed": true,
+    "source": "M13-demo.json"
+  },
+  "schemaChanges": false,
+  "credentialsChanged": false,
+  "sourcePermissionsChanged": false,
+  "oldApprovalHistoryPreserved": true,
+  "oldApprovalsExpired": true,
+  "fullLog": ".local/M13-review-fixes-final-full.log",
+  "windowsLog": ".local/M13-review-fixes-windows.log",
+  "unverified": [
+    "Fresh interactive F5/breakpoints",
+    "Visual/mobile/accessibility",
+    "Genuine human release reviews",
+    "Live providers/production media",
+    "Actual platform publication/remediation",
+    "Hosted CI/production qualification"
+  ],
+  "m14Started": false
+}

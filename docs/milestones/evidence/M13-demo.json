@@ -1,0 +1,23 @@
+{
+    "verifiedDate":  "2026-10-11",
+    "windowsStaffPageStatus":  200,
+    "privateWavePreviewStatus":  200,
+    "fixtureTextApproved":  true,
+    "fixtureAssetApproved":  true,
+    "textEditExpiredApproval":  true,
+    "assetReplacementExpiredApproval":  true,
+    "assetChecksumChanged":  true,
+    "actualApiRestarted":  true,
+    "expiredApprovalAndAssetPreserved":  true,
+    "authorApproveDenied":  true,
+    "editorPublishDenied":  true,
+    "authorRouteDenied":  true,
+    "windowsReaderApproveDenied":  true,
+    "windowsReaderPublishDenied":  true,
+    "windowsReaderActivateDenied":  true,
+    "roleDenialMethod":  "Actual Windows Reader HTTP403 plus real SQL author/editor boundaries.",
+    "humanReleaseBlocked":  true,
+    "liveCalls":  0,
+    "fixtureOnly":  true,
+    "ownedHostsStopped":  true
+}

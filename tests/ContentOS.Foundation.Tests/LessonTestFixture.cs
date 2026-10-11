@@ -16,11 +16,14 @@ internal static class LessonTestFixture
 {
     internal const string Connection = "Server=localhost;Database=GeetaStudio_M1Tests;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;";
     internal sealed record Fixture(CoreScope Owner, Guid Universe, Guid Bundle, Guid SourceWork, LessonProfileView[] Profiles);
-    internal static ServiceProvider Services()
+    internal static ServiceProvider ServicesWithRegistry() => BuildServices(true);
+    internal static ServiceProvider Services() => BuildServices(false);
+    private static ServiceProvider BuildServices(bool registry)
     {
-        var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?> { ["ConnectionStrings:ContentOS"] = Connection }).Build();
+        var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?> { ["ConnectionStrings:ContentOS"] = Connection, ["Assets:Root"] = Path.Combine(ArchitectureTests.RepositoryRoot, ".local", "test-assets") }).Build();
         var services = new ServiceCollection().AddLogging(); services.AddSingleton<IConfiguration>(config);
         services.AddContentRuntime(config, true); services.AddContentCore(config); services.AddLessons();
+        if (registry) services.AddUniverseRegistry();
         services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationA>(); services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationB>();
         return services.BuildServiceProvider();
     }

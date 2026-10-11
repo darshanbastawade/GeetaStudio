@@ -1,0 +1,21 @@
+@page "/preview/read/{Key}/universe"
+@page "/preview/read"
+@page "/preview/read/{Key}"
+@page "/preview/read/{Key}/chapter/{Chapter:int}"
+@page "/preview/read/{Key}/chapter/{Chapter:int}/verse/{Verse:int}"
+@page "/preview/read/{Key}/concept/{Concept}"
+@page "/preview/read/{Key}/journey/{Journey}"
+@page "/preview/read/{Key}/search"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Policy = "ReaderPreview")]
+<ReadSurface Preview="true" Key="@Key" Chapter="@Chapter" Verse="@Verse" Concept="@Concept" Journey="@Journey" Query="@Query" Locale="@Locale" Audience="@Audience" />
+@code {
+    [Parameter] public string Key { get; set; } = "";
+    [Parameter] public int? Chapter { get; set; }
+    [Parameter] public int? Verse { get; set; }
+    [Parameter] public string? Concept { get; set; }
+    [Parameter] public string? Journey { get; set; }
+    [SupplyParameterFromQuery(Name = "q")] public string? Query { get; set; }
+    [SupplyParameterFromQuery(Name = "locale")] public string? Locale { get; set; }
+    [SupplyParameterFromQuery(Name = "audience")] public Guid? Audience { get; set; }
+}

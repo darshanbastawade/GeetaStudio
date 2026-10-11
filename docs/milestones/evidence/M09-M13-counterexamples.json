@@ -1,0 +1,25 @@
+{
+  "WrongAudienceApproval": {
+    "Reproduced": true,
+    "ContentAudience": "f11cc6bb-d77a-4d7a-93d7-2c5b0ab1a3d3",
+    "EvaluationAudience": "0b7fbaac-071b-431e-a16e-c021ca6f7f2b",
+    "State": "Approved",
+    "Mode": "Fixture"
+  },
+  "AssetLineageCorrection": {
+    "Reproduced": true,
+    "ChildHasSource": true,
+    "ChildMissingFromLineage": true,
+    "ChildDryRunCopies": 1,
+    "ParentTasks": 1,
+    "ChildTasks": 0
+  },
+  "FactoryRetiredCastReapproval": {
+    "Reproduced": true,
+    "ExpiredFirst": true,
+    "RetiredCharacterStatus": "Retired",
+    "FactoryHistory": 1,
+    "State": "Approved",
+    "Mode": "Fixture"
+  }
+}
