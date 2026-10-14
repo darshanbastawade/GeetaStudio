@@ -4,7 +4,8 @@ public sealed class ReadCollection : CoreRecord
 {
     public Guid TenantId { get; set; }
     public Guid UniverseId { get; set; }
-    public Guid ManifestId { get; set; }
+    public Guid? ManifestId { get; set; }
+    public int? ExpectedPieces { get; set; }
     public string Key { get; set; } = ""; public int Version { get; set; }
     public string Title { get; set; } = "";
     public string Mode { get; set; } = ""; public string Rationale { get; set; } = ""; public string Actor { get; set; } = "";
@@ -15,7 +16,8 @@ public sealed class ReadPiece : CoreRecord
     public Guid TenantId { get; set; }
     public Guid UniverseId { get; set; }
     public Guid CollectionId { get; set; }
-    public Guid CorpusVerseId { get; set; }
+    public Guid? CorpusVerseId { get; set; }
+    public string? HistoricalJson { get; set; }
     public Guid EditorialItemId { get; set; }
     public Guid RevisionId { get; set; }
     public Guid LessonVariantId { get; set; }

@@ -1,0 +1,24 @@
+{
+    "verifiedDate":  "2026-10-13",
+    "platforms":  [
+                      "YouTube",
+                      "Instagram",
+                      "Facebook",
+                      "X"
+                  ],
+    "windowsStaff200":  true,
+    "reviewedExports":  true,
+    "coreBodyPreserved":  true,
+    "unknownReconciled":  true,
+    "duplicateReceiptPreservedHistory":  true,
+    "apiRestart":  true,
+    "originalProviderAccountPreserved":  true,
+    "liveConnected":  false,
+    "humanApproval":  false,
+    "freshInteractiveF5Verified":  false,
+    "paidCalls":  0,
+    "publicationsToSocialPlatforms":  0,
+    "tenant":  "7a39d0db-c06a-42f6-9176-c96cc7005105",
+    "universe":  "701e0ed6-4452-4bab-8c87-94b505aae4e4",
+    "publication":  "72c3ce86-9463-4c9d-b49b-60fea6a49058"
+}

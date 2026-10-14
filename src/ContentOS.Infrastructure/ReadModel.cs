@@ -22,6 +22,7 @@ public sealed partial class CoreDbContext
             m.Entity(type).HasOne(typeof(Universe)).WithMany().HasForeignKey("UniverseId", "TenantId").HasPrincipalKey("Id", "TenantId").OnDelete(DeleteBehavior.Restrict);
         }
         m.Entity<ReadCollection>().Property(x => x.Rationale).HasMaxLength(2000);
+        m.Entity<ReadPiece>().Property(x => x.HistoricalJson).HasMaxLength(4000);
         m.Entity<ReadCollection>().HasIndex(x => new { x.Key, x.Version }).IsUnique();
         m.Entity<ReadCollection>().HasIndex(x => x.Key).IsUnique().HasFilter("[State] = 'Active'");
         m.Entity<ReadCollection>().HasOne<CorpusManifest>().WithMany().HasForeignKey(x => x.ManifestId).OnDelete(DeleteBehavior.Restrict);

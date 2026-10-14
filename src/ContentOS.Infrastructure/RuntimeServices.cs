@@ -35,16 +35,20 @@ public static class RuntimeServices
 {
     public static IServiceCollection AddContentRuntime(this IServiceCollection services, IConfiguration configuration, bool development)
     {
-        var connection = configuration.GetConnectionString("ContentOS");
-        if (string.IsNullOrWhiteSpace(connection)) throw new RuntimeValidationException("Configure ConnectionStrings:ContentOS outside source control before enabling runtime.");
-        SqlConnectionStringBuilder parsed;
-        try { parsed = new SqlConnectionStringBuilder(connection); }
-        catch (ArgumentException) { throw new RuntimeValidationException("Invalid database configuration."); }
-        if (development && parsed.InitialCatalog is not ("GeetaStudio_Dev" or "GeetaStudio_M1Tests"))
-            throw new RuntimeValidationException("Development runtime requires a dedicated GeetaStudio database.");
-        if (!development && (parsed.TrustServerCertificate || parsed.Encrypt == SqlConnectionEncryptOption.Optional))
-            throw new RuntimeValidationException("Production requires validated encrypted SQL connections.");
-        services.AddDbContextFactory<RuntimeDbContext>(o => o.UseSqlServer(connection).EnableSensitiveDataLogging(false).EnableDetailedErrors(false));
+        string ValidatedConnection()
+        {
+            var connection = configuration.GetConnectionString("ContentOS");
+            if (string.IsNullOrWhiteSpace(connection)) throw new RuntimeValidationException("Configure ConnectionStrings:ContentOS outside source control before enabling runtime.");
+            SqlConnectionStringBuilder parsed;
+            try { parsed = new SqlConnectionStringBuilder(connection); }
+            catch (ArgumentException) { throw new RuntimeValidationException("Invalid database configuration."); }
+            if (development && parsed.InitialCatalog is not ("GeetaStudio_Dev" or "GeetaStudio_M1Tests")) throw new RuntimeValidationException("Development runtime requires a dedicated GeetaStudio database.");
+            if (!development && (parsed.TrustServerCertificate || parsed.Encrypt == SqlConnectionEncryptOption.Optional)) throw new RuntimeValidationException("Production requires validated encrypted SQL connections.");
+            return connection;
+        }
+        _ = ValidatedConnection();
+        // Match Core's deferred configuration resolution; revalidate the final host configuration before use.
+        services.AddDbContextFactory<RuntimeDbContext>(o => o.UseSqlServer(ValidatedConnection()).EnableSensitiveDataLogging(false).EnableDetailedErrors(false));
         services.AddSingleton<ISecretResolver, ConfigurationSecretResolver>();
         services.AddScoped<RuntimeStore>();
         services.AddScoped<IRuntimeStore>(s => s.GetRequiredService<RuntimeStore>());
@@ -102,8 +106,11 @@ public sealed class LocalAssetStore(RuntimeDbContext db, IConfiguration configur
     {
         var asset = await db.Assets.AsNoTracking().SingleOrDefaultAsync(a => a.Id == id && a.Owner == actor, ct);
         if (asset is null) return null;
-        var path = Path.Combine(_root, id.ToString("N") + ".bin");
+        var mapping = await db.AssetLocations.AsNoTracking().Where(x => x.AssetId == id).Select(x => x.StoreKey).SingleOrDefaultAsync(ct);
+        var root = mapping == null || mapping == "primary" ? _root : Path.GetFullPath(configuration["Assets:Stores:" + mapping] ?? throw new RuntimeConflictException("Asset storage mapping unavailable."));
+        var path = Path.Combine(root, id.ToString("N") + ".bin");
         if (!File.Exists(path)) throw new RuntimeConflictException("Asset bytes are unavailable; storage reconciliation required.");
+        if (new FileInfo(path).Length != asset.Length) throw new RuntimeConflictException("Asset size mismatch; storage reconciliation required.");
         var content = await File.ReadAllBytesAsync(path, ct);
         if (content.LongLength != asset.Length || Convert.ToHexString(SHA256.HashData(content)) != asset.Sha256)
             throw new RuntimeConflictException("Asset checksum mismatch; storage reconciliation required.");

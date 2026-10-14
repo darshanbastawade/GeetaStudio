@@ -1,0 +1,9 @@
+{
+  "verifiedDate": "2026-10-13",
+  "powerShellParser": true,
+  "vsCodeJson": true,
+  "staffJavascriptSyntax": true,
+  "diffWhitespace": true,
+  "freshInteractiveF5": false,
+  "browserMobileScreenReader": false
+}

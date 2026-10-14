@@ -76,7 +76,7 @@ internal static class EditorialBinding
         var profiles = await db.RegistryRevisions.AsNoTracking().Where(x => x.CharacterId != null && characterIds.Contains(x.CharacterId.Value)).OrderBy(x => x.Id).ToListAsync(ct);
         var corrections = await db.ClaimCorrections.AsNoTracking().Where(x => claimIds.Contains(x.ClaimRevisionId)).OrderBy(x => x.Id).ToListAsync(ct);
         var pending = await db.EditorialCorrectionTasks.AsNoTracking().Where(x => x.ContentId == head.Id && x.Kind == "Internal" && x.State != "Resolved").OrderBy(x => x.Id).ToListAsync(ct);
-        return Hash(new
+        var baseline = Hash(new
         {
             Policy = "editorial.v2",
             head.Id,
@@ -101,9 +101,18 @@ internal static class EditorialBinding
             Bibles = bibles,
             item.EvaluationCaseKey
         });
+        var trends = await TrendFence.Revisions(db, revision.Id, ct);
+        var withTrends = trends.Length == 0 ? baseline : Hash(new { baseline, Trends = trends.Select(x => new { x.Id, x.State, x.SnapshotJson, x.RowVersion }) });
+        var presentationIds = await MediaRightsGuard.CastPresentations(db, new(item.TenantId, "editorial-fingerprint"), item.UniverseId, familyRevisionIds, ct);
+        var mediaPackages = await db.MediaPackages.AsNoTracking().Where(x => x.PresentationRevisionId != null && presentationIds.Contains(x.PresentationRevisionId.Value)).OrderBy(x => x.Id).ToListAsync(ct);
+        var media = await (from m in db.MediaVersions.AsNoTracking() join a in db.Assets on m.AssetReferenceId equals a.Id where familyRevisionIds.Contains(a.ContentRevisionId) select m).OrderBy(x => x.Id).ToListAsync(ct);
+        return mediaPackages.Count == 0 && media.Count == 0 ? withTrends : Hash(new { withTrends, MediaPackages = mediaPackages, Media = media });
     }
     internal static async Task AssertExport(CoreDbContext db, CoreScope s, Guid revision, string purpose, CancellationToken ct)
     {
+        await TrendFence.AssertRevision(db, revision, purpose, ct);
+        await WatchFence.AssertExport(db, s, revision, purpose, ct);
+        await MediaRightsGuard.Revision(db, s, revision, purpose, ct);
         var content = await db.Revisions.Where(x => x.Id == revision).Select(x => x.ContentId).SingleAsync(ct);
         if (await db.EditorialCorrectionTasks.AnyAsync(x => x.ContentId == content && x.Kind == "Internal" && x.State != "Resolved", ct)) throw new EvidenceBlockedException("UnresolvedEditorialCorrection");
         var parents = (await new SourceRightsGuard(db).LineageAsync(revision, ct)).Edges.Where(x => x.ParentRevisionId.HasValue).Select(x => x.ParentRevisionId!.Value).Append(revision).Distinct().ToArray();

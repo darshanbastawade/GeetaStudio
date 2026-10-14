@@ -1,0 +1,10 @@
+{
+  "verifiedDate": "2026-10-14",
+  "powershellParser": true,
+  "vscodeJson": true,
+  "javascriptSyntax": true,
+  "gitDiffWhitespace": true,
+  "interactiveDebugVerified": false,
+  "browserVisualVerified": false,
+  "verifiedUtc": "2026-10-14T15:49:04.244718+00:00"
+}

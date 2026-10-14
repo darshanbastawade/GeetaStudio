@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-14",
+  "status": "Offline Verified \u2014 technical/private proof",
+  "build": {
+    "warnings": 0,
+    "errors": 0,
+    "lockedRestore": true,
+    "sdk": "10.0.401",
+    "minimumRuntime": "10.0.13"
+  },
+  "offline": {
+    "passed": 110,
+    "failed": 0,
+    "skipped": 0,
+    "bothModelsMatch": true
+  },
+  "focusedSql": {
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0
+  },
+  "fullSql": {
+    "passed": 219,
+    "failed": 0,
+    "skipped": 0,
+    "minutes": 15.1216,
+    "result": ".local\\M26-results\\M26-sql.trx"
+  },
+  "formatVerified": true,
+  "staticSyntaxAndDiff": true,
+  "sourceFullOcrHashes": 2,
+  "exactExcerptHashes": 14,
+  "readSamples": 10,
+  "watchSamples": 2,
+  "actualOwnedMasters": 4,
+  "windowsDemo": true,
+  "restart": true,
+  "sourceCorrectionAndRightsFences": true,
+  "coreMigrations": 28,
+  "runtimeMigrations": 4,
+  "originalDevelopmentIdsAndPermissionRowsPreserved": true,
+  "humanHistoricalAcceptance": false,
+  "humanVisualListeningAcceptance": false,
+  "liveSandbox": "N/A \u2014 no new external adapter",
+  "publicProductionReady": false,
+  "newInteractiveDebugVerified": false,
+  "M26FreshBackupRestoreVerified": false,
+  "liveCalls": 0,
+  "publications": 0,
+  "restrictedDevelopmentHistoricalReadVerified": true,
+  "allOwnedDemoHostsStopped": true
+}

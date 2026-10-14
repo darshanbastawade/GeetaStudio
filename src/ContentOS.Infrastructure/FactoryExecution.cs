@@ -42,6 +42,8 @@ public sealed partial class DraftFactory
         try
         {
             await Access(scope, batch.UniverseId, true, ct);
+            await TrendFence.AssertPlan(db, plan.Id, ct);
+            var trend = await TrendFence.Plan(db, plan.Id, ct);
             if (batch.DeadlineUtc <= DateTimeOffset.UtcNow) throw new RuntimeValidationException("Original deadline exceeded.", "DeadlineExceeded");
             await Recheck(scope, batch.UniverseId, input, true, true, ct);
             var fingerprint = Hash(new
@@ -53,6 +55,7 @@ public sealed partial class DraftFactory
                 Cast = input.Cast.Cast.Select(c => new { c.Character.CharacterId, Profile = c.Character.Profile.Id, c.Role, Presentation = c.Presentation?.Id }),
                 Relationships = input.Cast.Relationships.Select(r => r.Id)
             });
+            if (trend != null) fingerprint = Hash(new { Base = fingerprint, trend.Id, trend.SnapshotJson });
             var reusable = await db.FactoryArtifacts.AsNoTracking().SingleOrDefaultAsync(a => a.TenantId == batch.TenantId && a.UniverseId == batch.UniverseId && a.Fingerprint == fingerprint, ct);
             if (reusable != null)
             {
@@ -63,6 +66,7 @@ public sealed partial class DraftFactory
             else
             {
                 var output = templates.Single(t => t.Key == snap.Rules.Adapter).Render(new(input, format), ct);
+                if (trend != null) output = TrendFence.Render(Read<TrendStorySnapshot>(trend.SnapshotJson), output);
                 RegistryRules.Story(input.Cast with { Beats = input.Cast.Beats.Select(beat => beat with { Text = output.OriginalTreatment + " " + format.Instruction }).ToArray() });
                 if (output.TemplateVersion != snap.Rules.Adapter || output.Body.Length > format.MaxCharacters || string.IsNullOrWhiteSpace(output.Body)) throw new RuntimeValidationException("Template output violates bounded contract.");
                 if (DateTimeOffset.UtcNow >= batch.DeadlineUtc || DateTimeOffset.UtcNow >= work.LeaseUntilUtc) throw new RuntimeValidationException("Generation lease/deadline expired.", "DeadlineExceeded");
@@ -82,6 +86,7 @@ public sealed partial class DraftFactory
                     var title = snap.Rules.Title + " — " + format.Kind; if (title.Length > 200) title = title[..200];
                     var revision = new ContentRevision { Id = Guid.NewGuid(), ContentId = content.Id, Version = content.CurrentVersion, OperationId = work.Id, Title = title, Body = output.Body, Kind = "Fiction", RightsStatus = "Licensed", Provenance = "M11 reviewed lesson " + input.Brief.LessonVariantId + "; original fiction and attributed evidence remain separately labeled." };
                     db.Revisions.Add(revision);
+                    if (trend != null) TrendFence.Lineage(db, trend, revision.Id, output.Body);
                     foreach (var source in input.Lesson.Snapshot.Bundle.SourceIds.Distinct()) db.Provenance.Add(new() { Id = Guid.NewGuid(), TenantId = batch.TenantId, ContentRevisionId = revision.Id, SnapshotId = source, Relation = "Adaptation" });
                     if (prior != null && prior.CoreContentId == content.Id) db.Provenance.Add(new() { Id = Guid.NewGuid(), TenantId = batch.TenantId, ContentRevisionId = revision.Id, ParentRevisionId = prior.CoreRevisionId, Relation = "Revision" });
                     var artifact = new FactoryArtifact { Id = Guid.NewGuid(), TenantId = batch.TenantId, UniverseId = batch.UniverseId, PlanId = plan.Id, BriefKey = work.BriefKey, Format = work.Format, LessonVariantId = input.Brief.LessonVariantId, CoreContentId = content.Id, CoreRevisionId = revision.Id, ParentArtifactId = prior?.Id, AudienceId = input.Brief.Cast.AudienceId, Locale = input.Brief.Cast.Locale, Fingerprint = fingerprint, BodyHash = bodyHash, Treatment = output.OriginalTreatment, SnapshotJson = Json(new FactoryArtifactSnapshot(plan.Id, work.BriefKey, work.Format, input.Brief.LessonVariantId, input, snap.Rules.Adapter, output)) };
@@ -99,7 +104,7 @@ public sealed partial class DraftFactory
     }
     private async Task<FactoryArtifactView> ArtifactView(CoreScope s, FactoryArtifact row, CancellationToken ct)
     {
-        var snap = Read<FactoryArtifactSnapshot>(row.SnapshotJson); try { await Recheck(s, row.UniverseId, snap.Input, false, false, ct); return new(row.Id, row.CoreContentId, row.CoreRevisionId, row.ParentArtifactId, row.ReviewStatus, row.ReviewEvidence, Convert.ToBase64String(row.RowVersion), snap, false); }
+        var snap = Read<FactoryArtifactSnapshot>(row.SnapshotJson); try { await TrendFence.AssertPlan(db, row.PlanId, ct); await Recheck(s, row.UniverseId, snap.Input, false, false, ct); return new(row.Id, row.CoreContentId, row.CoreRevisionId, row.ParentArtifactId, row.ReviewStatus, row.ReviewEvidence, Convert.ToBase64String(row.RowVersion), snap, false); }
         catch (Exception e) when (e is RightsBlockedException or EvidenceBlockedException) { return new(row.Id, row.CoreContentId, row.CoreRevisionId, row.ParentArtifactId, row.ReviewStatus, row.ReviewEvidence, Convert.ToBase64String(row.RowVersion), null, true); }
     }
     public async Task<IReadOnlyList<FactoryArtifactView>> ArtifactsAsync(CoreScope s, Guid u, CancellationToken ct)
@@ -110,6 +115,7 @@ public sealed partial class DraftFactory
     {
         RegistryRules.ReviewEvidence(r.EvidenceReference); var row = await db.FactoryArtifacts.SingleOrDefaultAsync(a => a.Id == id && a.TenantId == s.TenantId && a.UniverseId == u, ct) ?? throw new CoreAccessException();
         if (Convert.ToBase64String(row.RowVersion) != r.ExpectedRowVersion) throw new CoreConcurrencyException(); if (row.ReviewStatus != "Draft") throw new RuntimeConflictException("Artifact review frozen.");
+        await TrendFence.AssertPlan(db, row.PlanId, ct);
         await Recheck(s, u, Read<FactoryArtifactSnapshot>(row.SnapshotJson).Input, false, false, ct); row.ReviewStatus = r.Approve ? "Approved" : "Rejected"; row.ReviewEvidence = r.EvidenceReference; return id;
     }, ct);
     private async Task<bool> PubliclyUsable(CoreScope scope, Guid universe, FactoryArtifact row, FactoryArtifactSnapshot snap, CancellationToken ct)

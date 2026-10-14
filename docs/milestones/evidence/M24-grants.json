@@ -1,0 +1,260 @@
+{
+  "date": "2026-10-14",
+  "rows": [
+    {
+      "table": "CommerceActivity",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceActivity",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceAudit",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceAudit",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceDelivery",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceDelivery",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceDelivery",
+      "column": "Cost",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceDelivery",
+      "column": "Currency",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceDelivery",
+      "column": "Lease",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceDelivery",
+      "column": "LeaseUntilUtc",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceDelivery",
+      "column": "Receipt",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceDelivery",
+      "column": "State",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceDelivery",
+      "column": "UpdatedUtc",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceEffect",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceEffect",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceInstitution",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceInstitution",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceOffer",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceOffer",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceOrder",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceOrder",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceOrder",
+      "column": "EndsUtc",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceOrder",
+      "column": "PaymentOrderId",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceOrder",
+      "column": "State",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceOrder",
+      "column": "UpdatedUtc",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceProduct",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceProduct",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceProduct",
+      "column": "CustomerProductId",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceProduct",
+      "column": "Enabled",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceProduct",
+      "column": "PackageJson",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceProduct",
+      "column": "UpdatedUtc",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceRoute",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceRoute",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceRoute",
+      "column": "Active",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceRoute",
+      "column": "Enabled",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceRoute",
+      "column": "UpdatedUtc",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceSeat",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT"
+    },
+    {
+      "table": "CommerceSeat",
+      "column": "Object",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT"
+    },
+    {
+      "table": "CommerceSeat",
+      "column": "Cohort",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceSeat",
+      "column": "Enabled",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceSeat",
+      "column": "Role",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    },
+    {
+      "table": "CommerceSeat",
+      "column": "UpdatedUtc",
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE"
+    }
+  ],
+  "workerGrants": 0,
+  "deleteGrants": 0,
+  "immutableUpdateGrants": 0
+}

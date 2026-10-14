@@ -1,0 +1,18 @@
+{
+    "verifiedDate":  "2026-10-12",
+    "windowsStaff200":  true,
+    "apiRestart":  true,
+    "guestPromotion":  true,
+    "referencePreserved":  true,
+    "unsupportedReferenceBlocked":  true,
+    "duplicateCallback":  true,
+    "originalResourceReconciliation":  true,
+    "spokenWindowsPreview":  true,
+    "durationSeconds":  3.535,
+    "storageMove":  "primary-to-configured-local-archive",
+    "checksumAndReferencesPreserved":  true,
+    "humanQualityVerified":  false,
+    "paidCalls":  0,
+    "publicPublication":  false,
+    "newInteractiveF5Verified":  false
+}

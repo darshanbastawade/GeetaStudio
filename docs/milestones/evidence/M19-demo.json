@@ -1,0 +1,22 @@
+{
+    "verifiedDate":  "2026-10-13",
+    "windowsStaff200":  true,
+    "privateNoStore":  true,
+    "knownRecognizedInr":  1540,
+    "costInr":  120,
+    "settledInr":  820,
+    "estimatedInr":  200,
+    "duplicateReimport":  true,
+    "providerSwitchKeepsHistoricalSource":  true,
+    "metricSnapshotNotSummed":  true,
+    "forecastVersions":  2,
+    "apiRestart":  true,
+    "unknownAttributionVisible":  true,
+    "liveConnected":  false,
+    "freshInteractiveF5Verified":  false,
+    "humanConsentVerified":  false,
+    "paidCalls":  0,
+    "publicationsToSocialPlatforms":  0,
+    "tenant":  "2b703ca1-12fb-4d0d-be63-9909599ec80c",
+    "universe":  "d5067f89-3294-4a59-a4b1-e77a2c978a21"
+}

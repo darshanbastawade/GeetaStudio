@@ -1,0 +1,275 @@
+[
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialAccount",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialAccount",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialAccount",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Enabled"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialAccount",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "TokenState"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialAccount",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialCallback",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialCallback",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialCommand",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialCommand",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialEffect",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialEffect",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialHistory",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialHistory",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialNotification",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialNotification",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialNotification",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Acknowledged"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialNotification",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPackage",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPackage",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPackage",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "ReviewJson"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPackage",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "ReviewStatus"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPackage",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Actor"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Attempts"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "DeadlineUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "EditorialCopyId"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "LeaseToken"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "LeaseUntilUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "MaxAttempts"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "NextUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Outcome"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "RemoteId"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "RemoteUrl"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "ScheduledUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "State"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Timezone"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "SocialPublication",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  }
+]

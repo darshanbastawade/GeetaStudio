@@ -1,0 +1,16 @@
+{
+    "verifiedDate":  "2026-10-14",
+    "database":  "GeetaStudio_Dev",
+    "privateRestrictedApiConfigurationUsed":  true,
+    "windowsAccountPageStatus":  200,
+    "windowsAdministratorPageStatus":  200,
+    "privateNoStore":  true,
+    "scopedProvidersAndRoutesReadPassed":  true,
+    "providers":  2,
+    "paymentRoutes":  0,
+    "unregisteredAccount403":  true,
+    "defaultFixtureSigningKeyEnabled":  false,
+    "customerFixturesInserted":  false,
+    "liveCalls":  0,
+    "ownedApiStopped":  true
+}

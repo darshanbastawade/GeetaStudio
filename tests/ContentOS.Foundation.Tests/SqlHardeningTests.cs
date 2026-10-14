@@ -1,0 +1,97 @@
+using ContentOS.Application;
+using ContentOS.Contracts;
+using ContentOS.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Xunit;
+namespace ContentOS.Foundation.Tests;
+
+[Collection("SQL runtime")]
+[Trait("Category", "Sql")]
+public sealed class SqlHardeningTests
+{
+    [SqlFact]
+    public async Task Published_receipt_populates_time_to_publish()
+    {
+        using var root = AnalyticsTestFixture.Services(); using var scope = root.CreateScope(); var s = scope.ServiceProvider;
+        var f = await EditorialTestFixture.Setup(s, "review-m18-m19"); var editorial = s.GetRequiredService<IEditorialWorkbench>();
+        var content = await EditorialTestFixture.Approved(s, f, await editorial.StartAsync(f.Owner, f.Universe, EditorialTestFixture.Request(f), default));
+        var account = await SocialTestFixture.Account(s, f); var package = await SocialTestFixture.Package(s, f, content, account);
+        var social = s.GetRequiredService<ISocialPublishing>(); var pub = await social.ScheduleAsync(f.Owner, f.Universe, new(Guid.NewGuid(), package.Id, DateTimeOffset.UtcNow, "UTC"), default);
+        pub = await SocialTestFixture.Drain(s, f, pub.Id); Assert.Equal("Published", pub.State); Assert.NotNull(pub.RemoteId);
+        var analytics = s.GetRequiredService<IAnalyticsWorkbench>(); var source = await AnalyticsTestFixture.Source(s, f);
+        await analytics.ImportAsync(f.Owner, f.Universe, new(Guid.NewGuid(), source, [AnalyticsTestFixture.Cost("publication-cost") with { RevisionId = content.RevisionId, PublicationId = pub.Id, Campaign = "fixture-campaign" }]), default);
+        var report = await analytics.ReportAsync(f.Owner, f.Universe, AnalyticsTestFixture.Query, default);
+        Assert.NotNull(Assert.Single(report.Variants).TimeToPublishSeconds);
+    }
+    [SqlFact]
+    public async Task Future_observation_is_excluded_from_current_asof_report()
+    {
+        using var root = AnalyticsTestFixture.Services(); using var scope = root.CreateScope(); var s = scope.ServiceProvider;
+        var f = await EditorialTestFixture.Setup(s, "review-m19-asof"); var w = s.GetRequiredService<IAnalyticsWorkbench>(); var source = await AnalyticsTestFixture.Source(s, f);
+        var definition = await w.DefinitionAsync(f.Owner, f.Universe, new(Guid.NewGuid(), "views", 1, "count", "Snapshot", "Review controlled observation", "fixture:definition"), default);
+        var end = DateTimeOffset.UtcNow.AddMinutes(-2);
+        var first = new AnalyticsEntryInput("first", "first", "Metric", end, "fixture:metric", DefinitionId: definition, MetricValue: 100, WindowStartUtc: end.AddHours(-1), WindowEndUtc: end, ObservedUtc: end);
+        await w.ImportAsync(f.Owner, f.Universe, new(Guid.NewGuid(), source, [first, first with { EventId = "future", EconomicKey = "future", MetricValue = 120, ObservedUtc = DateTimeOffset.UtcNow.AddMinutes(4) }]), default);
+        var report = await w.ReportAsync(f.Owner, f.Universe, AnalyticsTestFixture.Query with { AsOfUtc = DateTimeOffset.UtcNow }, default);
+        Assert.Equal(100, Assert.Single(report.Metrics).Value);
+    }
+    [SqlFact]
+    public async Task All_future_metric_observations_remain_explicitly_unavailable()
+    {
+        using var root = AnalyticsTestFixture.Services(); using var scope = root.CreateScope(); var s = scope.ServiceProvider;
+        var f = await EditorialTestFixture.Setup(s, "m25-all-future"); var w = s.GetRequiredService<IAnalyticsWorkbench>(); var source = await AnalyticsTestFixture.Source(s, f);
+        var definition = await w.DefinitionAsync(f.Owner, f.Universe, new(Guid.NewGuid(), "views", 1, "count", "Snapshot", "Bounded future observation", "fixture:definition"), default);
+        var end = DateTimeOffset.UtcNow.AddMinutes(-2);
+        var metric = new AnalyticsEntryInput("future", "future", "Metric", end, "fixture:metric", DefinitionId: definition, MetricValue: 120, WindowStartUtc: end.AddHours(-1), WindowEndUtc: end, ObservedUtc: DateTimeOffset.UtcNow.AddMinutes(4));
+        await w.ImportAsync(f.Owner, f.Universe, new(Guid.NewGuid(), source, [metric]), default);
+        var report = await w.ReportAsync(f.Owner, f.Universe, AnalyticsTestFixture.Query with { AsOfUtc = DateTimeOffset.UtcNow }, default);
+        var view = Assert.Single(report.Metrics); Assert.Null(view.Value); Assert.Equal("UnavailableAsOf", view.Coverage);
+    }
+    [SqlFact]
+    public async Task Problem_reports_withhold_revoked_source_text()
+    {
+        using var root = TalkTestFixture.Services(); using var scope = root.CreateScope(); var s = scope.ServiceProvider;
+        var f = await TalkTestFixture.Setup(s); var c = f.Customer; var w = s.GetRequiredService<ITalkWorkbench>();
+        var session = await w.OpenAsync(c.Alice, new(Guid.NewGuid(), f.Policy, c.Profile), default);
+        var turn = await w.AskAsync(c.Alice, session, new(Guid.NewGuid(), "Where did the opposing armies gather?"), default); Assert.Equal("Supported", turn.Outcome);
+        var text = Assert.Single(turn.Sources).ExactText;
+        await w.ReportAsync(c.Alice, session, turn.Id, new(Guid.NewGuid(), "Citation"), default);
+        var db = s.GetRequiredService<CoreDbContext>(); var snapshot = await db.SourceSnapshots.AsNoTracking().SingleAsync(x => x.Id == f.Snapshot); var edition = await db.SourceEditions.AsNoTracking().SingleAsync(x => x.Id == snapshot.EditionId);
+        var registry = s.GetRequiredService<ISourceRegistry>(); var detail = await registry.InspectAsync(c.Admin, c.Universe, edition.WorkId, default);
+        await registry.RevokeAsync(c.Admin, c.Universe, edition.WorkId, new(Guid.NewGuid(), null, "fixture:review-revocation", detail.Work.RowVersion), default);
+        Assert.Empty((await w.InspectAsync(c.Alice, session, default)).Turns.Single().Sources);
+        var problem = Assert.Single(await w.ProblemsAsync(c.Admin, default));
+        using var outer = System.Text.Json.JsonDocument.Parse(problem.EvidenceJson);
+        var copied = outer.RootElement.GetProperty("sourcesJson").GetString()!;
+        using var inner = System.Text.Json.JsonDocument.Parse(copied);
+        Assert.DoesNotContain(inner.RootElement.EnumerateArray(), x => x.GetProperty("exactText").GetString() == text);
+    }
+}
+
+[Collection("SQL runtime")]
+[Trait("Category", "Sql")]
+public sealed class SqlHardeningPersonaTests
+{
+    [SqlFact]
+    public async Task Replaced_persona_before_ai_admission_does_not_dispatch()
+    {
+        using var root = TalkTestFixture.Services(); using var scope = root.CreateScope(); var s = scope.ServiceProvider;
+        var f = await TalkTestFixture.Setup(s); var c = f.Customer; var w = s.GetRequiredService<ITalkWorkbench>();
+        var session = await w.OpenAsync(c.Alice, new(Guid.NewGuid(), f.Policy, c.Profile), default);
+        var retriever = s.GetRequiredService<IKnowledgeRetriever>();
+        s.GetRequiredService<AiService>().Retrieval = async (staff, universe, query, ct) =>
+        {
+            var found = await retriever.RetrieveAsync(staff, universe, query, ct);
+            using var other = root.CreateScope(); var db = other.ServiceProvider.GetRequiredService<CoreDbContext>();
+            var policy = await db.TalkPolicies.AsNoTracking().SingleAsync(x => x.Id == f.Policy, ct);
+            var cfg = System.Text.Json.JsonSerializer.Deserialize<TalkPolicyRequest>(policy.SettingsJson, new System.Text.Json.JsonSerializerOptions(System.Text.Json.JsonSerializerDefaults.Web))!;
+            var persona = await db.RegistryRevisions.AsNoTracking().SingleAsync(x => x.Id == cfg.PersonaRevisionId, ct);
+            var original = await db.CharacterRevisions.AsNoTracking().SingleAsync(x => x.Id == persona.CoreRevisionId, ct);
+            db.CharacterRevisions.Add(new ContentOS.Domain.CharacterRevision { Id = Guid.NewGuid(), CharacterId = original.CharacterId, Version = original.Version + 1, DisplayName = original.DisplayName, LifeStage = original.LifeStage, Biography = "Revised persona requires renewed review", FictionalStatus = original.FictionalStatus });
+            await db.SaveChangesAsync(ct); return found;
+        };
+        var turn = await w.AskAsync(c.Alice, session, new(Guid.NewGuid(), "Where did the opposing armies gather?"), default);
+        Assert.Null(turn.AiRunId);
+    }
+}

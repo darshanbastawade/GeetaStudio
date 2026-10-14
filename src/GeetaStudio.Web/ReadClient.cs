@@ -5,13 +5,22 @@ namespace GeetaStudio.Web;
 
 public sealed class ReadClient(IHttpClientFactory factory, IConfiguration config)
 {
+    public async Task<ReadCollectionSummary[]> PrivateDirectory(CancellationToken ct = default) =>
+        await factory.CreateClient("read-preview").GetFromJsonAsync<ReadCollectionSummary[]>("api/v1/read-preview", ct) ?? [];
     public async Task<ReadCollectionSummary[]> Directory(CancellationToken ct = default) =>
         await factory.CreateClient("read-public").GetFromJsonAsync<ReadCollectionSummary[]>("api/v1/read", ct) ?? [];
     public async Task<ReadBook?> Book(string key, bool preview, CancellationToken ct = default)
     {
         if (preview)
         {
-            if (!Guid.TryParse(config["Read:PreviewCollection"], out var id)) return null;
+            Guid id;
+            if (key.Length > 0)
+            {
+                var match = (await PrivateDirectory(ct)).SingleOrDefault(x => x.Key == key);
+                if (match == null) return null;
+                id = match.Id;
+            }
+            else if (!Guid.TryParse(config["Read:PreviewCollection"], out id)) return null;
             var result = await Fetch(factory.CreateClient("read-preview"), "api/v1/read-preview/" + id, ct);
             return result != null && (key.Length == 0 || result.Collection.Key == key) ? result : null;
         }

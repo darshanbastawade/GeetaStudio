@@ -64,8 +64,14 @@ public sealed class SqlKnowledgeTests : IAsyncLifetime
     }
     private static async Task<KnowledgeAliasView> Activate(IServiceProvider s, KnowledgeIndexView index, string key, string row = "")
     {
-        var admin = s.GetRequiredService<IKnowledgeAdministration>(); await admin.ActivateAsync(Owner, Universe, new(Guid.NewGuid(), key, index.Id, row, index.EmbeddingSpaceId), Ct);
-        return (await admin.AliasesAsync(Owner, Universe, Ct)).Single(x => x.Key == key);
+        var admin = s.GetRequiredService<IKnowledgeAdministration>();
+        var id = await admin.ActivateAsync(Owner, Universe, new(Guid.NewGuid(), key, index.Id, row, index.EmbeddingSpaceId), Ct);
+        // This persistent fixture may contain more aliases than the bounded administration listing.
+        var alias = await s.GetRequiredService<CoreDbContext>().KnowledgeAliases.AsNoTracking()
+            .SingleAsync(x => x.Id == id && x.UniverseId == Universe, Ct);
+        Assert.Equal(key, alias.Key);
+        Assert.Equal(index.Id, alias.ActiveIndexId);
+        return new(alias.Id, alias.Key, alias.Locale, alias.ActiveIndexId, alias.PreviousIndexId, Convert.ToBase64String(alias.RowVersion));
     }
     [SqlFact]
     public async Task Known_no_answer_swapped_adapter_and_same_dimension_cutover_rollback_preserve_contract()

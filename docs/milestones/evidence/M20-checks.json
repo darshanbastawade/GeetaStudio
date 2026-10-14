@@ -1,0 +1,73 @@
+{
+  "verifiedDate": "2026-10-14",
+  "implementation": "Complete controlled M20 system",
+  "status": "Offline Verified - controlled M20 system",
+  "lockedRestorePassed": true,
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "focused": {
+    "trx": "tests/ContentOS.Foundation.Tests/TestResults/M20-focused-final.trx",
+    "skipped": 0,
+    "failed": 0,
+    "milestones": [
+      "M19",
+      "M20"
+    ],
+    "passed": 23,
+    "log": ".local/M20-focused-final.log"
+  },
+  "initialM20Focused": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0
+  },
+  "resolvedFailure": "Filtered active-route uniqueness rejected nondeterministic EF update ordering. Retire/save before activation inside the same tenant transaction; keep constraint and switch-back regression. Initial22/23 and demo failure retained in .local/M20-focused-route-order-failure.log/.local/M20-demo.log.",
+  "fullRegression": {
+    "exitCode": 1,
+    "allGreenCombinedRun": false,
+    "offlineFailed": 0,
+    "log": ".local/M20-verify.log",
+    "offlineSkipped": 0,
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1 -Locked -Sql -LowMemory",
+    "offlinePassed": 100,
+    "sqlStatus": "Completed",
+    "sqlPassed": 188,
+    "sqlFailed": 1,
+    "sqlSkipped": 0,
+    "sqlTotal": 189
+  },
+  "windowsDemoPassed": true,
+  "restrictedDevelopmentPagesAndReadsPassed": true,
+  "defaultFixtureSigningKeyDisabled": true,
+  "preservationPassed": true,
+  "coreMigrations": 22,
+  "runtimeMigrations": 4,
+  "customerTablesAdded": 18,
+  "apiPermissionRows": 85,
+  "workerCustomerGrants": 0,
+  "immutableUpdateOrDeleteGrants": 0,
+  "coreModelClean": true,
+  "runtimeModelClean": true,
+  "finalFormatPassed": true,
+  "finalStaticSyntaxAndDiffPassed": true,
+  "liveIdentityPaymentQualified": false,
+  "realCharges": 0,
+  "externalNotifications": 0,
+  "childPersonalizationEnabled": false,
+  "adultAttestationIsVerifiedAge": false,
+  "genuineM12HumanReview": "Pending",
+  "freshInteractiveF5Verified": false,
+  "browserMobileScreenReaderVerified": false,
+  "databaseReset": false,
+  "committed": false,
+  "m21Started": false,
+  "targetedLegacyRecheck": {
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "case": "SqlWorkflowTests.Existing_content_evidence_gate_participates_in_review_transaction_without_nested_transactions",
+    "productionCodeOrAssertionsChanged": false,
+    "log": ".local/M20-legacy-recheck.log",
+    "trx": "tests/ContentOS.Foundation.Tests/TestResults/M20-legacy-recheck.trx"
+  }
+}

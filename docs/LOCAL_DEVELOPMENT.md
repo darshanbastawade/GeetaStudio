@@ -1,10 +1,30 @@
+For M27 experiments, rollback, bounded automation and debugging, see [M27_LOCAL_RUN](M27_LOCAL_RUN.md).
+
+For M25 security/privacy, release gates, isolated recovery, private packaging and debugging, see [M25_LOCAL_RUN](M25_LOCAL_RUN.md).
+
+For M24 private digital/institutional offers and original-payment/delivery debugging, see [M24_LOCAL_RUN](M24_LOCAL_RUN.md).
+
+For the private M23 creation studio and queue/credit debugging, see [M23_LOCAL_RUN](M23_LOCAL_RUN.md).
+
+For private M21 TALK, grounded questions, memory, credits and debug setup, see [M21_LOCAL_RUN](M21_LOCAL_RUN.md).
+
+For M20 accounts, households, Geeta+ and credits, see [M20_LOCAL_RUN](M20_LOCAL_RUN.md).
+
+For M19 analytics, reconciliation, controlled imports and debugging, see [M19_LOCAL_RUN](M19_LOCAL_RUN.md).
+
+For M18 destination packages, controlled publishing recovery and debugging, see [M18_LOCAL_RUN](M18_LOCAL_RUN.md).
+
+For M17 WATCH, pinned renderer setup, spoken fixtures and debugging, see [M17_LOCAL_RUN](M17_LOCAL_RUN.md).
+
+For M15 trends, source review, controlled fixtures and debugging, see [M15_LOCAL_RUN](M15_LOCAL_RUN.md).
+
 For the M14 reader, private fixture preview and attach debugging, see [M14_LOCAL_RUN](M14_LOCAL_RUN.md).
 
 # Windows and VS Code development — M0 foundation through M12
 
 For audience lessons, reviewed translation memory and casting, follow [M9_LOCAL_RUN](M9_LOCAL_RUN.md). For current workflows, review and worker restart/debugging, follow [M8_LOCAL_RUN](M8_LOCAL_RUN.md). For AI tasks, provider routes, budget accounting and debugging, follow [M7_LOCAL_RUN](M7_LOCAL_RUN.md). For knowledge retrieval/index migration/debugging, follow [M6_LOCAL_RUN](M6_LOCAL_RUN.md). For claim/evidence setup/demo/debugging, follow [M5_LOCAL_RUN](M5_LOCAL_RUN.md). For corpus setup/demo/debugging, follow [M4_LOCAL_RUN](M4_LOCAL_RUN.md); [M3_LOCAL_RUN](M3_LOCAL_RUN.md) covers sources. For core setup/demo/debugging, follow [M2_LOCAL_RUN](M2_LOCAL_RUN.md); [M1_LOCAL_RUN](M1_LOCAL_RUN.md) covers runtime recovery. The M0 instructions below describe the database-free, runtime-disabled baseline. To select it after M1 provisioning, set `$env:Runtime__Enabled = 'false'` separately in the API and worker terminals; remove that override to return to M1.
 
-Run from `C:\dev\GeetaStudio` in PowerShell. M0 needs the stable .NET SDK selected by global.json (10.0.401 or later compatible patch), Git for review, and VS Code with the recommended C# / C# Dev Kit extensions for F5. No SQL Server, database connection, Docker, WSL, provider key, or cloud account is required. First restore requires NuGet.org or a populated cache.
+Run from `C:\dev\GeetaStudio` in PowerShell. M0 needs the stable .NET SDK selected by global.json (exactly10.0.401; roll-forward is disabled to keep SDK-provided Blazor assets consistent with the existing package locks), Git for review, and VS Code with the recommended C# / C# Dev Kit extensions for F5. No SQL Server, database connection, Docker, WSL, provider key, or cloud account is required. First restore requires NuGet.org or a populated cache.
 
 ## Restore, build, and verify
 
@@ -119,3 +139,9 @@ See [M12 local run/debug guide](M12_LOCAL_RUN.md). Staff page http://localhost:5
 
 ## M13 editorial workbench
 See [M13 local run/debug guide](M13_LOCAL_RUN.md). Staff page http://localhost:5100/staff/editorial. Existing F5 compound retained; the M13 editorial fixture demo task requires5100 free. Real human qualification and actual platform publication/remediation remain blocked. Fresh interactive M13 debug/visual checks are unverified.
+
+## M16 media library
+See [M16 local run/debug guide](M16_LOCAL_RUN.md). Private staff library: http://localhost:5100/staff/media. Existing F5 compound retained. M16 media fixture demo task requires5100 free; installed English SAPI voice needed for the spoken preview. New debugger/visual/listening/public quality checks remain separate.
+
+## M26 historical universe
+See [M26 local run/debug](M26_LOCAL_RUN.md). Private universe selector: http://localhost:5200/preview/universes. Use scripts/historical-demo.ps1 -ManageHosts, or -ReuseFixture -DebugPause with M26 attach Api/Web. Development import is additive and private. Historian/source/rights/listening/public qualification and fresh interactive debugging remain pending.

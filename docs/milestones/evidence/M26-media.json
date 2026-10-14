@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-14",
+  "samples": [
+    {
+      "sample": "coronation",
+      "production": "f0ccb3b8-4959-4272-b70f-581bfbf15cc9",
+      "state": "Approved",
+      "label": "Historical learning \u2014 distinguish cited accounts, uncertainty and original dramatization.",
+      "sourceSnapshots": 2,
+      "creditsComplete": true,
+      "artifacts": [
+        {
+          "aspect": "Vertical",
+          "seconds": 48.604667,
+          "sha256": "B10703A08A23EB2A14C3F3CFC2DB8A5C6794A68EAF3B5877FA530B0A13076A70"
+        },
+        {
+          "aspect": "Standard",
+          "seconds": 48.604667,
+          "sha256": "DE54AF142EED1E9F0EAB0543B093A02014FF9DBA3E96DAF19967040447D299B0"
+        }
+      ]
+    },
+    {
+      "sample": "dialogue",
+      "production": "5db4dc12-f1e6-4ccb-9d0f-83a670e4908d",
+      "state": "Approved",
+      "label": "Original fiction \u2014 not scripture or reporting.",
+      "sourceSnapshots": 0,
+      "creditsComplete": true,
+      "artifacts": [
+        {
+          "aspect": "Vertical",
+          "seconds": 14.229667,
+          "sha256": "5849C85BD94FA03AE63FC040ADB5DBB7A63313D45159CBBE58012216ED53A6D3"
+        },
+        {
+          "aspect": "Standard",
+          "seconds": 14.229667,
+          "sha256": "B3C4F2B1831316AE7A975D4B8864B13F0055C5A1266B53C001C5DF0B028D70F9"
+        }
+      ]
+    }
+  ],
+  "localFrameReadabilityInspected": true,
+  "humanVisualListeningAcceptance": false,
+  "historicalAcceptance": false,
+  "liveCalls": 0
+}

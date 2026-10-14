@@ -85,7 +85,8 @@ public sealed partial class LessonEngine(CoreDbContext db, ITranslationProvider 
         }, ct);
     private async Task<LessonBundle> Bundle(CoreScope s, Guid u, Guid id, CancellationToken ct) =>
         await db.LessonBundles.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id && x.TenantId == s.TenantId && x.UniverseId == u, ct) ?? throw new CoreAccessException();
-    private async Task Recheck(CoreScope s, Guid u, LessonBundleSnapshot bundle, string locale, string purpose, CancellationToken ct)
+    private Task Recheck(CoreScope s, Guid u, LessonBundleSnapshot bundle, string locale, string purpose, CancellationToken ct) => RecheckBundle(db, s, u, bundle, locale, purpose, ct);
+    internal static async Task RecheckBundle(CoreDbContext db, CoreScope s, Guid u, LessonBundleSnapshot bundle, string locale, string purpose, CancellationToken ct)
     {
         var engine = new EvidenceEngine(db);
         await engine.RequireLessonClaimAsync(s, u, bundle.Request.AnchorClaimRevisionId, new("Read", "en-IN", "IN", "Text"), ct);
@@ -110,14 +111,26 @@ public sealed partial class LessonEngine(CoreDbContext db, ITranslationProvider 
             var engine = new EvidenceEngine(db);
             var anchor = await engine.RequireLessonClaimAsync(s, u, r.AnchorClaimRevisionId, new("Read", "en-IN", "IN", "Text"), ct);
             var meaning = await engine.RequireLessonClaimAsync(s, u, r.InterpretationClaimRevisionId, new("Read", "en-IN", "IN", "Text"), ct);
-            if (anchor.Type is not ("Translation" or "Quotation") || anchor.Locale != "en-IN" || meaning.Type != "Interpretation" || meaning.Locale != "en-IN") throw new RuntimeValidationException("Bundle needs an approved exact English source anchor and separately attributed interpretation.");
-            var anchorSpan = await db.ClaimSpans.AsNoTracking().SingleAsync(x => x.ClaimRevisionId == anchor.Id && x.Relation == "Supporting", ct);
-            var anchorText = await db.CorpusTexts.AsNoTracking().SingleAsync(x => x.Id == anchorSpan.CorpusTextId, ct);
-            if (!await db.ClaimSpans.AnyAsync(x => x.ClaimRevisionId == meaning.Id && x.Relation == "Supporting" && x.CorpusTextId == anchorText.Id && x.SnapshotId == anchorSpan.SnapshotId, ct)) throw new EvidenceBlockedException("InterpretationNotBoundToAnchor");
+            if (anchor.Type is not ("Translation" or "Quotation" or "SourceQuotation" or "HistoricalClaim" or "FictionalScene") || anchor.Locale != "en-IN" || meaning.Type != "Interpretation" || meaning.Locale != "en-IN") throw new RuntimeValidationException("Approved English source/historical anchor and separately attributed interpretation required.");
+            var anchorSpans = await db.ClaimSpans.AsNoTracking().Where(x => x.ClaimRevisionId == anchor.Id && x.Relation == "Supporting").OrderBy(x => x.Id).ToArrayAsync(ct);
+            var anchorSpan = anchorSpans.First();
+            CorpusText? anchorText = null;
+            if (anchor.Type is "Translation" or "Quotation")
+            {
+                anchorSpan = anchorSpans.Single();
+                anchorText = await db.CorpusTexts.AsNoTracking().SingleAsync(x => x.Id == anchorSpan.CorpusTextId, ct);
+                if (!await db.ClaimSpans.AnyAsync(x => x.ClaimRevisionId == meaning.Id && x.Relation == "Supporting" && x.CorpusTextId == anchorText.Id && x.SnapshotId == anchorSpan.SnapshotId, ct)) throw new EvidenceBlockedException("InterpretationNotBoundToAnchor");
+            }
+            else
+            {
+                var meaningSpans = await db.ClaimSpans.AsNoTracking().Where(x => x.ClaimRevisionId == meaning.Id && x.Relation == "Supporting").ToArrayAsync(ct);
+                if (anchorSpans.Any(x => x.CorpusTextId != null) || !anchorSpans.All(a => meaningSpans.Any(m => m.SnapshotId == a.SnapshotId && m.Start == a.Start && m.Length == a.Length && m.Sha256 == a.Sha256))) throw new EvidenceBlockedException("InterpretationNotBoundToHistoricalAnchor");
+            }
             string? sanskrit = null;
             var sources = await db.ClaimSpans.AsNoTracking().Where(x => x.ClaimRevisionId == anchor.Id || x.ClaimRevisionId == meaning.Id).Select(x => x.SnapshotId).Distinct().ToListAsync(ct);
             if (r.SanskritTextId is Guid sa)
             {
+                if (anchorText == null) throw new CoreAccessException();
                 var t = await db.CorpusTexts.AsNoTracking().SingleOrDefaultAsync(x => x.Id == sa && x.VerseId == anchorText.VerseId && x.Kind == "DirectQuotation" && x.Locale == "sa-IN", ct) ?? throw new CoreAccessException();
                 sanskrit = t.ExactText; sources.Add(t.SnapshotId);
             }

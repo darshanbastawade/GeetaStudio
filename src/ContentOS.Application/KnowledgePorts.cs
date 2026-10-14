@@ -12,7 +12,11 @@ public interface IKnowledgeRankingAdapter
     ValueTask<IReadOnlyList<KnowledgeScore>> RankAsync(KnowledgeRanking request, CancellationToken ct);
 }
 public interface IKnowledgeRetriever { Task<KnowledgeResult> RetrieveAsync(CoreScope scope, Guid universe, KnowledgeQuery request, CancellationToken ct); }
-public interface IKnowledgeIndexWorker { Task<bool> ProcessNextAsync(CancellationToken ct); }
+public interface IKnowledgeIndexWorker
+{
+    Task<bool> ProcessNextAsync(CancellationToken ct);
+    Task<bool> ProcessAsync(CoreScope scope, Guid universe, Guid index, CancellationToken ct);
+}
 public interface IKnowledgeAdministration
 {
     Task<Guid> ConceptAsync(CoreScope scope, Guid universe, RegisterConcept request, CancellationToken ct);

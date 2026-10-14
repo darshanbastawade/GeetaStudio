@@ -1,0 +1,212 @@
+{
+  "date": "2026-10-14",
+  "rows": [
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT",
+      "table": "CreationCommand",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT",
+      "table": "CreationCommand",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT",
+      "table": "CreationEvent",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT",
+      "table": "CreationEvent",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT",
+      "table": "CreationRevision",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT",
+      "table": "CreationRevision",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "CreationRevision",
+      "column": "Html"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "CreationRevision",
+      "column": "UpdatedUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT",
+      "table": "CreationTemplate",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT",
+      "table": "CreationTemplate",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "CreationTemplate",
+      "column": "Enabled"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "CreationTemplate",
+      "column": "UpdatedUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT",
+      "table": "CreationUpload",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT",
+      "table": "CreationUpload",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "CreationUpload",
+      "column": "AltText"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "CreationUpload",
+      "column": "Content"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "CreationUpload",
+      "column": "Deleted"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "CreationUpload",
+      "column": "UpdatedUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "INSERT",
+      "table": "PrivateCreation",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "SELECT",
+      "table": "PrivateCreation",
+      "column": "Object"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "Attempts"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "ChargedCredits"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "Cleanup"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "InputJson"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "Lease"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "LeaseUntilUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "Outcome"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "PublicEligible"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "ReservationId"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "Review"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "State"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "UpdatedUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "UploadsJson"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "permission": "UPDATE",
+      "table": "PrivateCreation",
+      "column": "Version"
+    }
+  ],
+  "workerGrants": 0,
+  "deleteGrants": 0,
+  "immutableOwnershipUpdateGrants": 0
+}

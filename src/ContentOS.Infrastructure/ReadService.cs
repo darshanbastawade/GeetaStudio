@@ -7,9 +7,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 namespace ContentOS.Infrastructure;
 
-public sealed class ReadService(CoreDbContext db, IEditorialWorkbench editorial, ILessonEngine lessons, IConfiguration configuration) : IReadWorkbench, IPublicRead
+public sealed partial class ReadService(CoreDbContext db, IEditorialWorkbench editorial, ILessonEngine lessons, IConfiguration configuration) : IReadWorkbench, IPublicRead
 {
     private static string Json<T>(T value) => EditorialBinding.Json(value);
+    public Task<ReadCollectionSummary[]> PrivateDirectoryAsync(string actor, CancellationToken ct) =>
+        (from c in db.ReadCollections.AsNoTracking()
+         join universe in db.Universes.AsNoTracking() on c.UniverseId equals universe.Id
+         where c.State != "Disabled" && !db.ReadCollections.Any(newer => newer.Key == c.Key && newer.State != "Disabled" && newer.Version > c.Version) && db.Members.Any(m => m.TenantId == c.TenantId && m.Actor == actor)
+         orderby c.CreatedUtc descending, c.Id
+         select new ReadCollectionSummary(c.Id, c.Key, c.Version, c.Title, db.ReadPieces.Count(p => p.CollectionId == c.Id), c.State, universe.Name)).Take(50).ToArrayAsync(ct);
     private async Task Access(CoreScope s, Guid u, bool write, CancellationToken ct)
     {
         if (!await db.Universes.AnyAsync(x => x.Id == u && x.TenantId == s.TenantId, ct) ||
@@ -25,7 +31,13 @@ public sealed class ReadService(CoreDbContext db, IEditorialWorkbench editorial,
         if (op == Guid.Empty) throw new RuntimeValidationException("Stable operation required.");
         db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct); await Access(s, u, true, ct);
         await db.Database.ExecuteSqlInterpolatedAsync($"DECLARE @r int; EXEC @r=sys.sp_getapplock @Resource={"ContentOS.Read:" + s.TenantId},@LockMode='Exclusive',@LockOwner='Transaction',@LockTimeout=10000; IF @r<0 THROW 51000,'READ lock unavailable',1;", ct);
-        var hash = EditorialBinding.Hash(new { u, r }); var prior = await db.ReadOperations.SingleOrDefaultAsync(x => x.TenantId == s.TenantId && x.OperationId == op, ct);
+        object replay = r switch
+        {
+            RegisterReadCollection c when c.ExpectedPieces == null => new { c.OperationId, c.Key, c.Version, c.Title, c.ManifestId, c.Mode, c.Rationale },
+            AddReadPiece p when p.History == null => new { p.OperationId, p.CollectionId, p.CorpusVerseId, p.EditorialItemId, p.LessonVariantId, p.Journey, p.Position },
+            _ => r!
+        };
+        var hash = EditorialBinding.Hash(new { u, r = replay }); var prior = await db.ReadOperations.SingleOrDefaultAsync(x => x.TenantId == s.TenantId && x.OperationId == op, ct);
         if (prior != null) { if (prior.Actor != s.Actor || prior.Kind != kind || prior.Fingerprint != hash) throw new RuntimeConflictException("Read replay differs."); return prior.ResultId; }
         var id = await action(); db.ReadOperations.Add(new() { Id = Guid.NewGuid(), TenantId = s.TenantId, UniverseId = u, OperationId = op, Kind = kind, Actor = s.Actor, Fingerprint = hash, ResultId = id });
         db.SourceAudits.Add(new() { Id = Guid.NewGuid(), TenantId = s.TenantId, Actor = s.Actor, SubjectId = id, Action = "read." + kind });
@@ -33,17 +45,21 @@ public sealed class ReadService(CoreDbContext db, IEditorialWorkbench editorial,
     }
     public Task<Guid> RegisterAsync(CoreScope s, Guid u, RegisterReadCollection r, CancellationToken ct) => Command(s, u, r.OperationId, "register", r, async () =>
     {
-        ReadRules.Collection(r); if (!await db.CorpusManifests.AnyAsync(x => x.Id == r.ManifestId && x.TenantId == s.TenantId && x.UniverseId == u, ct)) throw new CoreAccessException();
+        ReadRules.Collection(r);
+        if (r.ManifestId != null && !await db.CorpusManifests.AnyAsync(x => x.Id == r.ManifestId && x.TenantId == s.TenantId && x.UniverseId == u, ct)) throw new CoreAccessException();
+        if (r.ManifestId == null && r.ExpectedPieces is not (>= 1 and <= 50) || r.ManifestId != null && r.ExpectedPieces != null) throw new RuntimeValidationException("Historical collections require an explicit bounded entry target; scripture retains its manifest target.");
         var previous = await db.ReadCollections.Where(x => x.Key == r.Key).OrderByDescending(x => x.Version).FirstOrDefaultAsync(ct);
         if (previous != null && (previous.TenantId != s.TenantId || previous.UniverseId != u)) throw new CoreAccessException();
         if (r.Version != (previous?.Version ?? 0) + 1) throw new RuntimeConflictException("Append the next collection version.");
-        var c = new ReadCollection { Id = Guid.NewGuid(), TenantId = s.TenantId, UniverseId = u, ManifestId = r.ManifestId, Key = r.Key, Version = r.Version, Title = r.Title, Mode = r.Mode, Rationale = r.Rationale, Actor = s.Actor };
+        var c = new ReadCollection { Id = Guid.NewGuid(), TenantId = s.TenantId, UniverseId = u, ManifestId = r.ManifestId, ExpectedPieces = r.ExpectedPieces, Key = r.Key, Version = r.Version, Title = r.Title, Mode = r.Mode, Rationale = r.Rationale, Actor = s.Actor };
         db.ReadCollections.Add(c); return c.Id;
     }, ct);
     public Task<Guid> AddAsync(CoreScope s, Guid u, AddReadPiece r, CancellationToken ct) => Command(s, u, r.OperationId, "bind", r, async () =>
     {
         var c = await Collection(s, r.CollectionId, true, ct); if (c.UniverseId != u) throw new CoreAccessException();
         if (c.State != "Draft" || await db.ReadPieces.CountAsync(x => x.CollectionId == c.Id, ct) >= 50) throw new RuntimeConflictException("Draft collection capacity50; version before editing active bindings.");
+        if (c.ManifestId == null) return await AddHistorical(s, u, c, r, ct);
+        if (r.History != null || r.CorpusVerseId == null) throw new RuntimeValidationException("Scripture requires its original verse binding.");
         var verse = await db.CorpusVerses.SingleOrDefaultAsync(x => x.Id == r.CorpusVerseId && x.ManifestId == c.ManifestId, ct) ?? throw new CoreAccessException();
         var p = await editorial.InspectAsync(s, u, r.EditorialItemId, ct); var lesson = await lessons.InspectAsync(s, u, r.LessonVariantId, ct);
         if (p.SourceOutputWithheld || lesson.OutputWithheld || lesson.Sections == null || lesson.ReviewStatus != "Approved" ||
@@ -81,6 +97,7 @@ public sealed class ReadService(CoreDbContext db, IEditorialWorkbench editorial,
             if (release && head.EditorialState != "Approved") return null;
             if (head.AudienceId != lesson.Snapshot.Audience.Rules.Audience!.AudienceId || head.LocaleId != lesson.Snapshot.Locale.Rules.Locale!.Locale) return null;
             await new SourceRightsGuard(db).CheckAsync(s, row.RevisionId, new(release ? "Publish" : "Read", head.LocaleId, "IN", "Text"), ct);
+            if (c.ManifestId == null) return await HistoricalPiece(s, c, row, p, lesson, head, release, ct);
             var verse = await db.CorpusVerses.AsNoTracking().SingleAsync(x => x.Id == row.CorpusVerseId && x.ManifestId == c.ManifestId, ct);
             if (verse.ReviewStatus != "Approved" || release && verse.ReviewEvidence?.StartsWith("manual:") != true) return null;
             var texts = new List<ReadSource>();
@@ -108,19 +125,20 @@ public sealed class ReadService(CoreDbContext db, IEditorialWorkbench editorial,
         {
             var view = await Piece(s, c, row, release, ct); if (view != null) pieces.Add(view);
             var packet = await editorial.InspectAsync(s, c.UniverseId, row.EditorialItemId, ct);
-            var verseVersion = await db.CorpusVerses.AsNoTracking().Where(x => x.Id == row.CorpusVerseId).Select(x => x.RowVersion).SingleAsync(ct);
+            var verseVersion = row.CorpusVerseId.HasValue ? await db.CorpusVerses.AsNoTracking().Where(x => x.Id == row.CorpusVerseId).Select(x => x.RowVersion).SingleAsync(ct) : await HistoricalVersion(row, ct);
             var lessonVersion = await db.LessonVariants.AsNoTracking().Where(x => x.Id == row.LessonVariantId).Select(x => x.RowVersion).SingleAsync(ct);
             dependencies.Add(new { row.Id, packet.Fingerprint, row.LessonVariantId, row.CorpusVerseId, VerseVersion = verseVersion, LessonVersion = lessonVersion });
         }
-        var manifest = await db.CorpusManifests.AsNoTracking().SingleAsync(x => x.Id == c.ManifestId, ct);
+        var manifest = c.ManifestId.HasValue ? await db.CorpusManifests.AsNoTracking().SingleAsync(x => x.Id == c.ManifestId, ct) : null;
         var fingerprint = EditorialBinding.Hash(new { Policy = "read.v1", c.Id, c.ManifestId, c.Version, Dependencies = dependencies });
         var evidence = await db.ReadEvidenceEntries.AsNoTracking().Where(x => x.CollectionId == c.Id && x.Mode == "Manual" && x.Fingerprint == fingerprint && x.ExpiresUtc > DateTimeOffset.UtcNow).Select(x => x.Kind).ToArrayAsync(ct);
         var blocks = ReadRules.Gates.Except(evidence).Select(x => x + "EvidenceRequired").ToList();
         if (c.Mode != "Public") blocks.Add("FixtureCollectionCannotRollOut");
         if (!(bool.TryParse(configuration["Read:PublicEnabled"], out var enabled) && enabled)) blocks.Add("PublicRolloutDisabled");
         if (rows.Count == 0 || pieces.Count != rows.Count) blocks.Add("EveryPieceRequiresCurrentHumanQualifiedInputs");
-        var book = new ReadBook(new(c.Id, c.Key, c.Version, c.Title, pieces.Count, c.State), pieces.ToArray(), manifest.BaselineTarget,
-            await db.CorpusVerses.CountAsync(x => x.ManifestId == c.ManifestId, ct), pieces.Select(x => (x.Chapter, x.Verse)).Distinct().Count(), c.Mode, release ? blocks.ToArray() : ["Private fixture preview; not public release qualification."], await db.Universes.Where(x => x.Id == c.UniverseId).Select(x => x.Name).SingleAsync(ct));
+        var universeName = await db.Universes.Where(x => x.Id == c.UniverseId).Select(x => x.Name).SingleAsync(ct);
+        var book = new ReadBook(new(c.Id, c.Key, c.Version, c.Title, pieces.Count, c.State, universeName), pieces.ToArray(), manifest?.BaselineTarget ?? c.ExpectedPieces!.Value,
+            manifest == null ? rows.Count : await db.CorpusVerses.CountAsync(x => x.ManifestId == c.ManifestId, ct), pieces.Select(x => (x.Chapter, x.Verse)).Distinct().Count(), c.Mode, release ? blocks.ToArray() : ["Private preview; human release review pending."], universeName, manifest == null ? "History" : "Scripture");
         return (book, fingerprint, blocks.ToArray());
     }
     public async Task<ReadStaffView> InspectAsync(CoreScope s, Guid u, Guid id, CancellationToken ct)

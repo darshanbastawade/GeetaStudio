@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-14",
+  "status": "Offline Verified",
+  "sequence": "M23 completed before M24 implementation",
+  "build": {
+    "exit": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "offline": {
+    "failed": 0,
+    "skipped": 0,
+    "passed": 106
+  },
+  "combinedFocused": {
+    "failed": 0,
+    "skipped": 0,
+    "passed": 21
+  },
+  "windowsDemo": "Passed",
+  "layout": "Two A4 PDF pages rendered/visually checked",
+  "development": {
+    "coreMigrations": 26,
+    "fullSourcePermissionHashPreserved": true,
+    "existingIdsPreserved": true,
+    "runtimeMigrations": 4
+  },
+  "formatExit": 0,
+  "coreModelExit": 0,
+  "runtimeModelExit": 0,
+  "staticParsers": "PowerShell,JavaScript,VS Code JSON,diff passed",
+  "fullSqlRegression": "Not rerun; prior broad run was incomplete under memory pressure",
+  "livePayments": "Not enabled",
+  "externalEmailAndPrinting": "Not enabled",
+  "humanQualification": "Pending",
+  "priorM18ToM21Findings": "Remain open",
+  "M25": "Not started"
+}

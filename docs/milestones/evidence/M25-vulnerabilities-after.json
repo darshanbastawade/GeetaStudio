@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "parameters": "--vulnerable --include-transitive",
+  "sources": [
+    "https://api.nuget.org/v3/index.json"
+  ],
+  "projects": [
+    {
+      "path": "C:/dev/GeetaStudio/src/ContentOS.Application/ContentOS.Application.csproj"
+    },
+    {
+      "path": "C:/dev/GeetaStudio/src/ContentOS.Domain/ContentOS.Domain.csproj"
+    },
+    {
+      "path": "C:/dev/GeetaStudio/src/ContentOS.Contracts/ContentOS.Contracts.csproj"
+    },
+    {
+      "path": "C:/dev/GeetaStudio/src/ContentOS.Infrastructure/ContentOS.Infrastructure.csproj"
+    },
+    {
+      "path": "C:/dev/GeetaStudio/src/ContentOS.Integrations/ContentOS.Integrations.csproj"
+    },
+    {
+      "path": "C:/dev/GeetaStudio/src/GeetaStudio.Api/GeetaStudio.Api.csproj"
+    },
+    {
+      "path": "C:/dev/GeetaStudio/src/GeetaStudio.Web/GeetaStudio.Web.csproj"
+    },
+    {
+      "path": "C:/dev/GeetaStudio/src/GeetaStudio.Worker/GeetaStudio.Worker.csproj"
+    },
+    {
+      "path": "C:/dev/GeetaStudio/tests/ContentOS.Foundation.Tests/ContentOS.Foundation.Tests.csproj"
+    }
+  ]
+}

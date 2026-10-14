@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "release": "Private controlled pilot",
+  "productionReady": false,
+  "hosting": "Single Windows host, separate API/Web/Worker and SQL identities; loopback until qualified TLS ingress",
+  "features": [
+    {
+      "key": "READ",
+      "enabled": "PrivateFixtureOnly",
+      "evidence": "docs/milestones/M14.md",
+      "productionGates": [
+        "Human M12",
+        "Source rights",
+        "Accessibility",
+        "Production TLS/backups"
+      ]
+    },
+    {
+      "key": "WATCH",
+      "enabled": "PrivateFixtureOnly",
+      "evidence": "docs/milestones/M17.md",
+      "productionGates": [
+        "Human listening/visual review",
+        "Media rights",
+        "Live adapters if selected"
+      ]
+    },
+    {
+      "key": "Social",
+      "enabled": "PrivateFixtureOnly",
+      "evidence": "docs/milestones/M18.md",
+      "productionGates": [
+        "Platform OAuth/permissions",
+        "Original-provider live reconciliation"
+      ]
+    },
+    {
+      "key": "Analytics",
+      "enabled": "PrivateFixtureOnly",
+      "evidence": "docs/milestones/M19.md",
+      "productionGates": [
+        "Audited financial source/consent",
+        "Real metrics/cost SLO"
+      ]
+    },
+    {
+      "key": "AccountsPayments",
+      "enabled": "PrivateFixtureOnly",
+      "evidence": "docs/milestones/M20.md",
+      "productionGates": [
+        "Qualified identity/payment provider",
+        "Legal retention/tax/privacy"
+      ]
+    },
+    {
+      "key": "TALK",
+      "enabled": "PrivateFixtureOnly",
+      "evidence": "docs/milestones/M21.md",
+      "productionGates": [
+        "Human safety",
+        "Qualified AI/voice if selected"
+      ]
+    },
+    {
+      "key": "CREATE",
+      "enabled": "PrivateFixtureOnly",
+      "evidence": "docs/milestones/M23.md",
+      "productionGates": [
+        "Human age/quality",
+        "External cleanup if selected"
+      ]
+    },
+    {
+      "key": "Commerce",
+      "enabled": "PrivateFixtureOnly",
+      "evidence": "docs/milestones/M24.md",
+      "productionGates": [
+        "Human/license/commercial",
+        "Real fulfillment/payment"
+      ]
+    }
+  ],
+  "slos": {
+    "readerAvailability": {
+      "target": 0.999,
+      "window": "30 days",
+      "alert": "5xx >1% for 5 minutes or readiness fails twice"
+    },
+    "readerP95Ms": {
+      "target": 1000,
+      "alert": "p95 >1000ms for 5 minutes"
+    },
+    "queueDelaySeconds": {
+      "target": 120,
+      "alert": "oldest runnable job >120sec; exclude deferred/blocked jobs"
+    },
+    "generationFailureRate": {
+      "target": 0.05,
+      "alert": "terminal failures >5% of >=20 admitted runs"
+    },
+    "costVariance": {
+      "target": 0.1,
+      "alert": "actual against pinned budget >10%; kill on budget exhaustion"
+    },
+    "voiceP95Ms": {
+      "target": 1500,
+      "status": "N/A voice not release enabled"
+    },
+    "publicationBacklogSeconds": {
+      "target": 300,
+      "alert": "due submitted/unknown >300sec; reconcile original resource; never resubmit"
+    }
+  },
+  "recovery": {
+    "pilotRtoSeconds": 300,
+    "snapshotDrillRpoSeconds": 0,
+    "productionRpoSeconds": 900,
+    "qualification": "Local SQL snapshot only; production log/asset/offsite drills pending"
+  },
+  "platformEvidence": [
+    "docs/milestones/M00.md",
+    "docs/milestones/M01.md",
+    "docs/milestones/M02.md",
+    "docs/milestones/M03.md",
+    "docs/milestones/M04.md",
+    "docs/milestones/M05.md",
+    "docs/milestones/M06.md",
+    "docs/milestones/M07.md",
+    "docs/milestones/M08.md",
+    "docs/milestones/M09.md",
+    "docs/milestones/M10.md",
+    "docs/milestones/M11.md",
+    "docs/milestones/M12.md",
+    "docs/milestones/M13.md"
+  ]
+}

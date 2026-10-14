@@ -143,11 +143,17 @@ public sealed class EvidenceEngine(CoreDbContext db) : IEvidenceEngine
             if (v.ReviewStatus != "Approved" || !await db.CorpusBindings.AnyAsync(b => b.ManifestId == v.ManifestId && b.Chapter == v.Chapter && b.Verse == v.Verse && b.VariantKey == v.VariantKey &&
                 b.SnapshotId == t.SnapshotId && b.Kind == t.Kind && b.Locale == t.Locale && b.Sha256 == t.Sha256 && b.SourceLocator == t.SourceLocator && b.SourceChapter == v.Chapter && b.SourceVerse == v.Verse, ct)) return "UnreviewedCanonicalEvidence";
         }
+        else if (r.Type == "SourceQuotation")
+        {
+            if (r.Quality != "DirectSource" || r.Outcome != "Supported" || support.Length != 1 || support[0].ExactText != r.Statement || support[0].CorpusTextId != null) return "UnsupportedQuotation";
+        }
         else if (r.Type is "HistoricalClaim" or "NewsClaim")
         {
             var ids = support.Select(x => x.SnapshotId).ToArray();
             var count = await (from snap in db.SourceSnapshots join e in db.SourceEditions on snap.EditionId equals e.Id where ids.Contains(snap.Id) select e.WorkId).Distinct().CountAsync(ct);
-            if (r.Quality != "Corroborated" || r.Outcome != "Supported" || count < rubric.MinimumIndependentSources || support.Any(x => x.ExactText != r.Statement) || spans.Any(x => x.Relation == "Contradicting")) return "InsufficientEvidence";
+            // A reviewed historical paraphrase need not repeat the identical wording in independent accounts.
+            // Exact span/hash validation still applies on submission; corroboration is a reviewer decision.
+            if (r.Quality != "Corroborated" || r.Outcome != "Supported" || count < rubric.MinimumIndependentSources || r.Type == "NewsClaim" && support.Any(x => x.ExactText != r.Statement) || spans.Any(x => x.Relation == "Contradicting")) return "InsufficientEvidence";
         }
         else if (r.Type == "Interpretation")
         {
@@ -218,7 +224,12 @@ public sealed class EvidenceEngine(CoreDbContext db) : IEvidenceEngine
         CommandAsync(s, u, r.OperationId, "evidence.disagreement", r, async () =>
         {
             var left = await RevisionAsync(u, r.LeftRevisionId, ct); var right = await RevisionAsync(u, r.RightRevisionId, ct);
-            if (left.Id == right.Id || left.Type != "Interpretation" || right.Type != "Interpretation" || left.ReviewStatus != "Approved" || right.ReviewStatus != "Approved") throw new RuntimeValidationException("Retain two reviewed attributed interpretations.");
+            if (left.Id == right.Id || !(left.Type == "Interpretation" && right.Type == "Interpretation" || left.Type == "SourceQuotation" && right.Type == "SourceQuotation") || left.ReviewStatus != "Approved" || right.ReviewStatus != "Approved") throw new RuntimeValidationException("Retain two reviewed attributed interpretations or historical source accounts.");
+            if (left.Type == "SourceQuotation")
+            {
+                await RequireLessonClaimAsync(s, u, left.Id, new("Read", left.Locale, "IN", "Text"), ct);
+                await RequireLessonClaimAsync(s, u, right.Id, new("Read", right.Locale, "IN", "Text"), ct);
+            }
             CoreRules.Text(r.Reason, 1000, "Disagreement reason");
             var item = new ClaimDisagreement { Id = Guid.NewGuid(), LeftRevisionId = left.Id, RightRevisionId = right.Id, Reason = r.Reason, EvidenceReference = Evidence(r.EvidenceReference) }; db.ClaimDisagreements.Add(item); return item.Id;
         }, ct, 2);
@@ -291,7 +302,8 @@ public sealed class EvidenceEngine(CoreDbContext db) : IEvidenceEngine
             if (claim.Locale != content.LocaleId || revision.Body.Substring(link.Start, link.Length) != claim.Statement) return new(false, "ClaimTextMismatch", labels);
             if (revision.Kind == "Canonical" && claim.Type != "Quotation" || revision.Kind == "Translation" && claim.Type != "Translation" ||
                 revision.Kind == "CurrentEvent" && claim.Type is not ("HistoricalClaim" or "NewsClaim") ||
-                revision.Kind == "Interpretation" && claim.Type != "Interpretation") return new(false, "ContentLabelMismatch", labels);
+                revision.Kind == "Interpretation" && claim.Type != "Interpretation" ||
+                revision.Kind == "Historical" && claim.Type is not ("SourceQuotation" or "HistoricalClaim" or "Interpretation" or "FictionalScene")) return new(false, "ContentLabelMismatch", labels);
             var failure = await AssessAsync(s, claim, use, ct); if (failure != null) return new(false, failure, labels);
             labels.Add(new(claim.Id, revisionId, link.Start, link.Length, claim.Label, claim.Author, claim.Tradition, claim.Uncertainty, claim.Version)); end = link.Start + link.Length;
         }

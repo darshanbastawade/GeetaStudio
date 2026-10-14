@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-14",
+  "fullOriginalOcrHashMatches": true,
+  "quotes": [
+    {
+      "key": "method",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "B5F446A016F30EA8B61F50161D4619600EDEEF31E250E110F01C6081EA88641F"
+    },
+    {
+      "key": "torna",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "02F566348DAF5E5EE382BC47BFC142C016E4E9919890851389AC9A61812922E7"
+    },
+    {
+      "key": "surat-s",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "ADCA0C243E8A4B2C548ED02324EBC7E9204D6EB010A8D1919C9B2611482D4E4A"
+    },
+    {
+      "key": "surat-k",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "62C4523096468A606EF51B5A6DF8CCD82247CD9C6F3AC563DF78BD568C43FB2C"
+    },
+    {
+      "key": "purandar-s",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "3591DCDC56083192DE18099B4BAA4778BD5636D26369DA0B2B26C0295E9501B4"
+    },
+    {
+      "key": "purandar-k",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "80FB8D146A3250071DF3FA72F63F89CE75BD2488E3B1EB5EB390F75BA6F2D802"
+    },
+    {
+      "key": "agra-s",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "64DF2BDDFED78D13F356E9AF533934FD5DB1E3ECDA8F4FA59B5D5A0D8BA1B40B"
+    },
+    {
+      "key": "agra-k",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "CC430A4AD08D8D6F6CA9B14B20EE016EAE4BBEC1615B974C6D4F7370D2A3624B"
+    },
+    {
+      "key": "return",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "9AB971E232A56DB5F2C8ED8933B3CBB3842409AE52DC4FECA6AF4F888D63F2F0"
+    },
+    {
+      "key": "coronation-s",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "26347E72D4D9846883C655811929274CC8C6205395F8DEA5504BA81E0B377DE8"
+    },
+    {
+      "key": "coronation-k",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "6476A974BD98B9E42F35523C4E5D1EBFFF52D14444FA1D686473269DE1F6F263"
+    },
+    {
+      "key": "dispute-left",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "18066B449C6C950E9E1759B07CF6BD9F6181AFB5D8E29741B2E9D056013D7CBE"
+    },
+    {
+      "key": "dispute-right",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "2B0D0DF9275CB121B50D2A68F55AD9414CA7656A250D782111C68F6D8ABB1E76"
+    },
+    {
+      "key": "legend",
+      "exactOriginalOcrSubstring": true,
+      "sha256": "A9579CA45D7181FC37AF9E83A0C00E6846E605EDCC4FD4C0A3D8078E2EFE555E"
+    }
+  ],
+  "humanScanReview": "Pending",
+  "historicalIndependenceReview": "Pending",
+  "publicRelease": false
+}

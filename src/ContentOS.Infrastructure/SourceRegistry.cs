@@ -71,7 +71,7 @@ public sealed class SourceRegistry(CoreDbContext db, IContentCore core) : ISourc
         CommandAsync(scope, universe, r.OperationId, "source.registered", r, async () =>
         {
             var key = Text(r.Key); var title = Text(r.Title);
-            if (r.Kind is not ("Canonical" or "Translation" or "Interpretation" or "CurrentEvent" or "Fiction" or "Synthetic")) throw new RuntimeValidationException("Invalid source kind.");
+            if (r.Kind is not ("Canonical" or "Translation" or "Interpretation" or "CurrentEvent" or "Fiction" or "Synthetic" or "Historical")) throw new RuntimeValidationException("Invalid source kind.");
             var existing = await db.SourceWorks.SingleOrDefaultAsync(w => w.UniverseId == universe && w.Key == key, ct);
             if (existing != null)
             {

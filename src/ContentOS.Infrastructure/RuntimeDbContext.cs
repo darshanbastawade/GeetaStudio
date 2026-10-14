@@ -19,10 +19,13 @@ public sealed class RuntimeDbContext(DbContextOptions<RuntimeDbContext> options)
     public DbSet<OutboxMessage> Outbox => Set<OutboxMessage>();
     public DbSet<InboxMessage> Inbox => Set<InboxMessage>();
     public DbSet<AuditEntry> Audit => Set<AuditEntry>();
+    public DbSet<AssetLocation> AssetLocations => Set<AssetLocation>();
     public DbSet<Asset> Assets => Set<Asset>();
     protected override void OnModelCreating(ModelBuilder model)
     {
         model.HasDefaultSchema("runtime");
+        model.Entity<AssetLocation>().HasKey(x => x.AssetId);
+        model.Entity<AssetLocation>().HasOne<Asset>().WithOne().HasForeignKey<AssetLocation>(x => x.AssetId).OnDelete(DeleteBehavior.Restrict);
         foreach (var entity in model.Model.GetEntityTypes())
         {
             foreach (var property in entity.GetProperties())

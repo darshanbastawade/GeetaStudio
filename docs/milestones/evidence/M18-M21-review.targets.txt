@@ -1,0 +1,5 @@
+<Project>
+  <ItemGroup Condition="'$(MSBuildProjectName)' == 'ContentOS.Foundation.Tests'">
+    <Compile Include="C:\dev\GeetaStudio\.local\M18M21ReviewTests.cs" />
+  </ItemGroup>
+</Project>

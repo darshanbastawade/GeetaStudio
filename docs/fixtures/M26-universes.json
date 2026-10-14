@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "locales": [
+    {
+      "id": "en-IN",
+      "name": "English (India)"
+    },
+    {
+      "id": "hi-IN",
+      "name": "Hindi (India)"
+    },
+    {
+      "id": "en-US",
+      "name": "English (United States; local speech preview)"
+    }
+  ],
+  "universes": [
+    {
+      "key": "geeta",
+      "name": "Geeta",
+      "tenantKey": "local",
+      "terminology": {
+        "teaching": "Geeta teaching",
+        "subject": "Concept"
+      },
+      "subjectTypes": [
+        "concept"
+      ],
+      "sourceRules": {
+        "Canonical": "Canonical sources must be cited and verified separately from interpretation.",
+        "Translation": "License and translator attribution required.",
+        "Interpretation": "Label interpretation and preserve its source lineage.",
+        "Fiction": "Original fiction; never present invented text as scripture."
+      },
+      "editorialPolicies": {
+        "review": "Human review before approval.",
+        "rights": "Unverified rights block approval.",
+        "cast": "Cast is selected from data and frozen by revision; assets require separate approval."
+      },
+      "audiences": [
+        {
+          "key": "children",
+          "name": "Children",
+          "minAge": 6,
+          "maxAge": 12
+        },
+        {
+          "key": "teens",
+          "name": "Teens",
+          "minAge": 13,
+          "maxAge": 19
+        },
+        {
+          "key": "young-adults",
+          "name": "Young adults",
+          "minAge": 20,
+          "maxAge": 29
+        },
+        {
+          "key": "adults",
+          "name": "Adults",
+          "minAge": 30,
+          "maxAge": 120
+        }
+      ],
+      "subjects": [
+        {
+          "key": "action-and-responsibility",
+          "type": "concept",
+          "name": "Action and responsibility"
+        }
+      ],
+      "characters": [
+        {
+          "key": "dhairy",
+          "displayName": "Dhairy",
+          "lifeStage": "Child",
+          "biography": "Curious, energetic child and experimenter; generous and ambitious, sometimes impatient or attached to recognition.",
+          "aliases": []
+        },
+        {
+          "key": "neerja",
+          "displayName": "Neerja",
+          "lifeStage": "Child",
+          "biography": "Inventive, observant child and problem-solver; has her own goals, sometimes overplans or struggles to admit a mistake.",
+          "aliases": [
+            "Neeraja"
+          ]
+        },
+        {
+          "key": "dadaji",
+          "displayName": "Dadaji",
+          "lifeStage": "OlderAdult",
+          "biography": "Warm, playful mentor with hobbies, memories and mistakes; asks useful questions and keeps learning.",
+          "aliases": []
+        },
+        {
+          "key": "shakuni",
+          "displayName": "Shakuni",
+          "lifeStage": "Imaginary",
+          "biography": "Fictional, witty trickster and imaginary commentator who sells persuasive shortcuts.",
+          "aliases": []
+        },
+        {
+          "key": "tara",
+          "displayName": "Tara",
+          "lifeStage": "Teen",
+          "biography": "Approximately 17; creative, outspoken, capable and seeking independence while valuing approval.",
+          "aliases": []
+        },
+        {
+          "key": "kabir",
+          "displayName": "Kabir",
+          "lifeStage": "YoungAdult",
+          "biography": "Approximately 22; resourceful, humorous and ambitious, with uncertainty about his direction.",
+          "aliases": []
+        },
+        {
+          "key": "meera",
+          "displayName": "Meera",
+          "lifeStage": "Adult",
+          "biography": "Approximately 36; capable professional/business owner, generous but sometimes overcommitted.",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "key": "shivaji-maharaj",
+      "name": "Shivaji Maharaj",
+      "tenantKey": "local",
+      "terminology": {
+        "teaching": "Historical learning",
+        "subject": "Event, person, place or historical method",
+        "anchor": "Cited historical source account",
+        "chronology": "Source-year timeline",
+        "swarajya": "Historical political concept; contextual meaning requires sources, not a slogan",
+        "chhatrapati": "Royal title; preserve transliteration and context"
+      },
+      "subjectTypes": [
+        "event",
+        "person",
+        "place",
+        "method"
+      ],
+      "sourceRules": {
+        "Historical": "Early twentieth-century secondary histories, not neutral consensus or independent contemporary eyewitness records. Retain attribution; do not reproduce ethnic/religious stereotypes as facts. Verify OCR against scans before public use.",
+        "SourceQuotation": "Exact attributed historical account excerpt; not Sanskrit or scripture.",
+        "HistoricalClaim": "Two-work technical corroboration only; human factual assessment required.",
+        "PopularLegend": "Narrated as a legend in the source; never established as miraculous historical fact.",
+        "Fiction": "Original invented archive-guide dialogue; no impersonation or invented words attributed to historical people."
+      },
+      "editorialPolicies": {
+        "review": "Human historical/editorial review required for public release; private technical fixtures remain explicit.",
+        "timeline": "Source years CE; do not infer Gregorian conversion, exact birth date, timezone or precision absent in evidence",
+        "disagreement": "The selected Kincaid passage reports and disputes Grant Duff; direct Duff verification remains pending. The disagreement is not silently settled.",
+        "rights": "Selected permitted original text only; no portraits, footage, modern additions or historical voice cloning.",
+        "cast": "One fictional archive guide; historical people are subjects, not impersonated speakers."
+      },
+      "audiences": [
+        {
+          "key": "adult-history",
+          "name": "Adult historical literacy",
+          "minAge": 18,
+          "maxAge": 120
+        }
+      ],
+      "subjects": [
+        {
+          "key": "history-learning",
+          "type": "method",
+          "name": "Historical literacy and source comparison"
+        }
+      ],
+      "characters": [
+        {
+          "key": "archive-guide",
+          "displayName": "Archive Guide",
+          "lifeStage": "Adult",
+          "biography": "Original fictional guide who asks learners to check sources and uncertainty; not a historian or historical person.",
+          "aliases": []
+        }
+      ]
+    }
+  ]
+}

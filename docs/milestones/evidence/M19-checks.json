@@ -1,0 +1,59 @@
+{
+  "verifiedDate": "2026-10-13",
+  "tier": "Offline Verified - controlled M19 acceptance",
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "lockedRestorePassed": true,
+  "focused": {
+    "passed": 12,
+    "log": ".local/M19-focused-final.log",
+    "trx": "tests/ContentOS.Foundation.Tests/TestResults/M19-focused-final.trx",
+    "failed": 0,
+    "skipped": 0
+  },
+  "fullRegression": {
+    "exitCode": 1,
+    "sqlSkipped": 0,
+    "sqlPassed": 177,
+    "sqlFailed": 3,
+    "offlinePassed": 98,
+    "allGreenCombinedRun": false,
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1 -Locked -Sql -LowMemory",
+    "failures": [
+      "SqlWatchTests.Known_render_failure_resumes_after_restart_without_repeating_accepted_media_or_timing: SQL execution timeout",
+      "SqlWatchTests.Wrong_scope_unapproved_cast_and_withdrawn_media_block_create_preview_and_snapshot_body: SQL execution timeout",
+      "SqlKnowledgeTests.Failed_shadow_validation_and_stale_alias_updates_cannot_activate: capped alias listing in persistent test helper"
+    ],
+    "log": ".local/M19-verify-final.log",
+    "sqlTotal": 180
+  },
+  "targetedRecovery": {
+    "trx": "tests/ContentOS.Foundation.Tests/TestResults/M19-legacy-recheck.trx",
+    "log": ".local/M19-legacy-recheck.log",
+    "skipped": 0,
+    "failed": 0,
+    "productionWatchChanged": false,
+    "passed": 3,
+    "testHelperCorrection": "Read exact returned activation ID and assert key/active index; no retained records deleted or assertions weakened"
+  },
+  "windowsDemoPassed": true,
+  "developmentStaffAndReadsPassed": true,
+  "preservationPassed": true,
+  "coreMigrations": 21,
+  "runtimeMigrations": 4,
+  "narrowAnalyticsApiGrants": 18,
+  "coreAndRuntimeModelsClean": true,
+  "finalStaticSyntaxPassed": true,
+  "finalFormat": "Pass: dotnet format GeetaStudio.sln --verify-no-changes --no-restore; exit0; .local/M19-format-completed.log",
+  "firstBroadRun": "Aborted after legacy SQL timeouts/post-login failure; retained as .local/M19-verify.log",
+  "freshInteractiveF5Verified": false,
+  "browserMobileScreenReaderVerified": false,
+  "liveProviderQualified": false,
+  "genuineFinanceFxConsentVerified": false,
+  "genuineM12HumanGate": "Pending",
+  "paidCalls": 0,
+  "publications": 0,
+  "databaseReset": false,
+  "committed": false,
+  "m20Started": false
+}

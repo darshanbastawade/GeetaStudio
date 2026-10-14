@@ -1,0 +1,10 @@
+{
+  "verifiedDate": "2026-10-14",
+  "powershellParser": true,
+  "vsCodeJson": true,
+  "customerAndAdministratorJavascriptSyntax": true,
+  "analyticsJavascriptSyntax": true,
+  "diffWhitespace": true,
+  "freshInteractiveF5": false,
+  "browserMobileScreenReader": false
+}

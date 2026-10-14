@@ -5,7 +5,7 @@ try {
     if (Get-Command dotnet -ErrorAction SilentlyContinue) {
         $version = & dotnet --version
         if ($LASTEXITCODE -ne 0 -or $version -notmatch '^10\.0\.4\d\d$') {
-            Write-Host 'Install the stable .NET SDK compatible with global.json (10.0.401 or a later patch in that feature band).'; $failed = $true
+            Write-Host 'Install the stable .NET SDK compatible with global.json (exactly10.0.401; SDK roll-forward is disabled for reproducible package locks).'; $failed = $true
         } else { Write-Host ".NET SDK: $version" }
     } else { Write-Host '.NET SDK missing.'; $failed = $true }
     foreach ($tool in @('git', 'code')) {

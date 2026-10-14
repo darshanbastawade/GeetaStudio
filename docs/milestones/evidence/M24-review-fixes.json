@@ -1,0 +1,66 @@
+{
+  "publicPublishing": false,
+  "rosterPolicy": "Existing shared roster; block requested SKU if enabled non-owner seats exceed its exact allowance until roster is reduced",
+  "externalDeliveries": 0,
+  "actualCharges": 0,
+  "databaseReset": false,
+  "productionReady": false,
+  "diffCheck": "Passed",
+  "verifiedUtc": "2026-10-14T16:50:03.3666493+00:00",
+  "status": "OfflineVerifiedControlledPrivate",
+  "build": {
+    "errors": 0,
+    "warnings": 0,
+    "log": ".local/M24-fixes-current-build.log"
+  },
+  "newMilestone": false,
+  "permanentNewSqlCases": 5,
+  "checkpointScope": "33 affected SQL and111offline passed; final9commerce rerun after adding the missing-expiry rejection/regression. No full SQL rerun.",
+  "tests": {
+    "affected": {
+      "trx": ".local/M24-fixes-results/M24-fixes-affected.trx",
+      "failed": 0,
+      "passed": 33,
+      "notExecuted": 0,
+      "total": 33
+    },
+    "final-commerce": {
+      "trx": ".local/M24-fixes-results/M24-fixes-final-commerce.trx",
+      "failed": 0,
+      "passed": 9,
+      "notExecuted": 0,
+      "total": 9
+    },
+    "offline": {
+      "trx": ".local/M24-fixes-results/M24-fixes-offline.trx",
+      "failed": 0,
+      "passed": 111,
+      "notExecuted": 0,
+      "total": 111
+    }
+  },
+  "changedFileWhitespace": "Passed",
+  "models": {
+    "RuntimeDbContext": "No pending model changes",
+    "CoreDbContext": "No pending model changes"
+  },
+  "liveCalls": 0,
+  "migrationsApplied": false,
+  "resolvedFindings": [
+    "R1",
+    "R2"
+  ],
+  "lockedRestore": true,
+  "windowsDemo": {
+    "log": ".local/M24-fixes-demo.log",
+    "passed": true,
+    "interactiveBreakpointVerified": false,
+    "evidence": "docs/milestones/evidence/M24-demo.json"
+  },
+  "limits": [
+    "Independent per-SKU rosters not added",
+    "Full SQL suite not rerun",
+    "Fresh interactive F5/accessibility not verified",
+    "Genuine live/human/legal/payment/fulfillment qualification remains pending"
+  ]
+}

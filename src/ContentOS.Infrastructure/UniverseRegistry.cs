@@ -194,10 +194,11 @@ public sealed partial class UniverseRegistry(CoreDbContext db, IAssetStore asset
                 var presentation = presentations.Where(x => x.ReviewStatus == "Approved" && !presentations.Any(y => y.Key == x.Key && y.Version > x.Version) && x.Rules.ProfileRevisionId == c.Profile.Id && x.Rules.AudienceId == r.AudienceId && x.Rules.Locale == r.Locale)
                     .OrderBy(x => x.Key).ThenByDescending(x => x.Version).FirstOrDefault(x => pinned?.PresentationRevisionId == null || x.Id == pinned.PresentationRevisionId);
                 if (pinned?.PresentationRevisionId != null && presentation == null) reasons.Add("Pinned presentation incompatible or unreviewed");
+                if (presentation != null) try { await MediaRightsGuard.Presentation(db, s, u, presentation.Id, "Reuse", ct); } catch (Exception e) when (e is RightsBlockedException or EvidenceBlockedException) { reasons.Add("Media package unavailable"); }
                 if (r.Budget.RequireMedia)
                 {
                     if (presentation == null || presentation.Rules.VisualAssetReferenceId == null || presentation.Rules.VoiceAssetReferenceId == null) reasons.Add("Approved media package missing");
-                    else try { await Asset(s, u, presentation.Rules.VisualAssetReferenceId.Value, r.Locale, true, ct); await Asset(s, u, presentation.Rules.VoiceAssetReferenceId.Value, r.Locale, true, ct); } catch (RightsBlockedException) { reasons.Add("Media rights unavailable"); }
+                    else try { await Asset(s, u, presentation.Rules.VisualAssetReferenceId.Value, r.Locale, true, ct); await Asset(s, u, presentation.Rules.VoiceAssetReferenceId.Value, r.Locale, true, ct); } catch (Exception e) when (e is RightsBlockedException or EvidenceBlockedException) { reasons.Add("Media rights or review unavailable"); }
                 }
                 if (r.Mode == "Production") try { await Identity(s, u, p, ct); } catch (RuntimeValidationException) { reasons.Add("Real/historical identity permission/evidence missing"); }
                 var cost = presentation?.Rules.EstimatedCost ?? 0;
@@ -240,6 +241,8 @@ public sealed partial class UniverseRegistry(CoreDbContext db, IAssetStore asset
     {
         var a = await db.Assets.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id && x.TenantId == s.TenantId && db.Revisions.Any(r => r.Id == x.ContentRevisionId && db.Contents.Any(c => c.Id == r.ContentId && c.UniverseId == u)), ct) ?? throw new CoreAccessException();
         if (!qualified) return;
+        var media = await MediaRightsGuard.Reference(db, s, u, id, "Reuse", true, ct);
+        if (media != null) { if (await assets.GetAsync(a.StorageAssetId, media.StorageOwner, ct) == null) throw new RightsBlockedException("MediaBytesUnavailable"); return; }
         if (a.RightsStatus is not ("Owned" or "Licensed" or "PublicDomain") || await assets.GetAsync(a.StorageAssetId, s.Actor, ct) == null) throw new RightsBlockedException("UnqualifiedMediaAsset");
         await new SourceRightsGuard(db).CheckAsync(s, a.ContentRevisionId, new("Publish", locale, "IN", "Text"), ct);
         var evidence = await new EvidenceEngine(db).CheckContentAsync(s, a.ContentRevisionId, new("Publish", locale, "IN", "Text"), ct);
@@ -301,6 +304,7 @@ public sealed partial class UniverseRegistry(CoreDbContext db, IAssetStore asset
                 else if (row.Kind == "Presentation")
                 {
                     var p = Read<RegistryPresentationRules>(row.RulesJson); await Revision(s, u, p.ProfileRevisionId, "Character", ct, true);
+                    await MediaRightsGuard.Presentation(db, s, u, row.Id, "Reuse", ct);
                     foreach (var a in new[] { p.VisualAssetReferenceId, p.VoiceAssetReferenceId }) if (a is Guid asset) await Asset(s, u, asset, p.Locale, true, ct);
                 }
                 else if (row.Kind == "Story")
@@ -329,6 +333,7 @@ public sealed partial class UniverseRegistry(CoreDbContext db, IAssetStore asset
            v.Rules.EditorialEscalationRequired && row.EscalationEvidence?.StartsWith("manual:") != true) throw new RuntimeValidationException("Fixtures and incomplete human reviews cannot qualify release.", "HumanReviewRequired");
         foreach (var c in v.Rules.Cast)
         {
+            await MediaRightsGuard.Presentation(db, s, u, c.Presentation!.Id, "Publish", ct);
             await Identity(s, u, c.Character.Profile.Rules, ct, true); var p = c.Presentation!.Rules;
             if (p.VisualAssetReferenceId == null || p.VoiceAssetReferenceId == null) throw new RightsBlockedException("ApprovedMediaPackageRequired");
             await Asset(s, u, p.VisualAssetReferenceId.Value, v.Rules.Brief.Locale, true, ct); await Asset(s, u, p.VoiceAssetReferenceId.Value, v.Rules.Brief.Locale, true, ct);

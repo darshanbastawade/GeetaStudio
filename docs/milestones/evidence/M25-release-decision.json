@@ -1,0 +1,88 @@
+{
+    "date":  "2026-10-14",
+    "scope":  "Private controlled pilot",
+    "productionReady":  false,
+    "features":  [
+                     {
+                         "key":  "READ",
+                         "enabled":  "PrivateFixtureOnly",
+                         "evidence":  "docs/milestones/M14.md",
+                         "productionGates":  [
+                                                 "Human M12",
+                                                 "Source rights",
+                                                 "Accessibility",
+                                                 "Production TLS/backups"
+                                             ]
+                     },
+                     {
+                         "key":  "WATCH",
+                         "enabled":  "PrivateFixtureOnly",
+                         "evidence":  "docs/milestones/M17.md",
+                         "productionGates":  [
+                                                 "Human listening/visual review",
+                                                 "Media rights",
+                                                 "Live adapters if selected"
+                                             ]
+                     },
+                     {
+                         "key":  "Social",
+                         "enabled":  "PrivateFixtureOnly",
+                         "evidence":  "docs/milestones/M18.md",
+                         "productionGates":  [
+                                                 "Platform OAuth/permissions",
+                                                 "Original-provider live reconciliation"
+                                             ]
+                     },
+                     {
+                         "key":  "Analytics",
+                         "enabled":  "PrivateFixtureOnly",
+                         "evidence":  "docs/milestones/M19.md",
+                         "productionGates":  [
+                                                 "Audited financial source/consent",
+                                                 "Real metrics/cost SLO"
+                                             ]
+                     },
+                     {
+                         "key":  "AccountsPayments",
+                         "enabled":  "PrivateFixtureOnly",
+                         "evidence":  "docs/milestones/M20.md",
+                         "productionGates":  [
+                                                 "Qualified identity/payment provider",
+                                                 "Legal retention/tax/privacy"
+                                             ]
+                     },
+                     {
+                         "key":  "TALK",
+                         "enabled":  "PrivateFixtureOnly",
+                         "evidence":  "docs/milestones/M21.md",
+                         "productionGates":  [
+                                                 "Human safety",
+                                                 "Qualified AI/voice if selected"
+                                             ]
+                     },
+                     {
+                         "key":  "CREATE",
+                         "enabled":  "PrivateFixtureOnly",
+                         "evidence":  "docs/milestones/M23.md",
+                         "productionGates":  [
+                                                 "Human age/quality",
+                                                 "External cleanup if selected"
+                                             ]
+                     },
+                     {
+                         "key":  "Commerce",
+                         "enabled":  "PrivateFixtureOnly",
+                         "evidence":  "docs/milestones/M24.md",
+                         "productionGates":  [
+                                                 "Human/license/commercial",
+                                                 "Real fulfillment/payment"
+                                             ]
+                     }
+                 ],
+    "blockers":  [
+                     "Human M12 and source/media review",
+                     "Production TLS/network/secret/retention acceptance",
+                     "Offsite encrypted SQL/log/asset restore and old binary rollback",
+                     "Required real provider qualifications"
+                 ]
+}

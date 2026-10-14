@@ -1,0 +1,597 @@
+[
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerChallenge",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerChallenge",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerChallenge",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Used"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerChallenge",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerCommand",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerCommand",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerConsent",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerConsent",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerCredit",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerCredit",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerHousehold",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerHousehold",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerHousehold",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Label"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerHousehold",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerIdentity",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerIdentity",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerIdentity",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Enabled"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerIdentity",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerInvite",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerInvite",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerInvite",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Used"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerInvite",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerMember",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerMember",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerMember",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Role"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerMember",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Enabled"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerMember",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerNotification",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerNotification",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerNotification",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "State"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerNotification",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Receipt"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerNotification",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "State"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "ExternalReference"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "SubscriptionReference"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Sequence"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "RefundedMinor"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "EndsUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "PaidUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Lease"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "LeaseEndsUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "RequestedAction"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerOrder",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerPaymentBinding",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerPaymentBinding",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerPaymentEvent",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerPaymentEvent",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerPaymentRoute",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerPaymentRoute",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerPaymentRoute",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Enabled"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerPaymentRoute",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Active"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerPaymentRoute",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProduct",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProduct",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProfile",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProfile",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProfile",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Alias"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProfile",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Locale"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProfile",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Personalization"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProfile",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Deleted"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProfile",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProgress",
+    "permission": "DELETE",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProgress",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProgress",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProgress",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Position"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProgress",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Bookmark"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerProgress",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerReservation",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerReservation",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerReservation",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "State"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerReservation",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Provider"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerReservation",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Account"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerReservation",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Resource"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerReservation",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Consumed"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerReservation",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "OutcomeHash"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerReservation",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerUser",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerUser",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerUser",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "AdultAttested"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerUser",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "LoginHash"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerUser",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "DisplayName"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerUser",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "State"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "CustomerUser",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  }
+]

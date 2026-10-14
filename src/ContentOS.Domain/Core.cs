@@ -166,7 +166,7 @@ public static class CoreRules
     public static void Revision(string title, string body, string kind, string rights, string provenance, bool publicKnowledge)
     {
         Text(title, 200, "Title"); Text(body, 16000, "Body"); Text(provenance, 1000, "Provenance");
-        if (kind is not ("Canonical" or "Translation" or "Interpretation" or "CurrentEvent" or "Fiction" or "Synthetic"))
+        if (kind is not ("Canonical" or "Translation" or "Interpretation" or "CurrentEvent" or "Fiction" or "Synthetic" or "Historical"))
             throw new RuntimeValidationException("Unsupported content kind.");
         if (rights is not ("Unverified" or "Owned" or "Licensed" or "PublicDomain" or "Synthetic"))
             throw new RuntimeValidationException("Unsupported rights status.");

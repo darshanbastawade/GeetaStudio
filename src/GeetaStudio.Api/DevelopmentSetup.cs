@@ -160,6 +160,130 @@ public static class DevelopmentSetup
                 {
                     await using var readGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[reader].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await readGrant.ExecuteNonQueryAsync();
                 }
+                // M18: the API owns publishing; immutable payloads, destination mappings and receipts have no UPDATE grant.
+                // M20: customer PII controls have narrow updates; credits, payments and evidence stay append-only.
+                foreach (var table in new[] { "CustomerUser", "CustomerIdentity", "CustomerChallenge", "CustomerHousehold", "CustomerMember", "CustomerInvite", "CustomerProfile", "CustomerConsent", "CustomerProgress", "CustomerProduct", "CustomerPaymentRoute", "CustomerPaymentBinding", "CustomerOrder", "CustomerPaymentEvent", "CustomerCredit", "CustomerReservation", "CustomerNotification", "CustomerCommand" })
+                {
+                    await using var permission = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[customers].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                foreach (var table in new[] { "CommerceProduct", "CommerceRoute", "CommerceOrder", "CommerceDelivery", "CommerceEffect", "CommerceInstitution", "CommerceSeat", "CommerceActivity", "CommerceAudit", "CommerceOffer" })
+                {
+                    await using var permission = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[commerce].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                var commerceUpdates = new Dictionary<string, string>
+                {
+                    ["CommerceProduct"] = "[CustomerProductId], [PackageJson], [Enabled], [UpdatedUtc]",
+                    ["CommerceRoute"] = "[Active], [Enabled], [UpdatedUtc]",
+                    ["CommerceOrder"] = "[PaymentOrderId], [State], [EndsUtc], [UpdatedUtc]",
+                    ["CommerceDelivery"] = "[State], [Lease], [LeaseUntilUtc], [Receipt], [Cost], [Currency], [UpdatedUtc]",
+                    ["CommerceSeat"] = "[Cohort], [Role], [Enabled], [UpdatedUtc]"
+                };
+                foreach (var update in commerceUpdates)
+                {
+                    await using var permission = new SqlCommand($"GRANT UPDATE ({update.Value}) ON OBJECT::[commerce].[{update.Key}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                foreach (var table in new[] { "CreationTemplate", "PrivateCreation", "CreationRevision", "CreationUpload", "CreationCommand", "CreationEvent" })
+                {
+                    await using var permission = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[create].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                var creationUpdates = new Dictionary<string, string>
+                {
+                    ["CreationTemplate"] = "[Enabled], [UpdatedUtc]",
+                    ["PrivateCreation"] = "[InputJson], [UploadsJson], [State], [Outcome], [Version], [Attempts], [ReservationId], [Lease], [LeaseUntilUtc], [ChargedCredits], [Review], [PublicEligible], [Cleanup], [UpdatedUtc]",
+                    ["CreationRevision"] = "[Html], [UpdatedUtc]",
+                    ["CreationUpload"] = "[Content], [AltText], [Deleted], [UpdatedUtc]"
+                };
+                foreach (var update in creationUpdates)
+                {
+                    await using var permission = new SqlCommand($"GRANT UPDATE ({update.Value}) ON OBJECT::[create].[{update.Key}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                foreach (var table in new[] { "TalkPolicy", "TalkSession", "TalkTurn", "TalkProblem" })
+                {
+                    await using var permission = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[talk].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                var talkUpdates = new Dictionary<string, string>
+                {
+                    ["TalkPolicy"] = "[Enabled], [UpdatedUtc]",
+                    ["TalkSession"] = "[Remember], [State], [UpdatedUtc]",
+                    ["TalkTurn"] = "[State], [Outcome], [ReservationId], [AiRunId], [RouteId], [Question], [Answer], [SourcesJson], [Credits], [ProviderCost], [Currency], [UpdatedUtc]"
+                };
+                foreach (var update in talkUpdates)
+                {
+                    await using var permission = new SqlCommand($"GRANT UPDATE ({update.Value}) ON OBJECT::[talk].[{update.Key}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                var customerUpdates = new Dictionary<string, string>
+                {
+                    ["CustomerUser"] = "[LoginHash], [DisplayName], [AdultAttested], [State], [UpdatedUtc]",
+                    ["CustomerIdentity"] = "[Enabled], [UpdatedUtc]",
+                    ["CustomerChallenge"] = "[Used], [UpdatedUtc]",
+                    ["CustomerHousehold"] = "[Label], [UpdatedUtc]",
+                    ["CustomerMember"] = "[Role], [Enabled], [UpdatedUtc]",
+                    ["CustomerInvite"] = "[Used], [UpdatedUtc]",
+                    ["CustomerProfile"] = "[Alias], [Locale], [Personalization], [Deleted], [UpdatedUtc]",
+                    ["CustomerProgress"] = "[Position], [Bookmark], [UpdatedUtc]",
+                    ["CustomerPaymentRoute"] = "[Enabled], [Active], [UpdatedUtc]",
+                    ["CustomerOrder"] = "[State], [ExternalReference], [SubscriptionReference], [Sequence], [RefundedMinor], [EndsUtc], [PaidUtc], [Lease], [LeaseEndsUtc], [RequestedAction], [UpdatedUtc]",
+                    ["CustomerReservation"] = "[State], [Provider], [Account], [Resource], [Consumed], [OutcomeHash], [UpdatedUtc]",
+                    ["CustomerNotification"] = "[State], [Receipt], [UpdatedUtc]"
+                };
+                foreach (var update in customerUpdates)
+                {
+                    await using var permission = new SqlCommand($"GRANT UPDATE ({update.Value}) ON OBJECT::[customers].[{update.Key}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                await using (var permission = new SqlCommand($"GRANT DELETE ON OBJECT::[customers].[CustomerProgress] TO [{login}];", (SqlConnection)db.Database.GetDbConnection())) await permission.ExecuteNonQueryAsync();
+                foreach (var table in new[] { "OptimizationExperiment", "OptimizationEvent", "OptimizationAutomationRun" })
+                {
+                    await using var permission = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[optimization].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                await using (var permission = new SqlCommand($"GRANT UPDATE ([State], [Dispatches], [ReservedCost], [UpdatedUtc]) ON OBJECT::[optimization].[OptimizationExperiment] TO [{login}];", (SqlConnection)db.Database.GetDbConnection())) await permission.ExecuteNonQueryAsync();
+                foreach (var table in new[] { "AnalyticsSource", "AnalyticsDefinition", "AnalyticsFx", "AnalyticsConsent", "AnalyticsEntry", "AnalyticsForecast", "AnalyticsCommand" })
+                {
+                    await using var permission = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[analytics].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                foreach (var table in new[] { "AnalyticsSource", "AnalyticsConsent" })
+                {
+                    await using var permission = new SqlCommand($"GRANT UPDATE ([Enabled], [UpdatedUtc]) ON OBJECT::[analytics].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync();
+                }
+                var socialUpdates = new Dictionary<string, string>
+                {
+                    ["SocialAccount"] = "[Enabled], [TokenState], [UpdatedUtc]",
+                    ["SocialPackage"] = "[ReviewStatus], [ReviewJson], [UpdatedUtc]",
+                    ["SocialPublication"] = "[Actor], [ScheduledUtc], [Timezone], [DeadlineUtc], [MaxAttempts], [State], [Attempts], [LeaseToken], [LeaseUntilUtc], [NextUtc], [RemoteId], [RemoteUrl], [Outcome], [EditorialCopyId], [UpdatedUtc]",
+                    ["SocialNotification"] = "[Acknowledged], [UpdatedUtc]"
+                };
+                foreach (var entry in socialUpdates) { await using var permission = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[social].[{entry.Key}] TO [{login}]; GRANT UPDATE ({entry.Value}) ON OBJECT::[social].[{entry.Key}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync(); }
+                foreach (var table in new[] { "SocialCommand", "SocialHistory", "SocialEffect", "SocialCallback" }) { await using var permission = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[social].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await permission.ExecuteNonQueryAsync(); }
+                // M16: only the existing API identity; immutable media bytes/bindings have no UPDATE grant.
+                var watchUpdates = new Dictionary<string, string>
+                {
+                    ["WatchTemplate"] = "[ReviewStatus], [ReviewJson], [UpdatedUtc]",
+                    ["WatchProfile"] = "[Enabled], [UpdatedUtc]",
+                    ["WatchProduction"] = "[TimelineJson], [State], [ReviewJson], [ReviewMinutes], [UpdatedUtc]",
+                    ["WatchStage"] = "[State], [Attempts], [LeaseToken], [LeaseUntilUtc], [NextUtc], [OutputJson], [ExternalResourceId], [Outcome], [ActualCost], [UpdatedUtc]"
+                };
+                foreach (var entry in watchUpdates) { await using var watchGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[watch].[{entry.Key}] TO [{login}]; GRANT UPDATE ({entry.Value}) ON OBJECT::[watch].[{entry.Key}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await watchGrant.ExecuteNonQueryAsync(); }
+                foreach (var table in new[] { "WatchArtifact", "WatchOperation" }) { await using var watchGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[watch].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await watchGrant.ExecuteNonQueryAsync(); }
+                var mediaUpdates = new Dictionary<string, string>
+                {
+                    ["MediaAsset"] = "[CurrentVersion], [UpdatedUtc]",
+                    ["MediaVersion"] = "[ReviewStatus], [ReviewEvidence], [ReviewJson], [UpdatedUtc]",
+                    ["CharacterMediaPackage"] = "[ReviewStatus], [ReviewEvidence], [ReviewJson], [PresentationRevisionId], [UpdatedUtc]",
+                    ["MediaProfile"] = "[Enabled], [UpdatedUtc]",
+                    ["MediaGeneration"] = "[State], [ExternalResourceId], [ResultSha256], [AcceptedVersionId], [ActualCost], [Outcome], [LeaseToken], [LeaseUntilUtc], [UpdatedUtc]"
+                };
+                foreach (var mediaUpdate in mediaUpdates)
+                {
+                    await using var mediaGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[media].[{mediaUpdate.Key}] TO [{login}]; GRANT UPDATE ({mediaUpdate.Value}) ON OBJECT::[media].[{mediaUpdate.Key}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await mediaGrant.ExecuteNonQueryAsync();
+                }
+                await using (var mediaGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[media].[MediaCommand] TO [{login}]; GRANT SELECT, INSERT ON OBJECT::[runtime].[AssetLocations] TO [{login}]; GRANT UPDATE ([StoreKey], [VerifiedUtc]) ON OBJECT::[runtime].[AssetLocations] TO [{login}];", (SqlConnection)db.Database.GetDbConnection())) await mediaGrant.ExecuteNonQueryAsync();
+                foreach (var table in new[] { "TrendConnector", "TrendCluster", "TrendTeaching", "TrendStoryBrief", "TrendRemediation" })
+                {
+                    await using var trendGrant = new SqlCommand($"GRANT SELECT, INSERT, UPDATE ON OBJECT::[trends].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await trendGrant.ExecuteNonQueryAsync();
+                }
+                foreach (var table in new[] { "TrendCandidate", "TrendBinding", "TrendOperation" })
+                {
+                    await using var trendGrant = new SqlCommand($"GRANT SELECT, INSERT ON OBJECT::[trends].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await trendGrant.ExecuteNonQueryAsync();
+                }
                 foreach (var table in new[] { "EditorialItem", "EditorialCopy", "EditorialCorrectionTask", "EditorialTrend" })
                 {
                     await using var editorialGrant = new SqlCommand($"GRANT SELECT, INSERT, UPDATE ON OBJECT::[editorial].[{table}] TO [{login}];", (SqlConnection)db.Database.GetDbConnection()); await editorialGrant.ExecuteNonQueryAsync();

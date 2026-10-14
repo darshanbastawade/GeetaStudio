@@ -1,0 +1,185 @@
+{
+  "verifiedDate": "2026-10-14",
+  "database": "GeetaStudio_Dev",
+  "apiPermissionRows": 25,
+  "workerPermissionRows": 0,
+  "immutableOwnershipUpdateAllowed": false,
+  "deleteAllowed": false,
+  "rows": [
+    {
+      "Host": "API",
+      "TableName": "TalkPolicy",
+      "Permission": "INSERT",
+      "State": "GRANT",
+      "ColumnName": ""
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkPolicy",
+      "Permission": "SELECT",
+      "State": "GRANT",
+      "ColumnName": ""
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkPolicy",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "Enabled"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkPolicy",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "UpdatedUtc"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkProblem",
+      "Permission": "INSERT",
+      "State": "GRANT",
+      "ColumnName": ""
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkProblem",
+      "Permission": "SELECT",
+      "State": "GRANT",
+      "ColumnName": ""
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkSession",
+      "Permission": "INSERT",
+      "State": "GRANT",
+      "ColumnName": ""
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkSession",
+      "Permission": "SELECT",
+      "State": "GRANT",
+      "ColumnName": ""
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkSession",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "Remember"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkSession",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "State"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkSession",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "UpdatedUtc"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "INSERT",
+      "State": "GRANT",
+      "ColumnName": ""
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "SELECT",
+      "State": "GRANT",
+      "ColumnName": ""
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "AiRunId"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "Answer"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "Credits"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "Currency"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "Outcome"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "ProviderCost"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "Question"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "ReservationId"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "RouteId"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "SourcesJson"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "State"
+    },
+    {
+      "Host": "API",
+      "TableName": "TalkTurn",
+      "Permission": "UPDATE",
+      "State": "GRANT",
+      "ColumnName": "UpdatedUtc"
+    }
+  ]
+}

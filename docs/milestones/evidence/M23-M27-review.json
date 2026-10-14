@@ -1,0 +1,89 @@
+{
+  "liveCalls": 0,
+  "architecture": "Consistent with agreed modular monolith",
+  "productionReady": false,
+  "verifiedUtc": "2026-10-14T21:59:16.7796322+05:30",
+  "tests": {
+    "probes": {
+      "failed": 0,
+      "notExecuted": 0,
+      "trx": ".local/M23-M27-review-results/M23-M27-review-probes.trx",
+      "total": 2,
+      "passed": 2
+    },
+    "boundaries": {
+      "failed": 0,
+      "notExecuted": 0,
+      "trx": ".local/M23-M27-review-results/M23-M27-review-boundaries.trx",
+      "total": 26,
+      "passed": 26
+    },
+    "offline": {
+      "failed": 0,
+      "notExecuted": 0,
+      "trx": ".local/M23-M27-review-results/M23-M27-review-offline.trx",
+      "total": 111,
+      "passed": 111
+    },
+    "sql": {
+      "failed": 0,
+      "notExecuted": 0,
+      "trx": ".local/M23-M27-review-results/M23-M27-review-sql.trx",
+      "total": 27,
+      "passed": 27
+    }
+  },
+  "findings": [
+    {
+      "line": 32,
+      "id": "R1",
+      "priority": 1,
+      "file": "src/ContentOS.Infrastructure/CommerceExecution.cs",
+      "reproduced": "Refund committed after claim; order Revoked; one new effect and DeliveryState Delivered"
+    },
+    {
+      "line": 55,
+      "id": "R2",
+      "priority": 1,
+      "file": "src/ContentOS.Infrastructure/CommerceInstitutions.cs",
+      "reproduced": "Five-seat and one-seat products; two members both download one-seat SKU"
+    }
+  ],
+  "actualCharges": 0,
+  "probeMeaning": "Two passing counterexample probes assert observed defects, not acceptance; retained outside compiled tests",
+  "build": {
+    "warnings": 0,
+    "log": ".local/M23-M27-review-final-build.log",
+    "errors": 0
+  },
+  "scope": "M23-M27 current working tree review",
+  "fullCurrentSqlRerun": false,
+  "correctness": "Two confirmed M24 P1 findings; fixes pending",
+  "notRepeated": [
+    "Interactive F5/browser/accessibility",
+    "Development preservation/demos",
+    "Offsite/log/asset and old-binary recovery",
+    "Sustained SLO/alert delivery",
+    "Online dependency advisory checks",
+    "Live providers",
+    "Genuine human historical/editorial/legal acceptance"
+  ],
+  "externalDeliveries": 0,
+  "applicationCodeChanged": false,
+  "existingSqlCases": 53,
+  "migrationsApplied": false,
+  "lockedRestore": true,
+  "databaseReset": false,
+  "models": {
+    "CoreDbContext": "No pending changes",
+    "RuntimeDbContext": "No pending changes"
+  },
+  "formatVerify": {
+    "passed": true,
+    "log": ".local/M23-M27-review-format.log"
+  },
+  "diffCheck": {
+    "passed": true,
+    "log": ".local/M23-M27-review-diff.log"
+  }
+}

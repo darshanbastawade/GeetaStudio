@@ -4,8 +4,8 @@ public sealed record CorpusLocatorInput(int Chapter, int Verse, string VariantKe
 public sealed record CorpusSourceBindingInput(int Chapter, int Verse, string VariantKey, string Kind, string Locale,
     Guid SnapshotId, int SourceChapter, int SourceVerse, string Sha256, string SourceLocator);
 public sealed record RegisterCorpus(Guid OperationId, string Key, int Version, string Edition, int BaselineTarget,
-    IReadOnlyList<CorpusLocatorInput> Inventory, IReadOnlyList<CorpusSourceBindingInput>? Bindings = null);
-public sealed record CorpusManifestView(Guid Id, string Key, int Version, string Edition, int BaselineTarget, int ExpectedCount);
+    IReadOnlyList<CorpusLocatorInput> Inventory, IReadOnlyList<CorpusSourceBindingInput>? Bindings = null, string MaterialKind = "Scripture");
+public sealed record CorpusManifestView(Guid Id, string Key, int Version, string Edition, int BaselineTarget, int ExpectedCount, string MaterialKind = "Scripture");
 public sealed record CorpusTextInput(string Kind, string Locale, string ExactText, string Sha256, Guid SnapshotId, string SourceLocator);
 public sealed record CorpusVerseInput(int Chapter, int Verse, string VariantKey, IReadOnlyList<CorpusTextInput> Texts);
 public sealed record ImportCorpus(Guid OperationId, IReadOnlyList<CorpusVerseInput> Verses);

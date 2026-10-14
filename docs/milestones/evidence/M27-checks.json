@@ -1,0 +1,109 @@
+{
+  "verifiedUtc": "2026-10-14T15:49:04.244718+00:00",
+  "status": "OfflineVerifiedControlledPrivate",
+  "lockedRestore": true,
+  "currentBuild": {
+    "errors": 0,
+    "warnings": 0,
+    "log": ".local/M27-build-current.log"
+  },
+  "currentOffline": {
+    "total": 111,
+    "passed": 111,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  "broadSqlCheckpoint": {
+    "total": 228,
+    "passed": 228,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  "broadSqlCheckpointScope": "Before final privacy/exact-admission refinements; not rerun as a complete final-source suite",
+  "currentAffectedSql": {
+    "total": 45,
+    "passed": 45,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  "affectedFilter": "FullyQualifiedName~SqlOptimizationTests|FullyQualifiedName~SqlAiTests|FullyQualifiedName~SqlWorkflowTests|FullyQualifiedName~SqlTalk",
+  "focusedM27CasesIncluded": 9,
+  "windowsDemo": {
+    "verifiedUtc": "2026-10-14T15:42:08.7849802+00:00",
+    "windowsAuthentication": true,
+    "noStore": true,
+    "apiRestart": true,
+    "candidateActivated": true,
+    "rollbackState": "RolledBack",
+    "highRiskApprovalDenied": true,
+    "fixtureOnly": true,
+    "liveCalls": 0,
+    "publicPublishing": false,
+    "interactiveDebugVerified": false
+  },
+  "development": {
+    "date": "2026-10-14",
+    "restrictedDevelopmentPage200": true,
+    "optimizationPage200": true,
+    "optimizationReport200": true,
+    "optimizationExperiments200": true,
+    "historicalRead200": true,
+    "historicalPieces": 10,
+    "privateDirectoryHeaders": true,
+    "noStore": true,
+    "workspaceDiscovery200": true,
+    "workspaceCount": 1,
+    "noFixtureAccountCreated": true
+  },
+  "preservation": {
+    "verifiedDate": "2026-10-14",
+    "database": "GeetaStudio_Dev",
+    "core.CharactersCount": 11,
+    "core.CharactersIdsHash": "HAav8Pfi1YSKNa74xJBDt0Z5fOpXpUGGxgRDHXNY1Tk=",
+    "core.UniversesCount": 4,
+    "core.UniversesIdsHash": "mI9KgskhZ0B14uL50Ze1gIR8hrf00EsPv36muozuuUs=",
+    "corpus.CorpusVerseCount": 78,
+    "corpus.CorpusVerseIdsHash": "qun7DlmAE5c18V0+mGEi6pw2nRvKd2gerIBFU2XpGGQ=",
+    "runtime.JobsCount": 10,
+    "runtime.JobsIdsHash": "XF/TBKw0Cf1MF8WIYt1oUWBsEqXTnoUBXXgl6wd/5+U=",
+    "sources.SourcePermissionCount": 9,
+    "sources.SourcePermissionIdsHash": "97mU6RJ5YmfKn6FY/YARa+8h0E32lLYlnUcVBICkDBU=",
+    "permissionsHash": "feXaccQj/RnCJNYkyKtlcM2LHGYxg1MFR5xmCa8Tes0=",
+    "coreMigrations": 31,
+    "dboMigrations": 4,
+    "completeGeetaAndHistoricalBaselinePreserved": true,
+    "existingIdsPreserved": true,
+    "sourcePermissionsUnchanged": true,
+    "databaseReset": false,
+    "liveCalls": 0
+  },
+  "models": {
+    "CoreDbContext": "No changes have been made to the model since the last migration.",
+    "RuntimeDbContext": "No changes have been made to the model since the last migration."
+  },
+  "format": {
+    "log": ".local/M27-format-current.log",
+    "result": "Pass"
+  },
+  "migrations": [
+    "20261014140000_M27Optimization",
+    "20261014141000_M27DispatchPrivacy",
+    "20261014142000_M27DispatchPrivacyCaseFix"
+  ],
+  "liveCalls": 0,
+  "actualCharges": 0,
+  "publicPublishing": false,
+  "databaseReset": false,
+  "commits": false,
+  "m28Started": false,
+  "unverified": [
+    "Genuine human M12/learning effectiveness/held-out acceptance",
+    "Historian/religious/child/source rights and consent acceptance",
+    "Live/public cohort and provider qualification",
+    "Current official dependency/API/security review beyond operator fixture snapshots",
+    "Interactive F5/breakpoints and browser/accessibility acceptance",
+    "Fresh M27 backup/restore and old-binary rollback",
+    "Sustained real production SLO/alerts"
+  ],
+  "finalUi": "Direct trial/measurement/rollback/report controls; advanced setup retained; current build, JavaScript syntax and Windows HTTP/restart verified. Browser interaction/accessibility unverified."
+}

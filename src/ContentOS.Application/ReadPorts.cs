@@ -3,6 +3,7 @@ namespace ContentOS.Application;
 
 public interface IReadWorkbench
 {
+    Task<ReadCollectionSummary[]> PrivateDirectoryAsync(string actor, CancellationToken ct);
     Task<Guid> RegisterAsync(CoreScope scope, Guid universe, RegisterReadCollection request, CancellationToken ct);
     Task<Guid> AddAsync(CoreScope scope, Guid universe, AddReadPiece request, CancellationToken ct);
     Task<ReadStaffView> InspectAsync(CoreScope scope, Guid universe, Guid collection, CancellationToken ct);

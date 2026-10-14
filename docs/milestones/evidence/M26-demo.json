@@ -1,0 +1,18 @@
+{
+  "verifiedDate": "2026-10-14",
+  "database": "GeetaStudio_M1Tests",
+  "readCount": 10,
+  "watchCount": 2,
+  "actualWindowsSpeech": true,
+  "actualFfmpegMasters": 4,
+  "windowsPrivateHttp": true,
+  "universeSwitch": true,
+  "disagreementAndLegendVisible": true,
+  "restart": true,
+  "ownedChecksums": true,
+  "publicRelease": false,
+  "historicalHumanReview": "Pending",
+  "humanListeningAndVisualReview": "Pending",
+  "interactiveDebuggerVerified": false,
+  "liveCalls": 0
+}

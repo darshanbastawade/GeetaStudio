@@ -73,7 +73,7 @@ public sealed partial class EditorialWorkbench
         if (r.ClaimRevisionId.HasValue)
         {
             if (!await db.ClaimRevisions.AnyAsync(x => x.Id == r.ClaimRevisionId && db.Claims.Any(c => c.Id == x.ClaimId && c.TenantId == s.TenantId && c.UniverseId == u), ct)) throw new CoreAccessException();
-            initial = await db.ClaimLinks.Where(x => x.ClaimRevisionId == r.ClaimRevisionId).Select(x => x.ContentRevisionId).ToArrayAsync(ct);
+            initial = await db.ClaimLinks.Where(x => x.ClaimRevisionId == r.ClaimRevisionId).Select(x => x.ContentRevisionId).ToArrayAsync(ct); initial = initial.Concat(await TrendFence.ClaimDependents(db, s, u, r.ClaimRevisionId.Value, ct)).Distinct().ToArray();
         }
         else
         {

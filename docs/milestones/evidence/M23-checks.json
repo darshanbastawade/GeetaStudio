@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-14",
+  "implementation": "M23",
+  "lockedRestoreExit": 0,
+  "build": {
+    "warnings": 0,
+    "exit": 0,
+    "errors": 0
+  },
+  "offline": {
+    "skipped": 0,
+    "failed": 0,
+    "passed": 106
+  },
+  "focused": {
+    "skipped": 0,
+    "failed": 0,
+    "passed": 8
+  },
+  "development": {
+    "existingIdsPreserved": true,
+    "sourcePermissionHashUnchanged": true,
+    "coreMigrations": 25,
+    "runtimeMigrations": 4
+  },
+  "migrations": [
+    "20261014033940_M23Creations",
+    "20261014041858_M23QueueBounds"
+  ],
+  "fullSqlRegression": "Not rerun; prior broad run was incomplete under memory pressure",
+  "liveProviders": "Not enabled",
+  "humanAcceptance": "Pending",
+  "M24": "Authorized next after completed M23",
+  "status": "Offline Verified",
+  "finalFormatExit": 0,
+  "modelChecksExit": 0,
+  "staticParsers": "PowerShell, JavaScript, VS Code JSON and diff passed"
+}

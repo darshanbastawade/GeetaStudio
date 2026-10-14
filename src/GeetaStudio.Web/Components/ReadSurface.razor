@@ -3,7 +3,7 @@
 @inject IConfiguration Configuration
 <PageTitle>@(_book?.Collection.Title ?? "Reading unavailable") — Geeta Studio</PageTitle>
 <HeadContent>
-    <meta name="description" content="@(_selected?.Title ?? "Explore reviewed verses, sources, practical actions and learning journeys.")" />
+    <meta name="description" content="@(_selected?.Title ?? "Explore reviewed sources, practical actions and learning journeys.")" />
     @if (!Preview && _book != null && Uri.TryCreate(Configuration["Read:PublicBaseUri"], UriKind.Absolute, out var canonicalBase)) { <link rel="canonical" href="@(new Uri(canonicalBase, Http?.Request.Path.Value ?? CollectionPath))" /> }
     @if (Preview || _book == null) { <meta name="robots" content="noindex, nofollow" /> }
 </HeadContent>
@@ -15,18 +15,21 @@
     @if (_error) { <h1>Reading temporarily unavailable</h1><p role="status">Please try again. Your saved device bookmarks are unchanged.</p> }
     else if (_book == null) { <h1>Reading not available</h1><p>This collection has not been published, or its current review no longer permits reading.</p> }
     else {
-        <nav aria-label="Reading navigation"><a href="@(CollectionPath+"/universe")">Universe</a><a href="@CollectionPath">Collection</a><a href="@(CollectionPath+"/search")">Search</a><a href="@(CollectionPath+"/journey/chronological")">Chronological journey</a></nav>
+        <nav aria-label="Reading navigation">@if (Preview) { <a href="/preview/universes">Switch universe</a> }<a href="@(CollectionPath+"/universe")">Universe</a><a href="@CollectionPath">Collection</a><a href="@(CollectionPath+"/search")">Search</a><a href="@(CollectionPath+"/journey/chronological")">Chronological journey</a></nav>
         <p class="eyebrow">@_book.Universe · @_book.Collection.Title</p>
-        <h1>@(Verse.HasValue ? $"Chapter {Chapter}, verse {Verse}" : Chapter.HasValue ? $"Chapter {Chapter}" : Concept != null ? $"Explore {Concept}" : Journey != null ? "Your learning journey" : IsSearch ? "Find a teaching" : "Choose a place to begin")</h1>
-        <p class="coverage">@_book.AvailableVerses verses available in this collection · @_book.ImportedVerses imported of @_book.ExpectedVerses expected. Missing reviewed variants remain unavailable.</p>
+        <h1>@(Verse.HasValue ? $"{(_book.MaterialKind == "History" ? "Section" : "Chapter")} {Chapter}, {(_book.MaterialKind == "History" ? "entry" : "verse")} {Verse}" : Chapter.HasValue ? $"{(_book.MaterialKind == "History" ? "Section" : "Chapter")} {Chapter}" : Concept != null ? $"Explore {Concept}" : Journey != null ? "Your learning journey" : IsSearch ? "Find a teaching" : "Choose a place to begin")</h1>
+        <p class="coverage">@_book.AvailableVerses @(_book.MaterialKind == "History" ? "historical entries" : "verses") available in this collection · @_book.ImportedVerses imported of @_book.ExpectedVerses expected. Missing reviewed variants remain unavailable.</p>
         <form method="get" action="@(CollectionPath+"/search")" role="search"><label for="read-query">Search reviewed text or a concept</label><div class="search-row"><input id="read-query" name="q" value="@Query" maxlength="160" type="search" /><button type="submit">Search</button></div></form>
         @if (_selected != null) {
             <section aria-labelledby="variants"><h2 id="variants">Choose a reviewed variant</h2><div class="variant-links">@foreach (var variant in _variants) { <a href="@PiecePath(variant)" aria-current="@(variant.Id == _selected.Id ? "page" : null)">@variant.Audience · @Language(variant.Locale)</a> }</div><p>Only currently eligible variants are listed.</p></section>
             <article class="verse-reading" data-piece="@_selected.Id">
                 <h2>@_selected.Title</h2>
-                <section aria-labelledby="source-text"><h3 id="source-text">Source text and translation</h3>
+                @if (_selected.History is { } history) {
+                    <aside><strong>@HistoryLabel(history.Classification)</strong><p>@(history.Dating.StartsWith("Undated", StringComparison.Ordinal) ? "Undated narrative; no historical event date asserted." : $"{history.StartYear}–{history.EndYear} CE · {HistoryDating(history.Dating)}; years as given by the source.")</p><p>People: @string.Join(", ", history.People) · Places: @string.Join(", ", history.Places)</p>@if (history.Classification == "DebatedClaim") { <p>The differing accounts remain cited below; this disagreement has not been silently resolved.</p> }</aside>
+                }
+                <section aria-labelledby="source-text"><h3 id="source-text">@(_book.MaterialKind == "History" ? "Historical source accounts" : "Source text and translation")</h3>
                 @foreach (var source in _selected.Sources) { <div lang="@source.Locale.Split('-')[0]" class="source-text"><p class="source-label">@SourceLabel(source.Kind) · @Language(source.Locale)</p><p>@source.Text</p></div> }
-                @if (!_selected.Sources.Any(x => x.Kind == "Transliteration")) { <p>No reviewed transliteration is available in this collection.</p> }
+                @if (_book.MaterialKind != "History" && !_selected.Sources.Any(x => x.Kind == "Transliteration")) { <p>No reviewed transliteration is available in this collection.</p> }
                 </section>
                 <section><h3>Explanation</h3><p class="read-prose" lang="@_selected.Locale.Split('-')[0]">@_selected.Explanation</p></section>
                 <section class="takeaway"><h3>One practical action</h3><p lang="@_selected.Locale.Split('-')[0]">@_selected.PracticalAction</p><h3>Reflect</h3><p>@_selected.Reflection</p></section>
@@ -34,15 +37,15 @@
                 <div class="device-actions"><button type="button" data-bookmark="@_selected.Id" data-reading-path="@PiecePath(_selected)">Bookmark on this device</button><button type="button" data-progress="@_selected.Id">Mark read on this device</button><p role="status" data-device-status></p></div>
                 <p>Device data expires after 90 days. <button type="button" data-clear-reading>Clear bookmarks and progress</button></p>
                 @if (!Preview) { <label><input type="checkbox" data-read-consent /> Share optional anonymous reading counts (no account or search text; retained 7 days).</label> }
-                <nav aria-label="Previous and next verse">@if (_previous != null) { <a href="@PiecePath(_previous)">← Previous verse</a> } @if (_next != null) { <a href="@PiecePath(_next)">Next verse →</a> }</nav>
+                <nav aria-label="Previous and next verse">@if (_previous != null) { <a href="@PiecePath(_previous)">← Previous entry</a> } @if (_next != null) { <a href="@PiecePath(_next)">Next entry →</a> }</nav>
             </article>
         } else {
             @if (_matches.Length == 0) { <p role="status">No currently reviewed reading matches this selection. Try another chapter, language or concept.</p> }
-            <div class="read-grid">@foreach (var piece in _matches) { <article data-read-card="@piece.Id"><p class="eyebrow">Chapter @piece.Chapter · verse @piece.Verse</p><h2><a href="@PiecePath(piece)">@piece.Title</a></h2><p>@piece.Audience · @Language(piece.Locale)</p><p>@piece.PracticalAction</p></article> }</div>
+            <div class="read-grid">@foreach (var piece in _matches) { <article data-read-card="@piece.Id"><p class="eyebrow">@(_book.MaterialKind == "History" ? "Section" : "Chapter") @piece.Chapter · @(_book.MaterialKind == "History" ? "entry" : "verse") @piece.Verse</p><h2><a href="@PiecePath(piece)">@piece.Title</a></h2><p>@piece.Audience · @Language(piece.Locale)</p><p>@piece.PracticalAction</p></article> }</div>
         }
         <section><h2>Related concepts</h2><div class="variant-links">@foreach (var concept in _book.Pieces.SelectMany(x => x.Concepts).Distinct().Take(20)) { <a href="@(CollectionPath+"/concept/"+Uri.EscapeDataString(concept))">@concept</a> }</div></section>
         <section><h2>Device bookmarks</h2><ul data-device-list></ul></section>
-        <section><h2>Browse chapters</h2><div class="variant-links">@foreach (var chapter in _book.Pieces.Select(x => x.Chapter).Distinct().Order()) { <a href="@(CollectionPath+"/chapter/"+chapter)">Chapter @chapter</a> }</div></section>
+        <section><h2>@(_book.MaterialKind == "History" ? "Browse historical sections" : "Browse chapters")</h2><div class="variant-links">@foreach (var chapter in _book.Pieces.Select(x => x.Chapter).Distinct().Order()) { <a href="@(CollectionPath+"/chapter/"+chapter)">@(_book.MaterialKind == "History" ? "Section" : "Chapter") @chapter</a> }</div></section>
     }
     </main><footer>Read without generated media. Bookmarks and progress stay on this device.</footer>
 </div>
@@ -61,7 +64,9 @@
     private ReadPieceView[] _matches = [], _variants = [];
     private ReadPieceView? _selected, _previous, _next;
     private bool _error;
-    private static string SourceLabel(string kind) => kind switch { "DirectQuotation" => "Source quotation", "Translation" => "Licensed translation", "Transliteration" => "Reviewed transliteration", _ => "Source text" };
+    private static string HistoryDating(string dating) => dating == "DisputedSourceYearCE" ? "dating is disputed" : "source-year chronology";
+    private static string HistoryLabel(string kind) => kind switch { "DocumentedFact" => "Documented fact · historical review status remains explicit", "DebatedClaim" => "Debated historical claim", "PopularLegend" => "Popular legend · not established fact", "DramatizedDialogue" => "Invented learning dialogue · not a historical quotation", _ => "Historical account · distinguish the author’s account from consensus" };
+    private static string SourceLabel(string kind) => kind switch { "DirectQuotation" => "Source quotation", "HistoricalSource" => "Historical account excerpt", "DisputedHistoricalSource" => "Differing historical account", "Translation" => "Licensed translation", "Transliteration" => "Reviewed transliteration", _ => "Source text" };
     private static string Language(string locale)
     {
         try { return System.Globalization.CultureInfo.GetCultureInfo(locale).NativeName; }
@@ -83,7 +88,7 @@
             if (Verse.HasValue && _selected == null && Http != null) Http.Response.StatusCode = 404;
             _matches = pieces.Where(x => (!Chapter.HasValue || x.Chapter == Chapter) && (Concept == null || x.Concepts.Contains(Concept))
                 && (Journey == null || Journey == "chronological" || x.Journey == Journey)
-                && (string.IsNullOrWhiteSpace(Query) || (x.Title+" "+x.Explanation+" "+x.PracticalAction+" "+string.Join(" ",x.Concepts)+" "+string.Join(" ",x.Sources.Select(s=>s.Text))).Contains(Query, StringComparison.OrdinalIgnoreCase))).ToArray();
+                && (string.IsNullOrWhiteSpace(Query) || (x.Title+" "+x.Explanation+" "+x.PracticalAction+" "+string.Join(" ",x.Concepts)+" "+string.Join(" ",x.Sources.Select(s=>s.Text))+" "+string.Join(" ",x.History?.People ?? [])+" "+string.Join(" ",x.History?.Places ?? [])).Contains(Query, StringComparison.OrdinalIgnoreCase))).ToArray();
             if (_selected != null) {
                 var same = pieces.Where(x=>x.Locale==_selected.Locale && x.AudienceId==_selected.AudienceId).GroupBy(x=>(x.Chapter,x.Verse)).Select(x=>x.First()).ToArray();
                 var at = Array.FindIndex(same,x=>x.Id==_selected.Id); _previous = at > 0 ? same[at-1] : null; _next = at >= 0 && at+1 < same.Length ? same[at+1] : null;

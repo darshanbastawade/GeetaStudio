@@ -1,0 +1,23 @@
+using System.Reflection;
+using System.Security.Principal;
+using System.Text.Json;
+using ContentOS.Application;
+using ContentOS.Contracts;
+using ContentOS.Integrations;
+using Microsoft.Extensions.DependencyInjection;
+if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException("Windows identity required.");
+var directory = args[0]; var type = typeof(ContentOS.Foundation.Tests.ArchitectureTests).Assembly.GetType("ContentOS.Foundation.Tests.CommerceTestFixture")!;
+using var root = (ServiceProvider)type.GetMethod("Services", BindingFlags.NonPublic | BindingFlags.Static)!.Invoke(null, [])!; using var scope = root.CreateScope(); var s = scope.ServiceProvider;
+var pending = (Task)type.GetMethod("Setup", BindingFlags.NonPublic | BindingFlags.Static)!.Invoke(null, [s, "delivery.unknown.v1", WindowsIdentity.GetCurrent().Name])!; await pending; var f = pending.GetType().GetProperty("Result")!.GetValue(pending)!;
+T Field<T>(object value, string name) => (T)value.GetType().GetProperty(name)!.GetValue(value)!;
+var creation = Field<object>(f, "Creation"); var owner = Field<CustomerScope>(creation, "Owner"); var editorial = Field<object>(creation, "Editorial"); var staff = Field<CoreScope>(editorial, "Owner"); var digital = Field<Guid>(f, "Digital"); var institutional = Field<Guid>(f, "Institutional"); var institution = Field<Guid>(f, "Institution");
+var shop = s.GetRequiredService<ICommerceWorkbench>(); var customers = s.GetRequiredService<ICustomerWorkbench>();
+var digitalOrder = await shop.PurchaseAsync(owner, new(Guid.NewGuid(), digital, "Instagram"), default); var institutionOrder = await shop.PurchaseAsync(owner, new(Guid.NewGuid(), institutional, "Unknown", institution), default);
+var secretType = type.Assembly.GetType("ContentOS.Foundation.Tests.CustomerTestFixture")!; var secret = (string)secretType.GetField("Secret", BindingFlags.NonPublic | BindingFlags.Static)!.GetValue(null)!;
+CustomerPaymentEvidence Evidence(CustomerOrderView o, long seq, string state, long refund = 0) => new("fixture-event-" + Guid.NewGuid().ToString("N"), o.Id, o.Provider, o.Account, o.Environment, o.CustomerReference, o.ExternalReference!, "fixture-sub:" + o.Id.ToString("N"), seq, state, o.PriceMinor, o.Currency, refund, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow.AddDays(30), DateTimeOffset.UtcNow.AddMinutes(-1));
+void Save(string name, object data) => File.WriteAllText(Path.Combine(directory, name), JsonSerializer.Serialize(data, new JsonSerializerOptions(JsonSerializerDefaults.Web) { WriteIndented = true }));
+foreach (var pair in new[] { (Name: "digital", Id: digitalOrder), (Name: "institution", Id: institutionOrder) }) { var order = (await shop.OrdersAsync(owner, default)).Single(x => x.Id == pair.Id); var pay = (await customers.OrdersAsync(owner, default)).Single(x => x.Id == order.PaymentOrderId); Save(pair.Name + "-paid.json", FixturePaymentProvider.Sign(Evidence(pay, 1, "Paid"), secret)); if (pair.Name == "digital") Save("digital-refund.json", FixturePaymentProvider.Sign(Evidence(pay, 3, "Refunded", pay.PriceMinor), secret)); }
+var other = new CustomerScope(owner.TenantId, new System.Security.Claims.ClaimsPrincipal(new System.Security.Claims.ClaimsIdentity([new(System.Security.Claims.ClaimTypes.Name, "other-pilot-" + Guid.NewGuid())], "VerifiedTestHost"))); await customers.RegisterAsync(other, new(Guid.NewGuid(), "Other controlled adult", true), default); var otherInstitution = await shop.InstitutionAsync(other, new(Guid.NewGuid(), "Other isolated institution", "fixture:other-contract"), default);
+await shop.OfferAsync(staff, new(Guid.NewGuid(), "merchandise-prerequisites", "Merchandise", ["rights", "manufacturing", "tax"], "fixture:merch-contract", "Prerequisites only; no revenue or commercial eligibility asserted"), default);
+Save("fixture.json", new { tenant = owner.TenantId, universe = staff.TenantId == owner.TenantId ? Field<Guid>(editorial, "Universe") : Guid.Empty, digital, institutional, institution, otherInstitution, digitalOrder, institutionOrder, creationId = Field<Guid>(f, "CreationId") });
+Console.WriteLine("Private digital and institutional orders prepared; signed fixture evidence remains local; no real charges.");

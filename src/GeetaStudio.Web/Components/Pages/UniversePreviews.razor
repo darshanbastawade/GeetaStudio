@@ -1,0 +1,28 @@
+@page "/preview/universes"
+@using Microsoft.AspNetCore.Authorization
+@using ContentOS.Contracts
+@attribute [Authorize(Policy = "ReaderPreview")]
+@inject ReadClient Reader
+<PageTitle>Choose a universe · Geeta Studio</PageTitle>
+<HeadContent><meta name="robots" content="noindex, nofollow" /></HeadContent>
+<main class="reader">
+    <h1>Choose a universe</h1>
+    <p>Private reading previews. Human editorial and release reviews remain explicit; these samples are not public publications.</p>
+    @if (_error) { <p role="status">Previews are temporarily unavailable.</p> }
+    else if (_collections.Length == 0) { <p>No permitted collections are available.</p> }
+    @foreach (var group in _collections.GroupBy(x => x.Universe))
+    {
+        <section><h2>@group.Key</h2>
+            <ul>@foreach (var c in group) { <li><a href="@("/preview/read/" + Uri.EscapeDataString(c.Key))">@c.Title</a> · version @c.Version · @c.Pieces entries</li> }</ul>
+        </section>
+    }
+</main>
+@code {
+    private ReadCollectionSummary[] _collections = [];
+    private bool _error;
+    protected override async Task OnInitializedAsync()
+    {
+        try { _collections = await Reader.PrivateDirectory(); }
+        catch (HttpRequestException) { _error = true; }
+    }
+}

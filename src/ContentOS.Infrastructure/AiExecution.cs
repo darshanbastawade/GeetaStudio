@@ -50,7 +50,7 @@ public sealed partial class AiService
         }
         if (citations.Length > 20) throw new RuntimeValidationException("Combined evidence/source IDs exceed the 20-source limit.");
         var full = Instruction(r.Task, citations) + "\n" + prompt;
-        db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct); await WorkflowAdmission(s, universe, r.OperationId, r.WorkflowAdmission, ct); await Lock(s, ct); await Access(s, true, ct, universe);
+        db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct); await OptimizationAdmission(s, universe, r.OperationId, r.PinnedRouteId, r.OptimizationAdmission, ct); await WorkflowAdmission(s, universe, r.OperationId, r.WorkflowAdmission, ct); await TalkAdmission(s, universe, r.OperationId, r.TalkAdmission, ct); await Lock(s, ct); await Access(s, true, ct, universe);
         old = await db.AiRuns.SingleOrDefaultAsync(x => x.TenantId == s.TenantId && x.OperationId == r.OperationId, ct);
         if (old != null) { if (old.Actor != s.Actor || old.Fingerprint != fingerprint) throw new RuntimeConflictException("AI replay differs."); return (old, false, ""); }
         var routeId = r.PinnedRouteId;
@@ -68,9 +68,10 @@ public sealed partial class AiService
         var run = new AiRun { Id = Guid.NewGuid(), TenantId = s.TenantId, UniverseId = universe, OperationId = r.OperationId, Actor = s.Actor, Fingerprint = fingerprint, BudgetId = budget.Id, RouteId = route.Id, SnapshotJson = Encode(snapshot), Reserved = reserve, DeadlineUtc = now.AddSeconds(settings.DeadlineSeconds) };
         budget.Reserved += reserve; db.AiRuns.Add(run); Audit(s, run.Id, "ai.run-reserved"); await Save(ct); await tx.CommitAsync(ct); return (run, true, full);
     }
-    private async Task<AiAttempt> Start(CoreScope s, Guid runId, AiProfileView p, int number, decimal ceiling, CancellationToken ct, bool admin = true, WorkflowAiAdmission? workflow = null)
+    private async Task<AiAttempt> Start(CoreScope s, Guid runId, AiProfileView p, int number, decimal ceiling, CancellationToken ct, bool admin = true, WorkflowAiAdmission? workflow = null, TalkAiAdmission? talk = null, OptimizationAiAdmission? optimization = null)
     {
-        db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct); await WorkflowAdmissionForRun(s, runId, workflow, ct); await Lock(s, ct); await Access(s, admin, ct);
+        db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct); if (optimization != null) { var admittedRun = await db.AiRuns.AsNoTracking().SingleAsync(x => x.Id == runId && x.TenantId == s.TenantId, ct); await OptimizationAdmission(s, admittedRun.UniverseId, admittedRun.OperationId, admittedRun.RouteId, optimization, ct); }
+        await WorkflowAdmissionForRun(s, runId, workflow, ct); await TalkAdmissionForRun(s, runId, talk, ct); await Lock(s, ct); await Access(s, admin, ct);
         var run = await db.AiRuns.SingleAsync(x => x.Id == runId && x.TenantId == s.TenantId, ct);
         var outcome = DateTimeOffset.UtcNow < run.DeadlineUtc ? await Admission(p, true, ct) : "DeadlineExceeded";
         var row = new AiAttempt { Id = Guid.NewGuid(), RunId = run.Id, ProfileId = p.Id, ConnectionId = p.ConnectionId, Number = number, Ceiling = ceiling, State = outcome == "Success" ? "Started" : "Completed", Outcome = outcome == "Success" ? "" : outcome, InputTokens = outcome == "Success" ? null : 0, CachedInputTokens = outcome == "Success" ? null : 0, OutputTokens = outcome == "Success" ? null : 0, EndedUtc = outcome == "Success" ? null : DateTimeOffset.UtcNow };
@@ -152,13 +153,14 @@ public sealed partial class AiService
         var prepared = await Prepare(s, u, r, ct); if (!prepared.New) return await InspectAsync(s, prepared.Run.Id, ct);
         var run = prepared.Run; var snap = Decode<AiExecutionSnapshot>(run.SnapshotJson); string outcome = "Unavailable"; GeneratedText? output = null;
         using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct); timeout.CancelAfter(TimeSpan.FromSeconds(snap.Route.DeadlineSeconds));
+        using var optimizationStop = new CancellationTokenSource(); var optimizationWatch = WatchOptimization(s, r.OptimizationAdmission, timeout, optimizationStop.Token);
         try
         {
             var number = 0;
             foreach (var p in snap.Profiles)
             {
                 await CheckSources(s, snap.SourceIds.Select(Guid.Parse).ToArray(), r.Task, r.Locale, timeout.Token);
-                var a = await Start(s, run.Id, p, ++number, Ceiling(p.Settings, Encoding.UTF8.GetByteCount(prepared.Prompt)), timeout.Token, workflow: r.WorkflowAdmission);
+                var a = await Start(s, run.Id, p, ++number, Ceiling(p.Settings, Encoding.UTF8.GetByteCount(prepared.Prompt)), timeout.Token, workflow: r.WorkflowAdmission, talk: r.TalkAdmission, optimization: r.OptimizationAdmission);
                 if (a.State != "Started") { outcome = a.Outcome; if (outcome is "RateLimited" or "CircuitOpen") continue; break; }
                 AiProviderResult result; var streamed = false;
                 var call = new AiProviderCall(run.Id, a.Id, p.Settings, prepared.Prompt, p.Settings.MaxOutputTokens, snap.SourceIds, r.Streaming, (await runtime.Connections.AsNoTracking().SingleAsync(x => x.Id == p.ConnectionId, timeout.Token)).SecretRef);
@@ -187,7 +189,8 @@ public sealed partial class AiService
         catch (OperationCanceledException) { outcome = ct.IsCancellationRequested ? "Cancelled" : "DeadlineExceeded"; }
         catch (RightsBlockedException) { outcome = "PolicyRejected"; output = null; }
         catch (Exception) { outcome = "UnknownUsage"; output = null; }
-        await Finish(s, run.Id, outcome, output, CancellationToken.None); return await InspectAsync(s, run.Id, CancellationToken.None);
+        optimizationStop.Cancel(); await optimizationWatch;
+        await Finish(s, run.Id, outcome, r.RetainOutput ? output : null, CancellationToken.None); var view = await InspectAsync(s, run.Id, CancellationToken.None); return !r.RetainOutput && view.State == "Completed" ? view with { Output = output } : view;
     }
     public async IAsyncEnumerable<AiStreamEvent> StreamAsync(CoreScope s, Guid u, GenerateAi r, [EnumeratorCancellation] CancellationToken ct)
     {

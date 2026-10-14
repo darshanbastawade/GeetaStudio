@@ -134,6 +134,97 @@
       "request": "attach",
       "processId": "${command:pickProcess}",
       "justMyCode": true
+    },
+    {
+      "type": "coreclr",
+      "justMyCode": true,
+      "name": "Geeta Studio: M15 attach Api",
+      "processId": "${command:pickProcess}",
+      "request": "attach"
+    },
+    {
+      "request": "attach",
+      "name": "Geeta Studio: M16 attach Api",
+      "justMyCode": true,
+      "processId": "${command:pickProcess}",
+      "type": "coreclr"
+    },
+    {
+      "name": "Geeta Studio: M17 attach Api",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "name": "Geeta Studio: M18 attach Api",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "name": "Geeta Studio: M19 attach Api",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "name": "Geeta Studio: M20 attach Api",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "name": "Geeta Studio: M21 attach Api",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "type": "coreclr",
+      "justMyCode": true,
+      "name": "Geeta Studio: M23 attach Api",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    },
+    {
+      "type": "coreclr",
+      "processId": "${command:pickProcess}",
+      "request": "attach",
+      "justMyCode": true,
+      "name": "Geeta Studio: M24 attach Api"
+    },
+    {
+      "type": "coreclr",
+      "processId": "${command:pickProcess}",
+      "request": "attach",
+      "justMyCode": true,
+      "name": "Geeta Studio: M25 attach Api"
+    },
+    {
+      "name": "Geeta Studio: M26 attach Api",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "name": "Geeta Studio: M26 attach Web",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "name": "Geeta Studio: M27 attach Api",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
     }
   ]
 }

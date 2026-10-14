@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-14",
+  "status": "Offline Verified",
+  "build": {
+    "warnings": 0,
+    "errors": 0,
+    "exit": 0
+  },
+  "offline": {
+    "passed": 108,
+    "failed": 0,
+    "skipped": 0
+  },
+  "broadSqlCheckpoint": {
+    "passed": 214,
+    "failed": 0,
+    "skipped": 0,
+    "elapsedMinutes": 12.5709,
+    "scope": "Before final all-future metric coverage/minimum runtime refinements"
+  },
+  "finalFocused": {
+    "passed": 25,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Final hardening/analytics/TALK boundary source"
+  },
+  "priorFocused": {
+    "passed": 33,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Reindex/storage/switch/isolation/recovery"
+  },
+  "vulnerablePackageEntries": 0,
+  "recoverySeconds": 29.806891699999998,
+  "readerP95Milliseconds": 32.3551,
+  "coreMigrations": 27,
+  "runtimeMigrations": 4,
+  "bothModelSnapshots": "Checked by passing offline regression",
+  "productionReady": false,
+  "liveProviders": "Not qualified",
+  "oldBinaryRollback": "Pending",
+  "offsiteAssetLogRecovery": "Pending",
+  "realAlertDelivery": "Pending",
+  "humanReview": "Pending",
+  "newInteractiveF5": "Not verified",
+  "M26": "Not started at M25 completion",
+  "formatExit": 0,
+  "staticParsers": "Passed",
+  "diffExit": 0,
+  "releasePackage": "ee93981be02e4ccbaafd3ab0abc76aa7"
+}

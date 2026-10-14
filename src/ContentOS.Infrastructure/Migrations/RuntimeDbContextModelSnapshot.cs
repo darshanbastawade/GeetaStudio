@@ -50,6 +50,24 @@ namespace ContentOS.Infrastructure.Migrations
                     b.ToTable("Assets", "runtime");
                 });
 
+            modelBuilder.Entity("ContentOS.Domain.AssetLocation", b =>
+                {
+                    b.Property<Guid>("AssetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StoreKey")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTimeOffset>("VerifiedUtc")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("AssetId");
+
+                    b.ToTable("AssetLocations", "runtime");
+                });
+
             modelBuilder.Entity("ContentOS.Domain.AuditEntry", b =>
                 {
                     b.Property<Guid>("Id")
@@ -580,6 +598,15 @@ namespace ContentOS.Infrastructure.Migrations
                     b.HasIndex("ProfileId");
 
                     b.ToTable("Revisions", "runtime");
+                });
+
+            modelBuilder.Entity("ContentOS.Domain.AssetLocation", b =>
+                {
+                    b.HasOne("ContentOS.Domain.Asset", null)
+                        .WithOne()
+                        .HasForeignKey("ContentOS.Domain.AssetLocation", "AssetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ContentOS.Domain.BudgetReservation", b =>

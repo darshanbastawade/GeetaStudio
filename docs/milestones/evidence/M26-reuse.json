@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-14",
+  "reusedSubsystemCount": 15,
+  "reusedSubsystems": [
+    "Core ownership",
+    "Source registry/rights",
+    "Versioned corpus",
+    "Claim/evidence/correction",
+    "Retrieval/indexing",
+    "AI routing/budgets",
+    "Durable workflows",
+    "Audience/locale lessons",
+    "Character/cast registry",
+    "Draft factory",
+    "Quality evaluation",
+    "Editorial CMS",
+    "READ",
+    "Media/WATCH",
+    "Publishing exports"
+  ],
+  "demonstratedCouplingCount": 9,
+  "narrowChanges": [
+    "Historical source/content category",
+    "Exact source-account evidence",
+    "Reviewed historical paraphrase",
+    "Source-account disagreement",
+    "Historical corpus components/multi-work bindings",
+    "Non-Sanskrit lesson/factory source ordinals",
+    "Historical READ metadata/optional bindings",
+    "Scoped universe discovery/history labels/search",
+    "Historical WATCH and credit labels"
+  ],
+  "addedTables": 0,
+  "addedColumns": 3,
+  "nullableForeignKeys": 2,
+  "newExternalAdapters": 0,
+  "newHosts": 0,
+  "migration": "20261014130000_M26HistoricalRead",
+  "futurePacksPlanningOnly": [
+    "Sambhaji Maharaj",
+    "Jain teachings"
+  ]
+}

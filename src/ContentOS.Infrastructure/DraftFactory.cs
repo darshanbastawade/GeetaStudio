@@ -41,9 +41,24 @@ public sealed partial class DraftFactory(CoreDbContext db, ILessonEngine lessons
     {
         var lesson = await Lesson(s, u, b.LessonVariantId, true, ct); var ls = lesson.Snapshot;
         if (ls.Audience.Rules.Audience!.AudienceId != b.Cast.AudienceId || ls.Locale.Rules.Locale!.Locale != b.Cast.Locale || !b.Concepts.All(lesson.Sections!.Concepts.Contains) || !lesson.Sections!.LearningGoals.Contains(b.LearningGoal)) throw new RuntimeValidationException("Brief must bind the reviewed lesson's audience, locale, concepts and learning goal.");
-        var text = ls.Bundle.Request.SanskritTextId ?? await db.ClaimSpans.Where(x => x.ClaimRevisionId == ls.Bundle.Request.AnchorClaimRevisionId && x.CorpusTextId != null).Select(x => x.CorpusTextId!.Value).FirstAsync(ct);
-        var verse = await (from t in db.CorpusTexts join v in db.CorpusVerses on t.VerseId equals v.Id where t.Id == text select v).SingleAsync(ct);
-        if (verse.Chapter != b.Chapter || verse.Verse != b.Verse) throw new RuntimeValidationException("Chapter and verse must come from approved evidence.");
+        var text = ls.Bundle.Request.SanskritTextId ?? await db.ClaimSpans.Where(x => x.ClaimRevisionId == ls.Bundle.Request.AnchorClaimRevisionId && x.CorpusTextId != null).Select(x => x.CorpusTextId).FirstOrDefaultAsync(ct);
+        if (text.HasValue)
+        {
+            var verse = await (from t in db.CorpusTexts join v in db.CorpusVerses on t.VerseId equals v.Id where t.Id == text select v).SingleAsync(ct);
+            if (verse.Chapter != b.Chapter || verse.Verse != b.Verse) throw new RuntimeValidationException("Chapter and verse must come from approved evidence.");
+        }
+        else
+        {
+            var anchorType = await db.ClaimRevisions.Where(x => x.Id == ls.Bundle.Request.AnchorClaimRevisionId).Select(x => x.Type).SingleAsync(ct);
+            var bound = await (from span in db.ClaimSpans
+                               join t in db.CorpusTexts on new { span.SnapshotId, span.Sha256 } equals new { t.SnapshotId, t.Sha256 }
+                               join v in db.CorpusVerses on t.VerseId equals v.Id
+                               join manifest in db.CorpusManifests on v.ManifestId equals manifest.Id
+                               where span.ClaimRevisionId == ls.Bundle.Request.AnchorClaimRevisionId && span.Relation == "Supporting" && t.Kind == "HistoricalSource" && v.ReviewStatus == "Approved"
+                               && manifest.MaterialKind == "History" && manifest.UniverseId == u && manifest.TenantId == s.TenantId && v.Chapter == b.Chapter && v.Verse == b.Verse
+                               select v.Id).AnyAsync(ct);
+            if (anchorType is not ("SourceQuotation" or "HistoricalClaim") || !bound) throw new EvidenceBlockedException("HistoricalFactoryOrdinalMustBindReviewedSourceEvidence");
+        }
         var plan = await registry.CastAsync(s, u, b.Cast, ct); if (plan.MissingRoles.Length != 0 || plan.Selected.Any(c => c.Character.Status != "Active" || c.Character.Profile.ReviewStatus != "Approved" || c.Role == "Lead" && !ls.Writing.Rules.Writing!.EligibleLifeStages.Contains(c.Character.Profile.Rules.LifeStage))) throw new RuntimeValidationException("Register/activate compatible characters; use the approved writing life stages.");
         if (plan.Selected.Length > ls.Writing.Rules.Writing!.MaxCast || ls.Writing.Rules.Writing.EligibleCharacters.Length > 0 && plan.Selected.Any(c => !ls.Writing.Rules.Writing.EligibleCharacters.Contains(c.Character.CharacterId))) throw new RuntimeValidationException("Cast exceeds the writing profile bounds.");
         var relationships = (await registry.RelationshipsAsync(s, u, ct)).Where(x => b.RelationshipRevisionIds.Contains(x.Id)).ToArray();
@@ -99,7 +114,7 @@ public sealed partial class DraftFactory(CoreDbContext db, ILessonEngine lessons
     {
         var id = await Command(s, u, r.OperationId, "start", r, async () =>
         {
-            CoreRules.Text(r.BusinessKey, 100, "Business request"); FactoryRules.Budget(r.Budget); var p = await Plan(s, u, r.PlanId, ct); if (p.ReviewStatus != "Approved") throw new RuntimeValidationException("Review plan before starting.");
+            await TrendFence.AssertPlan(db, r.PlanId, ct); CoreRules.Text(r.BusinessKey, 100, "Business request"); FactoryRules.Budget(r.Budget); var p = await Plan(s, u, r.PlanId, ct); if (p.ReviewStatus != "Approved") throw new RuntimeValidationException("Review plan before starting.");
             var fingerprint = Hash(new { r.PlanId, r.Budget }); var old = await db.FactoryBatches.SingleOrDefaultAsync(x => x.TenantId == s.TenantId && x.UniverseId == u && x.BusinessKey == r.BusinessKey, ct);
             if (old != null) { if (old.Actor != s.Actor || old.Fingerprint != fingerprint) throw new RuntimeConflictException("Business request changed; use an explicit new key/version."); return old.Id; }
             var estimate = await EstimateAsync(s, u, p.Id, ct); if (estimate.Items > r.Budget.MaxItems || estimate.MaximumCharacters > r.Budget.MaxGeneratedCharacters) throw new RuntimeValidationException("Plan exceeds bounded generation budget.");

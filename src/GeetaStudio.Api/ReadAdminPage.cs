@@ -6,7 +6,7 @@ public static class ReadAdminPage
 <!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>READ release review</title>
 <style>body{font:1rem system-ui;color:#243e35;max-width:60rem;margin:2rem auto;padding:1rem}label{display:block;margin:1rem 0}input,textarea,select,button{font:inherit;padding:.5rem;max-width:100%;box-sizing:border-box}pre{white-space:pre-wrap;overflow-wrap:anywhere}button{background:#245441;color:white;border:0;padding:.8rem}a{color:#245441}:focus-visible{outline:3px solid #8b4c0e}</style>
 <h1>READ collection release review</h1><p>Review exact publication bindings and gate evidence. Fixture collections stay private; genuine human qualification and current release checks are required for rollout.</p>
-<p><a href="/staff/read">Canonical corpus</a> · <a href="/staff/editorial">Editorial approval</a> · <a href="/staff/lessons">Audience and language variants</a> · <a href="/staff/evaluation">Evaluation</a></p>
+<p><a href="/staff/read">Source corpus</a> · <a href="/staff/editorial">Editorial approval</a> · <a href="/staff/lessons">Audience and language variants</a> · <a href="/staff/evaluation">Evaluation</a></p>
 <label>Tenant ID <input id="tenant"></label><label>Universe ID <input id="universe"></label><label>Collection ID <input id="collection"></label><button id="inspect">Inspect collection</button>
 <pre id="status" role="status" aria-live="polite"></pre>
 <label>Operation <select id="kind"><option value="collections">Create collection</option><option value="pieces">Bind reviewed piece</option><option value="evidence">Record release evidence</option><option value="control">Activate, disable or rollback</option></select></label>

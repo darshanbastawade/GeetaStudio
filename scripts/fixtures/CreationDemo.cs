@@ -1,0 +1,26 @@
+using System.Reflection;
+using System.Security.Principal;
+using System.Text.Json;
+using ContentOS.Application;
+using ContentOS.Contracts;
+using Microsoft.Extensions.DependencyInjection;
+
+if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException("Windows host identity required.");
+var directory = args[0];
+var type = typeof(ContentOS.Foundation.Tests.ArchitectureTests).Assembly.GetType("ContentOS.Foundation.Tests.CreationTestFixture")!;
+using var root = (ServiceProvider)type.GetMethod("Services", BindingFlags.NonPublic | BindingFlags.Static)!.Invoke(null, [null, null])!;
+using var scope = root.CreateScope(); var s = scope.ServiceProvider;
+var setup = (Task)type.GetMethod("Setup", BindingFlags.NonPublic | BindingFlags.Static)!.Invoke(null, [s, "create.local.a.v1", "LearningPack", WindowsIdentity.GetCurrent().Name])!;
+await setup; var f = setup.GetType().GetProperty("Result")!.GetValue(setup)!;
+T Get<T>(string key) => (T)f.GetType().GetProperty(key)!.GetValue(f)!;
+var owner = Get<CustomerScope>("Owner"); var profile = Get<Guid>("Profile"); var template = Get<Guid>("Template"); var studio = s.GetRequiredService<ICreationStudio>();
+var settings = (await studio.TemplatesAsync(owner, default)).Single(x => x.Id == template).Settings;
+var editor = Get<object>("Editorial"); var staff = (CoreScope)editor.GetType().GetProperty("Owner")!.GetValue(editor)!;
+foreach (var format in new[] { "Story", "Comic" }) await studio.TemplateAsync(staff, settings with { OperationId = Guid.NewGuid(), Key = "fixture-" + format.ToLowerInvariant(), Format = format }, default);
+var customers = s.GetRequiredService<ICustomerWorkbench>();
+var other = new CustomerScope(owner.TenantId, new System.Security.Claims.ClaimsPrincipal(new System.Security.Claims.ClaimsIdentity([new(System.Security.Claims.ClaimTypes.Name, "fixture-other-" + Guid.NewGuid())], "VerifiedTestHost")));
+var user = await customers.RegisterAsync(other, new(Guid.NewGuid(), "Other controlled owner", true), default); var household = await customers.HouseholdAsync(other, new(Guid.NewGuid(), "Other private household"), default); var otherProfile = await customers.ProfileAsync(other, new(Guid.NewGuid(), household, "Other learner", "Child", "en-IN"), default);
+await customers.GrantAsync(staff, new(Guid.NewGuid(), user, 5, DateTimeOffset.UtcNow.AddDays(1), "fixture:isolated-demo"), default);
+var foreign = await studio.SubmitAsync(other, new(Guid.NewGuid(), template, otherProfile, new("Learner", "patience"), []), default);
+await File.WriteAllTextAsync(Path.Combine(directory, "fixture.json"), JsonSerializer.Serialize(new { tenant = owner.TenantId, profile, template, otherCreation = foreign, universe = settings.UniverseId }, new JsonSerializerOptions { WriteIndented = true }));
+Console.WriteLine("Three controlled templates ready; source permissions are unchanged; no live provider or public creation.");

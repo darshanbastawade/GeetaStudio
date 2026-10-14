@@ -430,6 +430,393 @@
         "cwd": "${workspaceFolder}"
       },
       "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M15 trend fixture demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".\\scripts\\trend-demo.ps1",
+        "-ManageApi"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".\\scripts\\media-demo.ps1",
+        "-ManageApi"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "label": "Geeta Studio: M16 media fixture demo",
+      "type": "shell",
+      "command": "powershell"
+    },
+    {
+      "label": "Geeta Studio: M17 configure renderer",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".\\scripts\\watch-tools.ps1"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M17 focused checks",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "tests/ContentOS.Foundation.Tests",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~SqlWatchTests|FullyQualifiedName~WatchRuleTests"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "GEETA_SQL_TESTS": "1"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M17 spoken video demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".\\scripts\\watch-demo.ps1",
+        "-ManageApi",
+        "-DebugPause"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M18 publishing demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".\\scripts\\social-demo.ps1",
+        "-ManageApi",
+        "-DebugPause"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M18 focused checks",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$",
+        "env:GEETA_SQL_TESTS='1'; dotnet test .\\tests\\ContentOS.Foundation.Tests --no-build --no-restore --filter 'FullyQualifiedName~SqlSocial|FullyQualifiedName~SocialRuleTests'"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M19 analytics demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/analytics-demo.ps1",
+        "-ManageApi"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M19 focused checks",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$env:GEETA_SQL_TESTS='1'; dotnet test .\\tests\\ContentOS.Foundation.Tests --no-build --no-restore --filter 'FullyQualifiedName~SqlAnalytics|FullyQualifiedName~AnalyticsRuleTests'"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M20 focused checks",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$env:GEETA_SQL_TESTS='1'; dotnet test .\\tests\\ContentOS.Foundation.Tests --no-build --no-restore --filter 'FullyQualifiedName~SqlCustomer|FullyQualifiedName~CustomerRuleTests'"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M20 account demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/customer-demo.ps1",
+        "-ManageApi"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M21 TALK demo",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/talk-demo.ps1",
+        "-ManageApi",
+        "-DebugPause"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M21 focused checks",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "tests/ContentOS.Foundation.Tests",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~Talk"
+      ],
+      "options": {
+        "env": {
+          "GEETA_SQL_TESTS": "1"
+        },
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "options": {
+        "env": {
+          "GEETA_SQL_TESTS": "1"
+        },
+        "cwd": "${workspaceFolder}"
+      },
+      "type": "process",
+      "command": "dotnet",
+      "problemMatcher": [],
+      "args": [
+        "test",
+        "tests/ContentOS.Foundation.Tests/ContentOS.Foundation.Tests.csproj",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~Creation"
+      ],
+      "label": "Geeta Studio: M23 focused checks"
+    },
+    {
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "type": "process",
+      "command": "powershell",
+      "problemMatcher": [],
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/creation-demo.ps1",
+        "-ManageApi"
+      ],
+      "label": "Geeta Studio: M23 creation demo"
+    },
+    {
+      "command": "dotnet",
+      "label": "Geeta Studio: M24 focused checks",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "GEETA_SQL_TESTS": "1"
+        }
+      },
+      "type": "process",
+      "args": [
+        "test",
+        "tests/ContentOS.Foundation.Tests/ContentOS.Foundation.Tests.csproj",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~Commerce"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "command": "powershell",
+      "label": "Geeta Studio: M24 commerce demo",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "type": "process",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/commerce-demo.ps1",
+        "-ManageApi"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M25 demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/hardening-demo.ps1",
+        "-ManageApi"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M26 historical demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/historical-demo.ps1",
+        "-ManageHosts"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M26 debug demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/historical-demo.ps1",
+        "-ManageHosts",
+        "-ReuseFixture",
+        "-DebugPause"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M27 demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/optimization-demo.ps1"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Geeta Studio: M27 debug demo",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/optimization-demo.ps1",
+        "-DebugPause"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
     }
   ],
   "version": "2.0.0"

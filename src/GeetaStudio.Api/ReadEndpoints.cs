@@ -43,6 +43,12 @@ public static class ReadEndpoints
         staff.MapGet("/collections/{id:guid}", (Guid tenant, Guid universe, Guid id, IReadWorkbench w, HttpContext c, CancellationToken ct) => w.InspectAsync(Scope(tenant, c), universe, id, ct));
         staff.MapPost("/collections/{id:guid}/evidence", async (Guid tenant, Guid universe, Guid id, ReadGateEvidence r, IReadWorkbench w, HttpContext c, CancellationToken ct) => { await w.EvidenceAsync(Scope(tenant, c), universe, id, r, ct); return Results.NoContent(); }).RequireAuthorization("StaffAdmin");
         staff.MapPost("/collections/{id:guid}/control", async (Guid tenant, Guid universe, Guid id, ControlReadCollection r, IReadWorkbench w, HttpContext c, CancellationToken ct) => { await w.ControlAsync(Scope(tenant, c), universe, id, r, ct); return Results.NoContent(); }).RequireAuthorization("StaffAdmin");
+        app.MapGet("/api/v1/read-preview", async (IReadWorkbench w, HttpContext c, CancellationToken ct) =>
+        {
+            Headers(c); c.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
+            return await w.PrivateDirectoryAsync(c.User.Identity!.Name!, ct);
+        })
+            .RequireAuthorization("StaffRead").RequireRateLimiting("read");
         app.MapGet("/api/v1/read-preview/{id:guid}", async (Guid id, IReadWorkbench w, HttpContext c, CancellationToken ct) =>
         {
             Headers(c); c.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";

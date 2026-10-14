@@ -94,7 +94,7 @@ public sealed class SourceRightsGuard(CoreDbContext db) : ISourceRightsGuard
         var publicRead = use.Purpose == "Read" && content.PublicKnowledge && content.EditorialState == "Approved" &&
             await db.Universes.AnyAsync(u => u.Id == content.UniverseId && u.PublicKnowledgeRead, ct);
         if (!owner && !granted && !publicRead) throw new CoreAccessException();
-        if (use.Purpose is "Publish" or "Generate" or "Translate" or "Adapt" && member.Permission is not ("Administrator" or "Editor")) throw new CoreAccessException();
+        if (use.Purpose == "Publish" && member.Permission is not ("Administrator" or "Editor" or "Publisher") || use.Purpose is "Generate" or "Translate" or "Adapt" && member.Permission is not ("Administrator" or "Editor")) throw new CoreAccessException();
         if (use.Language != content.LocaleId) throw new RuntimeValidationException("Intended language must match the content locale.");
         if (use.Purpose is "Export" or "Publish") await EditorialBinding.AssertExport(db, scope, revision, use.Purpose, ct);
         var lineage = await LineageAsync(revision, ct);

@@ -9,6 +9,7 @@ public sealed class CorpusManifest : CoreRecord
     public string Key { get; set; } = "";
     public int Version { get; set; }
     public string Edition { get; set; } = "";
+    public string MaterialKind { get; set; } = "Scripture";
     public int BaselineTarget { get; set; } = 700;
     public string Fingerprint { get; set; } = "";
 }

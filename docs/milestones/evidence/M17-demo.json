@@ -1,0 +1,16 @@
+{
+    "verifiedDate":  "2026-10-13",
+    "windowsStaff200":  true,
+    "apiRestart":  true,
+    "masterChecksumsPreserved":  true,
+    "captionTrack":  true,
+    "spokenWindowsSeconds":  3.49,
+    "fixtureApprovalOnly":  true,
+    "humanVisualListeningAcceptance":  false,
+    "interactiveDebugVerified":  false,
+    "paidCalls":  0,
+    "publications":  0,
+    "tenant":  "7a39d0db-c06a-42f6-9176-c96cc7005105",
+    "universe":  "701e0ed6-4452-4bab-8c87-94b505aae4e4",
+    "production":  "e042eaaf-1029-45fc-b82d-285006afdae5"
+}

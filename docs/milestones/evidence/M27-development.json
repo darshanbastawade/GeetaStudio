@@ -1,0 +1,14 @@
+{
+    "date":  "2026-10-14",
+    "restrictedDevelopmentPage200":  true,
+    "optimizationPage200":  true,
+    "optimizationReport200":  true,
+    "optimizationExperiments200":  true,
+    "historicalRead200":  true,
+    "historicalPieces":  10,
+    "privateDirectoryHeaders":  true,
+    "noStore":  true,
+    "workspaceDiscovery200":  true,
+    "workspaceCount":  1,
+    "noFixtureAccountCreated":  true
+}

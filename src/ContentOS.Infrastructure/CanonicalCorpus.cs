@@ -22,14 +22,16 @@ public sealed class CanonicalCorpus(CoreDbContext db) : ICanonicalCorpus
     private async Task<CorpusManifest> ManifestAsync(Guid universe, Guid id, CancellationToken ct) =>
         await db.CorpusManifests.AsNoTracking().SingleOrDefaultAsync(m => m.Id == id && m.UniverseId == universe, ct) ?? throw new CoreAccessException();
     private async Task<CorpusManifestView> ViewAsync(CorpusManifest m, CancellationToken ct) =>
-        new(m.Id, m.Key, m.Version, m.Edition, m.BaselineTarget, await db.CorpusLocators.CountAsync(l => l.ManifestId == m.Id, ct));
+        new(m.Id, m.Key, m.Version, m.Edition, m.BaselineTarget, await db.CorpusLocators.CountAsync(l => l.ManifestId == m.Id, ct), m.MaterialKind);
     private void Audit(CoreScope s, Guid id, string action) => db.SourceAudits.Add(new SourceAudit { Id = Guid.NewGuid(), TenantId = s.TenantId, Actor = s.Actor, SubjectId = id, Action = action });
     private async Task<Guid> CommandAsync<T>(CoreScope s, Guid u, Guid operation, string kind, T request, Func<Task<Guid>> execute, CancellationToken ct)
     {
         db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct);
         await AccessAsync(s, u, 1, ct);
         if (operation == Guid.Empty) throw new RuntimeValidationException("A stable import operation ID is required.");
-        var fingerprint = Hash(new { u, request });
+        object replay = request is RegisterCorpus c && c.MaterialKind == "Scripture"
+            ? new { c.OperationId, c.Key, c.Version, c.Edition, c.BaselineTarget, c.Inventory, c.Bindings } : request!;
+        var fingerprint = Hash(new { u, request = replay });
         var prior = await db.CorpusCommands.FromSqlInterpolated($"SELECT * FROM [corpus].[CorpusCommand] WITH (UPDLOCK, HOLDLOCK) WHERE [TenantId] = {s.TenantId} AND [OperationId] = {operation}").SingleOrDefaultAsync(ct);
         if (prior != null)
         {
@@ -43,6 +45,7 @@ public sealed class CanonicalCorpus(CoreDbContext db) : ICanonicalCorpus
     public Task<Guid> RegisterAsync(CoreScope scope, Guid universe, RegisterCorpus r, CancellationToken ct) =>
         CommandAsync(scope, universe, r.OperationId, "corpus.registered", r, async () =>
         {
+            if (r.MaterialKind is not ("Scripture" or "History")) throw new RuntimeValidationException("Explicit supported corpus material kind required.");
             CoreRules.Text(r.Key, 200, "Manifest key"); CoreRules.Text(r.Edition, 1000, "Edition");
             if (r.Version < 1 || r.BaselineTarget is < 1 or > 1000 || r.Inventory == null || r.Inventory.Count is < 1 or > 2000 ||
                 r.Inventory.Count(x => x.BaselineVerse != null) != r.BaselineTarget) throw new RuntimeValidationException("Inventory must explicitly reconcile the declared baseline and variants.");
@@ -67,7 +70,7 @@ public sealed class CanonicalCorpus(CoreDbContext db) : ICanonicalCorpus
                 foreach (var b in r.Bindings)
                 {
                     if (!keys.Contains((b.Chapter, b.Verse, b.VariantKey)) || b.SourceChapter != b.Chapter || b.SourceVerse != b.Verse ||
-                        b.Kind is not ("DirectQuotation" or "Translation" or "Transliteration" or "WordMeaning") ||
+                        (r.MaterialKind == "History" ? b.Kind != "HistoricalSource" : b.Kind is not ("DirectQuotation" or "Translation" or "Transliteration" or "WordMeaning")) ||
                         !bindingKeys.Add((b.Chapter, b.Verse, b.VariantKey, b.Kind, b.Locale)))
                         throw new RuntimeValidationException("Source bindings must match declared edition chapter/verse locators.");
                     CoreRules.Text(b.SourceLocator, 1000, "Source locator");
@@ -75,20 +78,21 @@ public sealed class CanonicalCorpus(CoreDbContext db) : ICanonicalCorpus
                         throw new RuntimeValidationException("Binding requires an exact UTF-8 SHA-256.");
                     var source = await SourceAsync(scope, universe, b.SnapshotId, b.Locale, ct);
                     if (source.Text == null) throw new RuntimeValidationException("Bindings require retained source evidence.");
-                    if (editions.TryGetValue((b.Kind, b.Locale), out var edition) && edition != source.EditionId)
+                    if (r.MaterialKind == "Scripture" && editions.TryGetValue((b.Kind, b.Locale), out var edition) && edition != source.EditionId)
                         throw new RuntimeValidationException("A component locale must bind one source edition per manifest version.");
                     editions[(b.Kind, b.Locale)] = source.EditionId;
                 }
             }
             var fingerprint = r.Bindings == null ? Hash(new { r.Key, r.Version, r.Edition, r.BaselineTarget, r.Inventory })
                 : Hash(new { r.Key, r.Version, r.Edition, r.BaselineTarget, r.Inventory, r.Bindings });
+            if (r.MaterialKind == "History") fingerprint = Hash(new { r.MaterialKind, fingerprint });
             var existing = await db.CorpusManifests.SingleOrDefaultAsync(m => m.UniverseId == universe && m.Key == r.Key && m.Version == r.Version, ct);
             if (existing != null)
             {
                 if (existing.Fingerprint != fingerprint) throw new RuntimeConflictException("Manifest version is immutable; register a new version.");
                 return existing.Id;
             }
-            var m = new CorpusManifest { Id = Guid.NewGuid(), TenantId = scope.TenantId, UniverseId = universe, Key = r.Key, Version = r.Version, Edition = r.Edition, BaselineTarget = r.BaselineTarget, Fingerprint = fingerprint };
+            var m = new CorpusManifest { Id = Guid.NewGuid(), TenantId = scope.TenantId, UniverseId = universe, Key = r.Key, Version = r.Version, Edition = r.Edition, MaterialKind = r.MaterialKind, BaselineTarget = r.BaselineTarget, Fingerprint = fingerprint };
             db.CorpusManifests.Add(m);
             foreach (var l in r.Inventory) db.CorpusLocators.Add(new CorpusLocator { ManifestId = m.Id, Chapter = l.Chapter, Verse = l.Verse, VariantKey = l.VariantKey, BaselineVerse = l.BaselineVerse, Note = l.Note });
             if (r.Bindings != null)
@@ -136,7 +140,7 @@ public sealed class CanonicalCorpus(CoreDbContext db) : ICanonicalCorpus
         var added = 0; var unchanged = 0;
         await CommandAsync(scope, universe, r.OperationId, "corpus.imported", new { manifest, r }, async () =>
         {
-            await ManifestAsync(universe, manifest, ct);
+            var definition = await ManifestAsync(universe, manifest, ct);
             if (r.Verses == null || r.Verses.Count is < 1 or > 100) throw new RuntimeValidationException("Import a bounded batch of 1–100 verses.");
             var keys = new HashSet<(int, int, string)>();
             foreach (var verse in r.Verses)
@@ -149,12 +153,12 @@ public sealed class CanonicalCorpus(CoreDbContext db) : ICanonicalCorpus
                 var prior = await db.CorpusVerses.SingleOrDefaultAsync(v => v.ManifestId == manifest && v.Chapter == verse.Chapter && v.Verse == verse.Verse && v.VariantKey == verse.VariantKey, ct);
                 if (prior != null && prior.Fingerprint != fingerprint)
                     throw new RuntimeConflictException("Cited verse data is immutable; create a new manifest/edition version.");
-                if (verse.Texts == null || verse.Texts.Count is < 1 or > 10 || verse.Texts.Count(t => t.Kind == "DirectQuotation") != 1)
+                if (verse.Texts == null || verse.Texts.Count is < 1 or > 10 || (definition.MaterialKind == "History" ? verse.Texts.Count != 1 || verse.Texts[0].Kind != "HistoricalSource" : verse.Texts.Count(t => t.Kind == "DirectQuotation") != 1))
                     throw new RuntimeValidationException("Exactly one Sanskrit direct quotation is required; absent translations remain explicit.");
                 var components = new HashSet<(string, string)>();
                 foreach (var t in verse.Texts)
                 {
-                    if (t.Kind is not ("DirectQuotation" or "Translation" or "Transliteration" or "WordMeaning") || !components.Add((t.Kind, t.Locale)))
+                    if ((definition.MaterialKind == "History" ? t.Kind != "HistoricalSource" : t.Kind is not ("DirectQuotation" or "Translation" or "Transliteration" or "WordMeaning")) || !components.Add((t.Kind, t.Locale)))
                         throw new RuntimeValidationException("Invalid or duplicate corpus text component.");
                     CorpusRules.Exact(t.ExactText); CoreRules.Text(t.SourceLocator, 1000, "Source locator");
                     if (!TextHash(t.ExactText).Equals(t.Sha256, StringComparison.OrdinalIgnoreCase)) throw new RuntimeValidationException("Source text hash mismatch.");
@@ -241,7 +245,7 @@ public sealed class CanonicalCorpus(CoreDbContext db) : ICanonicalCorpus
         {
             var v = verses.SingleOrDefault(v => v.Chapter == l.Chapter && v.Verse == l.Verse && v.VariantKey == l.VariantKey);
             var available = texts.Where(t => t.VerseId == v?.Id).ToArray();
-            var missing = new[] { "DirectQuotation", "Translation", "Transliteration", "WordMeaning" }.Where(kind => !available.Any(t => t.Kind == kind)).ToArray();
+            var missing = (m.MaterialKind == "History" ? new[] { "HistoricalSource" } : new[] { "DirectQuotation", "Translation", "Transliteration", "WordMeaning" }).Where(kind => !available.Any(t => t.Kind == kind)).ToArray();
             var restricted = new List<string>();
             foreach (var t in available)
             {

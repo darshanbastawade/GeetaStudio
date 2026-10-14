@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-14",
+  "powerShellAndVsCodeJson": true,
+  "embeddedJavaScriptSyntax": [
+    "CorpusReaderPage",
+    "SourceAdminPage",
+    "ReadAdminPage",
+    "EditorialPage"
+  ],
+  "gitDiffCheck": true,
+  "interactiveDebug": false
+}

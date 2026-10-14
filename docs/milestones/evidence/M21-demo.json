@@ -1,0 +1,20 @@
+{
+  "verifiedDate": "2026-10-14",
+  "windowsPrivateTalk200": true,
+  "noStore": true,
+  "supportedCitations": true,
+  "unsupportedNoAiRun": true,
+  "otherSession403": true,
+  "newTurnRouteSwitch": true,
+  "originalRouteReplayAfterRestart": true,
+  "validatedStreaming": true,
+  "defaultQuestionAnswerSqlAbsent": true,
+  "availableCredits": 7,
+  "heldCredits": 0,
+  "apiRestart": true,
+  "problemReport": true,
+  "forgottenSession": true,
+  "paidExternalCalls": 0,
+  "liveQualified": false,
+  "freshF5Verified": false
+}

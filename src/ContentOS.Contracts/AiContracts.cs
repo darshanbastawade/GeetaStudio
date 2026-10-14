@@ -23,6 +23,12 @@ public sealed record GenerateAi(Guid OperationId, string Task, string Prompt, st
     // Host-owned lease proof: never accepted from HTTP JSON or included in replay fingerprints.
     [System.Text.Json.Serialization.JsonIgnore]
     public WorkflowAiAdmission? WorkflowAdmission { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore]
+    public TalkAiAdmission? TalkAdmission { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore]
+    public OptimizationAiAdmission? OptimizationAdmission { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore]
+    public bool RetainOutput { get; init; } = true;
 }
 public sealed record WorkflowAiAdmission(Guid RunId, Guid StepId, Guid LeaseToken);
 public sealed record AiUsage(long InputTokens, long CachedInputTokens, long OutputTokens);
@@ -42,3 +48,5 @@ public sealed record AiStreamEvent(string Kind, string? Delta = null, AiProvider
 public sealed record AiEmbeddingCall(AiProviderSettings Settings, EmbeddingRequest Request);
 public sealed record AiEmbeddingResult(OwnedEmbedding Embedding, AiUsage Usage);
 public sealed record PinAiEmbedding(Guid ProfileId, string ModelReference);
+
+public sealed record OptimizationAiAdmission(Guid ExperimentId, Guid DispatchId);

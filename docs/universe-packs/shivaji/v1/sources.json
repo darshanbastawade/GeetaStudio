@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "version": 1,
+  "key": "shivaji-maharaj",
+  "name": "Shivaji Maharaj",
+  "review": "Technical source/contract review only; human historical/editorial review pending",
+  "territories": [
+    "IN"
+  ],
+  "calendar": "Source years CE; do not infer Gregorian conversion, exact birth date, timezone or precision absent in evidence",
+  "books": [
+    {
+      "key": "sarkar",
+      "title": "Shivaji and His Times",
+      "author": "Jadunath Sarkar",
+      "year": 1920,
+      "edition": "Second edition, Longmans, Green and Co.",
+      "url": "https://archive.org/details/shivajihistimes00sarkrich",
+      "textUrl": "https://archive.org/download/shivajihistimes00sarkrich/shivajihistimes00sarkrich_djvu.txt",
+      "retrieved": "2026-10-14",
+      "fullOcrSha256": "C57A1FF9F919C14F85BE2ABC825BF6E608AF3D9490723D2CCAA33B102A9D20D7",
+      "rights": "Public-domain original text basis: 1920 publication; author died1958, selected India life+60 inference and US publication-expiry tag; distribution/jurisdiction review pending. No modern additions, scans or portraits licensed by this sample.",
+      "publisher": "Longmans, Green and Co."
+    },
+    {
+      "key": "kincaid",
+      "title": "A History of the Maratha People, volume I",
+      "author": "Charles Augustus Kincaid and Dattatray Balwant Parasnis",
+      "year": 1918,
+      "edition": "Oxford University Press, volume I",
+      "url": "https://archive.org/details/historyofmaratha01kincuoft",
+      "textUrl": "https://archive.org/download/historyofmaratha01kincuoft/historyofmaratha01kincuoft_djvu.txt",
+      "retrieved": "2026-10-14",
+      "fullOcrSha256": "BBF006B15CE3F7D783F9E5E0240A6E17A1F03A4C15D639C7D9E2123C08E8B63C",
+      "rights": "Public-domain original text basis: 1918 publication; last surviving author Kincaid died1954, India life+60 inference; human jurisdiction/distribution review pending. No modern editions/scans/images included.",
+      "publisher": "Humphrey Milford, Oxford University Press"
+    }
+  ],
+  "sourcePolicy": {
+    "bias": "Early twentieth-century secondary histories, not neutral consensus or independent contemporary eyewitness records. Retain attribution; do not reproduce ethnic/religious stereotypes as facts. Verify OCR against scans before public use.",
+    "fact": "Two-work technical corroboration only; human factual assessment required.",
+    "disagreement": "The selected Kincaid passage reports and disputes Grant Duff; direct Duff verification remains pending. The disagreement is not silently settled.",
+    "legend": "Narrated as a legend in the source; never established as miraculous historical fact.",
+    "dialogue": "Original invented archive-guide dialogue; no impersonation or invented words attributed to historical people.",
+    "birthDate": "Contested birth chronology requires separate research; no exact date asserted in this pack."
+  },
+  "terminology": {
+    "teaching": "Historical learning",
+    "subject": "Event, person, place or historical method",
+    "anchor": "Cited historical source account",
+    "chronology": "Source-year timeline",
+    "swarajya": "Historical political concept; contextual meaning requires sources, not a slogan",
+    "chhatrapati": "Royal title; preserve transliteration and context"
+  },
+  "quotes": [
+    {
+      "key": "method",
+      "book": "sarkar",
+      "text": "character  has  long  been  due,  as  the  last  scholarly \nwork  on  the  subject  was  composed,  by  Captain \nJames  Grant  Duff,  a  century  ago,  and  a  vast  mass \nof  original  material  unknown  to  him  has  become \naccessible  to  the  student  since  then.  To  put  the \ncase  briefly,  the  present  work  differs  from  his \neminently  readable  and  still  valuable  History  of  the \nMahrattas,  (3  Vols.,  1826),  in  the  rigid  preference  of \ncontemporary  records  to  later  compilations,  and  the \nexhaustive  and  minute  use  of  the  available  sources, \nboth  printed  and  MS. — in  Persian,  English,  Marathi \nand  Hindi,  as  well  as  the  Dutch  Records  in  the  India \nOffice,  London.",
+      "sha256": "B5F446A016F30EA8B61F50161D4619600EDEEF31E250E110F01C6081EA88641F",
+      "locator": "Internet Archive OCR shivajihistimes00sarkrich, UTF-8 lines 65-78; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "torna",
+      "book": "sarkar",
+      "text": "*  Sabhasad  is  silent  about  the  capture  of  Torna.  A.  N. \n576,  and  following  it  K.  K.  (ii.  115),  say  that  Chandan  was  the \nfirst  fort  taken  by  him.  The  date  of  the  capture  of  Torna  has \nbeen  conjecturally  put  as  1646.  Shiva  loots  Bijapuri  treasure \non  the  way,  Chit.  31  ;  Dig.  140.",
+      "sha256": "02F566348DAF5E5EE382BC47BFC142C016E4E9919890851389AC9A61812922E7",
+      "locator": "Internet Archive OCR shivajihistimes00sarkrich, UTF-8 lines 1721-1727; OCR preserved, source scan check/historical review pending"
+    },
+    {
+      "key": "surat-s",
+      "book": "sarkar",
+      "text": "At  1 1  o'clock  in  the  morning  of  Wednesday, \n6th  January,  1664,  Shivaji  arrived  at  Surat  and \npitched  his  tent  in  a  garden  a  quarter  of  a  mile  outside \nthe  Burhanpur  or  eastern  gate.  The  night  before",
+      "sha256": "ADCA0C243E8A4B2C548ED02324EBC7E9204D6EB010A8D1919C9B2611482D4E4A",
+      "locator": "Internet Archive OCR shivajihistimes00sarkrich, UTF-8 lines 4221-4224; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "surat-k",
+      "book": "kincaid",
+      "text": "chief,  whom  he  had  won  to  his  cause,  he  suddenly  appeared  on \nJanuary  5, 1664,  some  10  or  12  miles  from  Surat.  The  Governor \ntimidly  sent  a  messenger  to  inquire  what  Shivaji's  intentions \nwere.  He  also  called  on  the  Dutch  and  English  merchants \nto  assist  in  the  defence  of  the  town.f  Both,  however, \nrefused  to  do  more  than  defend  their  own  factories.  But  the",
+      "sha256": "62C4523096468A606EF51B5A6DF8CCD82247CD9C6F3AC563DF78BD568C43FB2C",
+      "locator": "Internet Archive OCR historyofmaratha01kincuoft, UTF-8 lines 8731-8736; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "purandar-s",
+      "book": "sarkar",
+      "text": "1665]  SHIVA  IN  MUGHAL  CAMP.  141 \n\nagreed  to  assist  the  Mughals  in  the  invasion  of  Bijapur \nwith  2,000  cavalry  of  his  son  Shambhuji's  mansab \nand  7,000  expert  infantry  under  his  own  command. \n(Ben.  MS.  70a  &  6.) \n\n§  1 8.     Shivaji  receives  Mughal  favours. \n\nDilir  Khan  was  greatly  offended  at  this  pacific \nend  of  the  siege,  which  robbed  him  of  the  chance \nof  military  glory,  and  at  Shiva's  not  having  made \nhim  the  intermediary  of  the  Emperor's  pardon.  So \nhe  refused  to  move  from  his  trenches  or  consent  to  an \narmistice.  The  politic  Jai  Singh  now  turned  to  soothe \nhim.  On  the  12th,  as  the  public  did  not  yet  know \nof  Shiva's  arrival,  he  was  mounted  on  an  elephant \nand  sent  with  Rajah  Rai  Singh  to  wait  on  Dilir  Khan, \nwho,  mollified  by  this  attention,  presented  him  with \ntwo  horses,  a  sword,  a  jewelled  dagger,  and  two \npieces  of  precious  cloth.  Then  Dilir  Khan  conducted \nShiva  back  to  Jai  Singh,  took  his  hand,  and  entrusted \nhim.  to  the  Rajah.  The  Rajah  now  presented  Shiva \nwith  a  robe  of  honour,  a  horse,  an  elephant,  and  an \nornament  for  the  turban  (jigha.)  Shiva,  who  had \ncome  unarmed,  with  cunning  policy  girt  on  the  sword \nfor  a  short  time  and  then  put  it  off  saying,  \"I  shall\\ \nserve  the  Emperor  as  one  of  his  devoted  but  unarmea \nservants.\" \n\nThat  day  (12th  June)  according  to  the  agreement, \n7,000  men  and  women,  (of  whom  4,000  were  com- \nbatants), left  Purandar,  and  the  Mughals  entered  into \npossession   of  it  ;    all   the   stores,    weapons,    artillery,",
+      "sha256": "3591DCDC56083192DE18099B4BAA4778BD5636D26369DA0B2B26C0295E9501B4",
+      "locator": "Sarkar (1920), ch. V, p. 141; archive OCR lines 5623–5657. Exact OCR; human scan/history review pending."
+    },
+    {
+      "key": "purandar-k",
+      "book": "kincaid",
+      "text": "last  Shivaji  sent  to  Jai  Sing  his  confidential  minister,  Raghunath \nPant,  who  swore  by  the  most  binding  oaths  that  this  time \nhis  master  really  was  in  earnest  (June  9,  1665).  Jai  Sing  in \nthe  end  believed  him  and  desired  that  Shivaji  should  visit  him. \nOn  his  part  he  swore  by  the  sacred  tidsi  plant  that  if  Shivaji \ndid  80,  not  a  hair  of  his  head  would  be  harmed.  Shivaji  w^as \nat  this  time  at  Raygad.  On  receiving  Jai  Sing's  message  he  set \nout  with  1000  horse.*  When  he  reached  Jai  Sing's  tents, \nthe  latter  sent  a  clerk  with  a  body  of  armed  Rajputs  to  inform",
+      "sha256": "80FB8D146A3250071DF3FA72F63F89CE75BD2488E3B1EB5EB390F75BA6F2D802",
+      "locator": "Internet Archive OCR historyofmaratha01kincuoft, UTF-8 lines 9009-9017; OCR preserved, source scan check/historical review pending"
+    },
+    {
+      "key": "agra-s",
+      "book": "sarkar",
+      "text": "1666]  SHIVA  MEETS  AURANGZ1B.  157 \n\n9th  May  he  arrived  in  the  outskirts  of  Agra,  where \nthe  Emperor  was  then  holding  Court. \n\n§  4.     Shivaji's   interview   with  Aurangzib. \n\nThe  12th  of  the  month  was  appointed  as  the  day \nof  his  audience.*  It  was  the  50th  lunar  birthday  of \nthe  Emperor.  The  Hall  of  Public  Audience  in  Agra \nFort  was  splendidly  decorated  for  the  occasion. \nThe  courtiers  appeared  in  their  most  gorgeous  robes. \nAll  things  were  ready  for  weighing  the  Emperor \nagainst  gold  and  silver,  which  would  then  be  given \naway  in  charity.  The  nobles  of  the  empire  and  their \nretainers  in  thousands  stood  in  marshalled  ranks \nfilling  that  vast  hall  of  pillars  and  the  ground  beyond \non  three  sides  of  it,  which  was  covered  with  costly \ncanopies. \n\nInto  this  Diwan~i~am,  Kumar  Ram  Singh  ushered \nShivaji  with  his  son  Shambhuji  and  ten  of  his  officers. \nOn  behalf  of  the  Maratha  chief,  1500  gold  pieces",
+      "sha256": "64DF2BDDFED78D13F356E9AF533934FD5DB1E3ECDA8F4FA59B5D5A0D8BA1B40B",
+      "locator": "Internet Archive OCR shivajihistimes00sarkrich, UTF-8 lines 6191-6213; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "agra-k",
+      "book": "kincaid",
+      "text": "Nevertheless  Shivaji  said  nothing  but  started  with  his  escort. \nOn  reaching  Agra  he  was  given  an  audience  (May  12,  1666).  J",
+      "sha256": "CC430A4AD08D8D6F6CA9B14B20EE016EAE4BBEC1615B974C6D4F7370D2A3624B",
+      "locator": "Internet Archive OCR historyofmaratha01kincuoft, UTF-8 lines 9301-9303; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "return",
+      "book": "sarkar",
+      "text": "On  returning  home  from  Agra  in  December  1666, \nShivaji   found   the   political   situation  in   the   Deccan \nentirely  changed.     The  Mughal    viceroy,    Jai  Singh,",
+      "sha256": "9AB971E232A56DB5F2C8ED8933B3CBB3842409AE52DC4FECA6AF4F888D63F2F0",
+      "locator": "Internet Archive OCR shivajihistimes00sarkrich, UTF-8 lines 7041-7043; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "coronation-s",
+      "book": "sarkar",
+      "text": "Next  day  (6th  June,  1674)  came  the  coronation \nitself.  Rising  very  early  in  the  morning,  Shivaji  pre- \npared himself  by  bathing  amidst  ceremonies  intended \nto  avert  evil,  worshipped  his  household  gods,  and \nadored  the  feet  of  his  family  priest,  Gaga  Bhatta,",
+      "sha256": "26347E72D4D9846883C655811929274CC8C6205395F8DEA5504BA81E0B377DE8",
+      "locator": "Internet Archive OCR shivajihistimes00sarkrich, UTF-8 lines 9448-9452; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "coronation-k",
+      "book": "kincaid",
+      "text": "On  June  6.  the  day  found  propitious  by  the  wisest  astrologers \nin  all  India,  the  coronation  was  held.f  In  one  of  the  open  court- \nyards was  erected  a  mighty  sliamiana  or  state  tent.  Inside \nit  was  a  temporary  throne  raised  upon  a  square  dais.  At  the \nprescribed  moment,  the  ministers  appeared  in  procession  leading \nShivaji,  clad  in  white,  to  the  throne.  Behind  the  king  followed",
+      "sha256": "6476A974BD98B9E42F35523C4E5D1EBFFF52D14444FA1D686473269DE1F6F263",
+      "locator": "Internet Archive OCR historyofmaratha01kincuoft, UTF-8 lines 10549-10554; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "dispute-left",
+      "book": "kincaid",
+      "text": "In  Grant  Duff's  story,  Shivaji  is  made  to  bribe  Afzul  Khan's  envoy,  Pantoji \nGopinath,  and  with  his  help  to  lead  Afzul  Khan  into  a  trap  deliberately  laid \nfor  him  and  treacherously  to  murder  him.  With  all  deference  to  that  learned",
+      "sha256": "18066B449C6C950E9E1759B07CF6BD9F6181AFB5D8E29741B2E9D056013D7CBE",
+      "locator": "Internet Archive OCR historyofmaratha01kincuoft, UTF-8 lines 6971-6973; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "dispute-right",
+      "book": "kincaid",
+      "text": "and  eminent  writer,  I  cannot  but  think  that  on  this  occasion  ho  has  been  less \nthan  fair  to  Shivaji.  Pantoji  Gopinath  was  Shivaji's  officer  and  not  Afzul \nKhan's.  The  bestowal  therefore  on  him  of  Hivare  village  was  not  a  bribe  at \nall  and  could  not  have  influenced  the  real  envoy,  Krishnaji  Bhaskar.  The",
+      "sha256": "2B0D0DF9275CB121B50D2A68F55AD9414CA7656A250D782111C68F6D8ABB1E76",
+      "locator": "Internet Archive OCR historyofmaratha01kincuoft, UTF-8 lines 6974-6977; OCR preserved; scan/human historical review pending"
+    },
+    {
+      "key": "legend",
+      "book": "sarkar",
+      "text": "A  legend,  as  old  as  his  contemporaries,  tells  us  that \nthe  care-worn  chieftain's  sleep  was  broken  by  a  vision \nof  the  goddess  Bhavani  who  urged  him  to  confront \nAfzal  boldly  and  promised  him  victory  and  her  full \nprotection.     (Sabh.  14.)",
+      "sha256": "A9579CA45D7181FC37AF9E83A0C00E6846E605EDCC4FD4C0A3D8078E2EFE555E",
+      "locator": "Internet Archive OCR shivajihistimes00sarkrich, UTF-8 lines 2973-2977; OCR preserved, source scan check/historical review pending"
+    }
+  ],
+  "readTarget": 10,
+  "watchTarget": 2,
+  "futurePacks": {
+    "sambhaji": "Separate versioned pack with permitted contemporary records, contested captivity/death accounts, distinct biography/voices; reuse historical source/timeline and same rights/review gates. Not implemented.",
+    "jain": "Separate philosophy pack with canonical text/translation/interpretation distinctions, tradition-aware terminology and human doctrinal review; reuse original scripture path where appropriate. Not implemented."
+  }
+}

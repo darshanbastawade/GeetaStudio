@@ -1,0 +1,128 @@
+[
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsCommand",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsCommand",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsConsent",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsConsent",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsConsent",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Enabled"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsConsent",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsDefinition",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsDefinition",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsEntry",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsEntry",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsForecast",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsForecast",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsFx",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsFx",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsSource",
+    "permission": "INSERT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsSource",
+    "permission": "SELECT",
+    "state": "GRANT",
+    "column": "object"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsSource",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "Enabled"
+  },
+  {
+    "principal": "GeetaStudioApi_Dev",
+    "table": "AnalyticsSource",
+    "permission": "UPDATE",
+    "state": "GRANT",
+    "column": "UpdatedUtc"
+  }
+]

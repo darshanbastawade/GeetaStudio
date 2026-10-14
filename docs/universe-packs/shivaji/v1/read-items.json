@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "version": 1,
+  "entries": [
+    {
+      "key": "methods",
+      "title": "Reading historians critically",
+      "classification": "HistoricalAccount",
+      "startYear": 1919,
+      "endYear": 1920,
+      "dating": "SourceYearCE",
+      "quotes": [
+        "method"
+      ],
+      "statement": null,
+      "people": [
+        "Jadunath Sarkar"
+      ],
+      "places": [
+        "Published historical study"
+      ],
+      "position": 1,
+      "disagreementPeer": null,
+      "interpretation": "Technical learning interpretation: reading historians critically invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    },
+    {
+      "key": "dialogue",
+      "title": "An invented archive-learning dialogue",
+      "classification": "DramatizedDialogue",
+      "startYear": 0,
+      "endYear": 0,
+      "dating": "UndatedLearningScene",
+      "quotes": [
+        "method"
+      ],
+      "statement": "Invented learning dialogue: the fictional Archive Guide asks, \"Which source supports that date?\" No historical person is claimed to have said these words.",
+      "people": [
+        "Archive Guide (fictional)"
+      ],
+      "places": [
+        "Invented learning room"
+      ],
+      "position": 2,
+      "disagreementPeer": null,
+      "interpretation": "Technical learning interpretation: an invented archive-learning dialogue invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    },
+    {
+      "key": "torna",
+      "title": "Torna and a conjectural chronology",
+      "classification": "HistoricalAccount",
+      "startYear": 1646,
+      "endYear": 1646,
+      "dating": "DisputedSourceYearCE",
+      "quotes": [
+        "torna"
+      ],
+      "statement": null,
+      "people": [
+        "Shivaji Maharaj"
+      ],
+      "places": [
+        "Torna"
+      ],
+      "position": 3,
+      "disagreementPeer": null,
+      "interpretation": "Technical learning interpretation: torna and a conjectural chronology invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    },
+    {
+      "key": "surat",
+      "title": "Surat in 1664",
+      "classification": "DocumentedFact",
+      "startYear": 1664,
+      "endYear": 1664,
+      "dating": "SourceYearCE",
+      "quotes": [
+        "surat-s",
+        "surat-k"
+      ],
+      "statement": "Shivaji and his forces came to Surat in 1664.",
+      "people": [
+        "Shivaji Maharaj"
+      ],
+      "places": [
+        "Surat"
+      ],
+      "position": 4,
+      "disagreementPeer": null,
+      "interpretation": "Technical learning interpretation: surat in 1664 invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    },
+    {
+      "key": "purandar",
+      "title": "Negotiations at Purandar",
+      "classification": "DocumentedFact",
+      "startYear": 1665,
+      "endYear": 1665,
+      "dating": "SourceYearCE",
+      "quotes": [
+        "purandar-s",
+        "purandar-k"
+      ],
+      "statement": "Shivaji and Jai Singh negotiated during the Purandar campaign in 1665.",
+      "people": [
+        "Shivaji Maharaj",
+        "Jai Singh"
+      ],
+      "places": [
+        "Purandar"
+      ],
+      "position": 5,
+      "disagreementPeer": null,
+      "interpretation": "Technical learning interpretation: negotiations at purandar invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    },
+    {
+      "key": "agra",
+      "title": "The visit to Agra",
+      "classification": "DocumentedFact",
+      "startYear": 1666,
+      "endYear": 1666,
+      "dating": "SourceYearCE",
+      "quotes": [
+        "agra-s",
+        "agra-k"
+      ],
+      "statement": "Shivaji attended the Mughal court at Agra in 1666.",
+      "people": [
+        "Shivaji Maharaj",
+        "Aurangzeb"
+      ],
+      "places": [
+        "Agra"
+      ],
+      "position": 6,
+      "disagreementPeer": null,
+      "interpretation": "Technical learning interpretation: the visit to agra invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    },
+    {
+      "key": "return",
+      "title": "Correspondence and the return from Agra",
+      "classification": "HistoricalAccount",
+      "startYear": 1666,
+      "endYear": 1666,
+      "dating": "SourceYearCE",
+      "quotes": [
+        "return"
+      ],
+      "statement": null,
+      "people": [
+        "Shivaji Maharaj"
+      ],
+      "places": [
+        "Agra",
+        "Deccan"
+      ],
+      "position": 7,
+      "disagreementPeer": null,
+      "interpretation": "Technical learning interpretation: correspondence and the return from agra invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    },
+    {
+      "key": "coronation",
+      "title": "Coronation and royal authority",
+      "classification": "DocumentedFact",
+      "startYear": 1674,
+      "endYear": 1674,
+      "dating": "SourceYearCE",
+      "quotes": [
+        "coronation-s",
+        "coronation-k"
+      ],
+      "statement": "Shivaji was crowned in 1674.",
+      "people": [
+        "Shivaji Maharaj"
+      ],
+      "places": [
+        "Raigad"
+      ],
+      "position": 8,
+      "disagreementPeer": null,
+      "interpretation": "Technical learning interpretation: coronation and royal authority invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    },
+    {
+      "key": "disagreement",
+      "title": "A reported disagreement about an envoy",
+      "classification": "DebatedClaim",
+      "startYear": 1659,
+      "endYear": 1659,
+      "dating": "DisputedSourceYearCE",
+      "quotes": [
+        "dispute-left"
+      ],
+      "statement": null,
+      "people": [
+        "Pantoji Gopinath",
+        "Shivaji Maharaj",
+        "Afzal Khan"
+      ],
+      "places": [
+        "Pratapgad"
+      ],
+      "position": 9,
+      "disagreementPeer": "dispute-right",
+      "interpretation": "Technical learning interpretation: a reported disagreement about an envoy invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    },
+    {
+      "key": "legend",
+      "title": "A legend about a divine vision",
+      "classification": "PopularLegend",
+      "startYear": 0,
+      "endYear": 0,
+      "dating": "UndatedLegend",
+      "quotes": [
+        "legend"
+      ],
+      "statement": null,
+      "people": [
+        "Shivaji Maharaj"
+      ],
+      "places": [
+        "Legendary narrative"
+      ],
+      "position": 10,
+      "disagreementPeer": null,
+      "interpretation": "Technical learning interpretation: a legend about a divine vision invites careful comparison of evidence and its limits. This is a modern learning reflection, not a contemporary record or scholarly consensus. Check the cited accounts, their dates, authors and uncertainties before making a claim.",
+      "practicalAction": "Write down the source, its date and one uncertainty before repeating a historical claim.",
+      "reflection": "What would change your confidence, and which further record would you seek?"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-14",
+  "pdf": "output/pdf/M24-printable-comic.pdf",
+  "pages": 2,
+  "pageSize": "A4",
+  "allPagesRenderedAndVisuallyInspected": true,
+  "clipping": false,
+  "overlap": false,
+  "orphanCreditsHeading": false,
+  "sourceAttributionVisible": true,
+  "fictionLabelVisible": true,
+  "canonicalCharacterVisible": true,
+  "licenseVersionDurationSeatsContractCorrectionPolicyVisible": true,
+  "taggedPdf": true,
+  "humanEditorialAcceptance": "Pending",
+  "realCommercialEligibility": false
+}

@@ -63,7 +63,7 @@ public sealed partial class EditorialWorkbench
         foreach (var id in r.ClaimRevisionIds)
         {
             var claim = await db.ClaimRevisions.AsNoTracking().SingleAsync(x => x.Id == id, ct); var head = await db.Claims.AsNoTracking().SingleAsync(x => x.Id == claim.ClaimId, ct);
-            if (claim.ReviewStatus != "Approved" || claim.Type is not ("News" or "History") || head.CurrentVersion != claim.Version || await db.ClaimCorrections.AnyAsync(x => x.ClaimRevisionId == id && x.Status == "Open", ct) || await db.EditorialCorrections.AnyAsync(x => x.ClaimRevisionId == id, ct)) blocks.Add("UnverifiedOrStaleEvent");
+            if (claim.ReviewStatus != "Approved" || claim.Type is not ("NewsClaim" or "HistoricalClaim") || head.CurrentVersion != claim.Version || await db.ClaimCorrections.AnyAsync(x => x.ClaimRevisionId == id && x.Status == "Open", ct) || await db.EditorialCorrections.AnyAsync(x => x.ClaimRevisionId == id, ct)) blocks.Add("UnverifiedOrStaleEvent");
             if (!await db.ClaimSpans.AnyAsync(x => x.ClaimRevisionId == id && r.SourceSnapshotIds.Contains(x.SnapshotId), ct)) blocks.Add("EventSourcesDoNotMatch");
         }
         if (!r.LessonVariantId.HasValue) blocks.Add("NoSuitableTeachingMatch");

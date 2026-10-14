@@ -14,6 +14,7 @@ public sealed partial class CoreDbContext
     public DbSet<CorpusSourceBinding> CorpusBindings => Set<CorpusSourceBinding>();
     private static void ConfigureCorpus(ModelBuilder m)
     {
+        m.Entity<CorpusManifest>().Property(x => x.MaterialKind).HasMaxLength(200).HasDefaultValue("Scripture");
         foreach (var type in new[] { typeof(CorpusManifest), typeof(CorpusVerse), typeof(CorpusText), typeof(CorpusAnnotation), typeof(CorpusCommand) })
         {
             m.Entity(type).HasBaseType((Type?)null); m.Entity(type).HasKey("Id");

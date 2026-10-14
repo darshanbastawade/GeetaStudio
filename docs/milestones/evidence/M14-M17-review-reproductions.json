@@ -1,0 +1,27 @@
+[
+  {
+    "caseName": "GenerationWithoutAiRights",
+    "rightsAllowed": false,
+    "rightsReason": "AiProcessingNotPermitted",
+    "generationState": "Completed",
+    "providerResource": "local-image:4160d2aa569b4d32ba6ddb6323bb46a0",
+    "cost": 0.0000
+  },
+  {
+    "caseName": "DifferentVoiceProviderMapping",
+    "productionState": "Review",
+    "voiceStage": "Accepted",
+    "pinnedPresentationVoice": "eedda0d7-dfe8-4c13-80fd-c0abce12f83e",
+    "actualTimelineVoice": "3a2a565b-2d2b-4568-a850-26cb2576c182",
+    "actualProfile": "owned-recording.v1",
+    "actualProvider": "media.speech.tone-fixture.v1",
+    "actualAccount": "local:different-voice-account"
+  },
+  {
+    "caseName": "CorrectedTrendTeaching",
+    "lessonOutputWithheld": true,
+    "briefState": "Approved",
+    "briefBlocks": [],
+    "exposesOldMeaning": "Fixture interpretation: understand the context before making a decision. This is an attributed example, not doctrinal consensus."
+  }
+]

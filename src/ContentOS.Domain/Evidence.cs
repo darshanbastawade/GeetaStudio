@@ -88,6 +88,7 @@ public static class EvidenceRules
         var expected = type switch
         {
             "Quotation" => "Quotation",
+            "SourceQuotation" => "SourceQuotation",
             "Translation" => "Translation",
             "Interpretation" => "Interpretation",
             "HistoricalClaim" => "HistoricalClaim",
@@ -99,7 +100,7 @@ public static class EvidenceRules
         };
         if (label != expected || uncertainty is not ("SourceExact" or "Limited" or "Contested" or "Unverified" or "Fictional"))
             throw new RuntimeValidationException("Explicit claim label and uncertainty are required.");
-        if (type is "Quotation" or "Translation" && uncertainty != "SourceExact")
+        if (type is "Quotation" or "Translation" or "SourceQuotation" && uncertainty != "SourceExact")
             throw new RuntimeValidationException("Exact source readings must retain their source-exact label.");
         if (type == "Interpretation") { CoreRules.Text(author, 200, "Interpretation author"); CoreRules.Text(tradition, 200, "Interpretation tradition"); }
         if (type == "FictionalScene" && uncertainty != "Fictional") throw new RuntimeValidationException("Fiction must be labeled fictional.");
@@ -110,5 +111,5 @@ public static class EvidenceRules
             start > 0 && char.IsLowSurrogate(text[start]) || start + length < text.Length && char.IsLowSurrogate(text[start + length]))
             throw new RuntimeValidationException("Span must use valid UTF-16 character boundaries.");
     }
-    public static bool RequiresClaims(string kind) => kind is "Canonical" or "Translation" or "Interpretation" or "CurrentEvent";
+    public static bool RequiresClaims(string kind) => kind is "Canonical" or "Translation" or "Interpretation" or "CurrentEvent" or "Historical";
 }

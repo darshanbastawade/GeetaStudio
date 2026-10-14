@@ -1,0 +1,58 @@
+{
+  "milestone": "M21",
+  "verifiedDate": "2026-10-14",
+  "status": "Offline Verified - controlled/private system",
+  "sdk": "10.0.401",
+  "lockedRestorePassed": true,
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "focused": {
+    "log": ".local/M21-focused-final.log",
+    "passed": 16,
+    "offline": 5,
+    "realSqlAndHttp": 11,
+    "skipped": 0,
+    "failed": 0
+  },
+  "windowsDemo": {
+    "evidence": "M21-demo.json",
+    "passed": true,
+    "freshInteractiveF5": false,
+    "log": ".local/M21-demo-final.log"
+  },
+  "models": {
+    "corePendingChanges": false,
+    "runtimePendingChanges": false
+  },
+  "development": {
+    "runtimeMigrations": 4,
+    "workerPermissionRows": 0,
+    "fixturesInserted": false,
+    "apiPermissionRows": 25,
+    "coreMigrations": 23,
+    "fullSourcePermissionHashPreserved": true,
+    "existingIdentifiersPreserved": true
+  },
+  "fullRegression": {
+    "status": "Passed",
+    "sqlPassed": 200,
+    "log": ".local/M21-verify.log",
+    "offlinePassed": 105,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0
+  },
+  "gates": {
+    "genuineHumanM12Reviews": 0,
+    "productionQualified": false,
+    "browserMobileAccessibilityVerified": false,
+    "liveProviderVerified": false
+  },
+  "paidExternalCalls": 0,
+  "publicDeployment": false,
+  "commitCreated": false,
+  "nextMilestoneStarted": false,
+  "formattingVerified": true,
+  "doctorPassed": true,
+  "migration": "20261013204153_M21Talk"
+}

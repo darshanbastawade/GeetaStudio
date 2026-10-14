@@ -119,11 +119,11 @@ public sealed partial class CoreDbContext(DbContextOptions<CoreDbContext> option
         m.Entity<CoreOperation>().HasOne<ContentItem>().WithMany().HasForeignKey(x => x.ContentId).OnDelete(DeleteBehavior.Restrict);
         m.Entity<CoreEvent>().HasOne<ContentRevision>().WithMany().HasForeignKey(x => x.RevisionId).OnDelete(DeleteBehavior.Restrict);
         ConfigureSources(m);
-        ConfigureCorpus(m); ConfigureEvidence(m); ConfigureKnowledge(m); ConfigureAi(m); ConfigureWorkflows(m); ConfigureLessons(m); ConfigureRegistry(m); ConfigureFactory(m); ConfigureEvaluation(m); ConfigureEditorial(m); ConfigureRead(m);
+        ConfigureCorpus(m); ConfigureEvidence(m); ConfigureKnowledge(m); ConfigureAi(m); ConfigureWorkflows(m); ConfigureLessons(m); ConfigureRegistry(m); ConfigureFactory(m); ConfigureEvaluation(m); ConfigureEditorial(m); ConfigureRead(m); ConfigureTrends(m); ConfigureMedia(m); ConfigureWatch(m); ConfigureSocial(m); ConfigureAnalytics(m); ConfigureCustomers(m); ConfigureTalk(m); ConfigureCreations(m); ConfigureCommerce(m); ConfigureOptimization(m);
     }
     public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
     {
-        foreach (var entry in ChangeTracker.Entries()) { ValidateRegistryChange(entry); ValidateFactoryChange(entry); ValidateEvaluationChange(entry); ValidateEditorialChange(entry); ValidateReadChange(entry); }
+        foreach (var entry in ChangeTracker.Entries()) { ValidateRegistryChange(entry); ValidateFactoryChange(entry); ValidateEvaluationChange(entry); ValidateEditorialChange(entry); ValidateReadChange(entry); ValidateTrendChange(entry); ValidateMediaChange(entry); ValidateWatchChange(entry); ValidateSocialChange(entry); ValidateAnalyticsChange(entry); ValidateCustomerChange(entry); ValidateTalkChange(entry); ValidateCreationChange(entry); ValidateCommerceChange(entry); ValidateOptimizationChange(entry); }
         if (ChangeTracker.Entries().Any(e => e.State == EntityState.Deleted && e.Entity is LessonProfile or LessonBundle or LessonMemory or LessonVariant or LessonCommand)) throw new InvalidOperationException("Lesson history cannot be deleted.");
         foreach (var e in ChangeTracker.Entries().Where(e => e.State is EntityState.Added or EntityState.Modified))
         {

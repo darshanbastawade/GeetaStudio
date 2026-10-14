@@ -164,10 +164,18 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
         if (e.Vector.Length != dimensions || e.Vector.Any(x => !float.IsFinite(x)) || e.Features.Length > 4000) throw new KnowledgeBlockedException("InvalidEmbeddingContract");
         var norm = Math.Sqrt(e.Vector.Sum(x => (double)x * x)); if (norm != 0 && Math.Abs(norm - 1) > .001) throw new KnowledgeBlockedException("InvalidEmbeddingNormalization");
     }
-    public async Task<bool> ProcessNextAsync(CancellationToken ct)
+    public Task<bool> ProcessNextAsync(CancellationToken ct) => Process(null, ct);
+    public async Task<bool> ProcessAsync(CoreScope scope, Guid universe, Guid index, CancellationToken ct)
+    {
+        await Access(scope, universe, true, ct);
+        if (!await db.KnowledgeIndices.AnyAsync(x => x.Id == index && x.UniverseId == universe && x.TenantId == scope.TenantId, ct)) throw new CoreAccessException();
+        return await Process(index, ct);
+    }
+    private async Task<bool> Process(Guid? target, CancellationToken ct)
     {
         db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct);
-        var index = await db.KnowledgeIndices.FromSqlRaw("SELECT TOP (1) * FROM [knowledge].[KnowledgeIndex] WITH (UPDLOCK,HOLDLOCK) WHERE [State]='Queued' ORDER BY [CreatedUtc],[Id]").SingleOrDefaultAsync(ct);
+        var query = target == null ? db.KnowledgeIndices.FromSqlRaw("SELECT TOP (1) * FROM [knowledge].[KnowledgeIndex] WITH (UPDLOCK,HOLDLOCK) WHERE [State]='Queued' ORDER BY [CreatedUtc],[Id]") : db.KnowledgeIndices.FromSqlInterpolated($"SELECT * FROM [knowledge].[KnowledgeIndex] WITH (UPDLOCK,HOLDLOCK) WHERE [State]='Queued' AND [Id]={target.Value}");
+        var index = await query.SingleOrDefaultAsync(ct);
         if (index == null) return false; var s = new CoreScope(index.TenantId, index.Actor);
         try
         {
@@ -208,7 +216,7 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
         foreach (var candidate in candidates) ValidateEmbedding(new(candidate.Vector, candidate.Features), index.Dimensions);
         var scores = await Adapter(index.Adapter).RankAsync(new(input, candidates, limit), ct);
         if (scores.Count > limit || scores.Select(x => x.ChunkId).Distinct().Count() != scores.Count || scores.Any(x => !permitted.ContainsKey(x.ChunkId) || !double.IsFinite(x.Score) || x.Score < 0)) throw new KnowledgeBlockedException("InvalidRetrievalContract");
-        var hits = scores.Select(score => { var p = permitted[score.ChunkId]; return new KnowledgeHit(score.ChunkId, p.Text.Id, p.Text.SnapshotId, p.Manifest.Id, p.Manifest.Version, p.Manifest.Edition, p.Verse.Chapter, p.Verse.Verse, p.Verse.VariantKey, p.Text.Kind == "Translation" ? "Translation" : "Quotation", p.Text.ExactText, p.SourceStart, p.Text.ExactText.Length, p.Text.Sha256, p.Text.SourceLocator, p.Citation, score.Score); }).ToArray();
+        var hits = scores.Select(score => { var p = permitted[score.ChunkId]; return new KnowledgeHit(score.ChunkId, p.Text.Id, p.Text.SnapshotId, p.Manifest.Id, p.Manifest.Version, p.Manifest.Edition, p.Verse.Chapter, p.Verse.Verse, p.Verse.VariantKey, p.Text.Kind == "HistoricalSource" ? "HistoricalSource" : p.Text.Kind == "Translation" ? "Translation" : "Quotation", p.Text.ExactText, p.SourceStart, p.Text.ExactText.Length, p.Text.Sha256, p.Text.SourceLocator, p.Citation, score.Score); }).ToArray();
         return new(hits.Length == 0 ? "NoSupportedMatch" : "SupportedEvidence", index.Id, index.EmbeddingSpaceId, index.Adapter, hits, index.Model, index.Dimensions, index.Normalization, index.Chunking);
     }
     public async Task<KnowledgeResult> RetrieveAsync(CoreScope s, Guid u, KnowledgeQuery r, CancellationToken ct)

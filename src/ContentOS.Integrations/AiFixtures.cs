@@ -23,7 +23,7 @@ public sealed class FixtureTextA : ITextGenerationProvider
             "quota" => new("QuotaExhausted", null, new(0, 0, 0)),
             "transient" => new("Unavailable", null, usage),
             "unknown" => new("UnknownUsage", null, null),
-            _ => new("Success", JsonSerializer.Serialize(new { text = "Fixture A: an original calm conversation.", citations = c.SourceIds }), usage, "fixture-a-" + c.AttemptId)
+            _ => new("Success", JsonSerializer.Serialize(new { text = TalkExtractiveFixture.Text(c) ?? "Fixture A: an original calm conversation.", citations = c.SourceIds }), usage, "fixture-a-" + c.AttemptId)
         };
     }
     public async IAsyncEnumerable<AiStreamEvent> StreamAsync(AiProviderCall c, [EnumeratorCancellation] CancellationToken ct)
@@ -44,7 +44,7 @@ public sealed class FixtureTextB : ITextGenerationProvider
     {
         Validate(c.Settings); ct.ThrowIfCancellationRequested();
         // Independent response/usage behavior; no invocation of fixture A.
-        var body = new Dictionary<string, object> { ["citations"] = c.SourceIds, ["text"] = "Fixture B: listen, consider alternatives, then choose." };
+        var body = new Dictionary<string, object> { ["citations"] = c.SourceIds, ["text"] = TalkExtractiveFixture.Text(c) ?? "Fixture B: listen, consider alternatives, then choose." };
         return Task.FromResult(new AiProviderResult("Success", JsonSerializer.Serialize(body), new(55, 0, 28), "fixture-b-" + c.AttemptId));
     }
     public async IAsyncEnumerable<AiStreamEvent> StreamAsync(AiProviderCall c, [EnumeratorCancellation] CancellationToken ct)

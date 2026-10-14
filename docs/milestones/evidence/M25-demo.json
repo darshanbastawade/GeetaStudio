@@ -1,0 +1,14 @@
+{
+    "samples":  20,
+    "anonymousStaffDenied":  true,
+    "p95Milliseconds":  32.3551,
+    "publicRelease":  false,
+    "loadQualification":  "Sequential local directory baseline only; not capacity or monthly SLO",
+    "readerP95TargetMilliseconds":  1000,
+    "f5Verified":  false,
+    "headersVerified":  true,
+    "date":  "2026-10-14",
+    "availabilityAlert":  false,
+    "readerAvailability":  1,
+    "latencyAlert":  false
+}

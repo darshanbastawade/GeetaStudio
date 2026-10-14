@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-14",
+  "scope": "M18-M21 review only",
+  "verdict": "Changes required; full SQL acceptance incomplete",
+  "productionChanges": false,
+  "findings": [
+    {
+      "line": 25,
+      "reproduction": "Desired-behavior SQL assertion failed",
+      "file": "src/ContentOS.Infrastructure/AiTalkAdmission.cs",
+      "issue": "Stale persona version admitted",
+      "priority": 1
+    },
+    {
+      "line": 61,
+      "reproduction": "Desired-behavior SQL assertion failed",
+      "file": "src/ContentOS.Infrastructure/TalkWorkbench.cs",
+      "issue": "Revoked source exposed in problem reports",
+      "priority": 1
+    },
+    {
+      "line": 40,
+      "reproduction": "Serial retry reached desired-behavior SQL assertion; null timing",
+      "file": "src/ContentOS.Infrastructure/AnalyticsReports.cs",
+      "issue": "Receipt event ignored for publication timing",
+      "priority": 2
+    },
+    {
+      "line": 33,
+      "reproduction": "Desired-behavior SQL assertion failed; expected100 actual120",
+      "file": "src/ContentOS.Infrastructure/AnalyticsReports.cs",
+      "issue": "Future observation selected before as-of",
+      "priority": 2
+    }
+  ],
+  "lockedBuild": {
+    "exit": 0,
+    "warnings": 0,
+    "errors": 0
+  },
+  "offline": {
+    "skipped": 0,
+    "passed": 105,
+    "failed": 0
+  },
+  "fullSql": {
+    "finalCount": null,
+    "exit": -1,
+    "status": "Stopped after SQL memory pressure",
+    "reportedFailures": 3
+  },
+  "serialRecovery": {
+    "broadFailuresRecovered": 3,
+    "failed": 0,
+    "exit": 0,
+    "skipped": 0,
+    "passed": 6,
+    "duration": "1m37s"
+  },
+  "initialReproductions": {
+    "desiredAssertionFailures": 3,
+    "exit": 1,
+    "infrastructureFailures": 1
+  },
+  "serialPublicationReproduction": {
+    "duration": "28s",
+    "desiredAssertionFailures": 1,
+    "exit": 1,
+    "infrastructureFailures": 0
+  },
+  "formatExit": 0,
+  "coreModelExit": 0,
+  "runtimeModelExit": 0,
+  "demoScriptsParsed": 4,
+  "unverified": [
+    "Complete full SQL regression",
+    "Fresh interactive F5/breakpoint",
+    "Browser/mobile/accessibility",
+    "Live external providers/payments/publishing",
+    "Genuine human/source/M12/privacy/safety qualification"
+  ],
+  "next": "Fix findings, repeat serial focused/full acceptance; do not begin M22"
+}

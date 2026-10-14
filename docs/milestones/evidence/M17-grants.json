@@ -1,0 +1,233 @@
+{
+  "verifiedDate": "2026-10-13",
+  "apiSelectInsertOnlyForImmutableHistory": true,
+  "apiUpdatesColumnScoped": true,
+  "workerWatchGrants": 0,
+  "deleteGrants": 0,
+  "rows": [
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchArtifact",
+      "permission": "INSERT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchArtifact",
+      "permission": "SELECT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchOperation",
+      "permission": "INSERT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchOperation",
+      "permission": "SELECT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProduction",
+      "permission": "INSERT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProduction",
+      "permission": "SELECT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProduction",
+      "permission": "UPDATE",
+      "columnId": 10,
+      "column": "TimelineJson"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProduction",
+      "permission": "UPDATE",
+      "columnId": 11,
+      "column": "State"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProduction",
+      "permission": "UPDATE",
+      "columnId": 13,
+      "column": "ReviewJson"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProduction",
+      "permission": "UPDATE",
+      "columnId": 14,
+      "column": "ReviewMinutes"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProduction",
+      "permission": "UPDATE",
+      "columnId": 16,
+      "column": "UpdatedUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProfile",
+      "permission": "INSERT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProfile",
+      "permission": "SELECT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProfile",
+      "permission": "UPDATE",
+      "columnId": 7,
+      "column": "Enabled"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchProfile",
+      "permission": "UPDATE",
+      "columnId": 9,
+      "column": "UpdatedUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "INSERT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "SELECT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 7,
+      "column": "State"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 8,
+      "column": "Attempts"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 9,
+      "column": "LeaseToken"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 10,
+      "column": "LeaseUntilUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 11,
+      "column": "NextUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 12,
+      "column": "OutputJson"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 13,
+      "column": "ExternalResourceId"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 14,
+      "column": "Outcome"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 15,
+      "column": "ActualCost"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchStage",
+      "permission": "UPDATE",
+      "columnId": 17,
+      "column": "UpdatedUtc"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchTemplate",
+      "permission": "INSERT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchTemplate",
+      "permission": "SELECT",
+      "columnId": 0,
+      "column": null
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchTemplate",
+      "permission": "UPDATE",
+      "columnId": 7,
+      "column": "ReviewStatus"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchTemplate",
+      "permission": "UPDATE",
+      "columnId": 8,
+      "column": "ReviewJson"
+    },
+    {
+      "principal": "GeetaStudioApi_Dev",
+      "table": "WatchTemplate",
+      "permission": "UPDATE",
+      "columnId": 10,
+      "column": "UpdatedUtc"
+    }
+  ]
+}

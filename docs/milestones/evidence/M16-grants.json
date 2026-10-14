@@ -1,0 +1,274 @@
+{
+  "immutableColumnsNotUpdateGranted": true,
+  "verifiedDate": "2026-10-12",
+  "existingApiOnly": true,
+  "noMediaDeleteGrant": true,
+  "grants": [
+    {
+      "column": "(table)",
+      "permission": "INSERT",
+      "table": "CharacterMediaPackage",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "SELECT",
+      "table": "CharacterMediaPackage",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "ReviewStatus",
+      "permission": "UPDATE",
+      "table": "CharacterMediaPackage",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "ReviewEvidence",
+      "permission": "UPDATE",
+      "table": "CharacterMediaPackage",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "ReviewJson",
+      "permission": "UPDATE",
+      "table": "CharacterMediaPackage",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "PresentationRevisionId",
+      "permission": "UPDATE",
+      "table": "CharacterMediaPackage",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "UpdatedUtc",
+      "permission": "UPDATE",
+      "table": "CharacterMediaPackage",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "INSERT",
+      "table": "MediaAsset",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "SELECT",
+      "table": "MediaAsset",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "CurrentVersion",
+      "permission": "UPDATE",
+      "table": "MediaAsset",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "UpdatedUtc",
+      "permission": "UPDATE",
+      "table": "MediaAsset",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "INSERT",
+      "table": "MediaCommand",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "SELECT",
+      "table": "MediaCommand",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "INSERT",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "SELECT",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "State",
+      "permission": "UPDATE",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "ExternalResourceId",
+      "permission": "UPDATE",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "ResultSha256",
+      "permission": "UPDATE",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "AcceptedVersionId",
+      "permission": "UPDATE",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "ActualCost",
+      "permission": "UPDATE",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "Outcome",
+      "permission": "UPDATE",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "LeaseToken",
+      "permission": "UPDATE",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "LeaseUntilUtc",
+      "permission": "UPDATE",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "UpdatedUtc",
+      "permission": "UPDATE",
+      "table": "MediaGeneration",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "INSERT",
+      "table": "MediaProfile",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "SELECT",
+      "table": "MediaProfile",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "Enabled",
+      "permission": "UPDATE",
+      "table": "MediaProfile",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "UpdatedUtc",
+      "permission": "UPDATE",
+      "table": "MediaProfile",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "INSERT",
+      "table": "MediaVersion",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "SELECT",
+      "table": "MediaVersion",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "ReviewStatus",
+      "permission": "UPDATE",
+      "table": "MediaVersion",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "ReviewEvidence",
+      "permission": "UPDATE",
+      "table": "MediaVersion",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "ReviewJson",
+      "permission": "UPDATE",
+      "table": "MediaVersion",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "UpdatedUtc",
+      "permission": "UPDATE",
+      "table": "MediaVersion",
+      "schema": "media",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "INSERT",
+      "table": "AssetLocations",
+      "schema": "runtime",
+      "state": "GRANT"
+    },
+    {
+      "column": "(table)",
+      "permission": "SELECT",
+      "table": "AssetLocations",
+      "schema": "runtime",
+      "state": "GRANT"
+    },
+    {
+      "column": "StoreKey",
+      "permission": "UPDATE",
+      "table": "AssetLocations",
+      "schema": "runtime",
+      "state": "GRANT"
+    },
+    {
+      "column": "VerifiedUtc",
+      "permission": "UPDATE",
+      "table": "AssetLocations",
+      "schema": "runtime",
+      "state": "GRANT"
+    }
+  ]
+}
