@@ -28,13 +28,13 @@ public sealed partial class TrendWorkbench
         {
             var row = await Story(s, u, id, ct); if (row.State != "Preparing") return id;
             var cluster = await Cluster(s, u, row.ClusterId, ct); await TrendFence.AssertCluster(db, cluster, ct);
-            var teaching = await Teaching(s, u, row.TeachingId, ct); var match = Read<TeachingSnapshot>(teaching.SnapshotJson);
+            var teaching = await Teaching(s, u, row.TeachingId, ct); await TrendFence.AssertTeaching(db, teaching, ct); var match = Read<TeachingSnapshot>(teaching.SnapshotJson);
             var baseLesson = await lessons.InspectAsync(s, u, teaching.LessonVariantId, ct);
             var claim = await db.ClaimRevisions.AsNoTracking().SingleAsync(x => x.Id == cluster.ClaimRevisionId, ct);
             var signals = (await db.TrendCandidates.AsNoTracking().Where(x => x.ClusterId == cluster.Id).ToListAsync(ct)).Select(x => Read<TrendSignal>(x.SnapshotJson)).ToArray();
             if (r.Format == "CalendarLesson" && !signals.Any(x => x.Kind == "EventCalendar")) throw new EvidenceBlockedException("ApprovedCalendarContextRequired");
             var events = await db.ClaimSpans.AsNoTracking().Where(x => x.ClaimRevisionId == claim.Id).Select(x => x.SnapshotId).Distinct().ToArrayAsync(ct);
-            var packages = new List<TrendPackage>(); var template = templates.Single(x => x.Key == plan.Snapshot!.Rules.Adapter);
+            var packages = new List<TrendPackage>(); var template = plan.Snapshot!.GenerationWorkflow == null ? templates.Single(x => x.Key == plan.Snapshot.Rules.Adapter) : null;
             foreach (var input in plan.Snapshot!.Briefs)
             {
                 if (claim.Locale != input.Brief.Cast.Locale) throw new EvidenceBlockedException("ReviewedLocalizedEventClaimRequired");
@@ -43,7 +43,7 @@ public sealed partial class TrendWorkbench
                     throw new EvidenceBlockedException("AudiencePackagesMustPreserveTheReviewedTeachingConnection");
                 foreach (var source in events) if (!(await new SourceRightsGuard(db).DecideAsync(s, source, new("Adapt", input.Brief.Cast.Locale, "IN", "Text", Adaptation: true), ct)).Decision.Allowed)
                     throw new RightsBlockedException("TrendAdaptationRightsRequired");
-                var output = template.Render(new(input, input.Brief.Formats[0]), ct);
+                var output = template?.Render(new(input, input.Brief.Formats[0]), ct) ?? new FactoryRenderResult("Original script pending shared AI factory generation and editorial review.", input.Brief.LearningGoal, "ai-workflow.v1");
                 packages.Add(new(input.Brief.Key, input.Brief.Cast.AudienceId, input.Brief.Cast.Locale, input.Brief.LearningGoal, input.Cast,
                     output.OriginalTreatment, output.Body, input.Brief.Formats[0].EstimatedMediaCost));
             }
@@ -57,8 +57,9 @@ public sealed partial class TrendWorkbench
         }, ct);
         return await StoryView(s, u, await Story(s, u, id, ct), ct);
     }
-    private async Task<TrendStoryView> StoryView(CoreScope s, Guid u, TrendStoryBrief row, CancellationToken ct)
+    private Task<TrendStoryView> StoryView(CoreScope s, Guid u, TrendStoryBrief row, CancellationToken ct) => Project(async () =>
     {
+        row = await Story(s, u, row.Id, ct);
         var blocks = new List<string>(); try { await TrendFence.AssertBrief(db, row, false, ct); } catch (Exception e) when (e is EvidenceBlockedException or RightsBlockedException) { blocks.Add(e.Message); }
         var snapshot = row.SnapshotJson.Length == 0 || blocks.Count > 0 ? null : Read<TrendStorySnapshot>(row.SnapshotJson);
         if (snapshot != null)
@@ -68,10 +69,10 @@ public sealed partial class TrendWorkbench
         if (row.State == "Preparing")
             foreach (var brief in Read<PrepareTrendStory>(row.RequestJson).Plan.Briefs)
                 guestProposals.AddRange((await registry.CastAsync(s, u, brief.Cast, ct)).MissingRoles);
-        return new(row.Id, row.FactoryPlanId, row.Version, row.State, snapshot, Convert.ToBase64String(row.RowVersion), blocks.ToArray(), guestProposals.Distinct().ToArray());
-    }
-    public async Task<TrendStoryView[]> StoriesAsync(CoreScope s, Guid u, CancellationToken ct)
-    { await Access(s, u, "Read", ct); var result = new List<TrendStoryView>(); foreach (var row in await db.TrendStoryBriefs.AsNoTracking().Where(x => x.TenantId == s.TenantId && x.UniverseId == u).OrderByDescending(x => x.CreatedUtc).Take(100).ToListAsync(ct)) result.Add(await StoryView(s, u, row, ct)); return result.ToArray(); }
+        return new TrendStoryView(row.Id, row.FactoryPlanId, row.Version, row.State, snapshot, Convert.ToBase64String(row.RowVersion), blocks.ToArray(), guestProposals.Distinct().ToArray());
+    }, ct);
+    public Task<TrendStoryView[]> StoriesAsync(CoreScope s, Guid u, CancellationToken ct)
+        => Project(async () => { await Access(s, u, "Read", ct); var result = new List<TrendStoryView>(); foreach (var row in await db.TrendStoryBriefs.AsNoTracking().Where(x => x.TenantId == s.TenantId && x.UniverseId == u).OrderByDescending(x => x.CreatedUtc).Take(100).ToListAsync(ct)) result.Add(await StoryView(s, u, row, ct)); return result.ToArray(); }, ct);
     public async Task ReviewStoryAsync(CoreScope s, Guid u, Guid id, TrendReview r, CancellationToken ct) => _ = await Command(s, u, r.OperationId, "brief-review", new { id, r }, "Review", async () =>
     {
         var row = await Story(s, u, id, ct); Expected(row, r.ExpectedRowVersion); TrendRules.Attest(r.Mode, r.EvidenceReference);
@@ -100,7 +101,7 @@ public sealed partial class TrendWorkbench
         foreach (var brief in await db.TrendStoryBriefs.Where(x => x.ClusterId == row.Id).ToListAsync(ct))
         {
             if (brief.State is not ("Preparing" or "Rejected")) brief.State = "Held";
-            if (!await db.TrendRemediations.AnyAsync(x => x.ClusterId == row.Id && x.BriefId == brief.Id && x.State == "Open", ct))
+            if (!db.TrendRemediations.Local.Any(x => x.ClusterId == row.Id && x.BriefId == brief.Id && x.State == "Open") && !await db.TrendRemediations.AnyAsync(x => x.ClusterId == row.Id && x.BriefId == brief.Id && x.State == "Open", ct))
                 db.TrendRemediations.Add(new() { Id = Guid.NewGuid(), TenantId = row.TenantId, UniverseId = row.UniverseId, ClusterId = row.Id, BriefId = brief.Id, Reason = reason });
         }
     }
@@ -122,7 +123,15 @@ public sealed partial class TrendWorkbench
         {
             var cluster = await Cluster(s, u, task.ClusterId, ct); if (!cluster.ClaimRevisionId.HasValue) continue;
             var brief = await Story(s, u, task.BriefId, ct); var teaching = await Teaching(s, u, brief.TeachingId, ct); var lesson = await db.LessonVariants.AsNoTracking().SingleAsync(x => x.Id == teaching.LessonVariantId, ct); var bundle = Read<LessonVariantSnapshot>(lesson.SnapshotJson).Bundle; var cause = cluster.ClaimRevisionId.Value;
-            foreach (var claim in new[] { bundle.Request.AnchorClaimRevisionId, bundle.Request.InterpretationClaimRevisionId }) { try { await new EvidenceEngine(db).RequireLessonClaimAsync(s, u, claim, new("Read", "en-IN", "IN", "Text"), ct); } catch (Exception e) when (e is EvidenceBlockedException or RightsBlockedException) { cause = claim; break; } }
+            var selectedClaimChanged = false;
+            foreach (var claim in new[] { bundle.Request.AnchorClaimRevisionId, bundle.Request.InterpretationClaimRevisionId }) { try { await new EvidenceEngine(db).RequireLessonClaimAsync(s, u, claim, new("Read", "en-IN", "IN", "Text"), ct); } catch (Exception e) when (e is EvidenceBlockedException or RightsBlockedException) { cause = claim; selectedClaimChanged = true; break; } }
+            if (!selectedClaimChanged && (task.Reason is "SourceObservationChanged" or "SourceObservationCapacityReached" || cluster.State == "Verified" && !await TrendFence.TeachingRetrievalAllowed(db, teaching, ct)))
+            {
+                // A changed extra search hit requires review without falsely correcting the valid event claim.
+                await Command(s, u, Derived(task.Id, "retrieval-review"), "retrieval-review-required", new { task.Id }, "Review", async () =>
+                { var row = await db.TrendRemediations.SingleAsync(x => x.Id == task.Id, ct); row.State = "EditorialReview"; return task.Id; }, ct);
+                continue;
+            }
             var correction = await editorial.CorrectAsync(s, u, new(Derived(task.Id, "editorial"), cause, null, task.Reason, "fixture:trend-remediation-not-external-takedown"), ct);
             await Command(s, u, Derived(task.Id, "delivered"), "remediation-delivered", new { task.Id, correction }, "Review", async () =>
             { var row = await db.TrendRemediations.SingleAsync(x => x.Id == task.Id, ct); row.State = "EditorialReview"; row.EditorialCorrectionId = correction; return task.Id; }, ct);
@@ -157,10 +166,14 @@ public sealed partial class TrendWorkbench
     {
         await Access(s, u, "Read", ct); var clusters = await db.TrendClusters.AsNoTracking().Where(x => x.TenantId == s.TenantId && x.UniverseId == u).ToListAsync(ct);
         var briefs = await db.TrendStoryBriefs.AsNoTracking().Where(x => x.TenantId == s.TenantId && x.UniverseId == u).ToListAsync(ct);
+        var paid = await (from batch in db.FactoryBatches join work in db.FactoryWorks on batch.Id equals work.BatchId join step in db.WorkflowCheckpoints on work.WorkflowId equals (Guid?)step.RunId join ai in db.AiRuns on step.OperationId equals ai.OperationId where batch.TenantId == s.TenantId && batch.UniverseId == u && briefs.Select(x => x.FactoryPlanId).Contains(batch.PlanId) && ai.TenantId == s.TenantId && step.Kind == "draft" select new { ai.Spent, ai.Reserved, ai.SnapshotJson }).ToListAsync(ct);
+        var currencies = paid.Select(x => Read<AiExecutionSnapshot>(x.SnapshotJson).Route.Currency).Distinct().ToArray();
+        if (currencies.Length > 1) throw new RuntimeValidationException("Trend text costs span currencies; use the currency-scoped analytics report.");
         return new(await db.TrendCandidates.CountAsync(x => x.TenantId == s.TenantId && x.UniverseId == u, ct), clusters.Count(x => x.State == "Verified"), clusters.Count(x => x.State == "Held"),
             clusters.Count(x => x.State == "Rejected"), briefs.Count(x => x.State == "Approved"), briefs.Count(x => x.State == "Rejected"),
             briefs.Where(x => x.SnapshotJson.Length > 0).Sum(x => Read<TrendStorySnapshot>(x.SnapshotJson).Packages.Sum(p => p.EstimatedProductionCost)),
             await db.TrendRemediations.CountAsync(x => x.TenantId == s.TenantId && x.UniverseId == u && x.State != "Resolved", ct),
-            await db.FactoryBatches.Where(x => x.TenantId == s.TenantId && briefs.Select(b => b.FactoryPlanId).Contains(x.PlanId)).SumAsync(x => x.GenerationCost, ct), null);
+            paid.Sum(x => x.Spent), null)
+        { OutstandingTextGenerationCost = paid.Sum(x => x.Reserved), TextGenerationCurrency = currencies.SingleOrDefault() };
     }
 }

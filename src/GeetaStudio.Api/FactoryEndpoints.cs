@@ -8,6 +8,7 @@ public static class FactoryEndpoints
     public static void MapFactory(this WebApplication app)
     {
         var g = app.MapGroup("/api/v1/factory/tenants/{tenant:guid}/universes/{universe:guid}").RequireAuthorization("StaffRead");
+        g.MapGet("/generation-workflows", (Guid tenant, Guid universe, IWorkflowRuntime workflows, HttpContext c, CancellationToken ct) => workflows.DefinitionsAsync(Scope(tenant, c), universe, ct));
         g.MapGet("/plans", (Guid tenant, Guid universe, IDraftFactory f, HttpContext c, CancellationToken ct) => f.PlansAsync(Scope(tenant, c), universe, ct));
         g.MapPost("/plans", (Guid tenant, Guid universe, RegisterFactoryPlan r, IDraftFactory f, HttpContext c, CancellationToken ct) => f.RegisterPlanAsync(Scope(tenant, c), universe, r, ct)).RequireAuthorization("StaffAdmin");
         g.MapPost("/pilots", (Guid tenant, Guid universe, FactoryPilotRequest r, IDraftFactory f, HttpContext c, CancellationToken ct) => f.ProposePilotsAsync(Scope(tenant, c), universe, r, ct)).RequireAuthorization("StaffAdmin");

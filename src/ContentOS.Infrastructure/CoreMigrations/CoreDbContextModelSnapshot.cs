@@ -5451,7 +5451,14 @@ namespace ContentOS.Infrastructure.CoreMigrations
                     b.Property<DateTimeOffset>("UpdatedUtc")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<Guid?>("WorkflowId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("WorkflowId")
+                        .IsUnique()
+                        .HasFilter("[WorkflowId] IS NOT NULL");
 
                     b.HasIndex("UniverseId", "TenantId");
 
@@ -11855,6 +11862,11 @@ namespace ContentOS.Infrastructure.CoreMigrations
 
             modelBuilder.Entity("ContentOS.Domain.FactoryWork", b =>
                 {
+                    b.HasOne("ContentOS.Domain.DurableWorkflow", null)
+                        .WithMany()
+                        .HasForeignKey("WorkflowId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("ContentOS.Domain.Universe", null)
                         .WithMany()
                         .HasForeignKey("UniverseId", "TenantId")

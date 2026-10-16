@@ -1,0 +1,168 @@
+{
+  "format": "Pass",
+  "affectedClasses": [
+    {
+      "class": "ContentOS.Foundation.Tests.SqlEditorialReviewRegressionTests",
+      "count": 4
+    },
+    {
+      "class": "ContentOS.Foundation.Tests.SqlEditorialTests",
+      "count": 9
+    },
+    {
+      "class": "ContentOS.Foundation.Tests.SqlEvidenceTests",
+      "count": 9
+    },
+    {
+      "class": "ContentOS.Foundation.Tests.SqlHistoricalTests",
+      "count": 4
+    },
+    {
+      "class": "ContentOS.Foundation.Tests.SqlKnowledgeTests",
+      "count": 7
+    },
+    {
+      "class": "ContentOS.Foundation.Tests.SqlLessonTests",
+      "count": 7
+    },
+    {
+      "class": "ContentOS.Foundation.Tests.SqlReadTests",
+      "count": 3
+    },
+    {
+      "class": "ContentOS.Foundation.Tests.SqlSourceTests",
+      "count": 9
+    },
+    {
+      "class": "ContentOS.Foundation.Tests.SqlTrendStoredEvidenceTests",
+      "count": 3
+    },
+    {
+      "class": "ContentOS.Foundation.Tests.SqlTrendTests",
+      "count": 4
+    }
+  ],
+  "publicPublishing": false,
+  "implementationManifest": [
+    {
+      "path": "src/ContentOS.Infrastructure/KnowledgeService.cs",
+      "sha256": "87CB55763E285E594798C3FD93A8CD550B4326A9DE2919EC2E8E2010588C095C"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/KnowledgeStoredEvidence.cs",
+      "sha256": "091EAF865604DA49E25F8EC89B91A208DF90A3511A7C8367AC4DB3FBF332036A"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/TrendWorkbench.cs",
+      "sha256": "0F41969F7192CD3373E8F5E7FC76D4859A550191AB1DEADB798C3614EE374C73"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/TrendStories.cs",
+      "sha256": "5F04D2C27578F4D0E24FE5D773B569D73D5B356D3B6B31038AF4C97906D2AF8F"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/TrendFence.cs",
+      "sha256": "0D0EF12AA2C14127DCA0F8F5147C5113A73FC919E3B640C6BE97211BCFD369B5"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/TrendStoredEvidence.cs",
+      "sha256": "C9C7AFD9E23ADAFD0AD469E1011CC280FDE883CB59DD271B3D874E3EEB177467"
+    },
+    {
+      "path": "tests/ContentOS.Foundation.Tests/TrendTestFixture.cs",
+      "sha256": "37C11294D85E79F4493F89B524A9FD6ACDF4EA5A9703F6AB29B0117536D69F19"
+    },
+    {
+      "path": "tests/ContentOS.Foundation.Tests/SqlTrendStoredEvidenceTests.cs",
+      "sha256": "99C80093BDD25E6A2AD95E14452BB3032FC8525494E95720F98A8C3FA4DF0725"
+    }
+  ],
+  "selectedPrompt": 2,
+  "initialTree": "Existing Prompt1 code/config/documentation changes and original instruction pack preserved",
+  "prompt2Status": "OfflineVerified",
+  "liveCalls": 0,
+  "modelLimits": [
+    "One source edition per scripture component locale; matched extra hit uses separate snapshot of same edition",
+    "Approved corpus/snapshot/concept reviews are frozen; no direct state mutation used to fabricate withdrawal"
+  ],
+  "verifiedUtc": "2026-10-15T06:46:24.8921327+00:00",
+  "migrationsAdded": 0,
+  "existingLicensesBroadened": false,
+  "wholeSqlSuiteRun": false,
+  "freshInteractiveDebug": "NotRun",
+  "newSqlCases": 3,
+  "inputPackSha256": "C106386C6C1915D4314E845A88B46AB894EDBCADB740B6FFF42BE611BF51383B",
+  "providerAdapterChanges": false,
+  "savedSnapshotHashesUnchanged": true,
+  "verificationCommand": "pwsh -NoProfile -File scripts/verify.ps1 -Locked -LowMemory -ResultsDirectory .local/M25-1-prompt2/verification",
+  "affectedFilter": "FullyQualifiedName~SqlSourceTests|FullyQualifiedName~SqlKnowledgeTests|FullyQualifiedName~SqlEvidenceTests|FullyQualifiedName~SqlLessonTests|FullyQualifiedName~SqlEditorial|FullyQualifiedName~SqlTrend|FullyQualifiedName~SqlReadTests|FullyQualifiedName~SqlHistoricalTests",
+  "pushed": false,
+  "initialCompilerFailure": {
+    "code": "CS0246",
+    "resolved": true,
+    "cause": "Missing CoreScope application namespace import"
+  },
+  "inputPackPreserved": true,
+  "date": "2026-10-15",
+  "remaining": [
+    "Prompt3 full combined verification and both model checks",
+    "Historical GitHub job log unavailable in Prompt1; matching hosted run after owner commit/push",
+    "Fresh interactive F5/browser/accessibility and genuine human/live/production acceptance not claimed"
+  ],
+  "milestoneStatus": "InProgress",
+  "databaseReset": false,
+  "implementationManifestSha256": "941B6F21FA8DF79099E85875B4D0550748AFBA0165C9769E68CBEBCBD6C472BA",
+  "tests": {
+    "affected": {
+      "trx": ".local/M25-1-prompt2/results/affected.trx",
+      "skipped": 0,
+      "total": 59,
+      "passed": 59,
+      "failed": 0
+    },
+    "green": {
+      "trx": ".local/M25-1-prompt2/results/green.trx",
+      "skipped": 0,
+      "total": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    "red-decoded": {
+      "trx": ".local/M25-1-prompt2/results/red-decoded.trx",
+      "skipped": 0,
+      "total": 3,
+      "passed": 1,
+      "failed": 2
+    },
+    "offline": {
+      "trx": ".local/M25-1-prompt2/verification/offline.trx",
+      "skipped": 0,
+      "total": 111,
+      "passed": 111,
+      "failed": 0
+    }
+  },
+  "database": "GeetaStudio_M1Tests",
+  "redBeforeProductionFix": true,
+  "publicContractsChanged": false,
+  "packageOrSdkChanges": false,
+  "aliasSwitchReplacesSavedEvidence": false,
+  "lockedRestore": "Pass",
+  "build": {
+    "log": ".local/M25-1-prompt2/verification/build.log",
+    "warnings": 0,
+    "errors": 0
+  },
+  "redAssertion": "Decoded serialized scalar fields, including Unicode and copied rationale/alternatives; generic diagnostic without restricted text",
+  "prompt1ImplementationPreserved": true,
+  "branch": "fix/m25-1-ci-baseline",
+  "readConsistency": "Serializable projection; joins active command transaction",
+  "milestone": "M25.1",
+  "prompt3Started": false,
+  "hostedSuccessObserved": false,
+  "entitiesChanged": false,
+  "commitCreated": false,
+  "revalidationCallsEmbeddingOrRanking": false,
+  "diffCheck": "Pass",
+  "head": "82cc55d431367b822300c1d64bbb00986d38ccdd"
+}

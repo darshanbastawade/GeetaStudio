@@ -1,0 +1,73 @@
+{
+  "verifiedUtc": "2026-10-15T19:02:46.947113+00:00",
+  "mode": "fresh-affected-classes-with-targeted-final-layout-recheck",
+  "database": "GeetaStudio_M1Tests",
+  "passed": 23,
+  "failed": 0,
+  "skipped": 0,
+  "classes": [
+    {
+      "class": "SqlNarrationTests",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "notExecuted": 0,
+      "run": "final-layout",
+      "trx": ".local/M25-2-prompt6/final-planner-sql/SqlNarrationTests.trx",
+      "sha256": "9E3356535D8165EC03A2E2ADA658130B3EA62D59EA2DBA7481B250DA1AE9E814"
+    },
+    {
+      "class": "SqlMediaTests",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "notExecuted": 0,
+      "run": "unchanged-execution-path-before-layout-adjustment",
+      "trx": ".local/M25-2-prompt6/affected-sql/SqlMediaTests.trx",
+      "sha256": "8E4D004879A68B92D6F96521155E3D5A8C42A26976F2EA3E3E1B0B41E2C12CC6"
+    },
+    {
+      "class": "SqlWatchTests",
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "notExecuted": 0,
+      "run": "final-layout",
+      "trx": ".local/M25-2-prompt6/final-planner-sql/SqlWatchTests.trx",
+      "sha256": "73417E49F06765337B3975A58B22B2C29B622CE22E1EDB139FA0CC5452CABDCA"
+    },
+    {
+      "class": "SqlMilestoneReviewFixTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "notExecuted": 0,
+      "run": "unchanged-execution-path-before-layout-adjustment",
+      "trx": ".local/M25-2-prompt6/affected-sql/SqlMilestoneReviewFixTests.trx",
+      "sha256": "247ED99BFF9BF879B95D62BFB8740E27C3CB68C5836E4F298F1E5B2C299910DF"
+    },
+    {
+      "class": "SqlHistoricalTests",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "notExecuted": 0,
+      "run": "unchanged-execution-path-before-layout-adjustment",
+      "trx": ".local/M25-2-prompt6/affected-sql/SqlHistoricalTests.trx",
+      "sha256": "2E5E888086C005D933FDFFB4BCBE7EC8EA52E4667A84E03C66F24505EF39E021"
+    }
+  ],
+  "baseAffectedRunPassed": 23,
+  "finalLayoutRecheckPassed": 10,
+  "repeatedTestsNotAddedToUniqueCount": true,
+  "changesSinceBaseRun": [
+    "src/ContentOS.Application/WatchNarration.cs",
+    "src/ContentOS.Infrastructure/WatchNarrationPlanning.cs",
+    "tests/ContentOS.Foundation.Tests/NarrationRuleTests.cs"
+  ],
+  "unaffectedThirteenExecutionPathsUnchanged": true,
+  "fullSuiteRun": false,
+  "combinedProcessRunQualified": false,
+  "priorFull253IsHistoricalPrompt5": true,
+  "genuineVoiceOrArtworkQualified": false
+}

@@ -25,6 +25,9 @@ internal sealed class WorkflowClaimCancellation : IAsyncDisposable
                                        run.NextStep == step.Number && step.Id == stepId && step.State == "Running" &&
                                        step.LeaseToken == lease && step.LeaseUntilUtc > now
                                        select step.Id).AnyAsync(stop.Token);
+                    valid = valid && !await db.FactoryWorks.AnyAsync(w => w.WorkflowId == runId &&
+                        (w.State != "AwaitingWorkflow" && w.State != "Running" || db.FactoryBatches.Any(b => b.Id == w.BatchId &&
+                            (b.State != "Queued" && b.State != "Running" || b.DeadlineUtc <= now))), stop.Token);
                     if (!valid) { await work.CancelAsync(); return; }
                 }
             }

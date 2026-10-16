@@ -1,0 +1,419 @@
+{
+  "milestone": "M25.1",
+  "selectedPrompt": 3,
+  "verifiedUtc": "2026-10-15T08:57:03.814885+00:00",
+  "milestoneStatus": "InProgress",
+  "prompt3LocalStatus": "OfflineVerified",
+  "sourceIdentity": {
+    "head": "82cc55d431367b822300c1d64bbb00986d38ccdd",
+    "branch": "fix/m25-1-ci-baseline",
+    "trackedDiffSha256": "94416610AD8472F4DD004F64D6BB1D73EA13D9ABF3E4F7AEBF31509B66E775C3",
+    "trackedDiffLocalPath": ".local/M25-1-prompt3/reviewed.patch",
+    "manifestPath": "docs/milestones/evidence/M25.1-prompt3-manifest.json",
+    "manifestSha256": "C3A68C3919BF9776C13C272C6B8B862BDEB5BFD64FC211FAE4529139DF6A46EB",
+    "includedUntrackedFiles": true,
+    "selfReferentialMetadataExclusions": [
+      "docs/milestones/evidence/M25.1-prompt3-manifest.json",
+      "docs/milestones/evidence/M25.1-prompt3-checks.json"
+    ],
+    "finalNonDocumentManifest": ".local/M25-1-prompt3/source-final.json",
+    "finalNonDocumentManifestSha256": "73F17A1B88713366AADFB4B8163AECFC290B850730A32871EC7D5AE54BC6C73E",
+    "finalNonDocumentFileCount": 544
+  },
+  "finalVerification": {
+    "lockedRestore": "Pass",
+    "build": {
+      "passed": true,
+      "warnings": 0,
+      "errors": 0
+    },
+    "offline": {
+      "passed": 111,
+      "failed": 0,
+      "skipped": 0,
+      "trx": ".local/M25-1-prompt3/qualified-offline/offline.trx"
+    },
+    "sql": {
+      "mode": "fresh-test-process-per-class",
+      "database": "GeetaStudio_M1Tests",
+      "discovered": 236,
+      "passed": 236,
+      "failed": 0,
+      "skipped": 0,
+      "classCount": 36,
+      "summary": "docs/milestones/evidence/M25.1-prompt3-sql-isolated.json",
+      "trxDirectory": ".local/M25-1-prompt3/qualified-sql",
+      "lowMemory": true
+    },
+    "format": "Pass",
+    "verifierExitCodes": [
+      0,
+      0
+    ],
+    "combinedProcessSqlQualified": false,
+    "models": [
+      {
+        "context": "CoreDbContext",
+        "exitCode": 0,
+        "result": "NoPendingModelChanges",
+        "log": ".local/M25-1-prompt3/CoreDbContext-model.log"
+      },
+      {
+        "context": "RuntimeDbContext",
+        "exitCode": 0,
+        "result": "NoPendingModelChanges",
+        "log": ".local/M25-1-prompt3/RuntimeDbContext-model.log"
+      }
+    ],
+    "migrationCounts": {
+      "Core": 31,
+      "Runtime": 4
+    },
+    "sdk": "10.0.401"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "mode": "combined",
+      "offlinePassed": 111,
+      "sqlPassed": 234,
+      "sqlFailed": 2,
+      "sqlSkipped": 0,
+      "sqlTotal": 236,
+      "sqlDuration": "22m19s",
+      "exitCode": 1,
+      "failures": [
+        "SqlHistoricalTests.Historical_retrieval_switch_workflow_factory_and_export_use_existing_owned_contracts: capped-profile fixture omitted review",
+        "SqlEditorialTests.Exact_approval_scheduling_dryrun_replay_and_restart_preserve_history_without_publication: immediate schedule expired during SQL checks"
+      ],
+      "log": ".local/M25-1-prompt3/full-verify.log"
+    },
+    {
+      "attempt": 2,
+      "mode": "isolated before low-memory controls",
+      "offlinePassed": 111,
+      "completedSqlClasses": 4,
+      "completedSqlPassed": 24,
+      "status": "DeliberatelyInterruptedIncomplete",
+      "fullPass": false,
+      "reason": "SQL low physical memory;980MB free;11 verification build nodes; restart final source with LowMemory",
+      "log": ".local/M25-1-prompt3/final-sql.log"
+    },
+    {
+      "attempt": 3,
+      "mode": "final isolated LowMemory",
+      "offlinePassed": 111,
+      "sqlPassed": 236,
+      "sqlFailed": 0,
+      "sqlSkipped": 0,
+      "status": "Pass",
+      "logs": [
+        ".local/M25-1-prompt3/qualified-offline.log",
+        ".local/M25-1-prompt3/qualified-sql.log"
+      ]
+    }
+  ],
+  "preservation": {
+    "prompt1ImplementationHashes": "All3Match",
+    "prompt2ImplementationHashes": "All8Match",
+    "ownerInputSha256": "C106386C6C1915D4314E845A88B46AB894EDBCADB740B6FFF42BE611BF51383B",
+    "nonDocumentFilesChangedInPrompt3": [
+      "scripts/verify-sql-isolated.ps1",
+      "tests/ContentOS.Foundation.Tests/HistoricalTestFixture.cs"
+    ],
+    "remainingFinalNonDocumentFilesUnchanged": 542,
+    "sourceBytesUnchangedThroughFinalSuite": true,
+    "priorTalkAnalyticsCommerceM26M27": "Preserved",
+    "migrationsAddedOrRewritten": 0,
+    "databaseReset": false,
+    "existingAssertionsOrDeadlinesWeakened": false
+  },
+  "hostedCi": {
+    "candidateSuccessObserved": false,
+    "status": "PendingOwnerReviewCommitPushAndExactShaRun",
+    "baseHeadRun": 38604099399,
+    "baseHeadConclusion": "failure",
+    "url": "https://github.com/darshanbastawade/GeetaStudio/actions/runs/38604099399",
+    "historicalFailureCause": "Exact job log not retrieved; local LF failure proven separately"
+  },
+  "remainingGates": [
+    "Matching successful hosted offline run for exact owner-pushed candidate",
+    "Combined-process SQL mode remains unqualified",
+    "Fresh interactive F5/accessibility/recovery not rerun",
+    "Genuine human/M12/live/production qualification remains pending"
+  ],
+  "commitCreated": false,
+  "pushed": false,
+  "prompt4Started": false,
+  "liveCalls": 0,
+  "postDocumentationSecretGate": {
+    "status": "Pass",
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "trx": ".local/M25-1-prompt3/post-docs/secret-gate.trx"
+  },
+  "rawArtifacts": [
+    {
+      "path": ".local/M25-1-prompt3/CoreDbContext-model.log",
+      "sha256": "C924DA1693AD60EB6A78717DDD333946A8A61A056C2CE2868AE514384F01C866"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-offline/build.log",
+      "sha256": "F95DDD1803197A7299F2C3A58EF0E77F93C838CA2F603B413DA5F1B855A21D04"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-offline/format.log",
+      "sha256": "1EA5357F7167D2FE328618E7BFEFF97E9F5D89BB7655973C88E9BA7E086389EE"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-offline/offline-tests.log",
+      "sha256": "189846B695C60C42B037AF29BF4C0094BDE4A9D3DD114BE3AE76260093CE1937"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-offline/offline.trx",
+      "sha256": "DCDBD3FC278BD8310456EE45653E63FF6F0CBC317260F6FDF54D39A78518B87F"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-offline/restore.log",
+      "sha256": "62DB98199670A0B5F38AE2394DF52F5FA1CB355DE0047079DFBEDDDDC99ABFBD"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-offline.log",
+      "sha256": "73E7556B0709A49A613C25A9799B08B613A26455AA70DAA4D0D58FFABFA16FCB"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-sql/SqlAiTests.trx",
+      "sha256": "3AF8148754AFA572BA440A292BDA98671EB401A20EB984FD9622FEF1B58831A3"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-sql/SqlAnalyticsContentTests.trx",
+      "sha256": "72668911176C10AA41F356F067E08FA2809FFD467F68C523E9ED95404661A82C"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-sql/SqlAnalyticsTests.trx",
+      "sha256": "97D5382A908BC85FA604E61E57500879002E3E40F63F33B6E1EFFC4C98CD3589"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-sql/SqlCommerceAdmissionTests.trx",
+      "sha256": "6B5469F31FFDC4202B5EF98A2ED6597730AFC7F34C353C7FD470163276B4C065"
+    },
+    {
+      "path": ".local/M25-1-prompt3/final-sql.log",
+      "sha256": "F7F4C3516F05FF309DC50B1DF6CAEE82A9C56E71C742FD81A7C26FDBB752A640"
+    },
+    {
+      "path": ".local/M25-1-prompt3/full-verify.log",
+      "sha256": "9D8E4DE7E65ABE80B6E29ADC080CBA991583837C7CC879C9C754B14E59FA27F1"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-offline/build.log",
+      "sha256": "A0D8471E3963300D5A23AC5B5C34B1BCCFD8C9390470FCEE0786A99D7E73D048"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-offline/format.log",
+      "sha256": "1EA5357F7167D2FE328618E7BFEFF97E9F5D89BB7655973C88E9BA7E086389EE"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-offline/offline-tests.log",
+      "sha256": "3330F08B5766D233C5FD68164FACA4A39403FA56439EA7DBAB554453BA8C89D7"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-offline/offline.trx",
+      "sha256": "118FA6D096155F893FCC738C80BDA4E90FE668B59FA241218F56BA7294EE273B"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-offline/restore.log",
+      "sha256": "630562C704C13F8E6A9B67757386BD639E5CE927CF1F618A606A56D96B89B8B2"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-offline.log",
+      "sha256": "43EC9893542A3481E8EC723607EF4B6DA6014EE2E4DDD30241BFF9A1600FCC20"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlAiTests.trx",
+      "sha256": "89D6D77579A797F0656280AFAC9598BCA4DBF216EB480F2EF430A642171184D5"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlAnalyticsContentTests.trx",
+      "sha256": "4EC3478189C32BB09F32F0CA7E99724DDD370F207ED810F7E2BD20AF4BB8E8C6"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlAnalyticsTests.trx",
+      "sha256": "F873F6F180F87C8340D11A879B22247F502B7F43C51E001D1A1AFC838CE03844"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlCommerceAdmissionTests.trx",
+      "sha256": "59EEF85B4E3542B2B3EEC88B13AA6881FE50031C512F66D42CE8320B921A602A"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlCommerceTests.trx",
+      "sha256": "E98B2A8F41B634C673B2A91213A3348A5FB4967FDD8F58A148EE0F669615A0D9"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlCoreTests.trx",
+      "sha256": "C79E87D1C6DB83EDAA98F230130A88EBFD491B04B320A4B9ED7FB78B1CA23A95"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlCorpusTests.trx",
+      "sha256": "5BD65D42E2B726AD878393AE9C4B3EB2F9C119EC21C663383B09241CEB2E509A"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlCreationTests.trx",
+      "sha256": "DCDCA8007618B52022BB79DBE4194DD6BDFEB713308616C0B3966A330157B25D"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlCustomerApiTests.trx",
+      "sha256": "D4B9852E0393C83970ED0284F05B93D4FAC9583F5471F68C84A20BFE7969DBDF"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlCustomerIdentityTests.trx",
+      "sha256": "C15D4687A62E3257B26EADE755C713AE98298E80D5A6A895A2BDB8D3D37642FD"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlCustomerTests.trx",
+      "sha256": "431FBEF9C4B3A78E6761E44312251075ABA7CF5A156175D483E2C3CFD730714E"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlEditorialReviewRegressionTests.trx",
+      "sha256": "68261E47C024261196F595F732EEC9065382980E9297D5F2C8D352B330E366DB"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlEditorialTests.trx",
+      "sha256": "57C9F6E99AA2605B62864A2F702FAA08723371A40178D1E28C4AAF85B24D1090"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlEvaluationTests.trx",
+      "sha256": "6D275287F8A0DA75E7364513AE39CD04951CEE0249D891420D778E7A25FA251F"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlEvidenceTests.trx",
+      "sha256": "3F63E77E098B5091F140CC63689E646706FD25AD3757A7C0A4E626F543AC2715"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlFactoryTests.trx",
+      "sha256": "7D49123909C17460F3366AC04FF4AE47CD7CF8D8E67F750BE522C7B1579B91FB"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlHardeningPersonaTests.trx",
+      "sha256": "79B776F73C4697DE78C234FFBFF89815384356A48A446123463A190AFD119DD3"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlHardeningTests.trx",
+      "sha256": "BE6558AC3572C82C372D89FC857389C38DC978ABE5098F288E1B486893E0B8FE"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlHistoricalTests.trx",
+      "sha256": "FDD2860B4BEB193A078C09AE71CDBE7C23CA3CA87338840B8A462953236AA623"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlKnowledgeTests.trx",
+      "sha256": "EFB7A48D64410B62BF59F326BB73EADD09632877DEF07762972FA78F4F4DF5A6"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlLessonTests.trx",
+      "sha256": "230427A8C9699452D56A9B8D3E3F12D8BDAE58E6FA23F64101ED83D2F8CD9100"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlMediaTests.trx",
+      "sha256": "ACC53EC6D141F04E1E8C432965C7DD6EE705FECD241868A71A51F978D750DEA8"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlMilestoneReviewFixTests.trx",
+      "sha256": "239BBE8CD0AEBE2DB27CFC2116E142BAEEB0090C26030B643108221A26056146"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlOptimizationTests.trx",
+      "sha256": "A269F658CC6F48B9327D52B3E4239902C45458BBAE7FE5966ACDD054D5DDAE5A"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlReadTests.trx",
+      "sha256": "CC486B20F56EE260E876A9E27EFD9220616A72EE58645C2A939307B023B3ECF7"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlRegistryTests.trx",
+      "sha256": "0FDD487460DD6EDB7E0E13A2AE60BAE6B64A66AF3AE10176DF1CFBD1FE8FF24F"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlRuntimeTests.trx",
+      "sha256": "8BA6D9F0CD83E7EFC2FE18EA2F37DD7FDBB8B3B57FB70B9BBB8CDC1D633CA423"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlSocialRecoveryTests.trx",
+      "sha256": "5995C0136E846CE0CD19718AA5B47A6588907C959A377B558762E044021610F2"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlSocialTests.trx",
+      "sha256": "0DDB1D4860B983531A8C1F0B1EC14B5443089A2087B9F73510A371C5C64BAF9B"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlSourceTests.trx",
+      "sha256": "5BE42959D6F916DED9EC691DAB826C0FE60A276BEC169791ECDCED93E138DD23"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlTalkApiTests.trx",
+      "sha256": "DC51F87D6CAD744715DDEE4E3881A8B5C01043051183AE677C014468BEA9CFAE"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlTalkTests.trx",
+      "sha256": "1A8CDC516FE78586AE19CDD54F9611FFA6C73F7575E4DBB2DC9688C2A87BD5F4"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlTrendStoredEvidenceTests.trx",
+      "sha256": "AA3D84A02ED2E6FAEB09C2D1F9F375ADD467EC0FDA7DC919C9685809C405A9E5"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlTrendTests.trx",
+      "sha256": "ABBE6EDEE02F4D792F0A201D951ECEA1928529DEAF9434C11A44A56C2D21E736"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlWatchTests.trx",
+      "sha256": "A312A93C8386358B6EE31E3FD2C2D7A6D40E3A6F4E56704B316C703AFF1B1F84"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql/SqlWorkflowTests.trx",
+      "sha256": "B391BCF613A1BDE3E8F5A95449E6CA885B628F6D17575C694438EE43D1936F67"
+    },
+    {
+      "path": ".local/M25-1-prompt3/qualified-sql.log",
+      "sha256": "BA2CE4ABD3CB58526CEC1714CC4B571F53B73E8426E11B62AD6D49D7BD0E01CB"
+    },
+    {
+      "path": ".local/M25-1-prompt3/RuntimeDbContext-model.log",
+      "sha256": "C924DA1693AD60EB6A78717DDD333946A8A61A056C2CE2868AE514384F01C866"
+    },
+    {
+      "path": ".local/M25-1-prompt3/verification/build.log",
+      "sha256": "D416C04FA512FA38CAE402382F1CB3CE164BF33170E5F5CD45436C4AD9ADE254"
+    },
+    {
+      "path": ".local/M25-1-prompt3/verification/offline-tests.log",
+      "sha256": "27BA465C078406091BCF400EA7EE78F0C7BFCCBEDD9CA4B9F63712D4CBAB91CA"
+    },
+    {
+      "path": ".local/M25-1-prompt3/verification/offline.trx",
+      "sha256": "83795654C90EB96A4DC9C218580079DB3F8F8318AB4BB2BBE8371172528AFF71"
+    },
+    {
+      "path": ".local/M25-1-prompt3/verification/restore.log",
+      "sha256": "62DB98199670A0B5F38AE2394DF52F5FA1CB355DE0047079DFBEDDDDC99ABFBD"
+    },
+    {
+      "path": ".local/M25-1-prompt3/verification/sql-tests.log",
+      "sha256": "CC14CB7A82118A56F804EB4D1107E419D178305302DEA047C3F37707109E2EDC"
+    },
+    {
+      "path": ".local/M25-1-prompt3/verification/sql.trx",
+      "sha256": "3FBD405DA19CD8623B4F8DDB8FD1ED0C3F2D35B4F0B48365AFE2A662CBE73F5A"
+    },
+    {
+      "path": ".local/M25-1-prompt3/post-docs/secret-gate.trx",
+      "sha256": "3012541FD917F10AD80EA0FB0937D90B9883DD55EE1EA4CCDAE7F5E17AAC9F88"
+    },
+    {
+      "path": ".local/M25-1-prompt3/post-docs-secret.log",
+      "sha256": "8F51A54840905C8638505E570823A767C2FE604CD71F44C29697BB5C3593B585"
+    }
+  ],
+  "diffCheck": "Pass"
+}

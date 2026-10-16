@@ -1,0 +1,730 @@
+{
+  "verifiedUtc": "2026-10-16T02:08:55.679988+00:00",
+  "scope": "Prompt7 only / M25.2 partly verified; live acceptance blocked",
+  "status": "Offline Verified independent implementation; M25.2 In Progress",
+  "manifestSha256": "6984934876B719B82D10D5A1688CF3FB4DEEB6870920E82FE1C4F10A29DCDF91",
+  "sourceFreezePreserved": true,
+  "sourceFiles": 565,
+  "offline": {
+    "total": 160,
+    "passed": 160,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  "sql": {
+    "passed": 256,
+    "failed": 0,
+    "skipped": 0,
+    "freshClassProcesses": 40,
+    "fullSuiteRunOnFinalSource": true,
+    "combinedProcessQualified": false
+  },
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "lockedRestoreAndFullFormatPassed": true,
+  "bothModelsMatchMigrations": true,
+  "schemaCounts": [
+    {
+      "database": "GeetaStudio_M1Tests",
+      "coreMigrations": 32,
+      "dboMigrations": 4
+    },
+    {
+      "database": "GeetaStudio_Dev",
+      "coreMigrations": 32,
+      "dboMigrations": 4
+    }
+  ],
+  "actualDemoCommandPassed": true,
+  "development": {
+    "verifiedUtc": "2026-10-16T07:36:23.2921003+05:30",
+    "database": "GeetaStudio_Dev",
+    "restrictedApiReady": true,
+    "factoryPage200": true,
+    "trendsPage200": true,
+    "socialPage200": true,
+    "watchPage200": true,
+    "mediaPage200": true,
+    "speechCatalog200": true,
+    "anonymousStatus": 401,
+    "crossTenantStatus": 403,
+    "actualWindowsLocales": [
+      "en-US"
+    ],
+    "installedVoiceCount": 2,
+    "qualification": "LocalWindowsPreview",
+    "voicePermissionApproved": false,
+    "artworkApproved": false,
+    "publicLaunchLocaleApproved": false,
+    "technicalDefaultLocale": "en-IN",
+    "workersDisabled": true,
+    "createdRecords": 0,
+    "paidCalls": 0,
+    "interactiveBrowserOrF5Verified": false,
+    "ownedApiStopped": true
+  },
+  "preservation": {
+    "verifiedDate": "2026-10-16",
+    "database": "GeetaStudio_Dev",
+    "core.CharactersCount": 11,
+    "core.CharactersIdsHash": "HAav8Pfi1YSKNa74xJBDt0Z5fOpXpUGGxgRDHXNY1Tk=",
+    "core.UniversesCount": 4,
+    "core.UniversesIdsHash": "mI9KgskhZ0B14uL50Ze1gIR8hrf00EsPv36muozuuUs=",
+    "corpus.CorpusVerseCount": 78,
+    "corpus.CorpusVerseIdsHash": "qun7DlmAE5c18V0+mGEi6pw2nRvKd2gerIBFU2XpGGQ=",
+    "runtime.JobsCount": 10,
+    "runtime.JobsIdsHash": "XF/TBKw0Cf1MF8WIYt1oUWBsEqXTnoUBXXgl6wd/5+U=",
+    "sources.SourcePermissionCount": 9,
+    "sources.SourcePermissionIdsHash": "97mU6RJ5YmfKn6FY/YARa+8h0E32lLYlnUcVBICkDBU=",
+    "permissionsHash": "feXaccQj/RnCJNYkyKtlcM2LHGYxg1MFR5xmCa8Tes0=",
+    "coreMigrations": 32,
+    "dboMigrations": 4,
+    "completeGeetaAndHistoricalBaselinePreserved": true,
+    "existingIdsPreserved": true,
+    "sourcePermissionsUnchanged": true,
+    "databaseReset": false,
+    "liveCalls": 0
+  },
+  "technicalMediaQa": {
+    "outputs": [
+      {
+        "audience": "child",
+        "path": ".local/M25-2-prompt7/sample/child-CONTROLLED-TONE-NOT-NARRATION.mp4",
+        "sha256": "113723C8F638A69F43315630C637B2D1B69C5CBCBD13465A9545485C34EE0F37",
+        "length": 948110,
+        "seconds": 87.021333,
+        "size": [
+          640,
+          360
+        ],
+        "codecs": [
+          "h264",
+          "aac"
+        ],
+        "captionSegments": 10,
+        "completeCaptions": true,
+        "decodePassed": true,
+        "audioPeakDb": -23.8,
+        "voiceIsSyntheticTone": true,
+        "artIsPlaceholder": true,
+        "genuineHumanReview": false,
+        "aiLedgerCurrency": "USD",
+        "aiLedgerSyntheticAmount": 0.001,
+        "actualExternalCharge": 0,
+        "mediaCurrency": "INR",
+        "mediaLedgerAmount": 0.0
+      },
+      {
+        "audience": "youth",
+        "path": ".local/M25-2-prompt7/sample/youth-CONTROLLED-TONE-NOT-NARRATION.mp4",
+        "sha256": "3D139C2780E181931655D928C4EA06EB268625F971166BA0FD947F63DD82E01E",
+        "length": 984253,
+        "seconds": 88.771333,
+        "size": [
+          640,
+          360
+        ],
+        "codecs": [
+          "h264",
+          "aac"
+        ],
+        "captionSegments": 11,
+        "completeCaptions": true,
+        "decodePassed": true,
+        "audioPeakDb": -23.8,
+        "voiceIsSyntheticTone": true,
+        "artIsPlaceholder": true,
+        "genuineHumanReview": false,
+        "aiLedgerCurrency": "USD",
+        "aiLedgerSyntheticAmount": 0.00116,
+        "actualExternalCharge": 0,
+        "mediaCurrency": "INR",
+        "mediaLedgerAmount": 0.0
+      }
+    ],
+    "humanQualityApproved": false,
+    "technicalFrameInspectionPending": false,
+    "technicalFrameInspection": "Assistant inspected one extracted caption frame per final master: readable captions, adequate margins, no image/caption overlap. This is not genuine human creative, listening or native-language acceptance."
+  },
+  "integratedAssertions": {
+    "fixtureOnly": true,
+    "outputs": [
+      {
+        "Key": "child",
+        "audience": "ce06ae28-5282-4b07-8138-36953bd01390",
+        "Id": "686d8d93-bae3-48b2-8e52-cca614b296b6",
+        "Sha256": "113723C8F638A69F43315630C637B2D1B69C5CBCBD13465A9545485C34EE0F37",
+        "socialPackage": "26139356-aeee-40f3-a51e-3187707a40de",
+        "run": "01ee07ae-5be1-4ff8-988b-83389a2e5947",
+        "Spent": 0.001
+      },
+      {
+        "Key": "youth",
+        "audience": "f2e16ea7-156a-4a0f-a286-286bb8acd229",
+        "Id": "6c5cc416-2e86-4d5d-ade3-323f1718dc10",
+        "Sha256": "3D139C2780E181931655D928C4EA06EB268625F971166BA0FD947F63DD82E01E",
+        "socialPackage": "f88fcbc4-08a9-43da-89ab-618bf548a3a7",
+        "run": "efc44608-6cba-4a91-8dc5-af4676336ca1",
+        "Spent": 0.00116
+      }
+    ],
+    "noSuitableMatchBlocked": true,
+    "staleExportsBlocked": true,
+    "withdrawnExportsAndPreviewBlocked": true,
+    "generationSubmissions": 2,
+    "mediaSubmissions": 23,
+    "acceptedStagesReused": true,
+    "genuineHumanReview": false,
+    "actualExternalCharge": 0,
+    "publicPosts": 0
+  },
+  "originalOwnerInputAndEarlierWorkPreserved": true,
+  "liveCalls": 0,
+  "publicPosts": 0,
+  "actualExternalCharge": 0,
+  "genuineHumanReview": false,
+  "freshInteractiveF5Verified": false,
+  "liveStagesExecuted": false,
+  "osProcessKillRecoveryVerified": false,
+  "retainedFocusedAttempts": [
+    {
+      "path": ".local/M25-2-prompt7/focused-eighth/pipeline.trx",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-fifth/pipeline.trx",
+      "total": 5,
+      "passed": 4,
+      "failed": 1,
+      "notExecuted": 0
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-first/pipeline.trx",
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "notExecuted": 0
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-fourth/pipeline.trx",
+      "total": 5,
+      "passed": 4,
+      "failed": 1,
+      "notExecuted": 0
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-second/pipeline.trx",
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "notExecuted": 0
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-third/pipeline.trx",
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "notExecuted": 0
+    }
+  ],
+  "interruptedPreRationaleRun": {
+    "completedClasses": 5,
+    "passed": 28,
+    "fullSuite": false,
+    "sourceSuperseded": true,
+    "results": [
+      {
+        "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlAiTests.trx",
+        "total": 10,
+        "passed": 10,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      {
+        "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlAnalyticsContentTests.trx",
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      {
+        "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlAnalyticsTests.trx",
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      {
+        "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlCommerceAdmissionTests.trx",
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      {
+        "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlCommerceTests.trx",
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    ]
+  },
+  "repetitionsNotAddedToUniqueFinalTotals": true,
+  "remainingGates": [
+    "Permitted real current-event/feed evidence and reviewed defensible teaching",
+    "Approved artwork, compatible narration/consent/rights and human quality",
+    "Genuine M12 development/held-out human acceptance and current manual reviews",
+    "Qualified enabled live credentials and explicit owner spend",
+    "Positive live staging / real provider usage and invoice qualification",
+    "Matching hosted CI on owner-committed/pushed candidate",
+    "Fresh interactive F5/accessibility and OS-process-kill acceptance not newly verified",
+    "Production release; Prompt8 unselected; M22 missing"
+  ],
+  "evidenceFiles": [
+    {
+      "path": ".local/M25-2-prompt7/build-eighth.log",
+      "sha256": "AA4E0AE938FB3F58B42DE87DAEA8B20308487B3933EC9C4DABE2CE99BD7303B1"
+    },
+    {
+      "path": ".local/M25-2-prompt7/build-fifth.log",
+      "sha256": "DC731466C561A58D69E08A4DF372714100EF420C57C9BCC1F96288FAF4B3FA17"
+    },
+    {
+      "path": ".local/M25-2-prompt7/build-first.log",
+      "sha256": "38F6CF973CB1572CD7BAE6FC524195FE7FDFE133B9FE5658619FD6097B46E45E"
+    },
+    {
+      "path": ".local/M25-2-prompt7/build-fourth.log",
+      "sha256": "A09A4C21C1D5665E174A3B6A037833A9083229B8F7FEDB5CDEB610C21DFCB112"
+    },
+    {
+      "path": ".local/M25-2-prompt7/build-ninth.log",
+      "sha256": "DC731466C561A58D69E08A4DF372714100EF420C57C9BCC1F96288FAF4B3FA17"
+    },
+    {
+      "path": ".local/M25-2-prompt7/build-second.log",
+      "sha256": "4FB64C166CACB7E2CAA53F8B02C3AEBC9C6FEBC73A33AC4CEEFBF08A49F8FD93"
+    },
+    {
+      "path": ".local/M25-2-prompt7/build-seventh.log",
+      "sha256": "0D818F1945030FFD31B4607D8859691DE6CC4E6BECADC14E226233078DD304DB"
+    },
+    {
+      "path": ".local/M25-2-prompt7/build-sixth.log",
+      "sha256": "20F33914ABCD8C25692AC66CF235E45851257D77E51790D5C6C34FB6A8282A1F"
+    },
+    {
+      "path": ".local/M25-2-prompt7/build-third.log",
+      "sha256": "C99944BE06BF9972138F694D5F6E97F1521A156762294B3C18267674E772D74C"
+    },
+    {
+      "path": ".local/M25-2-prompt7/CoreDbContext-model.log",
+      "sha256": "C924DA1693AD60EB6A78717DDD333946A8A61A056C2CE2868AE514384F01C866"
+    },
+    {
+      "path": ".local/M25-2-prompt7/demo/pipeline.trx",
+      "sha256": "F64FDD1AE39FDA5B41E27063F5F7927A6727BF193670D349ADF4AD2728E79229"
+    },
+    {
+      "path": ".local/M25-2-prompt7/demo-before-rationale.log",
+      "sha256": "09B2466BAA1B1B186DA12459E8954C1E5A3B64792839280F3A3F38AF72F8AEEE"
+    },
+    {
+      "path": ".local/M25-2-prompt7/demo-before-rationale.trx",
+      "sha256": "530490FF726E7BDE48B1FF544EE61B9C1AB178F0772780FBF74EEBCF7B31419C"
+    },
+    {
+      "path": ".local/M25-2-prompt7/demo.log",
+      "sha256": "28597B8A4A8811B3FB0985DE7E89E5DC9827D2E1218325CB543A6E5D12732DBA"
+    },
+    {
+      "path": ".local/M25-2-prompt7/development-smoke.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-offline/build.log",
+      "sha256": "1881A9FA327B159FF02083C0A666F12E613FCE0D56A3F8E0F083AC604103D842"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-offline/format.log",
+      "sha256": "1EA5357F7167D2FE328618E7BFEFF97E9F5D89BB7655973C88E9BA7E086389EE"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-offline/offline-tests.log",
+      "sha256": "62413F9E6D3B3D05F313E7943A1312554FD76EBE8F51C6BF95C1AEA94CA22763"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-offline/offline.trx",
+      "sha256": "D78936DBB98F8F47F5F714C1161E4BE7D3FBF8EDFDF33E054E32DA4BE2309818"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-offline/restore.log",
+      "sha256": "62DB98199670A0B5F38AE2394DF52F5FA1CB355DE0047079DFBEDDDDC99ABFBD"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-offline.log",
+      "sha256": "D6CD6CFCA170A1F86448EFB671BF6D348CBC9698C54775861E508ECF12CEE1B9"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlAiTests.trx",
+      "sha256": "868DEEE9A8DA8A5693223C7771BDEC927C8AA9BC9969FD0CC89C11C95BEAFC3A"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlAnalyticsContentTests.trx",
+      "sha256": "F6F4F601BAB3509160221B0D73DC72A6DD678D490FB214DE35BF39B216D3AA52"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlAnalyticsTests.trx",
+      "sha256": "0A5A39C19C7D50428FFAEA1F2AC5E0E2B58E5A856ED978AF004A20BA5629168F"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlCommerceAdmissionTests.trx",
+      "sha256": "3DB1D8583FB2ECF4C8C0220672FFE7E03E09273BF709F8494772D6536EF487EE"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlCommerceTests.trx",
+      "sha256": "3B2D13E2719BB9DA9C6DEA88961547B9B738F5AB29A159438D4DA1DE2306C0B6"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlCoreTests.trx",
+      "sha256": "12E8FA61EFC17A0C2C52406609510CF0AEB1F25A363963CDB8F7AADAD24CF105"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlCorpusTests.trx",
+      "sha256": "96E8BA016134BB0EB0BDD321F44A5D8FF2E0DE7724A32B8D0BBEA30B7B9E7157"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlCreationTests.trx",
+      "sha256": "F66B92F090D1CE9639AE727A910DEF751CF3A3C50323C8D8980C2CCD8532D297"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlCustomerApiTests.trx",
+      "sha256": "898091C81558DD68EE76FA2620E8E60E0BDBC58DF7011CF5B39EF46630DA4D61"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlCustomerIdentityTests.trx",
+      "sha256": "EE46ED1E85F76379D0C2C2436FA380D855A9B04B20888B7022F175FD4A1BE723"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlCustomerTests.trx",
+      "sha256": "5CBB4D10DD2B99866D8E6D83DE91180B3737A2A6A6F3B75C784DFB79AA4FC92F"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlEditorialReviewRegressionTests.trx",
+      "sha256": "036EB84A971F3253E1093EA01D5AC59287C3F13D4A6133DA2C0E00A3983F3B44"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlEditorialTests.trx",
+      "sha256": "56E733CDF6B8611C2F7576FA36EBC1428C74AA5F9F130F1ED5F15F252E5182E9"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlEvaluationTests.trx",
+      "sha256": "109D158083773B20E9B1742C9AE69C0746EF2E6AD74F5E1BE5E2AC61F48523B1"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlEvidenceTests.trx",
+      "sha256": "84E665BCE685040F45338D4CB605214634F9BBFEAA468B37F1F9DF66FD653174"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlFactoryAiTests.trx",
+      "sha256": "C4280BCCADAB0268D2299A2A303DB23AA7B038A74F3D77F74A1C9634C122D2A5"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlFactoryTests.trx",
+      "sha256": "A40D483B82C19699811FA3B8AE9930E53085C7A7D371B0C5882E4D572D0513E4"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlHardeningPersonaTests.trx",
+      "sha256": "1824D5DC794306896A22000E4A5028DE918E0ED63FB93D7ED7657ACA43A5015C"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlHardeningTests.trx",
+      "sha256": "0FEC2ABFBDE005D641968CCDC56D6E6EF840EF708509265CB4A62FF31D308E77"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlHistoricalTests.trx",
+      "sha256": "A9FFB4BB099050E6AE3409827EA4A6FEF94496C8B4277A74D7B4392DAC5AD9B1"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlIntegratedPipelineTests.trx",
+      "sha256": "F8E16F0F461DC94E47CC035DD36889A8212C00B36631039489DDB50157D4E7A1"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlKnowledgeTests.trx",
+      "sha256": "AFAC1ACE7CC8D0C158D16EC28AF7A01AB03711531BF78B2AAA8E529DA7A00141"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlLessonTests.trx",
+      "sha256": "8BD3412F4C957D0CB2B0172B6F283F498E6BC39E8DC540764E21AC6DFB3B4D01"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlMediaTests.trx",
+      "sha256": "CF7A4697A7CEAC492E63C35830C166AC6F1B00A0632148D310D8DD1B7E7506FE"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlMilestoneReviewFixTests.trx",
+      "sha256": "CE78C9D6E00C129DE413AF8ABF3E7EDF0D856949F43316569FE4F14D35973DB2"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlNarrationTests.trx",
+      "sha256": "4390535E153AC9E14D817A3E9EC23067D8F658319D5656384599A46372E68863"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlOptimizationTests.trx",
+      "sha256": "3B057B9856F9D4B61D7587A667E98D631DCF35BF2CDCD2403052B1DAB87812CC"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlReadTests.trx",
+      "sha256": "0F60C281C9A03B0F1383DD54B240FE400D504E7252C13B38C5A3B7D058A1D8E1"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlRegistryTests.trx",
+      "sha256": "BF984AC862917E1EA4551122669F05508C050B60D5DCC2B89610DED01FE0BE6D"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlRuntimeTests.trx",
+      "sha256": "D39DB0C6D64339EBC60AEE23117C6305CD30F59148209CC2E8B8686F9132D278"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlSocialRecoveryTests.trx",
+      "sha256": "82B1E9C2B45ECEB008DAF17DD6ECBB90257A20AFC243209D061815A6546A1E18"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlSocialTests.trx",
+      "sha256": "09F4E392FF6E256A5B8B3E3868C465042290224FC95EA9DB5AE5BE2FD72409D8"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlSourceTests.trx",
+      "sha256": "5DBC763538AD1DF0CC0F1FA3F5A989D5CF70603F36E08767650F113D7C41440D"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlTalkApiTests.trx",
+      "sha256": "A654470EA2BE58BB6CC29ED67F0525EEBDCA3FDF3858469FFA06016A1E257C24"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlTalkTests.trx",
+      "sha256": "303277ACC3CC984E929E231DAEB9167CEDE491B7DEF2240A161E2EF694A3CB3E"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlTrendIntakeTests.trx",
+      "sha256": "DA27C2D3E58A0D4B5B7327DBC075006E6A5D4FC772C4769D529D7E702F6019A1"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlTrendStoredEvidenceTests.trx",
+      "sha256": "A5CF2804EDB50391C3500BE90830A90BDE2E31930298168A4FF03623EDAD46C9"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlTrendTests.trx",
+      "sha256": "1375A53F841625C87870CEC89800F12CA2F51CA4BD3D8047940F776D93272D32"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlWatchTests.trx",
+      "sha256": "00EAE28996875985FD778038A23C347062B55C76209E0DB4171694AAD47D6069"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql/SqlWorkflowTests.trx",
+      "sha256": "22CEA0A817F97219C27F29F87D683668A59FF3FDFB4FE9CBE7ACF9306199752F"
+    },
+    {
+      "path": ".local/M25-2-prompt7/final-sql.log",
+      "sha256": "A88D3D9B036E7C21BC8FE0E2760EB0DD98570D98C91CAF16EC061C6CA2E9DAF8"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-eighth/pipeline.trx",
+      "sha256": "8FBAD931E3CA7EE13F92AAA59974035EBAA47E5B62AB4259F08BAC7079FF68B5"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-eighth.log",
+      "sha256": "DB10DEB7DA9378CFB8EB5BEAAF22181E7423D1E303DAB63F741492BE5F41DDB1"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-fifth/pipeline.trx",
+      "sha256": "AD60B645D09E069492C7765A0A1F2D47FBD8A2FB2A611A90DB2D9DF4EECD6136"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-fifth.log",
+      "sha256": "C7795ECEE2A8A6AFE58031AAE95DB18354C189DABFF9BFF346E7D959C645D17C"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-first/pipeline.trx",
+      "sha256": "3042ABD45ECCCFFFFB1F2643F38F056B9DEC2534BA4AEFC930AA5AD44D432597"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-first.log",
+      "sha256": "58ACF098434523F9DCB4C5AF99738CCA27C926FEA9BC6A68E65799C7671D69B1"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-fourth/pipeline.trx",
+      "sha256": "A921D4D9CAF9EB8A775230FDEDB240A8D006B07953B85A37BDB20E901B6D2BDE"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-fourth.log",
+      "sha256": "90407C8D30D91FEFE03C8B944700F2BB401C8629E61E4D648BA7DC7384E63BA4"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-second/pipeline.trx",
+      "sha256": "575DD63C3EBFE58C8C98C8F9FB2E8DC4EAF1E4D900CE85F483AE838E2525E1E0"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-second.log",
+      "sha256": "2635D00B6B7AC197635B12284584A37A4D3AFE85BB3B1AF6B65A0520734A956A"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-third/pipeline.trx",
+      "sha256": "2112C5A45631E7DA009B7B3E010785CD6A7555889001F987965E7D472E9867C1"
+    },
+    {
+      "path": ".local/M25-2-prompt7/focused-third.log",
+      "sha256": "29FDC3501200DA0922B91DA3D789B8DD48DC1AC1132F852F156DF2782E28FF07"
+    },
+    {
+      "path": ".local/M25-2-prompt7/format-new.log",
+      "sha256": "16CF73C0A4A740F8B7896D2C0D17E7869A8EA2016F53CDCCB0C87E1958604C72"
+    },
+    {
+      "path": ".local/M25-2-prompt7/migration-counts.log",
+      "sha256": "0105A4FEFADCE7FF89AC494A8D756EE5CC50E4AFF07D10B6D8EF314D4D5CB60F"
+    },
+    {
+      "path": ".local/M25-2-prompt7/offline-before-rationale-fix/build.log",
+      "sha256": "ED9A22D2E3B403E0C1DDD7045FBA0F91DBFA69029CD34E43293C028F68FEA7A7"
+    },
+    {
+      "path": ".local/M25-2-prompt7/offline-before-rationale-fix/format.log",
+      "sha256": "1EA5357F7167D2FE328618E7BFEFF97E9F5D89BB7655973C88E9BA7E086389EE"
+    },
+    {
+      "path": ".local/M25-2-prompt7/offline-before-rationale-fix/offline-tests.log",
+      "sha256": "62413F9E6D3B3D05F313E7943A1312554FD76EBE8F51C6BF95C1AEA94CA22763"
+    },
+    {
+      "path": ".local/M25-2-prompt7/offline-before-rationale-fix/offline.trx",
+      "sha256": "2B65F3CF1598031C8EAE098B1C994E33E0BB7197590FAC5BF76B044C4E3EC728"
+    },
+    {
+      "path": ".local/M25-2-prompt7/offline-before-rationale-fix/restore.log",
+      "sha256": "62DB98199670A0B5F38AE2394DF52F5FA1CB355DE0047079DFBEDDDDC99ABFBD"
+    },
+    {
+      "path": ".local/M25-2-prompt7/offline-before-rationale-fix.log",
+      "sha256": "1075AA9542B32FC5A3371D4778EC1554F1A69CCE6DE0EE500562E45E18D58C71"
+    },
+    {
+      "path": ".local/M25-2-prompt7/post-doc-secret/secrets.trx",
+      "sha256": "9166C66DB7086F1B522B227903A551C9467FBC1B28C8C55755B25B040C2EC0BE"
+    },
+    {
+      "path": ".local/M25-2-prompt7/post-doc-secret.log",
+      "sha256": "55AF004E94F4C202F62E45233A16FF8E3FFB694E21AA029A9E95CDDA81DD4AEC"
+    },
+    {
+      "path": ".local/M25-2-prompt7/preservation-after.log",
+      "sha256": "92B21E41E19A7949263AA5A6B24096233F2A6B975E1095F8EF006BD80B8E599E"
+    },
+    {
+      "path": ".local/M25-2-prompt7/preservation-before.log",
+      "sha256": "18840997C9DC8E945911BF3B8E1975A948EFC128DEA2F7EDC776F228F1FEC3CC"
+    },
+    {
+      "path": ".local/M25-2-prompt7/RuntimeDbContext-model.log",
+      "sha256": "C924DA1693AD60EB6A78717DDD333946A8A61A056C2CE2868AE514384F01C866"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/acceptance.json",
+      "sha256": "FD3D2C317E9D30CC1A2AE10572645ABEB02C4EB13A9433C52488503BE9DBC696"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/child-audio.log",
+      "sha256": "B0310B5CB0C4BD01B087131944F2FD36493D07F597AEA8714CD2F7981A33144C"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/child-caption-frame.png",
+      "sha256": "60C15E27BC6452BF9AA9CE3B103BF6FA6D917D9721AE7A03C1A3B79347964208"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/child-CONTROLLED-TONE-NOT-NARRATION.mp4",
+      "sha256": "113723C8F638A69F43315630C637B2D1B69C5CBCBD13465A9545485C34EE0F37"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/child-decode.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/child-probe.json",
+      "sha256": "19B2242B4463100E5113FB0F5D40336A05BCDB11AAA9CF3382FA106836BEDB57"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/child.json",
+      "sha256": "94CBBFADDF7A1CE5DD51E9A512ABD624578E5C5211E5A47AB189A9814F3EBD2C"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/child.srt",
+      "sha256": "6E4D5CC6884B4D7649A23545C940937FDFE5DBD48711011DE9F0AD7D2C0943CC"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/child.vtt",
+      "sha256": "AE2010C9E5B171E7460E8B453BD3C77A0079855F448B62D295B454213F64D5AB"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/youth-audio.log",
+      "sha256": "25746D711DB6AB0F1CD6ACA1F08CDBC41F23D6D4AE40711A1EDF9FB77DEA47E2"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/youth-caption-frame.png",
+      "sha256": "E06463C31B71C38A3E2DD1D4FF465CB0AF004AABB47E80851854192171658604"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/youth-CONTROLLED-TONE-NOT-NARRATION.mp4",
+      "sha256": "3D139C2780E181931655D928C4EA06EB268625F971166BA0FD947F63DD82E01E"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/youth-decode.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/youth-probe.json",
+      "sha256": "DE2595F46DFA1521AB59FC54956D65CFCC39FB3F3CD8D270063A105725BA84D6"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/youth.json",
+      "sha256": "48195F7D52579442C44C1FF3638DF84CAE12FED740BF795FBCFD06028180A87C"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/youth.srt",
+      "sha256": "6E2A6D78FBD79FD5460D7BDC986B4C9CF88B1ECFD3365D10488FB75DBC2F0757"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sample/youth.vtt",
+      "sha256": "593905C02C9D50F2F5E3772431D478FFFF0AA51FC5CF47C69D36775A5A01BC94"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlAiTests.trx",
+      "sha256": "5AEF2AAC34575BAE6983E28CFBC4BB8223BF0429E01C868911F00326261680FB"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlAnalyticsContentTests.trx",
+      "sha256": "BBAF6E0043BDB4736A5D4013CA837B9DC1C3DABCE9553F14CC7EAFAE76AA4209"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlAnalyticsTests.trx",
+      "sha256": "7A33578E05257C5F1D8E4958656A0D6D6683A4FCB47CED28DFC793099BD94C28"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlCommerceAdmissionTests.trx",
+      "sha256": "69C28D658A8ED49856E0EF8612F4EBB11EFE07695957C60CA04D423F301A32DF"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sql-before-rationale-fix/SqlCommerceTests.trx",
+      "sha256": "DEA70CC19DC31E33E8F5AFA7E0C36EDC5E7A5DF21B0AB0549FD074AD64CF3B67"
+    },
+    {
+      "path": ".local/M25-2-prompt7/sql-before-rationale-fix.log",
+      "sha256": "D9909E5C6F1EBF01F41FD498802FBD551A51F31F94C470C53575C6605E63AD65"
+    }
+  ],
+  "finalArtifactSecretTrx": ".local/M25-2-prompt7/final-artifact-secret/secrets.trx"
+}

@@ -1,0 +1,141 @@
+{
+  "baseHead": "82cc55d431367b822300c1d64bbb00986d38ccdd",
+  "branch": "fix/m25-1-ci-baseline",
+  "identity": "HEAD plus reviewed tracked binary diff and these changed-file bytes, including untracked files",
+  "excludedSelfReferentialEvidence": [
+    "docs/milestones/evidence/M25.1-prompt3-manifest.json",
+    "docs/milestones/evidence/M25.1-prompt3-checks.json"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "state": "Untracked",
+      "sha256": "04F1EEACE400CF76834034D3CA46F90F68A95C6CB72A7965153ADCFDCDD77086"
+    },
+    {
+      "path": ".github/workflows/verify.yml",
+      "state": "TrackedModified",
+      "sha256": "B0BD3A6CBAE520815454D4B1E51CA6814683A5C61AF205DCCC15BC4D3F7A0357"
+    },
+    {
+      "path": "README.md",
+      "state": "TrackedModified",
+      "sha256": "924E934731C0458398FBBE5372014E2A5F9ADCBE2F837331A6C86C8ECF02FFE2"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "state": "TrackedModified",
+      "sha256": "23043124062A0081F7A0B779C2CA39DB454AF3C287CBE72DB133888686EB7FFF"
+    },
+    {
+      "path": "docs/GeetaStudio_Codex_Implementation_Steps.md",
+      "state": "Untracked",
+      "sha256": "C106386C6C1915D4314E845A88B46AB894EDBCADB740B6FFF42BE611BF51383B"
+    },
+    {
+      "path": "docs/LOCAL_DEVELOPMENT.md",
+      "state": "TrackedModified",
+      "sha256": "CA2E11EFD3467F5B06EB14C3D5FA90F4B598309B77151F229501EA8F7C616DD1"
+    },
+    {
+      "path": "docs/MILESTONE_MATRIX.md",
+      "state": "TrackedModified",
+      "sha256": "1ADFA38526339B0A2D2E155342AEABE7B31517CAB4E40A447105792780BF83CA"
+    },
+    {
+      "path": "docs/PROJECT_STATE.md",
+      "state": "TrackedModified",
+      "sha256": "F9171CFFF7BE6C96AD32A2150AEDC45D2E2548E2CC0D367355BEE98EDBAC46D1"
+    },
+    {
+      "path": "docs/milestones/M25.1-resume.md",
+      "state": "Untracked",
+      "sha256": "E0FE8CE9FFB3C51C7969CAB831FF932D35FE42C71BD3C8C5B1DC563B6D4C2998"
+    },
+    {
+      "path": "docs/milestones/M25.1.md",
+      "state": "Untracked",
+      "sha256": "195C9A7E7014709FF49F0138FD4314521FB2C3449D4F9ACE67EE0EF68690C9F7"
+    },
+    {
+      "path": "docs/milestones/evidence/M25.1-prompt1-checks.json",
+      "state": "Untracked",
+      "sha256": "CFCDE50D2087E3282D1A885BDD0F7E2B357BFF07D4F55B2006BAAED7B6BF0DBF"
+    },
+    {
+      "path": "docs/milestones/evidence/M25.1-prompt2-checks.json",
+      "state": "Untracked",
+      "sha256": "D294954642C0EA39791982CD76F6C645EF6551574EC237EBD4728F4C3C2C2F08"
+    },
+    {
+      "path": "docs/milestones/evidence/M25.1-prompt2.md",
+      "state": "Untracked",
+      "sha256": "4142A66EA1458972789791F359CC05F4E102CE1B58F670F3091B73EC13C75742"
+    },
+    {
+      "path": "docs/milestones/evidence/M25.1-prompt3-sql-isolated.json",
+      "state": "Untracked",
+      "sha256": "ACEE127C1A64FDF6CB7FEBBA0557C8517D02F9197AE6C49508AA8F49C541FE75"
+    },
+    {
+      "path": "docs/milestones/evidence/M25.1-prompt3.md",
+      "state": "Untracked",
+      "sha256": "743197ECD46077E50722558D6C249D60D468AC7565A9B93ABB27420A8D5CA3A4"
+    },
+    {
+      "path": "scripts/verify-sql-isolated.ps1",
+      "state": "TrackedModified",
+      "sha256": "CA7C7E0DD6878566B9100CC5F1B3822A3D504C0B51BA4AFD99BD364D11A27619"
+    },
+    {
+      "path": "scripts/verify.ps1",
+      "state": "TrackedModified",
+      "sha256": "1140EF1E322C8936AF098A71EA52678DC70693AD11A365F6AF8A1973009C43FD"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/KnowledgeService.cs",
+      "state": "TrackedModified",
+      "sha256": "87CB55763E285E594798C3FD93A8CD550B4326A9DE2919EC2E8E2010588C095C"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/KnowledgeStoredEvidence.cs",
+      "state": "Untracked",
+      "sha256": "091EAF865604DA49E25F8EC89B91A208DF90A3511A7C8367AC4DB3FBF332036A"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/TrendFence.cs",
+      "state": "TrackedModified",
+      "sha256": "0D0EF12AA2C14127DCA0F8F5147C5113A73FC919E3B640C6BE97211BCFD369B5"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/TrendStoredEvidence.cs",
+      "state": "Untracked",
+      "sha256": "C9C7AFD9E23ADAFD0AD469E1011CC280FDE883CB59DD271B3D874E3EEB177467"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/TrendStories.cs",
+      "state": "TrackedModified",
+      "sha256": "5F04D2C27578F4D0E24FE5D773B569D73D5B356D3B6B31038AF4C97906D2AF8F"
+    },
+    {
+      "path": "src/ContentOS.Infrastructure/TrendWorkbench.cs",
+      "state": "TrackedModified",
+      "sha256": "0F41969F7192CD3373E8F5E7FC76D4859A550191AB1DEADB798C3614EE374C73"
+    },
+    {
+      "path": "tests/ContentOS.Foundation.Tests/HistoricalTestFixture.cs",
+      "state": "TrackedModified",
+      "sha256": "B5338C1C6D9EE09466C1B4E9C9003E44FEEC5BEBF586937C8C6F6CCD5534CF71"
+    },
+    {
+      "path": "tests/ContentOS.Foundation.Tests/SqlTrendStoredEvidenceTests.cs",
+      "state": "Untracked",
+      "sha256": "99C80093BDD25E6A2AD95E14452BB3032FC8525494E95720F98A8C3FA4DF0725"
+    },
+    {
+      "path": "tests/ContentOS.Foundation.Tests/TrendTestFixture.cs",
+      "state": "TrackedModified",
+      "sha256": "37C11294D85E79F4493F89B524A9FD6ACDF4EA5A9703F6AB29B0117536D69F19"
+    }
+  ]
+}

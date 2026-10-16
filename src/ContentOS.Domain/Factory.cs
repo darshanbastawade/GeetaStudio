@@ -26,6 +26,7 @@ public sealed class FactoryWork : CoreRecord
     public string BriefKey { get; set; } = ""; public string Format { get; set; } = "";
     public string State { get; set; } = "Pending"; public string Outcome { get; set; } = ""; public int Attempts { get; set; }
     public Guid? ArtifactId { get; set; }
+    public Guid? WorkflowId { get; set; }
     public Guid? LeaseToken { get; set; }
     public DateTimeOffset? LeaseUntilUtc { get; set; }
 }

@@ -14,7 +14,7 @@ internal static class TrendTestFixture
 {
     internal sealed record Fixture(CoreScope Owner, Guid Universe, Guid Connector, Guid Cluster, Guid NewsClaim, Guid[] NewsSources, Guid ChildLesson, Guid YouthLesson,
         Guid ChildAudience, Guid YouthAudience, Guid Bible, Guid Episode, Guid ChildCharacter, Guid YouthCharacter, KnowledgeQuery Query);
-    internal static ServiceProvider Services()
+    internal static ServiceProvider Services(IEmbeddingProvider? embedding = null, Action<IServiceCollection>? configure = null)
     {
         using var basis = ReadTestFixture.Services(); var config = basis.GetRequiredService<IConfiguration>();
         var services = new ServiceCollection().AddLogging().AddSingleton(config);
@@ -23,11 +23,11 @@ internal static class TrendTestFixture
         services.AddSingleton<ITextGenerationProvider, FixtureTextA>(); services.AddSingleton<ITextGenerationProvider, FixtureTextB>();
         services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationA>(); services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationB>();
         services.AddSingleton<IFactoryTemplate, LocalDraftTemplateA>(); services.AddSingleton<IFactoryTemplate, LocalDraftTemplateB>();
-        services.AddSingleton<IEmbeddingProvider, ReviewedConceptEmbedding>(); services.AddSingleton<IKnowledgeRankingAdapter, SqlHybridRanking>();
+        services.AddSingleton<IEmbeddingProvider>(embedding ?? new ReviewedConceptEmbedding()); services.AddSingleton<IKnowledgeRankingAdapter, SqlHybridRanking>();
         services.AddSingleton<IEvaluationAdapter>(new EvaluationFixtureAdapter("evaluation.fixture.a.v1"));
         services.AddSingleton<ITrendSource, FixtureTrendSourceA>(); services.AddSingleton<ITrendSource, FixtureTrendSourceB>(); services.AddSingleton<ITrendSource, UploadedRssTrendSource>();
         services.AddSingleton<ITrendExtractor, OwnedTrendExtractorA>(); services.AddSingleton<ITrendExtractor, OwnedTrendExtractorB>();
-        return services.BuildServiceProvider();
+        configure?.Invoke(services); return services.BuildServiceProvider();
     }
     internal const string Fact = "A fictional community team gathered in a hall and checked the context before deciding.";
     internal static async Task<Guid> Source(IServiceProvider s, CoreScope owner, Guid u, string key, string text, bool video = false)
@@ -43,9 +43,9 @@ internal static class TrendTestFixture
     internal static TrendSignal Signal(Guid[] ids, string eventKey = "useful", string origin = "fixture-primary", bool primary = true) =>
         new("fixture-" + origin, eventKey, origin, primary, "News", "Fixture team checks the context", "https://example.invalid/fixture/" + origin, "Teamwork", "IN", "en-IN",
             DateTimeOffset.UtcNow.AddHours(-1), DateTimeOffset.UtcNow.AddHours(-1), null, DateTimeOffset.UtcNow, ids, null, false, [], []);
-    internal static async Task<Fixture> Setup(IServiceProvider s, string actor = "m15-owner", bool video = false)
+    internal static async Task<Fixture> Setup(IServiceProvider s, string actor = "m15-owner", bool video = false, bool generationFixture = false)
     {
-        var f = await ReadTestFixture.Setup(s, actor); var db = s.GetRequiredService<CoreDbContext>(); var lessons = s.GetRequiredService<ILessonEngine>();
+        var f = await ReadTestFixture.Setup(s, actor, generationFixture); var db = s.GetRequiredService<CoreDbContext>(); var lessons = s.GetRequiredService<ILessonEngine>();
         var candidates = new List<LessonVariantView>(); foreach (var row in await db.LessonVariants.AsNoTracking().Where(x => x.UniverseId == f.Universe && x.TenantId == f.Owner.TenantId && x.ReviewStatus == "Approved").ToListAsync())
             candidates.Add(await lessons.InspectAsync(f.Owner, f.Universe, row.Id, default));
         var youth = candidates.First(x => x.Snapshot.Audience.Rules.Key == "youth" && x.Snapshot.Locale.Rules.Locale!.Locale == "en-IN");

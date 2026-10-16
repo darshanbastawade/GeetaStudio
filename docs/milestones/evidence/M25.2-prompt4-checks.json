@@ -1,0 +1,830 @@
+{
+  "milestone": "M25.2",
+  "selectedPrompt": 4,
+  "verifiedUtc": "2026-10-15T13:36:12.631181+00:00",
+  "milestoneStatus": "InProgress",
+  "prompt4LocalStatus": "OfflineVerified",
+  "scopeAuthorization": "Owner explicitly authorized local implementation with matching hosted M25.1 CI still pending. No Prompt 5.",
+  "sourceIdentity": {
+    "head": "82cc55d431367b822300c1d64bbb00986d38ccdd",
+    "branch": "fix/m25-1-ci-baseline",
+    "trackedDiffSha256": "FC48C35207E0C0FFC7D4A6B9E0A5475E99B664B8784E462631365D3F856B6906",
+    "trackedDiffLocalPath": ".local/M25-2-prompt4/reviewed.patch",
+    "manifestPath": "docs/milestones/evidence/M25.2-prompt4-manifest.json",
+    "manifestSha256": "51F0330ACE91CE81B50483A33EBDEE73769C5438C0DF4DEBB19F8B39D96A3F80",
+    "includedUntrackedFiles": true,
+    "selfReferentialMetadataExclusions": [
+      "docs/milestones/evidence/M25.2-prompt4-checks.json",
+      "docs/milestones/evidence/M25.2-prompt4-manifest.json"
+    ],
+    "nonDocumentSourceFiles": 551,
+    "nonDocumentSourceUnchangedDuringFinalChecks": true,
+    "finalNonDocumentManifestSha256": "7DD571BD79EE53D78B02C7753C3C6A9E3E4596D2E27003D465EDDA9E9844505F",
+    "ownerInputSha256": "C106386C6C1915D4314E845A88B46AB894EDBCADB740B6FFF42BE611BF51383B"
+  },
+  "finalVerification": {
+    "lockedRestore": "Pass",
+    "build": {
+      "passed": true,
+      "warnings": 0,
+      "errors": 0
+    },
+    "offline": {
+      "total": 113,
+      "passed": 113,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "format": "Pass",
+    "postDocumentationSecretGate": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "models": {
+      "CoreDbContext": "Clean",
+      "RuntimeDbContext": "Clean"
+    },
+    "schemas": [
+      {
+        "database": "GeetaStudio_Dev",
+        "core": 32,
+        "runtime": 4
+      },
+      {
+        "database": "GeetaStudio_M1Tests",
+        "core": 32,
+        "runtime": 4
+      }
+    ],
+    "sql": {
+      "skipped": 0,
+      "failed": 0,
+      "verifiedUtc": "2026-10-15T13:29:47.3644689+00:00",
+      "liveCalls": 0,
+      "passed": 248,
+      "mode": "fresh-test-process-per-class",
+      "database": "GeetaStudio_M1Tests",
+      "assertionsAndTimeoutsUnchanged": true,
+      "discovered": 248,
+      "classes": [
+        {
+          "class": "ContentOS.Foundation.Tests.SqlAiTests",
+          "passed": 10,
+          "discovered": 10,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlAnalyticsContentTests",
+          "passed": 4,
+          "discovered": 4,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlAnalyticsTests",
+          "passed": 5,
+          "discovered": 5,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlCommerceAdmissionTests",
+          "passed": 5,
+          "discovered": 5,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlCommerceTests",
+          "passed": 4,
+          "discovered": 4,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlCoreTests",
+          "passed": 14,
+          "discovered": 14,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlCorpusTests",
+          "passed": 10,
+          "discovered": 10,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlCreationTests",
+          "passed": 6,
+          "discovered": 6,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlCustomerApiTests",
+          "passed": 2,
+          "discovered": 2,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlCustomerIdentityTests",
+          "passed": 3,
+          "discovered": 3,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlCustomerTests",
+          "passed": 4,
+          "discovered": 4,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlEditorialReviewRegressionTests",
+          "passed": 4,
+          "discovered": 4,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlEditorialTests",
+          "passed": 9,
+          "discovered": 9,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlEvaluationTests",
+          "passed": 7,
+          "discovered": 7,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlEvidenceTests",
+          "passed": 9,
+          "discovered": 9,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlFactoryAiTests",
+          "passed": 12,
+          "discovered": 12,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlFactoryTests",
+          "passed": 10,
+          "discovered": 10,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlHardeningPersonaTests",
+          "passed": 1,
+          "discovered": 1,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlHardeningTests",
+          "passed": 4,
+          "discovered": 4,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlHistoricalTests",
+          "passed": 4,
+          "discovered": 4,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlKnowledgeTests",
+          "passed": 7,
+          "discovered": 7,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlLessonTests",
+          "passed": 7,
+          "discovered": 7,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlMediaTests",
+          "passed": 5,
+          "discovered": 5,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlMilestoneReviewFixTests",
+          "passed": 4,
+          "discovered": 4,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlOptimizationTests",
+          "passed": 9,
+          "discovered": 9,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlReadTests",
+          "passed": 3,
+          "discovered": 3,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlRegistryTests",
+          "passed": 10,
+          "discovered": 10,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlRuntimeTests",
+          "passed": 17,
+          "discovered": 17,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlSocialRecoveryTests",
+          "passed": 3,
+          "discovered": 3,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlSocialTests",
+          "passed": 6,
+          "discovered": 6,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlSourceTests",
+          "passed": 9,
+          "discovered": 9,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlTalkApiTests",
+          "passed": 1,
+          "discovered": 1,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlTalkTests",
+          "passed": 10,
+          "discovered": 10,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlTrendStoredEvidenceTests",
+          "passed": 3,
+          "discovered": 3,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlTrendTests",
+          "passed": 4,
+          "discovered": 4,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlWatchTests",
+          "passed": 8,
+          "discovered": 8,
+          "skipped": 0,
+          "failed": 0
+        },
+        {
+          "class": "ContentOS.Foundation.Tests.SqlWorkflowTests",
+          "passed": 15,
+          "discovered": 15,
+          "skipped": 0,
+          "failed": 0
+        }
+      ]
+    },
+    "longerScriptFocused": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "priorTwelveCaseFocused": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "development": {
+      "verifiedUtc": "2026-10-15T13:33:18.6759235+00:00",
+      "database": "GeetaStudio_Dev",
+      "restrictedApiReady": true,
+      "factoryPage200": true,
+      "privateNoStore": true,
+      "workflowDefinitions200": true,
+      "definitionCount": 4,
+      "existingPlans200": true,
+      "planCount": 0,
+      "existingBatches200": true,
+      "batchCount": 0,
+      "anonymousStatus": 401,
+      "crossTenantStatus": 403,
+      "workersDisabled": true,
+      "fixtureAccountsCreated": 0,
+      "paidCalls": 0,
+      "interactiveBrowserOrF5Verified": false
+    },
+    "preservation": {
+      "verifiedDate": "2026-10-15",
+      "database": "GeetaStudio_Dev",
+      "core.CharactersCount": 11,
+      "core.CharactersIdsHash": "HAav8Pfi1YSKNa74xJBDt0Z5fOpXpUGGxgRDHXNY1Tk=",
+      "core.UniversesCount": 4,
+      "core.UniversesIdsHash": "mI9KgskhZ0B14uL50Ze1gIR8hrf00EsPv36muozuuUs=",
+      "corpus.CorpusVerseCount": 78,
+      "corpus.CorpusVerseIdsHash": "qun7DlmAE5c18V0+mGEi6pw2nRvKd2gerIBFU2XpGGQ=",
+      "runtime.JobsCount": 10,
+      "runtime.JobsIdsHash": "XF/TBKw0Cf1MF8WIYt1oUWBsEqXTnoUBXXgl6wd/5+U=",
+      "sources.SourcePermissionCount": 9,
+      "sources.SourcePermissionIdsHash": "97mU6RJ5YmfKn6FY/YARa+8h0E32lLYlnUcVBICkDBU=",
+      "permissionsHash": "feXaccQj/RnCJNYkyKtlcM2LHGYxg1MFR5xmCa8Tes0=",
+      "coreMigrations": 32,
+      "dboMigrations": 4,
+      "completeGeetaAndHistoricalBaselinePreserved": true,
+      "existingIdsPreserved": true,
+      "sourcePermissionsUnchanged": true,
+      "databaseReset": false,
+      "liveCalls": 0
+    },
+    "diffCheck": "Pass"
+  },
+  "actualCommands": [
+    "dotnet build GeetaStudio.sln --no-restore --disable-build-servers -m:1 -p:UseSharedCompilation=false",
+    "dotnet format GeetaStudio.sln --no-restore",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/db-update.ps1 -Database GeetaStudio_M1Tests -NoBuild",
+    "$env:GEETA_SQL_TESTS='1'; dotnet test tests/ContentOS.Foundation.Tests --no-build --no-restore --filter 'FullyQualifiedName~SqlFactoryAiTests' --results-directory .local/M25-2-prompt4/results --logger 'trx;LogFileName=focused-third.trx'",
+    "pwsh -NoProfile -File scripts/verify.ps1 -Locked -LowMemory -ResultsDirectory .local/M25-2-prompt4/qualified-offline",
+    "pwsh -NoProfile -File scripts/verify-sql-isolated.ps1 -SkipBuild -LowMemory -ResultsDirectory .local/M25-2-prompt4/qualified-sql -SummaryPath docs/milestones/evidence/M25.2-prompt4-sql.json",
+    "dotnet ef migrations has-pending-model-changes --project src/ContentOS.Infrastructure --startup-project src/ContentOS.Infrastructure --context CoreDbContext --no-build",
+    "dotnet ef migrations has-pending-model-changes --project src/ContentOS.Infrastructure --startup-project src/ContentOS.Infrastructure --context RuntimeDbContext --no-build",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File .local/M25-2-prompt4/preservation.ps1 (before and -After)",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/db-update.ps1 -Database GeetaStudio_Dev -NoBuild",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File .local/M25-2-prompt4/development-smoke.ps1",
+    "git -c safe.directory=C:/dev/GeetaStudio diff --check"
+  ],
+  "attempts": [
+    {
+      "name": "Initial compiler/wiring attempts",
+      "result": "Corrected missing import, trend field, beat property and xUnit analyzer errors; later builds pass."
+    },
+    {
+      "name": "Focused first",
+      "counts": {
+        "total": 10,
+        "passed": 8,
+        "failed": 2,
+        "notExecuted": 0
+      },
+      "cause": "Helper stopped before mandatory workflow review; fixed helper."
+    },
+    {
+      "name": "Focused second",
+      "counts": {
+        "total": 12,
+        "passed": 11,
+        "failed": 1,
+        "notExecuted": 0
+      },
+      "cause": "Incomplete M05 claim spans prevented CMS labels; fixed full coverage with pending generated-fiction claim."
+    },
+    {
+      "name": "Sandbox formatter",
+      "result": "Named-pipe access denied; unrestricted formatter and final verification pass."
+    },
+    {
+      "name": "Initial offline/focused third",
+      "result": "113 offline and 12 SQL pass, then final review found whole JSON incorrectly subject to per-beat limit."
+    },
+    {
+      "name": "Initial broad SQL",
+      "result": "Deliberately stopped incomplete for per-section fix; retained separately; not counted as a final pass."
+    },
+    {
+      "name": "Temporary HTTP helper",
+      "result": "Two workspace discovery attempts failed due Windows PowerShell REST-array nesting; helper-only correction followed by scoped HTTP pass. Application source and permissions unchanged."
+    },
+    {
+      "name": "Final source",
+      "result": "Long script focused pass, fresh complete offline and complete isolated SQL pass."
+    }
+  ],
+  "preservation": {
+    "previousUnrelatedImplementationHashes": "Match Prompt 3 source manifest; overlaps limited to listed Prompt 4 files",
+    "changedFromPrompt3": [
+      "src/ContentOS.Contracts/FactoryContracts.cs",
+      "src/ContentOS.Contracts/TrendContracts.cs",
+      "src/ContentOS.Contracts/WorkflowContracts.cs",
+      "src/ContentOS.Domain/Factory.cs",
+      "src/ContentOS.Infrastructure/AiExecution.cs",
+      "src/ContentOS.Infrastructure/AiService.cs",
+      "src/ContentOS.Infrastructure/AiServices.cs",
+      "src/ContentOS.Infrastructure/CoreMigrations/CoreDbContextModelSnapshot.cs",
+      "src/ContentOS.Infrastructure/DraftFactory.cs",
+      "src/ContentOS.Infrastructure/EditorialPackets.cs",
+      "src/ContentOS.Infrastructure/EditorialWorkbench.cs",
+      "src/ContentOS.Infrastructure/EvidenceEngine.cs",
+      "src/ContentOS.Infrastructure/FactoryExecution.cs",
+      "src/ContentOS.Infrastructure/FactoryModel.cs",
+      "src/ContentOS.Infrastructure/TrendFence.cs",
+      "src/ContentOS.Infrastructure/TrendStories.cs",
+      "src/ContentOS.Infrastructure/WorkflowClaimCancellation.cs",
+      "src/ContentOS.Infrastructure/WorkflowExecution.cs",
+      "src/ContentOS.Infrastructure/WorkflowRuntime.cs",
+      "src/ContentOS.Infrastructure/WorkflowTools.cs",
+      "src/GeetaStudio.Api/FactoryEndpoints.cs",
+      "src/GeetaStudio.Api/FactoryPage.cs",
+      "tests/ContentOS.Foundation.Tests/FactoryTestFixture.cs",
+      "tests/ContentOS.Foundation.Tests/LessonTestFixture.cs"
+    ],
+    "migrationsAdded": 1,
+    "oldMigrationsRewritten": 0,
+    "databaseReset": false,
+    "existingSourcePermissionsBroadened": false,
+    "sdkOrDependencyChanges": false,
+    "commitPushDeployPublishRealChargeMessages": false,
+    "paidOrLiveProviderCalls": 0
+  },
+  "remainingGates": [
+    "Matching successful M25.1 hosted CI on owner-reviewed pushed revision",
+    "M25.2 Prompts 5\u20137 and integrated pilot acceptance",
+    "Genuine M12 human-reviewed data and acceptance; source/cast/media/package review",
+    "Live provider creative quality/qualification and approved spend",
+    "Fresh interactive F5/breakpoint, visual/accessibility, OS-process-kill recovery and combined-process SQL are not newly verified",
+    "Production release remains blocked; M22 realtime voice remains missing"
+  ],
+  "evidenceFiles": [
+    {
+      "path": ".local/M25-2-build.log",
+      "sha256": "CF3833207189E25E6CCFFCF60FCD7AFD59E94825487D43F44E7F62FD4F69736F"
+    },
+    {
+      "path": ".local/M25-2-build2.log",
+      "sha256": "8C6DC6CBCA823B45AB54E910BFA181084BBF1B7DFE07576E98A1D5D69E120ACC"
+    },
+    {
+      "path": ".local/M25-2-build3.log",
+      "sha256": "98186440413238D0C94020255896EFE06CCE80E5056AD3C06FCA33BB0580AF84"
+    },
+    {
+      "path": ".local/M25-2-build4.log",
+      "sha256": "A0BF00CD3D19B76DEDF5DBA3F72CE2F233B21214EC327382B9C4578F9C78E7C7"
+    },
+    {
+      "path": ".local/M25-2-build5.log",
+      "sha256": "AC90B2E9E0FED353576A86D72DCB0E694F0C9440C5B961D02AE046B1183EFA5E"
+    },
+    {
+      "path": ".local/M25-2-build6.log",
+      "sha256": "BF8E14A3115C1B4EBB4733C31DC2EFFEEBEE6DA9309B63B2D518E033733E1B51"
+    },
+    {
+      "path": ".local/M25-2-build7.log",
+      "sha256": "CDD631999CD830E27EE43774126F2BC2BCE33DEE767A1EAA9AF8E87F0BF3732C"
+    },
+    {
+      "path": ".local/M25-2-build8.log",
+      "sha256": "D14E49048A4FBF61628264749CA416B17539A6A766919A422CD15807C6CB6A3C"
+    },
+    {
+      "path": ".local/M25-2-format-apply-unrestricted.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": ".local/M25-2-format-apply.log",
+      "sha256": "7FA735FEA61FC1907D8B8DE76CC93E87D8D6218D7C9BCD92DA05EA805CBFF707"
+    },
+    {
+      "path": ".local/M25-2-prompt4/CoreDbContext-model.log",
+      "sha256": "C924DA1693AD60EB6A78717DDD333946A8A61A056C2CE2868AE514384F01C866"
+    },
+    {
+      "path": ".local/M25-2-prompt4/development-smoke-final.log",
+      "sha256": "23A0483D3C639938A01D7127C2CE4565CABF1A0A3C78E9BE17B2C2B2A2AB8B68"
+    },
+    {
+      "path": ".local/M25-2-prompt4/development-smoke-qualified.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": ".local/M25-2-prompt4/development-smoke.log",
+      "sha256": "01A7EAB60C754DDB02F3B6676D81F5359B71F82A4FBAE0AD77D2FBDAC2890132"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-offline/build.log",
+      "sha256": "1778E17B445E8F404956791C2BBA7254B17A32A2FEE3B3B5EBBAB95B761AAEED"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-offline/format.log",
+      "sha256": "1EA5357F7167D2FE328618E7BFEFF97E9F5D89BB7655973C88E9BA7E086389EE"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-offline/offline-tests.log",
+      "sha256": "4E7FC25BAD49C714E71C79B675D30787E61D04DF6F90CD4B73AD652A38F07BDD"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-offline/offline.trx",
+      "sha256": "38EB5F8543D4AF8A3A6614EB8FB54463EA542E31FE4963AC83D5FC341831C0E1"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-offline/restore.log",
+      "sha256": "62DB98199670A0B5F38AE2394DF52F5FA1CB355DE0047079DFBEDDDDC99ABFBD"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-offline.log",
+      "sha256": "7178D12A7E7598AAF6F404244004BFD7DEC7BE19A506DD4E7F56983FCFC73ED5"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-sql/SqlAiTests.trx",
+      "sha256": "0233D9BEA9372A0A181179E2949D28E41B1EEA89F345A606A9E884AFEA647F14"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-sql/SqlAnalyticsContentTests.trx",
+      "sha256": "025CA115EB4C55B5BF5979D2A18C31B294378B8EA75C419B453335958AFE8D9D"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-sql/SqlAnalyticsTests.trx",
+      "sha256": "1A4C08CAC157B575CF5F183C52EACD491DF84EF63B05CD1567E924E6D59BE963"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-sql/SqlCommerceAdmissionTests.trx",
+      "sha256": "8296272436162FCEBB7CD72E674E80EAB3B7D02824E859809FA52D40E7DA768B"
+    },
+    {
+      "path": ".local/M25-2-prompt4/final-sql.log",
+      "sha256": "20EA6CF41B6A467475E7D8AF556F1AEAC5C5E3014D6F55BA7D483523B9574491"
+    },
+    {
+      "path": ".local/M25-2-prompt4/focused-first.log",
+      "sha256": "BC5D252C6F67794B7B6A66BAB37840D7F8042DB132B877DE874A4C0E6A001C16"
+    },
+    {
+      "path": ".local/M25-2-prompt4/focused-second.log",
+      "sha256": "DDBD6F7CA78C7755DE5A020FCFF5520D9A5CAFF5325C38B55A46F7AF20DF2334"
+    },
+    {
+      "path": ".local/M25-2-prompt4/focused-third.log",
+      "sha256": "358FE09B8BAF02AA40B79DD20E8292B114B61ABCB106DDF417F094563646F2E6"
+    },
+    {
+      "path": ".local/M25-2-prompt4/long-script.log",
+      "sha256": "5727A81BA646EBAE3D4A8848AB281C141AC11A4A29F87068E65357D58549B4EE"
+    },
+    {
+      "path": ".local/M25-2-prompt4/migrate-development.log",
+      "sha256": "32D9A05745C9EC5A0F166B1BF26FDB9804B57A03CB20AFA8E5E26FF7429B4899"
+    },
+    {
+      "path": ".local/M25-2-prompt4/migrate-test.log",
+      "sha256": "32D9A05745C9EC5A0F166B1BF26FDB9804B57A03CB20AFA8E5E26FF7429B4899"
+    },
+    {
+      "path": ".local/M25-2-prompt4/post-docs/secret-gate.trx",
+      "sha256": "17FB9AB22807B4D8554880970CDFA6E41706913818410B7841E48E0DABE7B250"
+    },
+    {
+      "path": ".local/M25-2-prompt4/post-docs-secret.log",
+      "sha256": "CB8AD8A2C66DA121C1E7AEF1D1A0C35B5F93DC164F7E7F7A71B658DBE51DB6FC"
+    },
+    {
+      "path": ".local/M25-2-prompt4/preservation-after.log",
+      "sha256": "7AE2D6363A76F2DFAA126EFE14F0C9100E71C50C1C3D516CBA4EA8F529CDFB9C"
+    },
+    {
+      "path": ".local/M25-2-prompt4/preservation-before.log",
+      "sha256": "1CFF3482BE1E522D76387F0B381B8FEFAE1C5E2D8F255EAA980121F0E6EE163F"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-offline/build.log",
+      "sha256": "1CA1B89A886B9980B7363862D016A4550243F6A96ED6CD8405AB30EC404CA31F"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-offline/format.log",
+      "sha256": "1EA5357F7167D2FE328618E7BFEFF97E9F5D89BB7655973C88E9BA7E086389EE"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-offline/offline-tests.log",
+      "sha256": "51E2ED742AABDBC674BC45A9835B07400BF5E7004D7ACB52A89294995D151032"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-offline/offline.trx",
+      "sha256": "DE8BD0128BB580529C27E17D52166C7F992FC5F9CC2DCE288B6062212FB582D0"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-offline/restore.log",
+      "sha256": "62DB98199670A0B5F38AE2394DF52F5FA1CB355DE0047079DFBEDDDDC99ABFBD"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-offline.log",
+      "sha256": "89F6C3631281EAD9699DF2CB7D1E3D4D594C89814725AF48A2340ADF990ACC0C"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlAiTests.trx",
+      "sha256": "10C17AD3B4A31EE213F515AD6228D5D17D7B0C547EBBA64DFF298F52FA523823"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlAnalyticsContentTests.trx",
+      "sha256": "D1FAB35020DCFF3ABE3B38A8A515C50AD8001DDD658895C61F097C6782617FC4"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlAnalyticsTests.trx",
+      "sha256": "9F2DDB2DEB712802E3EE309DE20E4C6CFA2AC0886401E9144777C683C8C75884"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlCommerceAdmissionTests.trx",
+      "sha256": "C25601A5AD69AE170335336ED8BD74A92FA3D50901C86CD165C4268A9507080A"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlCommerceTests.trx",
+      "sha256": "D763E9903716FA9DCF735B930F3E103118D5407661F3C371C1A212E4FC02CF2A"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlCoreTests.trx",
+      "sha256": "61EB7807E2864DAC9D4A6272AC7AF482CCA4F5B3D90B56565B86FC0A9A470D57"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlCorpusTests.trx",
+      "sha256": "2F8880EDB9D4CCF33C78350BCA2A4BBBF6C650EFB3AD3ED84F3F0A20F753834F"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlCreationTests.trx",
+      "sha256": "60A07411E487404FA35C4FEB9189759D3B4E51C0AB1315DF9C2464D3CD451324"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlCustomerApiTests.trx",
+      "sha256": "11DF24066FA8924F3CFF3DC91C38AE77AF928D82DF39FDBF62F6B4CB9A88BE69"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlCustomerIdentityTests.trx",
+      "sha256": "390CECC7E2CB9E9AEBDE4CE7C44DC935F45B320F6BBCF7CD4DE0079DD269E610"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlCustomerTests.trx",
+      "sha256": "EDC88A524BBC7C3A25F6980F85812C6681C8A44E318CEBB9ADB47A5DA9EAB1BD"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlEditorialReviewRegressionTests.trx",
+      "sha256": "E7F47AAD07B22D08DCFDAA9B6F78668890299E12FAA50B43C743D70EB2895478"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlEditorialTests.trx",
+      "sha256": "462CCD11883B3EBEA1340B5F2A80FBF00ECA03E7178EA2ACC8B60F1E51DAE0B3"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlEvaluationTests.trx",
+      "sha256": "3637FCF367496AB32461D0689BBE45A36E39B3FF064EF0C4264F1082DB069D48"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlEvidenceTests.trx",
+      "sha256": "E2174BA61FF5E29F7B1938082B9F1B6B00DF9FA1DC1225720762ECF1A830F0AC"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlFactoryAiTests.trx",
+      "sha256": "BF6AF9C7E7B0AEC279F5E474BB47175F70BDB85014B19ED5F61A618B7A729B20"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlFactoryTests.trx",
+      "sha256": "F4EABA6C577D0FC949B42E73E2C056EB1DF61F212A5F46CB68A89F5AF3389348"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlHardeningPersonaTests.trx",
+      "sha256": "064DD91EE0B6A41D2699A58F1F6173834D492E16979BEB7D58D28EEF9524BA91"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlHardeningTests.trx",
+      "sha256": "53E72DC3CF43DD4A95404CB131D6EB08BFD944BA16845D17A0E5D589B8C884EA"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlHistoricalTests.trx",
+      "sha256": "B3CA957F4E6B17DE7140DE418C4F74A44E8DD2EA6A4EE0AF6417365754833477"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlKnowledgeTests.trx",
+      "sha256": "8307358FAAEF30D4A38B5660A76A893BFF2584F32048F759AD56303B4C5DA980"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlLessonTests.trx",
+      "sha256": "4889CB5F53E114FD633935A1E0EBE28B9DF8D88E4F71C781E00DD60606A1E693"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlMediaTests.trx",
+      "sha256": "43D6AA34FAD41B7040F764632C1C43375F876E80EE27D5A3D40A042874ADFDF2"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlMilestoneReviewFixTests.trx",
+      "sha256": "A4A5FEA305EA9A42970341ECA67B47B674DBF14869AFD8C4339CABC090EEDEFA"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlOptimizationTests.trx",
+      "sha256": "DD2AE6887DF1F123BDF3AF7275F32C3F4BF080FE1B4212561B9EB317CC2A8A63"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlReadTests.trx",
+      "sha256": "A2E507F94218A281A082479F13E242BAB87EE65D2863C56029F057F59A72C6DF"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlRegistryTests.trx",
+      "sha256": "8A18F8E867C61CC12F013CD9F99FBAA6609E266BFC804ECE04B5D587AF0E18DF"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlRuntimeTests.trx",
+      "sha256": "1DF29B5A8C128F7AF78D73B154BF0D6818B70A961B943AAD607D8351D846BFEC"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlSocialRecoveryTests.trx",
+      "sha256": "F3CBDC952B2477ECF5469BB85BE50899214220D6ADF685617D2670BAD284BC49"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlSocialTests.trx",
+      "sha256": "4A5BADDCF21D373683A76BD9B76D56160FD54C740A6DF197BD2AC1BAFFE431E4"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlSourceTests.trx",
+      "sha256": "63CF69C608525B097096EFA06D27E0922891F39FE09EC65F1AB59326A66434CE"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlTalkApiTests.trx",
+      "sha256": "50D9A249648486003DBDB81669F00FECB1A97DEB8CEB40E2DCFF794489558E69"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlTalkTests.trx",
+      "sha256": "68F0CF2DCF34AF28DB5A10C3A59507F0E71F459B7451EA04C20FB4E2B9F5CC09"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlTrendStoredEvidenceTests.trx",
+      "sha256": "A8ECC59C0EAEA77AE5C7A71A7E24F1BF1DC8517D675D62A9B3E7F006E98123B8"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlTrendTests.trx",
+      "sha256": "F3EC308F91BF4B829E23C7D1C26D60175E7033E364440F1CBB55D281BA62382A"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlWatchTests.trx",
+      "sha256": "AF26639023D9A2F9A55FDCC9DB7846E4BAC089F006425AC1F7EFBD2BAEF49700"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql/SqlWorkflowTests.trx",
+      "sha256": "757068D10956CA3ADBF628081580B275B08605F4B8FE3341859D819BB426C0C3"
+    },
+    {
+      "path": ".local/M25-2-prompt4/qualified-sql.log",
+      "sha256": "CAF48C209DC4F078C4D64BAADBE1E53844EB022BC8EF2A12FEF8A57364C8EE44"
+    },
+    {
+      "path": ".local/M25-2-prompt4/results/focused-first.trx",
+      "sha256": "060EA24E0D96B3810EBFFF2CE6F6E4D44611660FFC207A54DB3299B1D37259E0"
+    },
+    {
+      "path": ".local/M25-2-prompt4/results/focused-second.trx",
+      "sha256": "E416F9F0F00BD2017DD31EC35809D8A47C7D3F5A8F57756B2B77FB30510C2339"
+    },
+    {
+      "path": ".local/M25-2-prompt4/results/focused-third.trx",
+      "sha256": "B0F7094ADF728FD1103AF58F6F6451BC7EC2E40A92F4903A3A6C1C211A7D20C1"
+    },
+    {
+      "path": ".local/M25-2-prompt4/results/long-script.trx",
+      "sha256": "28BA95B8CFAF5B245F7F08DD33893EBFBD75DB0FC46DD018201BBD6CDAFCF518"
+    },
+    {
+      "path": ".local/M25-2-prompt4/RuntimeDbContext-model.log",
+      "sha256": "C924DA1693AD60EB6A78717DDD333946A8A61A056C2CE2868AE514384F01C866"
+    }
+  ]
+}

@@ -55,7 +55,9 @@ public sealed partial class TrendWorkbench(CoreDbContext db, IEnumerable<ITrendS
     {
         CoreRules.Text(r.Key, 100, "Connector key"); TrendRules.Attest(r.Mode, r.EvidenceReference);
         if (r.Version < 1 || r.FixtureSignals.Length > 25 || !sources.Any(x => x.Key == r.SourceAdapter) || !extractors.Any(x => x.Key == r.ExtractorAdapter) ||
-            r.Mode == "Manual" && r.SourceAdapter != "trend.uploaded-rss.v1") throw new RuntimeValidationException("Approved deployed adapter/configuration and explicit fixture/upload coverage required.");
+            r.Mode == "Manual" && r.SourceAdapter is not ("trend.uploaded-rss.v1" or "trend.configured-rss.v1")) throw new RuntimeValidationException("Approved deployed adapter/configuration and explicit fixture/upload coverage required.");
+        sources.Single(x => x.Key == r.SourceAdapter).Validate(r);
+        if (r.LiveFeed != null && r.SourceAdapter != "trend.configured-rss.v1") throw new RuntimeValidationException("Live binding requires the configured RSS adapter.");
         foreach (var signal in r.FixtureSignals) TrendRules.Signal(signal);
         var previous = await db.TrendConnectors.Where(x => x.TenantId == s.TenantId && x.UniverseId == u && x.Key == r.Key).OrderByDescending(x => x.Version).FirstOrDefaultAsync(ct);
         if (r.Version != (previous?.Version ?? 0) + 1) throw new RuntimeConflictException("Append the next connector version.");
@@ -78,22 +80,75 @@ public sealed partial class TrendWorkbench(CoreDbContext db, IEnumerable<ITrendS
         var extraction = extractors.Single(x => x.Key == config.ExtractorAdapter).Extract(new(signal, texts), ct);
         if (extraction.Contract != "trend.contract.v1" || extraction.Adapter != config.ExtractorAdapter || extraction.SnapshotIds.Any(x => !texts.ContainsKey(x)) || extraction.Text?.Length > 65536) throw new RuntimeValidationException("Extractor violated canonical permitted-evidence contract.");
         var key = TrendRules.ClusterKey(signal);
+        var live = config.LiveFeed != null;
+        // Immutable connector revision + opaque source ID + semantic observation, not poll ID/time.
+        // Existing JSON history is queried in place: no migration or historical rewrites.
+        var history = await db.TrendCandidates.FromSqlInterpolated($"SELECT c.* FROM [trends].[TrendCandidate] c JOIN [trends].[TrendCluster] g ON g.Id=c.ClusterId WHERE c.ConnectorId={connector.Id} AND c.TenantId={s.TenantId} AND c.UniverseId={u} AND JSON_VALUE(c.SnapshotJson,'$.ExternalId') COLLATE Latin1_General_100_BIN2={signal.ExternalId} AND ({live}=CAST(1 AS bit) OR g.[Key]={key})").AsNoTracking().Take(26).ToListAsync(ct);
+        history.AddRange(db.TrendCandidates.Local.Where(x => db.Entry(x).State == EntityState.Added && x.ConnectorId == connector.Id && Read<TrendSignal>(x.SnapshotJson).ExternalId == signal.ExternalId && (live || TrendRules.ClusterKey(Read<TrendSignal>(x.SnapshotJson)) == key)));
+        var identity = Observation(signal);
+        var prior = history.OrderBy(x => x.RetrievedUtc).ThenBy(x => x.Id).FirstOrDefault(x => Observation(Read<TrendSignal>(x.SnapshotJson)) == identity);
+        if (prior != null) return prior.Id;
+        if (live && history.Count > 0) key = (await db.TrendClusters.AsNoTracking().SingleAsync(x => x.Id == history[0].ClusterId, ct)).Key;
         var cluster = db.TrendClusters.Local.SingleOrDefault(x => x.TenantId == s.TenantId && x.UniverseId == u && x.Key == key) ?? await db.TrendClusters.SingleOrDefaultAsync(x => x.TenantId == s.TenantId && x.UniverseId == u && x.Key == key, ct);
         if (cluster == null) { cluster = new() { Id = Guid.NewGuid(), TenantId = s.TenantId, UniverseId = u, Key = key }; db.TrendClusters.Add(cluster); }
-        if (await db.TrendCandidates.CountAsync(x => x.ClusterId == cluster.Id, ct) + db.TrendCandidates.Local.Count(x => x.ClusterId == cluster.Id) >= 25) throw new RuntimeValidationException("Cluster observation capacity25; append a new event/time-window.");
+        if (await db.TrendCandidates.CountAsync(x => x.ClusterId == cluster.Id, ct) + db.TrendCandidates.Local.Count(x => x.ClusterId == cluster.Id && db.Entry(x).State == EntityState.Added) >= 25)
+        {
+            // Commit the safety hold even when history cannot accept another version. Do not
+            // leave a previously approved brief usable after observing an unrecordable change.
+            var action = "trend.observation-capacity-held." + identity;
+            if (!db.SourceAudits.Local.Any(x => x.TenantId == s.TenantId && x.SubjectId == cluster.Id && x.Action == action) && !await db.SourceAudits.AnyAsync(x => x.TenantId == s.TenantId && x.SubjectId == cluster.Id && x.Action == action, ct))
+            {
+                if (cluster.State is not ("Corrected" or "Withdrawn")) cluster.State = "Held";
+                await Invalidate(cluster, signal.ReportStatus == "Current" ? "SourceObservationCapacityReached" : "SourceCorrectedOrRetracted", ct);
+                db.SourceAudits.Add(new() { Id = Guid.NewGuid(), TenantId = s.TenantId, Actor = s.Actor, SubjectId = cluster.Id, Action = action });
+            }
+            return Guid.Empty; // Durable failed-result marker, rejected only after transaction commit.
+        }
         var row = new TrendCandidate { Id = Guid.NewGuid(), TenantId = s.TenantId, UniverseId = u, ConnectorId = connector.Id, ClusterId = cluster.Id, SnapshotJson = Json(signal), ExtractionJson = Json(extraction), CoverageJson = Json(coverage), RetrievedUtc = DateTimeOffset.UtcNow };
-        db.TrendCandidates.Add(row); return row.Id;
+        db.TrendCandidates.Add(row);
+        if (cluster.State == "Verified" || signal.ReportStatus != "Current" && await db.TrendStoryBriefs.AnyAsync(x => x.ClusterId == cluster.Id, ct))
+        {
+            if (cluster.State is not ("Corrected" or "Withdrawn")) cluster.State = "Held";
+            await Invalidate(cluster, signal.ReportStatus == "Current" ? "SourceObservationChanged" : "SourceCorrectedOrRetracted", ct);
+        }
+        return row.Id;
     }
-    public Task<Guid[]> PollAsync(CoreScope s, Guid u, PollTrends r, CancellationToken ct) => Command(s, u, r.OperationId, "poll", r, "Admin", async () =>
+    private static string Observation(TrendSignal signal) => Hash(signal with
     {
-        var connector = await Connector(s, u, r.ConnectorId, ct); if (!connector.Enabled) throw new EvidenceBlockedException("SourceDisabled"); var config = Read<RegisterTrendConnector>(connector.SnapshotJson);
+        ObservedUtc = default,
+        SubstanceSnapshotIds = signal.SubstanceSnapshotIds.Distinct().Order().ToArray(),
+        Risks = signal.Risks.Order().ToArray(),
+        Metrics = signal.Metrics.OrderBy(x => x.Name).ThenBy(x => x.ObservedUtc).ThenBy(x => x.Value).ToArray()
+    });
+    public async Task<Guid[]> PollAsync(CoreScope s, Guid u, PollTrends r, CancellationToken ct)
+    {
+        await Access(s, u, "Admin", ct); if (r.OperationId == Guid.Empty) throw new RuntimeValidationException("Stable operation ID required.");
+        var old = await db.TrendOperations.AsNoTracking().SingleOrDefaultAsync(x => x.TenantId == s.TenantId && x.OperationId == r.OperationId, ct);
+        if (old != null) { if (old.Kind != "poll" || old.Actor != s.Actor || old.Fingerprint != Hash(new { u, request = r })) throw new RuntimeConflictException("Trend replay differs."); return PollResult(Read<Guid[]>(old.ResultJson)); }
+        var connector = await Connector(s, u, r.ConnectorId, ct); if (!connector.Enabled) throw new EvidenceBlockedException("SourceDisabled");
+        var config = Read<RegisterTrendConnector>(connector.SnapshotJson); var source = sources.Single(x => x.Key == config.SourceAdapter); source.Validate(config);
         var xml = config.FeedSnapshotId.HasValue ? await Text(s, u, config.FeedSnapshotId.Value, config.FeedLocale, config.FeedRegion, ct) : null;
-        var discovery = sources.Single(x => x.Key == config.SourceAdapter).Discover(new(config, xml), ct);
+        // No network inside the command transaction. Recheck current source/permission before acceptance.
+        var discovery = await source.DiscoverAsync(new(config, config.LiveFeed == null ? xml : null), ct);
         if (discovery.Contract != "trend.contract.v1" || discovery.Adapter != config.SourceAdapter || discovery.Signals.Length > 25) throw new RuntimeValidationException("Discovery contract/budget exceeded.");
-        var result = new List<Guid>(); foreach (var signal in discovery.Signals) result.Add(await Ingest(s, u, connector, signal, discovery.Coverage, ct)); return result.ToArray();
-    }, ct);
-    public Task<Guid> SubmitAsync(CoreScope s, Guid u, SubmitTrendSignal r, CancellationToken ct) => Command(s, u, r.OperationId, "manual", r, "Write", async () =>
-    { if (r.Signal.Kind != "Manual") throw new RuntimeValidationException("Manual URL/topic submissions use the same evidence pipeline."); return await Ingest(s, u, await Connector(s, u, r.ConnectorId, ct), r.Signal, ["ManualSubmission", "NoAutomaticVerification"], ct); }, ct);
+        return PollResult(await Command(s, u, r.OperationId, "poll", r, "Admin", async () =>
+        {
+            var current = await Connector(s, u, r.ConnectorId, ct); if (!current.Enabled || current.SnapshotJson != Json(config)) throw new EvidenceBlockedException("SourceDisabledOrChanged"); source.Validate(config);
+            if (config.FeedSnapshotId.HasValue) await Text(s, u, config.FeedSnapshotId.Value, config.FeedLocale, config.FeedRegion, ct);
+            var result = new List<Guid>(); foreach (var signal in discovery.Signals) result.Add(await Ingest(s, u, current, signal, discovery.Coverage, ct)); return result.ToArray();
+        }, ct));
+    }
+    private static Guid[] PollResult(Guid[] ids)
+    {
+        if (ids.Contains(Guid.Empty)) throw new RuntimeValidationException("Observation capacity25 reached; affected work is held. Append a reviewed source/event version.", "ObservationCapacityReached");
+        return ids;
+    }
+    public async Task<Guid> SubmitAsync(CoreScope s, Guid u, SubmitTrendSignal r, CancellationToken ct)
+    {
+        var id = await Command(s, u, r.OperationId, "manual", r, "Write", async () =>
+        { if (r.Signal.Kind != "Manual") throw new RuntimeValidationException("Manual URL/topic submissions use the same evidence pipeline."); return await Ingest(s, u, await Connector(s, u, r.ConnectorId, ct), r.Signal, ["ManualSubmission", "NoAutomaticVerification"], ct); }, ct);
+        return PollResult([id])[0];
+    }
     private async Task<TrendClusterView> ClusterView(CoreScope s, TrendCluster row, CancellationToken ct)
     {
         var proof = await TrendFence.Cluster(db, row, ct); var blocks = proof.Blocks.ToList();
@@ -103,9 +158,12 @@ public sealed partial class TrendWorkbench(CoreDbContext db, IEnumerable<ITrendS
         foreach (var record in records)
         {
             var signal = Read<TrendSignal>(record.SnapshotJson); var extraction = Read<TrendExtraction>(record.ExtractionJson); var withheld = false;
+            var connector = await db.TrendConnectors.AsNoTracking().SingleAsync(x => x.Id == record.ConnectorId, ct); var feed = Read<RegisterTrendConnector>(connector.SnapshotJson).LiveFeed;
+            var feedWithheld = feed != null && !(await new SourceRightsGuard(db).DecideAsync(s, feed.PermissionSnapshotId, new("Read", signal.Locale, signal.Region, "Text"), ct)).Decision.Allowed;
+            if (feedWithheld) { withheld = true; signal = signal with { Headline = "[Feed metadata withheld]", Url = "", EventKey = "", ReportOrigin = "Withheld", Metrics = [], SubstanceSnapshotIds = [], TranscriptSnapshotId = null }; }
             foreach (var id in extraction.SnapshotIds) if (!(await new SourceRightsGuard(db).DecideAsync(s, id, new("Read", signal.Locale, signal.Region, "Text"), ct)).Decision.Allowed) withheld = true;
             var observations = records.Where(x => x.ConnectorId == record.ConnectorId).Select(x => Read<TrendSignal>(x.SnapshotJson)).Where(x => x.ExternalId == signal.ExternalId).SelectMany(x => x.Metrics);
-            candidates.Add(new(record.Id, row.Id, record.ConnectorId, signal, withheld ? null : extraction, record.RetrievedUtc, Read<string[]>(record.CoverageJson), TrendRules.Momentum(observations), withheld ? ["RightsWithheld"] : []));
+            candidates.Add(new(record.Id, row.Id, record.ConnectorId, signal, withheld ? null : extraction, record.RetrievedUtc, Read<string[]>(record.CoverageJson), TrendRules.Momentum(observations), withheld ? [feedWithheld ? "FeedRightsWithheld" : "RightsWithheld"] : []));
         }
         return new(row.Id, row.Key, row.State, row.Dilemma, row.ClaimRevisionId, row.CheckedUtc, row.ExpiresUtc, Convert.ToBase64String(row.RowVersion), proof.Fingerprint, proof.Independent, candidates.ToArray(), blocks.Distinct().ToArray());
     }
@@ -145,20 +203,23 @@ public sealed partial class TrendWorkbench(CoreDbContext db, IEnumerable<ITrendS
             }; db.TrendTeachings.Add(row); return row.Id;
         }, ct); return await TeachingView(s, u, await Teaching(s, u, id, ct), ct);
     }
-    private sealed record TeachingSnapshot(LinkTrendTeaching Request, KnowledgeResult Retrieval);
-    private async Task<TrendTeachingView> TeachingView(CoreScope s, Guid u, TrendTeaching row, CancellationToken ct)
+    internal sealed record TeachingSnapshot(LinkTrendTeaching Request, KnowledgeResult Retrieval);
+    private Task<TrendTeachingView> TeachingView(CoreScope s, Guid u, TrendTeaching row, CancellationToken ct) => Project(async () =>
     {
+        row = await Teaching(s, u, row.Id, ct);
         var snapshot = Read<TeachingSnapshot>(row.SnapshotJson); var blocks = new List<string>();
         try { await TrendFence.AssertCluster(db, await Cluster(s, u, row.ClusterId, ct), ct); } catch (EvidenceBlockedException e) { blocks.Add(e.Message); }
         var lesson = await lessons.InspectAsync(s, u, row.LessonVariantId, ct); if (lesson.OutputWithheld || lesson.ReviewStatus != "Approved") blocks.Add("TeachingRightsOrReviewChanged");
         var candidateSignals = await db.TrendCandidates.AsNoTracking().Where(x => x.ClusterId == row.ClusterId).Select(x => x.SnapshotJson).ToArrayAsync(ct);
         var sensitive = candidateSignals.Select(x => Read<TrendSignal>(x)).Any(x => x.Risks.Length > 0);
-        return new(row.Id, row.ClusterId, row.LessonVariantId, row.Outcome, snapshot.Request.Rationale, lesson.OutputWithheld ? null : snapshot.Retrieval,
-            snapshot.Request.Alternatives, row.ReviewStatus, Convert.ToBase64String(row.RowVersion), blocks.ToArray())
+        if (!await KnowledgeService.StoredAllowed(db, s, u, snapshot.Request.Query, snapshot.Retrieval, ct)) blocks.Add("StoredRetrievalOutputWithheld");
+        var withheld = blocks.Count > 0;
+        return new TrendTeachingView(row.Id, row.ClusterId, row.LessonVariantId, row.Outcome, withheld ? "" : snapshot.Request.Rationale, withheld ? null : snapshot.Retrieval,
+            withheld ? [] : snapshot.Request.Alternatives, row.ReviewStatus, Convert.ToBase64String(row.RowVersion), blocks.ToArray())
         { RiskLevel = sensitive ? "SensitiveHumanReviewRequired" : "StandardEditorialReviewRequired" };
-    }
-    public async Task<TrendTeachingView[]> TeachingsAsync(CoreScope s, Guid u, CancellationToken ct)
-    { await Access(s, u, "Read", ct); var result = new List<TrendTeachingView>(); foreach (var row in await db.TrendTeachings.AsNoTracking().Where(x => x.TenantId == s.TenantId && x.UniverseId == u).Take(100).ToListAsync(ct)) result.Add(await TeachingView(s, u, row, ct)); return result.ToArray(); }
+    }, ct);
+    public Task<TrendTeachingView[]> TeachingsAsync(CoreScope s, Guid u, CancellationToken ct)
+        => Project(async () => { await Access(s, u, "Read", ct); var result = new List<TrendTeachingView>(); foreach (var row in await db.TrendTeachings.AsNoTracking().Where(x => x.TenantId == s.TenantId && x.UniverseId == u).Take(100).ToListAsync(ct)) result.Add(await TeachingView(s, u, row, ct)); return result.ToArray(); }, ct);
     public async Task ReviewTeachingAsync(CoreScope s, Guid u, Guid id, TrendReview r, CancellationToken ct) => _ = await Command(s, u, r.OperationId, "teaching-review", new { id, r }, "Review", async () =>
     {
         var row = await Teaching(s, u, id, ct); Expected(row, r.ExpectedRowVersion); TrendRules.Attest(r.Mode, r.EvidenceReference); var view = await TeachingView(s, u, row, ct);

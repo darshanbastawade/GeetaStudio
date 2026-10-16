@@ -13,15 +13,15 @@ namespace ContentOS.Foundation.Tests;
 internal static class FactoryTestFixture
 {
     internal sealed record Fixture(CoreScope Owner, Guid Universe, Guid Lesson, Guid SecondLesson, Guid SourceWork, Guid Character, Guid Bible, Guid Episode, Guid Audience);
-    internal static ServiceProvider Services()
+    internal static ServiceProvider Services(Action<IServiceCollection>? configure = null)
     {
         var services = new ServiceCollection(); using var baseServices = LessonTestFixture.ServicesWithRegistry();
         var config = baseServices.GetRequiredService<Microsoft.Extensions.Configuration.IConfiguration>(); services.AddSingleton(config); services.AddLogging(); services.AddContentRuntime(config, true); services.AddContentCore(config); services.AddLessons(); services.AddUniverseRegistry(); services.AddDraftFactory();
-        services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationA>(); services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationB>(); services.AddSingleton<IFactoryTemplate, LocalDraftTemplateA>(); services.AddSingleton<IFactoryTemplate, LocalDraftTemplateB>(); return services.BuildServiceProvider();
+        services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationA>(); services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationB>(); services.AddSingleton<IFactoryTemplate, LocalDraftTemplateA>(); services.AddSingleton<IFactoryTemplate, LocalDraftTemplateB>(); configure?.Invoke(services); return services.BuildServiceProvider();
     }
-    internal static async Task<Fixture> Setup(IServiceProvider s, string actor = "m11-owner")
+    internal static async Task<Fixture> Setup(IServiceProvider s, string actor = "m11-owner", bool aiProcessing = false)
     {
-        var f = await LessonTestFixture.Setup(s, actor); var lessons = s.GetRequiredService<ILessonEngine>(); var variant = await lessons.AdaptAsync(f.Owner, f.Universe, LessonTestFixture.Request(f), default); await ReviewLesson(s, f, variant);
+        var f = await LessonTestFixture.Setup(s, actor, aiProcessing); var lessons = s.GetRequiredService<ILessonEngine>(); var variant = await lessons.AdaptAsync(f.Owner, f.Universe, LessonTestFixture.Request(f), default); await ReviewLesson(s, f, variant);
         var second = await Second(s, f); var registry = s.GetRequiredService<IUniverseRegistry>(); var audience = variant.Snapshot.Audience.Rules.Audience!.AudienceId;
         var bible = await registry.RegisterBibleAsync(f.Owner, f.Universe, new(Guid.NewGuid(), "m11-bible", 1, RegistryTestFixture.Bible(audience)), default); await RegistryTestFixture.Review(s, f.Owner, f.Universe, bible);
         var episode = await registry.RegisterEpisodeAsync(f.Owner, f.Universe, new(Guid.NewGuid(), "m11-episode"), default);

@@ -13,6 +13,8 @@ public interface ISpeechSynthesisProvider
 {
     string Key { get; }
     MediaProviderCapabilities Capabilities { get; }
+    SpeechVoiceResource[] VoiceResources => [];
+    void ValidateProfile(RegisterMediaProfile profile) { }
     Task<MediaProviderResult> SubmitAsync(MediaProviderRequest request, CancellationToken ct);
     Task<MediaProviderResult> ReconcileAsync(MediaProviderRequest request, string? resource, CancellationToken ct);
 }
@@ -23,6 +25,7 @@ public interface IMediaStorageMover
 }
 public interface IMediaLibrary
 {
+    Task<SpeechAdapterView[]> SpeechAdaptersAsync(CoreScope scope, Guid universe, CancellationToken ct);
     Task<MediaVersionView> ImportAsync(CoreScope scope, Guid universe, ImportMedia request, CancellationToken ct);
     Task<MediaAssetView[]> AssetsAsync(CoreScope scope, Guid universe, CancellationToken ct);
     Task ReviewAsync(CoreScope scope, Guid universe, Guid version, ReviewMedia request, CancellationToken ct);

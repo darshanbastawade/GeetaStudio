@@ -1,30 +1,42 @@
-# M0 architecture — 10 October 2026
+# ContentOS architecture — current private implementation
 
-The modular monolith has independently runnable API, server-interactive Blazor web, and worker hosts. They share owned contracts and core libraries; this is not a distributed service design. M0 implements only health, a labeled development fixture, an interactive shell, and an idle cancellable worker. There is no database, migration, provider adapter, authentication flow, or content generation yet.
+Prompt 7 adds only a narrow operator helper and integrated acceptance tests over existing modules. Distinct audiences use separate reviewed audience-bound factory/workflow plans, the same event/teaching, and exact cast/presentation/media snapshots. M7 remains the monetary ledger; M8 remains the workflow runtime; M13/M16/M17/M18 retain review, rights and export ownership. The helper never creates approvals or invokes publication/payment endpoints. No new entity, migration, provider SDK or engine. Fixture/live/human qualification stays explicit. [Evidence](milestones/evidence/M25.2-prompt7.md).
+
+Prompt 6 keeps narration planning in Application/the existing WATCH workbench; it creates no provider work. Reviewed layout and exact script determine bounded segments, then original M16 jobs and M17 stages own execution/accounting. SAPI enumeration, COM execution and request/WAV receipts stay inside Integrations through the owned speech port. No engine/ledger/schema split or language fallback; genuine art/voice qualification remains pending. [Evidence](milestones/evidence/M25.2-prompt6.md).
+
+The .NET 10 modular monolith has independently runnable API, server-interactive Blazor web and worker hosts. Separate CoreDbContext and RuntimeDbContext own SQL schemas and migration histories. Application owns typed ports; Infrastructure implements persistence and orchestration; Integrations owns approved protocols and adapters. M26 reuses the platform for historical content, and M27 adds guarded private experiments and automation. M22 realtime voice TALK remains missing; M21 supplies text TALK.
+
+Later modules share M7 accounting, M8 workflows, M10 cast snapshots, M13 editorial lineage, M16 assets and M17 rendering. Stateful effects retain original provider/account/resource bindings, bounded budgets, cancellation/lease fences and unknown-outcome reconciliation. Current rights, audience, review, corrections, ownership and consent gate dispatch and returned content. Stored trend retrieval now validates exact pinned evidence under serializable projection without refreshing aliases, calling providers or rewriting snapshots. Prior TALK privacy, analytics timing and commerce refund/seat fixes remain in these boundaries.
+
+Prompt 4 bridges M11 factory work to a unique immutable M8 child workflow and the original M7 AI operation. Factory admission, cancellation and current rights/cast checks share the existing workflow/factory/AI locks. Provider calls remain outside SQL transactions; batch spend/unknown exposure is projected from M7. The immutable plan pins prompt/route/profile/evidence/cast/schema, and a new reviewed plan is required for route changes. Exact source/interpretation claims plus a pending generated-fiction claim commit with the factory artifact using shared M05 validation; existing M13 imports the private draft and carries provenance into WATCH. One additive nullable binding migration preserves local-template history. [M25.2 evidence](milestones/M25.2.md) keeps later prompts, live qualification and human acceptance open.
+
+Prompt 5 extends the existing trend source port asynchronously. Network discovery occurs outside SQL transactions; the existing scoped command lock rechecks configuration/permission before accepting metadata. The RSS integration pins a configured URL/permission binding, validates DNS at connection time and connects to a literal public IP with ordinary TLS. Candidate identity is independent of poll ID/local poll time; existing immutable candidate/operation/audit/remediation history handles reuse, meaningful versions and durable holds at capacity. Trend AI preparation uses the same factory and shows a pending placeholder until generation. No new schema, ledger, engine or publisher license is introduced; unconfigured live intake stays disabled. [Prompt 5 evidence](milestones/evidence/M25.2-prompt5.md).
+
+Controlled implementation and offline verification do not establish human quality, live qualification or production release. M12 human-reviewed data and feature-specific release gates remain open. M0's database-free mode remains available; durable acceptance uses real SQL Server. The milestone sections below describe their original implementation scope; consult the [matrix](MILESTONE_MATRIX.md) and [project state](PROJECT_STATE.md) for current qualification.
 
 | Project | Responsibility and allowed project dependencies |
 |---|---|
-| ContentOS.Domain | Domain invariants; no project/package references. Intentionally no speculative domain entities in M0. |
-| ContentOS.Contracts | Owned version 1 health and development DTOs; no project/package references. |
-| ContentOS.Application | Use cases and typed ports as milestones introduce them; Domain, Contracts. No M1 ports implemented yet. |
-| ContentOS.Infrastructure | Future SQL Server persistence, files, durable jobs; Application, Domain. Empty boundary in M0. |
-| ContentOS.Integrations | Approved capability adapters and vendor/protocol mapping; Application, Contracts. Empty boundary in M0. |
+| ContentOS.Domain | Domain invariants; no project/package references. |
+| ContentOS.Contracts | Owned transport and snapshot contracts; no project/package references. |
+| ContentOS.Application | Use cases and typed capability ports; Domain, Contracts. |
+| ContentOS.Infrastructure | SQL Server persistence, rights/review fences, files and durable jobs; Application, Domain. |
+| ContentOS.Integrations | Approved capability adapters and vendor/protocol mapping; Application, Contracts. |
 | GeetaStudio.Api | Composition root and HTTP endpoints; Application, Contracts, Infrastructure, Integrations. |
 | GeetaStudio.Web | UI and configured server-side HTTP client; Contracts. Never direct persistence access. |
 | GeetaStudio.Worker | Composition root and hosted background lifetime; Application, Infrastructure, Integrations. |
-| ContentOS.Foundation.Tests | In-process API tests, web client failures, architecture and secret gates. No SQL/live tests disguised as fixtures. |
+| ContentOS.Foundation.Tests | Offline rule/API/architecture/security checks and explicitly opted-in real-SQL durability/regression tests; no live-provider qualification inferred. |
 
 Core projects use only the .NET base framework and `Microsoft.NET.Sdk`. The gate forbids PackageReference, assembly Reference, FrameworkReference, incorrect SDK, reverse/lateral project dependencies, and literal HTTP(S) endpoints/network clients in Domain/Application/Contracts. Repository Directory.Build files cannot inject references. Hosts may use ASP.NET/hosting/HTTP framework behavior. Microsoft.Extensions.Hosting 10.0.12 belongs to the worker; Microsoft.AspNetCore.Mvc.Testing 10.0.12 belongs to tests. New exceptions require an explicit decision and gate change. This is a focused source/build configuration gate, not a general security analyzer; it does not prove the absence of arbitrarily obfuscated code.
 
-External integrations will follow: use case → owned capability port → policy/route selection → approved adapter. Vendor SDK types, model/voice IDs, authentication, endpoints, and protocol mapping stay in adapters or validated configuration. M1 introduces registry/routing and deterministic adapters; M0 does not implement them. Web-to-API health is first-party HTTP, not a vendor capability.
+External integrations follow: use case → owned capability port → policy/route selection → approved adapter. Vendor SDK types, model/voice IDs, authentication, endpoints, and protocol mapping stay in adapters or validated configuration. M1 introduces registry/routing and deterministic adapters; M0 does not implement them. Web-to-API health is first-party HTTP, not a vendor capability.
 
-ContentOS owns reusable product logic. Universe packs will supply versioned configuration, approved source/rights records, character data, and editorial policy. No Geeta characters, canonical texts, scripture fixtures, or invented sources are seeded in M0. No empty future module forest or generic plugin loader is introduced.
+ContentOS owns reusable product logic. Universe packs supply versioned configuration, approved source/rights records, character data, and editorial policy. No Geeta characters, canonical texts, scripture fixtures, or invented sources are seeded in M0. No empty future module forest or generic plugin loader is introduced.
 
 Internal identifiers will be stable GUIDs independent of external provider IDs. Persist instants in UTC (DateTimeOffset with zero offset); external resource bindings retain provider/account identity. M0 health uses `DateTimeOffset.UtcNow`. The shell displays that instant in the server's local timezone/current culture and labels it as such; user-selected locale presentation belongs to its later milestone. SQL Server is the selected persistence engine from M1; no in-memory database substitutes for its acceptance.
 
 Development configuration binds HTTP to loopback and enables the fixture route only when the API environment is Development. Web's API address is configured in appsettings.Development.json / `Api__BaseAddress`; it is required and must use HTTPS outside Development. Non-development HTTP hosts retain HTTPS redirection (web also HSTS). M0 is not an authenticated public application or production deployment baseline.
 
-Packages are exact-version references with committed NuGet lock files. CI restores locked dependencies, builds with warnings as errors, runs focused offline tests and the secret gate, then checks formatting. SDK selection is 10.0.401, latestPatch, no prereleases. Secret scanning detects known key/private-key patterns and nonempty secret assignments without printing values; it is a heuristic guard, not exhaustive credential detection. Keep local secrets outside source control and use .NET user secrets from the milestone that needs them.
+Packages are exact-version references with committed NuGet lock files. CI restores locked dependencies, builds with warnings as errors, runs focused offline tests and the secret gate, then checks formatting. SDK selection is 10.0.401, roll-forward disabled, no prereleases; executable runtime minimum is 10.0.13. Repository text checkout uses LF attributes; CI retains scoped stage logs/TRX even on failure. Secret scanning detects known key/private-key patterns and nonempty secret assignments without printing values; it is a heuristic guard, not exhaustive credential detection. Keep local secrets outside source control and use .NET user secrets from the milestone that needs them.
 
 Official API/configuration references reviewed on 10 October 2026:
 
@@ -33,7 +45,7 @@ Official API/configuration references reviewed on 10 October 2026:
 - [VS Code C# debugger settings](https://code.visualstudio.com/docs/csharp/debugger-settings)
 - [VS Code compound debugging](https://code.visualstudio.com/docs/debugtest/debugging#_compound-launch-configurations)
 
-For existing installations, audit first; add missing boundaries without renaming healthy projects or touching IDs/data; establish passing offline checks; then add host configuration and reverify before a dependency milestone. This fresh repository had no implementation to migrate. M0 additions can be reviewed/removed independently of the retained planning baseline; no claim of database rollback is applicable.
+Historical M0 setup: for existing installations, audit first; add missing boundaries without renaming healthy projects or touching IDs/data; establish passing offline checks; then add host configuration and reverify before a dependency milestone. This fresh repository had no implementation to migrate. M0 additions can be reviewed/removed independently of the retained planning baseline; no claim of database rollback is applicable.
 
 ## M1 extension — current runtime
 

@@ -106,6 +106,9 @@ public sealed partial class EditorialWorkbench(CoreDbContext db, IQualityEvaluat
             var d = await new SourceRightsGuard(db).DecideAsync(s, source, new(purpose, head.LocaleId, "IN", "Text", Adaptation: purpose != "Read" && revision.Kind is "Fiction" or "Synthetic" or "Interpretation"), ct);
             if (!d.Decision.Allowed) blocks.Add("Rights:" + d.Decision.Reason); else if (d.Citation != null) citations.Add(d.Citation);
         }
+        var hasAiFactory = await db.FactoryArtifacts.AnyAsync(a => a.TenantId == s.TenantId && a.UniverseId == item.UniverseId && a.SnapshotJson.Contains("\"Generation\":") && (a.CoreRevisionId == revision.Id || lineage.Edges.Select(e => e.ParentRevisionId).Contains(a.CoreRevisionId)), ct);
+        if (hasAiFactory) foreach (var source in lineage.Snapshots)
+            if (!(await new SourceRightsGuard(db).DecideAsync(s, source, new("Generate", head.LocaleId, "IN", "Text", Adaptation: true, AiProcessing: true), ct)).Decision.Allowed) blocks.Add("Rights:FactoryAiPermissionWithdrawn");
         var gate = await new EvidenceEngine(db).CheckContentAsync(s, revision.Id, new(purpose, head.LocaleId, "IN", "Text"), ct); if (!gate.Eligible) blocks.Add("Evidence:" + gate.Reason);
         if (await db.EditorialCorrectionTasks.AnyAsync(x => x.ContentId == item.ContentId && x.Kind == "Internal" && x.State != "Resolved", ct)) blocks.Add("UnresolvedCorrection");
         foreach (var a in await db.Assets.AsNoTracking().Where(x => x.ContentRevisionId == revision.Id).ToListAsync(ct))

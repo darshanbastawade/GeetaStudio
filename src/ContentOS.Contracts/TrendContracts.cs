@@ -4,9 +4,18 @@ public sealed record TrendMetric(string Name, decimal Value, DateTimeOffset Obse
 public sealed record TrendSignal(string ExternalId, string EventKey, string ReportOrigin, bool Primary, string Kind, string Headline,
     string Url, string Category, string Region, string Locale, DateTimeOffset? EventUtc, DateTimeOffset? PublishedUtc,
     DateTimeOffset? UpdatedUtc, DateTimeOffset ObservedUtc, Guid[] SubstanceSnapshotIds, Guid? TranscriptSnapshotId,
-    bool RequiresTranscript, string[] Risks, TrendMetric[] Metrics, string ReportStatus = "Current");
+    bool RequiresTranscript, string[] Risks, TrendMetric[] Metrics, string ReportStatus = "Current")
+{
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public string? DiscoveryContentHash { get; init; }
+}
 public sealed record RegisterTrendConnector(Guid OperationId, string Key, int Version, string SourceAdapter, string ExtractorAdapter,
-    string Mode, string EvidenceReference, TrendSignal[] FixtureSignals, Guid? FeedSnapshotId = null, string FeedLocale = "en-IN", string FeedRegion = "IN");
+    string Mode, string EvidenceReference, TrendSignal[] FixtureSignals, Guid? FeedSnapshotId = null, string FeedLocale = "en-IN", string FeedRegion = "IN")
+{
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public TrendLiveFeed? LiveFeed { get; init; }
+}
+public sealed record TrendLiveFeed(string Key, string Url, Guid PermissionSnapshotId, string PermissionReference);
 public sealed record TrendConnectorView(Guid Id, RegisterTrendConnector Configuration, bool Enabled, string RowVersion);
 public sealed record TrendDiscoveryRequest(RegisterTrendConnector Configuration, string? FeedXml);
 public sealed record TrendDiscovery(string Contract, string Adapter, string[] Coverage, TrendSignal[] Signals);
@@ -39,7 +48,11 @@ public sealed record BindTrendStory(Guid OperationId, Guid BriefId, Guid Editori
 public sealed record TrendChange(Guid OperationId, string ExpectedRowVersion, string Action, string Reason, string EvidenceReference);
 public sealed record TrendRemediationView(Guid Id, Guid ClusterId, Guid BriefId, string Reason, string State, Guid? EditorialCorrectionId);
 public sealed record TrendStats(int Candidates, int Verified, int Held, int Rejected, int AcceptedBriefs, int RejectedBriefs,
-    decimal EstimatedProductionCost, int OpenRemediations, decimal ActualTextGenerationCost, decimal? ActualMediaCost);
+    decimal EstimatedProductionCost, int OpenRemediations, decimal ActualTextGenerationCost, decimal? ActualMediaCost)
+{
+    public decimal OutstandingTextGenerationCost { get; init; }
+    public string? TextGenerationCurrency { get; init; }
+}
 
 public sealed record TrendRankWeights(double Freshness = .2, double Momentum = .05, double Evidence = .3, double Novelty = .15, double Cost = .1, double TeachingRelevance = .2);
 public sealed record RankTrends(Guid AudienceId, string Locale, TrendRankWeights Weights);

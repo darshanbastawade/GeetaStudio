@@ -23,7 +23,7 @@ internal static class ReadTestFixture
         services.AddSingleton<IEmbeddingProvider, ContentOS.Integrations.ReviewedConceptEmbedding>(); services.AddSingleton<IKnowledgeRankingAdapter, ContentOS.Integrations.SqlHybridRanking>();
         return services.BuildServiceProvider();
     }
-    internal static async Task<Fixture> Setup(IServiceProvider s, string actor = "m14-owner")
+    internal static async Task<Fixture> Setup(IServiceProvider s, string actor = "m14-owner", bool generationFixture = false)
     {
         var f = await EditorialTestFixture.Setup(s, actor); var db = s.GetRequiredService<CoreDbContext>(); var lessons = s.GetRequiredService<ILessonEngine>(); var corpus = s.GetRequiredService<ICanonicalCorpus>(); var sources = s.GetRequiredService<ISourceRegistry>();
         await lessons.ProposeDefaultsAsync(f.Owner, f.Universe, default);
@@ -37,7 +37,7 @@ internal static class ReadTestFixture
             var work = await sources.RegisterAsync(f.Owner, f.Universe, new(Guid.NewGuid(), "read-" + locale, "M14 exact stored samples — fixture permissions only", locale == "sa-IN" ? "Canonical" : "Translation"), default);
             if (locale == "en-IN") sourceWork = work;
             var edition = await sources.EditionAsync(f.Owner, f.Universe, work, new(Guid.NewGuid(), "read-two-verses", "M04 stored sample", "Annie Besant (1922) sample", "M14 isolated fixture", locale, "Discourse 1, verses 1–2"), default);
-            var permission = await sources.PermissionAsync(f.Owner, f.Universe, edition, new(Guid.NewGuid(), "fixture:M14-not-production-permission", ["en-IN", "sa-IN", "mr-IN", "hi-IN"], ["IN"], ["Text", "Json"], false, true, true, false, true, "Fixture: exact M04 stored sample; genuine release review pending."), default);
+            var permission = await sources.PermissionAsync(f.Owner, f.Universe, edition, new(Guid.NewGuid(), "fixture:M14-not-production-permission", ["en-IN", "sa-IN", "mr-IN", "hi-IN"], ["IN"], generationFixture ? ["Text", "Json", "Video"] : ["Text", "Json"], false, true, true, generationFixture, true, "Fixture: exact M04 stored sample; genuine release review pending."), default);
             var detail = await sources.InspectAsync(f.Owner, f.Universe, work, default); await sources.ReviewPermissionAsync(f.Owner, f.Universe, permission, new(detail.Permissions.Single().RowVersion, "Approved"), default);
             for (var i = 0; i < 2; i++)
             {

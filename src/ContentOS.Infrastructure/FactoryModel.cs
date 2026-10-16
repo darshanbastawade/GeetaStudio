@@ -33,6 +33,8 @@ public sealed partial class CoreDbContext
         m.Entity<FactoryPlan>().HasIndex(x => new { x.TenantId, x.UniverseId, x.Key, x.Version }).IsUnique();
         m.Entity<FactoryBatch>().HasIndex(x => new { x.TenantId, x.UniverseId, x.BusinessKey }).IsUnique();
         m.Entity<FactoryWork>().HasIndex(x => new { x.BatchId, x.BriefKey, x.Format }).IsUnique();
+        m.Entity<FactoryWork>().HasIndex(x => x.WorkflowId).IsUnique().HasFilter("[WorkflowId] IS NOT NULL");
+        m.Entity<FactoryWork>().HasOne<DurableWorkflow>().WithMany().HasForeignKey(x => x.WorkflowId).OnDelete(DeleteBehavior.Restrict);
         m.Entity<FactoryArtifact>().HasIndex(x => new { x.TenantId, x.UniverseId, x.Fingerprint }).IsUnique();
         m.Entity<FactoryOperation>().HasIndex(x => new { x.TenantId, x.OperationId }).IsUnique();
     }
@@ -40,6 +42,7 @@ public sealed partial class CoreDbContext
     {
         if (e.State == EntityState.Deleted && e.Entity is FactoryPlan or FactoryBatch or FactoryWork or FactoryArtifact or FactoryOperation) throw new InvalidOperationException("Factory history cannot be deleted.");
         if (e.State != EntityState.Modified) return;
+        if (e.Entity is FactoryWork && e.Property("WorkflowId").IsModified && e.Property("WorkflowId").OriginalValue != null) throw new InvalidOperationException("Factory child workflow is immutable.");
         if (e.Entity is FactoryOperation) throw new InvalidOperationException("Factory operation is immutable.");
         if (e.Entity is FactoryPlan or FactoryArtifact && (e.Property("ReviewStatus").OriginalValue as string is "Approved" or "Rejected" || e.Properties.Any(p => p.IsModified && p.Metadata.Name is not ("ReviewStatus" or "ReviewEvidence" or "UpdatedUtc" or "RowVersion")))) throw new InvalidOperationException("Factory reviewed inputs and artifacts are immutable; append a version.");
     }

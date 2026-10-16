@@ -1,0 +1,19 @@
+{
+    "verifiedUtc":  "2026-10-15T13:33:18.6759235+00:00",
+    "database":  "GeetaStudio_Dev",
+    "restrictedApiReady":  true,
+    "factoryPage200":  true,
+    "privateNoStore":  true,
+    "workflowDefinitions200":  true,
+    "definitionCount":  4,
+    "existingPlans200":  true,
+    "planCount":  0,
+    "existingBatches200":  true,
+    "batchCount":  0,
+    "anonymousStatus":  401,
+    "crossTenantStatus":  403,
+    "workersDisabled":  true,
+    "fixtureAccountsCreated":  0,
+    "paidCalls":  0,
+    "interactiveBrowserOrF5Verified":  false
+}

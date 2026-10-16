@@ -27,7 +27,7 @@ internal static class LessonTestFixture
         services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationA>(); services.AddSingleton<ITranslationAdapter, ReviewedMemoryTranslationB>();
         return services.BuildServiceProvider();
     }
-    internal static async Task<Fixture> Setup(IServiceProvider s, string actor = "m09-owner")
+    internal static async Task<Fixture> Setup(IServiceProvider s, string actor = "m09-owner", bool aiProcessing = false)
     {
         var db = s.GetRequiredService<CoreDbContext>(); var org = Guid.NewGuid(); var tenant = Guid.NewGuid(); var u = Guid.NewGuid();
         db.Organizations.Add(new() { Id = org, Name = "M09 synthetic fixture" }); db.Tenants.Add(new() { Id = tenant, OrganizationId = org, Key = "m09-" + tenant, Name = "M09 fixture — not release qualified" });
@@ -46,7 +46,7 @@ internal static class LessonTestFixture
         {
             var work = await sources.RegisterAsync(owner, u, new(Guid.NewGuid(), part.Locale, "M09 fixture source — test permissions only", part.Kind), default); if (part.Locale == "en-IN") workId = work;
             var edition = await sources.EditionAsync(owner, u, work, new(Guid.NewGuid(), "fixture-1.1", "M04 stored sample", "Annie Besant (1922) sample", "M09 test harness", part.Locale, locator), default);
-            var permission = await sources.PermissionAsync(owner, u, edition, new(Guid.NewGuid(), "fixture:M09-permission-not-a-production-license", ["en-IN", "sa-IN", "mr-IN", "hi-IN"], ["IN"], ["Text", "Json"], false, true, true, false, true, "Fixture: M04 stored Besant/Wikisource sample; no publication permission asserted"), default);
+            var permission = await sources.PermissionAsync(owner, u, edition, new(Guid.NewGuid(), "fixture:M09-permission-not-a-production-license", ["en-IN", "sa-IN", "mr-IN", "hi-IN"], ["IN"], ["Text", "Json"], false, true, true, aiProcessing, true, "Fixture: M04 stored Besant/Wikisource sample; no publication permission asserted"), default);
             var detail = await sources.InspectAsync(owner, u, work, default); await sources.ReviewPermissionAsync(owner, u, permission, new(detail.Permissions.Single().RowVersion, "Approved"), default);
             var bytes = Encoding.UTF8.GetBytes(part.Text);
             var snapshot = await sources.ImportAsync(owner, u, edition, new(Guid.NewGuid(), "fixture.txt", bytes, Convert.ToHexString(SHA256.HashData(bytes)), "fixture:M04-exact-one-verse", true), default);

@@ -10,7 +10,12 @@ public sealed record RegisterWorkflow(string Key, int Version, Guid PromptId, Gu
     int DeadlineSeconds = 600, int LeaseSeconds = 90, bool HumanReview = true);
 public sealed record WorkflowDefinitionView(Guid Id, RegisterWorkflow Settings);
 public sealed record StartWorkflow(Guid OperationId, Guid DefinitionId, Dictionary<string, string> Inputs,
-    Guid[]? SourceSnapshotIds = null, KnowledgeQuery? Query = null, string? PlanJson = null, Guid? EvidenceContentRevisionId = null);
+    Guid[]? SourceSnapshotIds = null, KnowledgeQuery? Query = null, string? PlanJson = null, Guid? EvidenceContentRevisionId = null)
+{
+    [System.Text.Json.Serialization.JsonIgnore]
+    public FactoryWorkflowAdmission? FactoryAdmission { get; init; }
+}
+public sealed record FactoryWorkflowAdmission(Guid WorkId, Guid LeaseToken);
 public sealed record WorkflowSnapshot(PromptView Prompt, WorkflowDefinitionView Definition, AiRouteView Route,
     AiProfileView[] Profiles, string Engine = "owned-sequence.v1", string Schema = "workflow-checkpoint.v1");
 public sealed record WorkflowEvidence(Guid[] SourceIds, string Data, KnowledgeResult? Retrieval = null);

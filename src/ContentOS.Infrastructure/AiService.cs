@@ -12,7 +12,7 @@ namespace ContentOS.Infrastructure;
 
 public sealed partial class AiService(CoreDbContext db, RuntimeDbContext runtime, ISecretResolver secrets,
     IEnumerable<ITextGenerationProvider> texts, IEnumerable<IAiEmbeddingAdapter> embeddings,
-    IConfiguration configuration, ILogger<AiService> logger) : IAiAdministration, IAiTaskRouter
+    IConfiguration configuration, ILogger<AiService> logger, IServiceProvider? services = null) : IAiAdministration, IAiTaskRouter
 {
     internal static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
     internal static string Encode<T>(T x) => JsonSerializer.Serialize(x, Json);

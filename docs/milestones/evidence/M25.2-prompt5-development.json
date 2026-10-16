@@ -1,0 +1,21 @@
+{
+    "verifiedUtc":  "2026-10-15T15:58:39.5771590+00:00",
+    "database":  "GeetaStudio_Dev",
+    "restrictedApiReady":  true,
+    "trendPage200":  true,
+    "privateNoStore":  true,
+    "connectors200":  true,
+    "connectorCount":  0,
+    "clusters200":  true,
+    "clusterCount":  0,
+    "stories200":  true,
+    "storyCount":  0,
+    "anonymousStatus":  401,
+    "crossTenantStatus":  403,
+    "unconfiguredSourceStatus":  400,
+    "negativeProbeCreatedConnectors":  0,
+    "workersDisabled":  true,
+    "fixtureAccountsCreated":  0,
+    "paidCalls":  0,
+    "interactiveBrowserOrF5Verified":  false
+}

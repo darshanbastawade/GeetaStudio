@@ -8,7 +8,7 @@ using ContentOS.Domain;
 using Microsoft.EntityFrameworkCore;
 namespace ContentOS.Infrastructure;
 
-public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedding, IEnumerable<IKnowledgeRankingAdapter> adapters) : IKnowledgeAdministration, IKnowledgeRetriever, IKnowledgeIndexWorker
+public sealed partial class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedding, IEnumerable<IKnowledgeRankingAdapter> adapters) : IKnowledgeAdministration, IKnowledgeRetriever, IKnowledgeIndexWorker
 {
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
     private static T Parse<T>(string s) => JsonSerializer.Deserialize<T>(s, Json)!;
@@ -38,10 +38,10 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
         if (!await (from snap in db.SourceSnapshots join e in db.SourceEditions on snap.EditionId equals e.Id join w in db.SourceWorks on e.WorkId equals w.Id where snap.Id == snapshot && w.UniverseId == u && w.TenantId == s.TenantId select snap.Id).AnyAsync(ct)) throw new CoreAccessException();
         if (claim is Guid id && !await db.ClaimRevisions.AnyAsync(r => r.Id == id && db.Claims.Any(c => c.Id == r.ClaimId && c.UniverseId == u), ct)) throw new CoreAccessException();
     }
-    private async Task<bool> CurrentClaim(Guid? id, CancellationToken ct)
+    private static async Task<bool> CurrentClaim(CoreDbContext db, Guid? id, CancellationToken ct)
     {
         if (id == null) return true; var r = await db.ClaimRevisions.AsNoTracking().SingleAsync(x => x.Id == id, ct);
-        return r.ReviewStatus == "Approved" && await db.Claims.AnyAsync(c => c.Id == r.ClaimId && c.CurrentVersion == r.Version, ct) && !await db.ClaimCorrections.AnyAsync(c => c.ClaimRevisionId == id && c.Status == "Open", ct);
+        return r.ReviewStatus == "Approved" && await db.Claims.AnyAsync(c => c.Id == r.ClaimId && c.CurrentVersion == r.Version, ct) && !await db.ClaimCorrections.AnyAsync(c => c.ClaimRevisionId == id && c.Status == "Open", ct) && !await db.EditorialCorrections.AnyAsync(c => c.ClaimRevisionId == id, ct);
     }
     public Task<Guid> ConceptAsync(CoreScope s, Guid u, RegisterConcept r, CancellationToken ct) => Command(s, u, r.OperationId, "knowledge.concept", r, async () =>
     {
@@ -71,7 +71,7 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
         {
             var locale = await (from snapshot in db.SourceSnapshots join edition in db.SourceEditions on snapshot.EditionId equals edition.Id where snapshot.Id == snap select edition.Language).SingleAsync(ct);
             var rights = await new SourceRightsGuard(db).DecideAsync(s, snap, new("Read", locale, "IN", "Text"), ct);
-            if (!rights.Decision.Allowed || !await CurrentClaim(claim, ct)) throw new KnowledgeBlockedException("UnreviewedOrRestrictedProvenance");
+            if (!rights.Decision.Allowed || !await CurrentClaim(db, claim, ct)) throw new KnowledgeBlockedException("UnreviewedOrRestrictedProvenance");
         }
         if (concept != null) { concept.ReviewStatus = r.Status; concept.Reviewer = s.Actor; concept.ReviewEvidence = r.EvidenceReference; }
         else { edge!.ReviewStatus = r.Status; edge.Reviewer = s.Actor; edge.ReviewEvidence = r.EvidenceReference; }
@@ -85,12 +85,12 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
         if (edges.Count > 300) throw new RuntimeValidationException("Graph exceeds 300-edge bound.");
         return new(concepts.Select(c => new ConceptView(c.Id, c.Key, c.SnapshotId, c.ClaimRevisionId, Parse<ConceptTermInput[]>(c.TermsJson), c.ReviewStatus, c.Reviewer, c.ReviewEvidence, Row(c))).ToArray(), edges.Select(e => new RelationView(e.Id, e.FromId, e.ToId, e.Kind, e.SnapshotId, e.ReviewStatus, Row(e))).ToArray());
     }
-    private async Task CheckGraph(CoreScope s, KnowledgeIndex index, CancellationToken ct, IntendedUse? use = null)
+    private static async Task CheckGraph(CoreDbContext db, CoreScope s, KnowledgeIndex index, CancellationToken ct, IntendedUse? use = null)
     {
         foreach (var c in Parse<ConceptFeature[]>(index.GraphJson))
         {
             var rights = await new SourceRightsGuard(db).DecideAsync(s, c.SnapshotId, use ?? new("Read", index.Locale, index.Territory, "Text"), ct);
-            if (!rights.Decision.Allowed || !await CurrentClaim(c.ClaimRevisionId, ct)) throw new KnowledgeBlockedException("StaleGraphProvenance");
+            if (!rights.Decision.Allowed || !await CurrentClaim(db, c.ClaimRevisionId, ct)) throw new KnowledgeBlockedException("StaleGraphProvenance");
             if (c.ClaimRevisionId is Guid claimId)
             {
                 foreach (var snapshot in await db.ClaimSpans.AsNoTracking().Where(x => x.ClaimRevisionId == claimId).Select(x => x.SnapshotId).Distinct().ToListAsync(ct))
@@ -112,14 +112,14 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
         foreach (var c in approved)
         {
             var rights = await new SourceRightsGuard(db).DecideAsync(s, c.SnapshotId, new("Read", r.Locale, r.Territory, "Text"), ct);
-            if (rights.Decision.Allowed && await CurrentClaim(c.ClaimRevisionId, ct)) features.Add(new(c.Id, c.SnapshotId, c.ClaimRevisionId, c.Terms, []));
+            if (rights.Decision.Allowed && await CurrentClaim(db, c.ClaimRevisionId, ct)) features.Add(new(c.Id, c.SnapshotId, c.ClaimRevisionId, c.Terms, []));
         }
         // Approved relation provenance is carried as a separate graph feature, never inferred from generated text.
         foreach (var e in graph.Relations.Where(e => e.ReviewStatus == "Approved" && e.Kind is "Related" or "Broader"))
         {
             var entity = await db.KnowledgeRelations.AsNoTracking().SingleAsync(x => x.Id == e.Id, ct);
             var rights = await new SourceRightsGuard(db).DecideAsync(s, e.SnapshotId, new("Read", r.Locale, r.Territory, "Text"), ct);
-            if (!rights.Decision.Allowed || !await CurrentClaim(entity.ClaimRevisionId, ct) || !features.Any(f => f.Id == e.FromId) || !features.Any(f => f.Id == e.ToId)) continue;
+            if (!rights.Decision.Allowed || !await CurrentClaim(db, entity.ClaimRevisionId, ct) || !features.Any(f => f.Id == e.FromId) || !features.Any(f => f.Id == e.ToId)) continue;
             var from = features.FindIndex(f => f.Id == e.FromId); features[from] = features[from] with { Related = features[from].Related.Append(e.ToId).ToArray() };
             features.Add(new(e.Id, e.SnapshotId, entity.ClaimRevisionId, [], []));
         }
@@ -145,7 +145,7 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
         db.KnowledgeIndices.Add(index); return index.Id;
     }, ct);
     private async Task<KnowledgeIndex> Index(Guid u, Guid id, CancellationToken ct) => await db.KnowledgeIndices.SingleOrDefaultAsync(x => x.Id == id && x.UniverseId == u, ct) ?? throw new CoreAccessException();
-    private async Task<(CorpusText Text, CorpusVerse Verse, CorpusManifest Manifest, CitationExport Citation, int SourceStart)?> Allowed(CoreScope s, KnowledgeIndex index, Guid textId, CancellationToken ct, IntendedUse? use = null)
+    private static async Task<(CorpusText Text, CorpusVerse Verse, CorpusManifest Manifest, CitationExport Citation, int SourceStart)?> Allowed(CoreDbContext db, CoreScope s, KnowledgeIndex index, Guid textId, CancellationToken ct, IntendedUse? use = null)
     {
         var text = await db.CorpusTexts.AsNoTracking().SingleOrDefaultAsync(t => t.Id == textId && t.Locale == index.Locale, ct); if (text == null) return null;
         var verse = await db.CorpusVerses.AsNoTracking().SingleAsync(v => v.Id == text.VerseId, ct);
@@ -179,10 +179,10 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
         if (index == null) return false; var s = new CoreScope(index.TenantId, index.Actor);
         try
         {
-            await Access(s, index.UniverseId, true, ct); await CheckGraph(s, index, ct);
+            await Access(s, index.UniverseId, true, ct); await CheckGraph(db, s, index, ct);
             foreach (var id in Parse<Guid[]>(index.MaterialJson))
             {
-                var allowed = await Allowed(s, index, id, ct); if (allowed == null) continue;
+                var allowed = await Allowed(db, s, index, id, ct); if (allowed == null) continue;
                 var t = allowed.Value.Text; var vector = await embedding.EmbedAsync(new(index.Model, index.Dimensions, index.Normalization, t.ExactText, index.Locale, Parse<ConceptFeature[]>(index.GraphJson), s.TenantId, s.Actor, index.UniverseId), ct); ValidateEmbedding(vector, index.Dimensions);
                 db.KnowledgeChunks.Add(new() { Id = Guid.NewGuid(), IndexId = index.Id, StableChunkId = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes(t.Id + ":" + index.Chunking))[..16]), CorpusTextId = t.Id, VectorJson = Serialize(vector.Vector), FeaturesJson = Serialize(vector.Features) });
             }
@@ -208,10 +208,10 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
             SourceRules.Use(use.Purpose, use.Language, use.Territory, use.Format);
             if (use.Language != index.Locale || use.Territory != territory) throw new RuntimeValidationException("Intended-use language/territory must match the query.");
         }
-        await CheckGraph(s, index, ct, use); var input = await embedding.EmbedAsync(new(index.Model, index.Dimensions, index.Normalization, query, index.Locale, Parse<ConceptFeature[]>(index.GraphJson), s.TenantId, s.Actor, index.UniverseId), ct); ValidateEmbedding(input, index.Dimensions);
+        await CheckGraph(db, s, index, ct, use); var input = await embedding.EmbedAsync(new(index.Model, index.Dimensions, index.Normalization, query, index.Locale, Parse<ConceptFeature[]>(index.GraphJson), s.TenantId, s.Actor, index.UniverseId), ct); ValidateEmbedding(input, index.Dimensions);
         var chunks = await db.KnowledgeChunks.AsNoTracking().Where(c => c.IndexId == index.Id).Take(1001).ToListAsync(ct); if (chunks.Count > 1000) throw new RuntimeValidationException("Index exceeds local retrieval bound.");
         var permitted = new Dictionary<Guid, (KnowledgeChunk Chunk, CorpusText Text, CorpusVerse Verse, CorpusManifest Manifest, CitationExport Citation, int SourceStart)>();
-        foreach (var c in chunks) { var allowed = await Allowed(s, index, c.CorpusTextId, ct, use); if (allowed != null) permitted[c.StableChunkId] = (c, allowed.Value.Text, allowed.Value.Verse, allowed.Value.Manifest, allowed.Value.Citation, allowed.Value.SourceStart); }
+        foreach (var c in chunks) { var allowed = await Allowed(db, s, index, c.CorpusTextId, ct, use); if (allowed != null) permitted[c.StableChunkId] = (c, allowed.Value.Text, allowed.Value.Verse, allowed.Value.Manifest, allowed.Value.Citation, allowed.Value.SourceStart); }
         var candidates = permitted.Select(p => new RankedCandidate(p.Key, Parse<float[]>(p.Value.Chunk.VectorJson), Parse<string[]>(p.Value.Chunk.FeaturesJson))).ToArray();
         foreach (var candidate in candidates) ValidateEmbedding(new(candidate.Vector, candidate.Features), index.Dimensions);
         var scores = await Adapter(index.Adapter).RankAsync(new(input, candidates, limit), ct);
@@ -244,7 +244,7 @@ public sealed class KnowledgeService(CoreDbContext db, IEmbeddingProvider embedd
         CoreRules.Text(r.Alias, 200, "Alias"); var index = await Index(u, r.IndexId, ct);
         if (index.State != "Ready" || index.ValidationEvidence == null) throw new KnowledgeBlockedException("UnvalidatedIndex");
         if (index.EmbeddingSpaceId != r.QueryEmbeddingSpaceId) throw new KnowledgeBlockedException("EmbeddingSpaceMismatch");
-        await CheckGraph(s, index, ct);
+        await CheckGraph(db, s, index, ct);
         // Recheck golden cases against current rights/reviews before activation, including rollback.
         var saved = Parse<JsonElement>(index.ValidationJson!);
         foreach (var q in saved.GetProperty("questions").EnumerateArray())

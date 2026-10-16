@@ -6,9 +6,10 @@ using ContentOS.Application;
 using ContentOS.Contracts;
 using ContentOS.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 namespace ContentOS.Infrastructure;
 
-public sealed partial class WorkflowRuntime(CoreDbContext db, IToolInvoker tools, IAiTaskRouter ai, IAiAdministration aiAdmin, IDbContextFactory<CoreDbContext> factory) : IWorkflowRuntime, IWorkflowWorker
+public sealed partial class WorkflowRuntime(CoreDbContext db, IToolInvoker tools, IAiTaskRouter ai, IAiAdministration aiAdmin, IDbContextFactory<CoreDbContext> factory, IServiceProvider services) : IWorkflowRuntime, IWorkflowWorker
 {
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
     private static string Encode<T>(T value) => JsonSerializer.Serialize(value, Json);
@@ -37,7 +38,7 @@ public sealed partial class WorkflowRuntime(CoreDbContext db, IToolInvoker tools
     {
         await Access(s, u, false, ct); return (await db.PromptRevisions.AsNoTracking().Where(x => x.TenantId == s.TenantId && x.UniverseId == u).OrderByDescending(x => x.CreatedUtc).Take(100).ToListAsync(ct)).Select(x => new PromptView(x.Id, Decode<RegisterPrompt>(x.SettingsJson))).ToArray();
     }
-    private async Task<WorkflowSnapshot> Snapshot(CoreScope s, Guid u, Guid id, CancellationToken ct)
+    internal async Task<WorkflowSnapshot> Snapshot(CoreScope s, Guid u, Guid id, CancellationToken ct)
     {
         var row = await db.WorkflowDefinitions.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id && x.TenantId == s.TenantId && x.UniverseId == u, ct) ?? throw new CoreAccessException();
         var def = Decode<RegisterWorkflow>(row.SettingsJson);
@@ -100,12 +101,15 @@ public sealed partial class WorkflowRuntime(CoreDbContext db, IToolInvoker tools
             InputsJson = Encode(r),
             DeadlineUtc = DateTimeOffset.UtcNow.AddSeconds(snap.Definition.Settings.DeadlineSeconds)
         };
+        if (r.FactoryAdmission != null) await FactoryWorkflowFence.Bind(db, services, s, u, run, snap, r.FactoryAdmission, ct);
         db.DurableWorkflows.Add(run);
         for (var i = 0; i < 5; i++) db.WorkflowCheckpoints.Add(new() { Id = Guid.NewGuid(), RunId = run.Id, Number = i, Kind = WorkflowRules.Sequence[i], OperationId = Guid.NewGuid() });
         Audit(s, run.Id, "queued"); await Save(ct); await tx.CommitAsync(ct); return await InspectAsync(s, run.Id, ct);
     }
     private async Task<bool> Rights(CoreScope s, DurableWorkflow run, CancellationToken ct)
     {
+        try { await FactoryWorkflowFence.Validate(db, services, new(run.TenantId, run.Actor), run.Id, ct); }
+        catch (Exception e) when (e is RuntimeValidationException or RightsBlockedException or EvidenceBlockedException or CoreAccessException) { return false; }
         var snap = Decode<WorkflowSnapshot>(run.SnapshotJson);
         var retrieve = await db.WorkflowCheckpoints.AsNoTracking().SingleAsync(x => x.RunId == run.Id && x.Number == 0, ct);
         var ids = retrieve.ResultJson == null ? Decode<StartWorkflow>(run.InputsJson).SourceSnapshotIds ?? [] : Decode<WorkflowEvidence>(retrieve.ResultJson).SourceIds;
@@ -161,7 +165,7 @@ public sealed partial class WorkflowRuntime(CoreDbContext db, IToolInvoker tools
         if (old != null) { if (old.Actor != s.Actor || old.Fingerprint != fingerprint) throw new RuntimeConflictException("Control replay differs."); await tx.CommitAsync(ct); return await InspectAsync(s, id, ct); }
         if (Convert.ToBase64String(run.RowVersion) != r.ExpectedRowVersion) throw new CoreConcurrencyException();
         if (run.State is "Completed" or "Cancelled" or "Rejected" or "Failed") throw new RuntimeConflictException("Run is terminal.");
-        if (action == "cancel") { run.State = "Cancelled"; run.Outcome = "Cancelled"; foreach (var pending in await db.WorkflowCheckpoints.Where(x => x.RunId == id && x.State != "Completed").ToListAsync(ct)) { pending.State = "Cancelled"; pending.Outcome = "Cancelled"; pending.LeaseToken = null; pending.LeaseUntilUtc = null; } }
+        if (action == "cancel") { await CancelRun(db, run, ct); }
         else if (action == "pause")
         {
             if (run.State != "Queued") throw new RuntimeConflictException("Only pause at a completed step boundary.");
@@ -192,4 +196,11 @@ public sealed partial class WorkflowRuntime(CoreDbContext db, IToolInvoker tools
         db.WorkflowDecisions.Add(new() { Id = Guid.NewGuid(), RunId = id, OperationId = r.OperationId, Actor = s.Actor, Fingerprint = fingerprint, Action = action, EvidenceReference = r.EvidenceReference });
         Audit(s, id, action); await Save(ct); await tx.CommitAsync(ct); return await InspectAsync(s, id, ct);
     }
+    internal static async Task CancelRun(CoreDbContext db, DurableWorkflow run, CancellationToken ct)
+    {
+        run.State = "Cancelled"; run.Outcome = "Cancelled";
+        foreach (var step in await db.WorkflowCheckpoints.Where(x => x.RunId == run.Id && x.State != "Completed").ToListAsync(ct))
+        { step.State = "Cancelled"; step.Outcome = "Cancelled"; step.LeaseToken = null; step.LeaseUntilUtc = null; }
+    }
+
 }

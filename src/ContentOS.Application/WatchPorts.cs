@@ -20,6 +20,7 @@ public interface IWatchMasterStore
 }
 public interface IWatchFactory
 {
+    Task<CreateWatch> PlanNarrationAsync(CoreScope s, Guid universe, CreateWatch request, CancellationToken ct);
     Task<Guid> TemplateAsync(CoreScope s, Guid universe, RegisterWatchTemplate request, CancellationToken ct);
     Task<WatchTemplateView[]> TemplatesAsync(CoreScope s, Guid universe, CancellationToken ct);
     Task ReviewTemplateAsync(CoreScope s, Guid universe, Guid id, WatchReview request, CancellationToken ct);

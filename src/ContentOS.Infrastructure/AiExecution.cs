@@ -105,6 +105,7 @@ public sealed partial class AiService
                            step.State == "Running" && step.LeaseToken == claim.LeaseToken && step.LeaseUntilUtc > now
                            select step.Id).AnyAsync(ct);
         if (!valid) throw new WorkflowAdmissionRejectedException();
+        await FactoryWorkflowFence.Validate(db, services, s, claim.RunId, ct);
     }
     private static string ValidateOutput(AiProviderResult r, string[] ids, out GeneratedText? output)
     {

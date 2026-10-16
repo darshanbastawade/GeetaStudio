@@ -12,7 +12,7 @@ public static class AiServices
         {
             var service = new AiService(s.GetRequiredService<CoreDbContext>(), s.GetRequiredService<RuntimeDbContext>(),
                 s.GetRequiredService<ISecretResolver>(), s.GetServices<ITextGenerationProvider>(), s.GetServices<IAiEmbeddingAdapter>(),
-                configuration, s.GetRequiredService<Microsoft.Extensions.Logging.ILogger<AiService>>());
+                configuration, s.GetRequiredService<Microsoft.Extensions.Logging.ILogger<AiService>>(), s);
             service.Retrieval = async (scope, universe, query, ct) =>
             {
                 using var child = s.GetRequiredService<IServiceScopeFactory>().CreateScope();

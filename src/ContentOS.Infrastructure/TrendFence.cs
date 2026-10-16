@@ -14,6 +14,9 @@ internal static class TrendFence
         var ids = extracted.SelectMany(x => x.SnapshotIds).Distinct().ToArray();
         var snapshots = await db.SourceSnapshots.AsNoTracking().Where(x => ids.Contains(x.Id)).OrderBy(x => x.Id).ToListAsync(ct);
         var blocks = new List<string>();
+        // Rejected changes at capacity are not in retained evidence. A body-only
+        // re-review cannot clear that gap; append a reviewed source/event version.
+        if (await db.SourceAudits.AnyAsync(x => x.TenantId == row.TenantId && x.SubjectId == row.Id && x.Action.StartsWith("trend.observation-capacity-held."), ct)) blocks.Add("SourceObservationCapacityReached");
         if (ids.Length == 0) blocks.Add("SubstanceUnavailable");
         if (signals.Any(x => x.PublishedUtc == null && x.UpdatedUtc == null)) blocks.Add("PublicationTimeUnavailable");
         if (signals.Where((x, i) => x.RequiresTranscript && extracted[i].TranscriptAccess != "AuthorizedTranscriptAvailable").Any()) blocks.Add("TranscriptUnavailable");
@@ -49,6 +52,13 @@ internal static class TrendFence
             if (spans.Count == 0 || spans.Any(x => !ids.Contains(x.SnapshotId))) blocks.Add("FactEvidenceDoesNotMatchSubstance");
         }
         var actor = await db.Members.Where(x => x.TenantId == row.TenantId && (x.Permission == "Administrator" || x.Permission == "Editor")).Select(x => x.Actor).FirstOrDefaultAsync(ct);
+        if (actor != null)
+            foreach (var connector in await db.TrendConnectors.AsNoTracking().Where(x => candidates.Select(c => c.ConnectorId).Contains(x.Id)).ToArrayAsync(ct))
+            {
+                var configuration = EditorialBinding.Read<RegisterTrendConnector>(connector.SnapshotJson);
+                if (configuration.LiveFeed != null && !(await new SourceRightsGuard(db).DecideAsync(new(row.TenantId, actor), configuration.LiveFeed.PermissionSnapshotId,
+                    new("Read", configuration.FeedLocale, configuration.FeedRegion, "Text"), ct)).Decision.Allowed) blocks.Add("FeedRightsWithheld");
+            }
         if (actor == null) blocks.Add("OwnedReviewerUnavailable");
         else foreach (var signal in signals)
             foreach (var id in ids)
@@ -74,6 +84,7 @@ internal static class TrendFence
         if (snapshot.ClusterFingerprint != cluster.CheckedFingerprint) throw new EvidenceBlockedException("TrendBriefEvidenceChanged");
         var teaching = await db.TrendTeachings.AsNoTracking().SingleAsync(x => x.Id == row.TeachingId, ct);
         if (teaching.ReviewStatus != "Approved" || teaching.Outcome != "Matched") throw new EvidenceBlockedException("TrendTeachingReviewRequired"); await AssertTeaching(db, teaching, ct);
+        if (snapshot.Retrieval == null || !await TeachingRetrievalAllowed(db, teaching, ct, snapshot.Retrieval)) throw new EvidenceBlockedException("StoredRetrievalOutputWithheld");
     }
     internal static async Task AssertTeaching(CoreDbContext db, TrendTeaching teaching, CancellationToken ct)
     {
@@ -82,6 +93,14 @@ internal static class TrendFence
         var snapshot = EditorialBinding.Read<LessonVariantSnapshot>(lesson.SnapshotJson);
         var actor = await db.Members.Where(x => x.TenantId == teaching.TenantId && (x.Permission == "Administrator" || x.Permission == "Editor")).Select(x => x.Actor).FirstOrDefaultAsync(ct) ?? throw new EvidenceBlockedException("OwnedTeachingReviewerUnavailable");
         await LessonEngine.RecheckBundle(db, new(teaching.TenantId, actor), teaching.UniverseId, snapshot.Bundle, snapshot.Locale.Rules.Locale!.Locale, "Read", ct);
+        if (!await TeachingRetrievalAllowed(db, teaching, ct)) throw new EvidenceBlockedException("StoredRetrievalOutputWithheld");
+    }
+    internal static async Task<bool> TeachingRetrievalAllowed(CoreDbContext db, TrendTeaching teaching, CancellationToken ct, KnowledgeResult? stored = null)
+    {
+        var actor = await db.Members.Where(x => x.TenantId == teaching.TenantId && (x.Permission == "Administrator" || x.Permission == "Editor")).Select(x => x.Actor).FirstOrDefaultAsync(ct);
+        if (actor == null) return false;
+        var snapshot = EditorialBinding.Read<TrendWorkbench.TeachingSnapshot>(teaching.SnapshotJson);
+        return await KnowledgeService.StoredAllowed(db, new(teaching.TenantId, actor), teaching.UniverseId, snapshot.Request.Query, stored ?? snapshot.Retrieval, ct);
     }
     internal static async Task<Guid[]> ClaimDependents(CoreDbContext db, CoreScope scope, Guid universe, Guid claim, CancellationToken ct)
     {
@@ -117,9 +136,9 @@ internal static class TrendFence
             }
         }
     }
-    internal static FactoryRenderResult Render(TrendStorySnapshot snapshot, FactoryRenderResult original) =>
-        original with { Body = "Verified factual context (separate from the story):\n" + snapshot.FactualSummary + "\n\n" + (snapshot.Format == "OriginalFiction" ? "Original fictional analogy; not a portrayal, endorsement or prediction of real people/events:" : snapshot.Format == "CalendarLesson" ? "Calendar-themed lesson and original illustration; not scripture or a prediction:" : "Sourced event explainer followed by a separately labeled interpretation and original illustration:") + "\n" + original.Body };
-    internal static void Lineage(CoreDbContext db, TrendStoryBrief row, Guid revision, string body)
+    internal static FactoryRenderResult Render(TrendStorySnapshot snapshot, FactoryRenderResult original, bool generated = false) =>
+        generated ? original with { Body = "Verified factual context (separate from the story):\n" + snapshot.FactualSummary + "\n\n" + original.Body } : original with { Body = "Verified factual context (separate from the story):\n" + snapshot.FactualSummary + "\n\n" + (snapshot.Format == "OriginalFiction" ? "Original fictional analogy; not a portrayal, endorsement or prediction of real people/events:" : snapshot.Format == "CalendarLesson" ? "Calendar-themed lesson and original illustration; not scripture or a prediction:" : "Sourced event explainer followed by a separately labeled interpretation and original illustration:") + "\n" + original.Body };
+    internal static void Lineage(CoreDbContext db, TrendStoryBrief row, Guid revision, string body, bool generated = false)
     {
         var snapshot = EditorialBinding.Read<TrendStorySnapshot>(row.SnapshotJson);
         var prefix = "Verified factual context (separate from the story):\n";
@@ -159,7 +178,7 @@ internal static class TrendFence
         Label(0, prefix.Length, "Suggestion", "Limited");
         db.ClaimLinks.Add(new() { Id = Guid.NewGuid(), ClaimRevisionId = fact.Id, ContentRevisionId = revision, Start = prefix.Length, Length = snapshot.FactualSummary.Length });
         var end = prefix.Length + snapshot.FactualSummary.Length;
-        Label(end, body.Length - end, "FictionalScene", "Fictional");
+        if (!generated) Label(end, body.Length - end, "FictionalScene", "Fictional");
     }
 
 }

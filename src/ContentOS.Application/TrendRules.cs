@@ -22,6 +22,7 @@ public static class TrendRules
     public static void Signal(TrendSignal r)
     {
         if (r.SubstanceSnapshotIds == null || r.Metrics == null || r.Risks == null || r.Url == null || r.EventKey?.Length > 500 || r.Url.Length > 2000 || r.Risks.Length > Risks.Length) throw new RuntimeValidationException("Bounded source metadata required.");
+        if (r.DiscoveryContentHash != null && (r.DiscoveryContentHash.Length != 64 || !r.DiscoveryContentHash.All(Uri.IsHexDigit))) throw new RuntimeValidationException("Invalid discovery content hash.");
         foreach (var metric in r.Metrics) CoreRules.Text(metric.Name, 100, "Metric name");
         CoreRules.Text(r.ExternalId, 200, "Source identifier"); CoreRules.Text(r.Headline, 1000, "Headline"); CoreRules.Text(r.ReportOrigin, 200, "Original report identity");
         if (!Kinds.Contains(r.Kind) || (!(r.Kind == "Manual" && r.Url.Length == 0) && (!Uri.TryCreate(r.Url, UriKind.Absolute, out var uri) || uri.Scheme is not ("http" or "https") || uri.UserInfo.Length != 0)) || r.ReportStatus is not ("Current" or "Corrected" or "Retracted") ||

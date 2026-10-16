@@ -3,6 +3,7 @@ using ContentOS.Application;
 using ContentOS.Contracts;
 using ContentOS.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 namespace ContentOS.Infrastructure;
 
 public sealed partial class DraftFactory
@@ -11,27 +12,29 @@ public sealed partial class DraftFactory
     {
         db.ChangeTracker.Clear();
         var now = DateTimeOffset.UtcNow;
-        var candidate = await db.FactoryBatches.AsNoTracking().Where(b => (b.State == "Queued" || b.State == "Running") && db.FactoryWorks.Any(w => w.BatchId == b.Id && (w.State == "Pending" || w.State == "Running" && w.LeaseUntilUtc <= now))).OrderBy(b => b.CreatedUtc).FirstOrDefaultAsync(ct);
+        var candidate = await db.FactoryBatches.AsNoTracking().Where(b => (b.State == "Queued" || b.State == "Running") && db.FactoryWorks.Any(w => w.BatchId == b.Id && (w.State == "Pending" || w.State == "Running" && w.LeaseUntilUtc <= now || w.State == "AwaitingWorkflow" && db.DurableWorkflows.Any(r => r.Id == w.WorkflowId && (r.State == "AwaitingReview" || r.State == "Completed" || r.State == "Failed" || r.State == "Cancelled" || r.State == "Rejected"))))).OrderBy(b => b.CreatedUtc).FirstOrDefaultAsync(ct);
         if (candidate == null) return null; await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct); await Lock(candidate.TenantId, ct); var batch = await db.FactoryBatches.SingleAsync(b => b.Id == candidate.Id, ct);
         // Reload after the tenant admission lock: another worker or cancellation may have committed.
         await db.Entry(batch).ReloadAsync(ct); if (batch.State is not ("Queued" or "Running")) return null;
         var snap = Read<FactoryPlanSnapshot>((await Plan(new(batch.TenantId, batch.Actor), batch.UniverseId, batch.PlanId, ct)).SnapshotJson);
-        var rows = await db.FactoryWorks.Where(w => w.BatchId == batch.Id && (w.State == "Pending" || w.State == "Running" && w.LeaseUntilUtc <= now)).ToListAsync(ct);
+        var rows = await db.FactoryWorks.Where(w => w.BatchId == batch.Id && (w.State == "Pending" || w.State == "Running" && w.LeaseUntilUtc <= now || w.State == "AwaitingWorkflow" && db.DurableWorkflows.Any(r => r.Id == w.WorkflowId && (r.State == "AwaitingReview" || r.State == "Completed" || r.State == "Failed" || r.State == "Cancelled" || r.State == "Rejected")))).ToListAsync(ct);
         var work = rows.OrderByDescending(w => snap.Briefs.Single(b => b.Brief.Key == w.BriefKey).Brief.Priority).ThenBy(w => snap.Briefs.Single(b => b.Brief.Key == w.BriefKey).Brief.Position).ThenBy(w => Array.IndexOf(FactoryRules.Formats, w.Format)).FirstOrDefault();
         if (work == null) return null;
-        if (batch.DeadlineUtc <= now) { batch.State = "Failed"; batch.Outcome = "DeadlineExceeded"; foreach (var unfinished in await db.FactoryWorks.Where(w => w.BatchId == batch.Id && (w.State == "Pending" || w.State == "Running")).ToListAsync(ct)) { unfinished.State = "Failed"; unfinished.Outcome = "DeadlineExceeded"; unfinished.LeaseToken = null; unfinished.LeaseUntilUtc = null; } await db.SaveChangesAsync(ct); await tx.CommitAsync(ct); return null; }
-        if (work.Attempts >= 3) { work.State = "Failed"; work.Outcome = "AttemptsExhausted"; await Finish(batch, ct); await db.SaveChangesAsync(ct); await tx.CommitAsync(ct); return null; }
+        if (batch.DeadlineUtc <= now) { batch.State = "Failed"; batch.Outcome = "DeadlineExceeded"; foreach (var unfinished in await db.FactoryWorks.Where(w => w.BatchId == batch.Id && (w.State == "Pending" || w.State == "Running" || w.State == "AwaitingWorkflow")).ToListAsync(ct)) { unfinished.State = "Failed"; unfinished.Outcome = "DeadlineExceeded"; unfinished.LeaseToken = null; unfinished.LeaseUntilUtc = null; } await db.SaveChangesAsync(ct); await tx.CommitAsync(ct); return null; }
+        if (work.Attempts >= 3 && work.WorkflowId == null) { work.State = "Failed"; work.Outcome = "AttemptsExhausted"; await Finish(batch, ct); await db.SaveChangesAsync(ct); await tx.CommitAsync(ct); return null; }
         var token = Guid.NewGuid(); work.State = "Running"; work.Attempts++; work.LeaseToken = token; work.LeaseUntilUtc = now.AddSeconds(30); batch.State = "Running"; batch.Outcome = "";
         await db.SaveChangesAsync(ct); await tx.CommitAsync(ct); return (work.Id, token, batch.TenantId);
     }
     private async Task Finish(FactoryBatch batch, CancellationToken ct)
     {
         var rows = await db.FactoryWorks.Where(w => w.BatchId == batch.Id).ToListAsync(ct);
-        if (rows.All(w => w.State is not ("Pending" or "Running"))) { batch.State = rows.Any(w => w.State is "Failed" or "RejectedDuplicate") ? "CompletedWithIssues" : "Completed"; batch.Outcome = batch.State == "Completed" ? "DraftInventoryOnly" : "InspectWorkOutcomes"; }
+        if (rows.All(w => w.State is not ("Pending" or "Running" or "AwaitingWorkflow"))) { batch.State = rows.Any(w => w.State is "Failed" or "RejectedDuplicate") ? "CompletedWithIssues" : "Completed"; batch.Outcome = batch.State == "Completed" ? "DraftInventoryOnly" : "InspectWorkOutcomes"; }
     }
     public async Task<bool> ProcessNextAsync(CancellationToken ct)
     {
+        if (await ImportGeneration(ct)) return true;
         var claim = await Claim(ct); if (claim == null) return false;
+        if (await QueueGeneration(claim.Value, ct)) return true;
         db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct);
         await Lock(claim.Value.Tenant, ct); var work = await db.FactoryWorks.SingleAsync(x => x.Id == claim.Value.Work, ct);
         var batch = await db.FactoryBatches.SingleAsync(x => x.Id == work.BatchId, ct);
@@ -56,6 +59,7 @@ public sealed partial class DraftFactory
                 Relationships = input.Cast.Relationships.Select(r => r.Id)
             });
             if (trend != null) fingerprint = Hash(new { Base = fingerprint, trend.Id, trend.SnapshotJson });
+            if (snap.GenerationWorkflow != null) fingerprint = Hash(new { Base = fingerprint, Work = work.Id, snap.GenerationWorkflow });
             var reusable = await db.FactoryArtifacts.AsNoTracking().SingleOrDefaultAsync(a => a.TenantId == batch.TenantId && a.UniverseId == batch.UniverseId && a.Fingerprint == fingerprint, ct);
             if (reusable != null)
             {
@@ -65,9 +69,25 @@ public sealed partial class DraftFactory
             }
             else
             {
-                var output = templates.Single(t => t.Key == snap.Rules.Adapter).Render(new(input, format), ct);
-                if (trend != null) output = TrendFence.Render(Read<TrendStorySnapshot>(trend.SnapshotJson), output);
-                RegistryRules.Story(input.Cast with { Beats = input.Cast.Beats.Select(beat => beat with { Text = output.OriginalTreatment + " " + format.Instruction }).ToArray() });
+                FactoryGenerationProvenance? generation = null;
+                FactoryRenderResult output;
+                if (snap.GenerationWorkflow != null)
+                {
+                    await RecheckGeneration(scope, batch.UniverseId, plan.Id, work.BriefKey, ct);
+                    var generated = await GeneratedOutput(scope, work, input, format, ct); output = generated.Output; generation = generated.Provenance;
+                    input = input with { Cast = input.Cast with { Beats = generation.Script.Dialogue.Select(d => new RegistryStoryBeat(d.CharacterId, "FictionalDialogue", d.Text, [], [], input.Cast.Cast.Single(x => x.Character.CharacterId == d.CharacterId).Role == "Lead")).ToArray() } };
+                    RegistryRules.Story(input.Cast);
+                }
+                else output = templates.Single(t => t.Key == snap.Rules.Adapter).Render(new(input, format), ct);
+                if (trend != null) output = TrendFence.Render(Read<TrendStorySnapshot>(trend.SnapshotJson), output, generation != null);
+                if (generation == null) RegistryRules.Story(input.Cast with { Beats = input.Cast.Beats.Select(beat => beat with { Text = output.OriginalTreatment + " " + format.Instruction }).ToArray() });
+                else
+                {
+                    var script = generation.Script;
+                    var narrator = input.Cast.Cast.First().Character.CharacterId;
+                    var sections = new[] { script.Hook, script.Scene, script.Decision, script.Reflection, format.Instruction };
+                    RegistryRules.Story(input.Cast with { Beats = input.Cast.Beats.Concat(sections.Select(text => new RegistryStoryBeat(narrator, "FictionalNarration", text, [], []))).ToArray() });
+                }
                 if (output.TemplateVersion != snap.Rules.Adapter || output.Body.Length > format.MaxCharacters || string.IsNullOrWhiteSpace(output.Body)) throw new RuntimeValidationException("Template output violates bounded contract.");
                 if (DateTimeOffset.UtcNow >= batch.DeadlineUtc || DateTimeOffset.UtcNow >= work.LeaseUntilUtc) throw new RuntimeValidationException("Generation lease/deadline expired.", "DeadlineExceeded");
                 var prior = await db.FactoryArtifacts.AsNoTracking().Where(a => a.TenantId == batch.TenantId && a.UniverseId == batch.UniverseId && a.BriefKey == work.BriefKey && a.Format == work.Format && db.FactoryPlans.Any(p => p.Id == a.PlanId && p.Key == plan.Key)).OrderByDescending(a => a.CreatedUtc).FirstOrDefaultAsync(ct);
@@ -86,10 +106,25 @@ public sealed partial class DraftFactory
                     var title = snap.Rules.Title + " — " + format.Kind; if (title.Length > 200) title = title[..200];
                     var revision = new ContentRevision { Id = Guid.NewGuid(), ContentId = content.Id, Version = content.CurrentVersion, OperationId = work.Id, Title = title, Body = output.Body, Kind = "Fiction", RightsStatus = "Licensed", Provenance = "M11 reviewed lesson " + input.Brief.LessonVariantId + "; original fiction and attributed evidence remain separately labeled." };
                     db.Revisions.Add(revision);
-                    if (trend != null) TrendFence.Lineage(db, trend, revision.Id, output.Body);
+                    if (trend != null) TrendFence.Lineage(db, trend, revision.Id, output.Body, generation != null);
                     foreach (var source in input.Lesson.Snapshot.Bundle.SourceIds.Distinct()) db.Provenance.Add(new() { Id = Guid.NewGuid(), TenantId = batch.TenantId, ContentRevisionId = revision.Id, SnapshotId = source, Relation = "Adaptation" });
                     if (prior != null && prior.CoreContentId == content.Id) db.Provenance.Add(new() { Id = Guid.NewGuid(), TenantId = batch.TenantId, ContentRevisionId = revision.Id, ParentRevisionId = prior.CoreRevisionId, Relation = "Revision" });
-                    var artifact = new FactoryArtifact { Id = Guid.NewGuid(), TenantId = batch.TenantId, UniverseId = batch.UniverseId, PlanId = plan.Id, BriefKey = work.BriefKey, Format = work.Format, LessonVariantId = input.Brief.LessonVariantId, CoreContentId = content.Id, CoreRevisionId = revision.Id, ParentArtifactId = prior?.Id, AudienceId = input.Brief.Cast.AudienceId, Locale = input.Brief.Cast.Locale, Fingerprint = fingerprint, BodyHash = bodyHash, Treatment = output.OriginalTreatment, SnapshotJson = Json(new FactoryArtifactSnapshot(plan.Id, work.BriefKey, work.Format, input.Brief.LessonVariantId, input, snap.Rules.Adapter, output)) };
+                    if (generation != null)
+                    {
+                        var offset = trend == null ? 0 : "Verified factual context (separate from the story):\n".Length + Read<TrendStorySnapshot>(trend.SnapshotJson).FactualSummary.Length + 2;
+                        foreach (var id in new[] { input.Lesson.Snapshot.Bundle.Request.AnchorClaimRevisionId, input.Lesson.Snapshot.Bundle.Request.InterpretationClaimRevisionId })
+                        {
+                            var claimText = await db.ClaimRevisions.Where(x => x.Id == id).Select(x => x.Statement).SingleAsync(ct);
+                            if (!output.Body.AsSpan(offset).StartsWith(claimText, StringComparison.Ordinal)) throw new EvidenceBlockedException("FactoryClaimTextMismatch");
+                            db.ClaimLinks.Add(new() { Id = Guid.NewGuid(), ClaimRevisionId = id, ContentRevisionId = revision.Id, Start = offset, Length = claimText.Length }); offset += claimText.Length + 2;
+                        }
+                        var rubric = await db.ClaimRevisions.Where(x => x.Id == input.Lesson.Snapshot.Bundle.Request.AnchorClaimRevisionId).Select(x => x.RubricId).SingleAsync(ct);
+                        var claimId = await new EvidenceEngine(db).SubmitInTransaction(scope, batch.UniverseId,
+                            new(work.Id, "factory-fiction-" + work.Id.ToString("N"), "", "FictionalScene", "FictionalScene", input.Brief.Cast.Locale, output.Body[offset..], "Generated original fiction", "", "Fictional", rubric, []), ct);
+                        generation = generation with { FictionClaimRevisionId = claimId };
+                        db.ClaimLinks.Add(new() { Id = Guid.NewGuid(), ClaimRevisionId = claimId, ContentRevisionId = revision.Id, Start = offset, Length = output.Body.Length - offset });
+                    }
+                    var artifact = new FactoryArtifact { Id = Guid.NewGuid(), TenantId = batch.TenantId, UniverseId = batch.UniverseId, PlanId = plan.Id, BriefKey = work.BriefKey, Format = work.Format, LessonVariantId = input.Brief.LessonVariantId, CoreContentId = content.Id, CoreRevisionId = revision.Id, ParentArtifactId = prior?.Id, AudienceId = input.Brief.Cast.AudienceId, Locale = input.Brief.Cast.Locale, Fingerprint = fingerprint, BodyHash = bodyHash, Treatment = output.OriginalTreatment, SnapshotJson = Json(new FactoryArtifactSnapshot(plan.Id, work.BriefKey, work.Format, input.Brief.LessonVariantId, input, snap.Rules.Adapter, output) { Generation = generation }) };
                     db.FactoryArtifacts.Add(artifact); work.ArtifactId = artifact.Id; work.State = "Generated"; work.Outcome = prior == null ? "NewDraft" : "ExplicitDerivativeRevision"; batch.GeneratedCharacters += output.Body.Length;
                 }
             }
@@ -98,14 +133,20 @@ public sealed partial class DraftFactory
         {
             work.State = "Failed"; work.Outcome = e is RuntimeValidationException v ? v.Outcome : e.GetType().Name;
         }
+        if (snap.GenerationWorkflow != null) batch.GenerationCost = await (from w in db.FactoryWorks join step in db.WorkflowCheckpoints on w.WorkflowId equals (Guid?)step.RunId join ai in db.AiRuns on step.OperationId equals ai.OperationId where w.BatchId == batch.Id && ai.TenantId == batch.TenantId && step.Kind == "draft" select ai.Spent).SumAsync(ct);
         work.LeaseToken = null; work.LeaseUntilUtc = null; await Finish(batch, ct);
         db.SourceAudits.Add(new() { Id = Guid.NewGuid(), TenantId = batch.TenantId, Actor = batch.Actor, SubjectId = work.Id, Action = "factory.checkpoint." + work.State });
         await db.SaveChangesAsync(ct); await tx.CommitAsync(ct); return true;
     }
     private async Task<FactoryArtifactView> ArtifactView(CoreScope s, FactoryArtifact row, CancellationToken ct)
     {
-        var snap = Read<FactoryArtifactSnapshot>(row.SnapshotJson); try { await TrendFence.AssertPlan(db, row.PlanId, ct); await Recheck(s, row.UniverseId, snap.Input, false, false, ct); return new(row.Id, row.CoreContentId, row.CoreRevisionId, row.ParentArtifactId, row.ReviewStatus, row.ReviewEvidence, Convert.ToBase64String(row.RowVersion), snap, false); }
-        catch (Exception e) when (e is RightsBlockedException or EvidenceBlockedException) { return new(row.Id, row.CoreContentId, row.CoreRevisionId, row.ParentArtifactId, row.ReviewStatus, row.ReviewEvidence, Convert.ToBase64String(row.RowVersion), null, true); }
+        var snap = Read<FactoryArtifactSnapshot>(row.SnapshotJson); try
+        {
+            await TrendFence.AssertPlan(db, row.PlanId, ct); await Recheck(s, row.UniverseId, snap.Input, false, false, ct);
+            if (snap.Generation != null) { await RecheckGeneration(s, row.UniverseId, row.PlanId, row.BriefKey, ct, false); if ((await services.GetRequiredService<IAiTaskRouter>().InspectAsync(s, snap.Generation.AiRunId, ct)).Output == null) throw new EvidenceBlockedException("AiOutputWithheld"); }
+            return new(row.Id, row.CoreContentId, row.CoreRevisionId, row.ParentArtifactId, row.ReviewStatus, row.ReviewEvidence, Convert.ToBase64String(row.RowVersion), snap, false);
+        }
+        catch (Exception e) when (e is RightsBlockedException or EvidenceBlockedException or RuntimeValidationException) { return new(row.Id, row.CoreContentId, row.CoreRevisionId, row.ParentArtifactId, row.ReviewStatus, row.ReviewEvidence, Convert.ToBase64String(row.RowVersion), null, true); }
     }
     public async Task<IReadOnlyList<FactoryArtifactView>> ArtifactsAsync(CoreScope s, Guid u, CancellationToken ct)
     {

@@ -1,0 +1,23 @@
+{
+    "verifiedUtc":  "2026-10-15T18:42:35.5839297+00:00",
+    "database":  "GeetaStudio_Dev",
+    "restrictedApiReady":  true,
+    "watchPage200":  true,
+    "mediaPage200":  true,
+    "speechCatalog200":  true,
+    "anonymousStatus":  401,
+    "crossTenantStatus":  403,
+    "actualWindowsLocales":  [
+                                 "en-US"
+                             ],
+    "installedVoiceCount":  2,
+    "qualification":  "LocalWindowsPreview",
+    "voicePermissionApproved":  false,
+    "artworkApproved":  false,
+    "publicLaunchLocaleApproved":  false,
+    "technicalDefaultLocale":  "en-IN",
+    "workersDisabled":  true,
+    "createdRecords":  0,
+    "paidCalls":  0,
+    "interactiveBrowserOrF5Verified":  false
+}

@@ -1,0 +1,569 @@
+{
+  "milestone": "M25.2",
+  "selectedPrompt": 6,
+  "verifiedUtc": "2026-10-15T19:02:47.754499+00:00",
+  "milestoneStatus": "InProgress",
+  "independentImplementationStatus": "OfflineVerified",
+  "qualifiedPilotAcceptance": "BlockedApprovedArtworkVoicePermissionAndHumanReview",
+  "ownerDecision": "No approved assets or voice yet; keep those gates pending. en-IN temporary technical default only. Prior local-work authorization with hosted M25.1 closure pending persists. No Prompt 7.",
+  "sourceIdentity": {
+    "head": "82cc55d431367b822300c1d64bbb00986d38ccdd",
+    "branch": "fix/m25-1-ci-baseline",
+    "trackedDiffLocalPath": ".local/M25-2-prompt6/reviewed.patch",
+    "trackedDiffSha256": "52BA9EBFDA49CE9A409BA5044788DA24D4AD04742DE3B31C8539A6C2FF5F95FC",
+    "manifestPath": "docs/milestones/evidence/M25.2-prompt6-manifest.json",
+    "manifestSha256": "9D4E0D78D0528B8DB3AE253DF4060018ABCFEC7F37C59512D4F73BC87C50402E",
+    "untrackedFilesIncluded": true,
+    "selfReferentialMetadataExclusions": [
+      "docs/milestones/evidence/M25.2-prompt6-checks.json",
+      "docs/milestones/evidence/M25.2-prompt6-manifest.json"
+    ],
+    "nonDocumentSourceFiles": 562,
+    "finalSourceManifestSha256": "AA15568551460271FEB4825C431AA72602882F04D292D24DAE04CBC8A86EFD88",
+    "sourceUnchangedSinceFinalLayoutVerificationStarted": true,
+    "ownerInputSha256": "C106386C6C1915D4314E845A88B46AB894EDBCADB740B6FFF42BE611BF51383B",
+    "priorMilestoneEvidencePreserved": true
+  },
+  "finalVerification": {
+    "lockedRestore": "Pass",
+    "build": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "offline": {
+      "total": 156,
+      "passed": 156,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "format": "Pass",
+    "models": {
+      "CoreDbContext": "Clean",
+      "RuntimeDbContext": "Clean"
+    },
+    "schemas": [
+      {
+        "database": "GeetaStudio_M1Tests",
+        "coreMigrations": 32,
+        "dboMigrations": 4
+      },
+      {
+        "database": "GeetaStudio_Dev",
+        "coreMigrations": 32,
+        "dboMigrations": 4
+      }
+    ],
+    "affectedSql": {
+      "verifiedUtc": "2026-10-15T19:02:46.947113+00:00",
+      "mode": "fresh-affected-classes-with-targeted-final-layout-recheck",
+      "database": "GeetaStudio_M1Tests",
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0,
+      "classes": [
+        {
+          "class": "SqlNarrationTests",
+          "total": 2,
+          "passed": 2,
+          "failed": 0,
+          "notExecuted": 0,
+          "run": "final-layout",
+          "trx": ".local/M25-2-prompt6/final-planner-sql/SqlNarrationTests.trx",
+          "sha256": "9E3356535D8165EC03A2E2ADA658130B3EA62D59EA2DBA7481B250DA1AE9E814"
+        },
+        {
+          "class": "SqlMediaTests",
+          "total": 5,
+          "passed": 5,
+          "failed": 0,
+          "notExecuted": 0,
+          "run": "unchanged-execution-path-before-layout-adjustment",
+          "trx": ".local/M25-2-prompt6/affected-sql/SqlMediaTests.trx",
+          "sha256": "8E4D004879A68B92D6F96521155E3D5A8C42A26976F2EA3E3E1B0B41E2C12CC6"
+        },
+        {
+          "class": "SqlWatchTests",
+          "total": 8,
+          "passed": 8,
+          "failed": 0,
+          "notExecuted": 0,
+          "run": "final-layout",
+          "trx": ".local/M25-2-prompt6/final-planner-sql/SqlWatchTests.trx",
+          "sha256": "73417E49F06765337B3975A58B22B2C29B622CE22E1EDB139FA0CC5452CABDCA"
+        },
+        {
+          "class": "SqlMilestoneReviewFixTests",
+          "total": 4,
+          "passed": 4,
+          "failed": 0,
+          "notExecuted": 0,
+          "run": "unchanged-execution-path-before-layout-adjustment",
+          "trx": ".local/M25-2-prompt6/affected-sql/SqlMilestoneReviewFixTests.trx",
+          "sha256": "247ED99BFF9BF879B95D62BFB8740E27C3CB68C5836E4F298F1E5B2C299910DF"
+        },
+        {
+          "class": "SqlHistoricalTests",
+          "total": 4,
+          "passed": 4,
+          "failed": 0,
+          "notExecuted": 0,
+          "run": "unchanged-execution-path-before-layout-adjustment",
+          "trx": ".local/M25-2-prompt6/affected-sql/SqlHistoricalTests.trx",
+          "sha256": "2E5E888086C005D933FDFFB4BCBE7EC8EA52E4667A84E03C66F24505EF39E021"
+        }
+      ],
+      "baseAffectedRunPassed": 23,
+      "finalLayoutRecheckPassed": 10,
+      "repeatedTestsNotAddedToUniqueCount": true,
+      "changesSinceBaseRun": [
+        "src/ContentOS.Application/WatchNarration.cs",
+        "src/ContentOS.Infrastructure/WatchNarrationPlanning.cs",
+        "tests/ContentOS.Foundation.Tests/NarrationRuleTests.cs"
+      ],
+      "unaffectedThirteenExecutionPathsUnchanged": true,
+      "fullSuiteRun": false,
+      "combinedProcessRunQualified": false,
+      "priorFull253IsHistoricalPrompt5": true,
+      "genuineVoiceOrArtworkQualified": false
+    },
+    "development": {
+      "verifiedUtc": "2026-10-15T18:42:35.5839297+00:00",
+      "database": "GeetaStudio_Dev",
+      "restrictedApiReady": true,
+      "watchPage200": true,
+      "mediaPage200": true,
+      "speechCatalog200": true,
+      "anonymousStatus": 401,
+      "crossTenantStatus": 403,
+      "actualWindowsLocales": [
+        "en-US"
+      ],
+      "installedVoiceCount": 2,
+      "qualification": "LocalWindowsPreview",
+      "voicePermissionApproved": false,
+      "artworkApproved": false,
+      "publicLaunchLocaleApproved": false,
+      "technicalDefaultLocale": "en-IN",
+      "workersDisabled": true,
+      "createdRecords": 0,
+      "paidCalls": 0,
+      "interactiveBrowserOrF5Verified": false
+    },
+    "preservation": {
+      "verifiedDate": "2026-10-16",
+      "database": "GeetaStudio_Dev",
+      "core.CharactersCount": 11,
+      "core.CharactersIdsHash": "HAav8Pfi1YSKNa74xJBDt0Z5fOpXpUGGxgRDHXNY1Tk=",
+      "core.UniversesCount": 4,
+      "core.UniversesIdsHash": "mI9KgskhZ0B14uL50Ze1gIR8hrf00EsPv36muozuuUs=",
+      "corpus.CorpusVerseCount": 78,
+      "corpus.CorpusVerseIdsHash": "qun7DlmAE5c18V0+mGEi6pw2nRvKd2gerIBFU2XpGGQ=",
+      "runtime.JobsCount": 10,
+      "runtime.JobsIdsHash": "XF/TBKw0Cf1MF8WIYt1oUWBsEqXTnoUBXXgl6wd/5+U=",
+      "sources.SourcePermissionCount": 9,
+      "sources.SourcePermissionIdsHash": "97mU6RJ5YmfKn6FY/YARa+8h0E32lLYlnUcVBICkDBU=",
+      "permissionsHash": "feXaccQj/RnCJNYkyKtlcM2LHGYxg1MFR5xmCa8Tes0=",
+      "coreMigrations": 32,
+      "dboMigrations": 4,
+      "completeGeetaAndHistoricalBaselinePreserved": true,
+      "existingIdsPreserved": true,
+      "sourcePermissionsUnchanged": true,
+      "databaseReset": false,
+      "liveCalls": 0
+    },
+    "samples": [
+      {
+        "aspect": "Vertical",
+        "durationSeconds": 32.021333,
+        "width": 360,
+        "height": 640,
+        "h264Aac": true,
+        "sha256": "4B4E78CA35CB6F08D7AD20C6D80B227DB72C2642CFD12ABC68EB0ABFF2B71D80"
+      },
+      {
+        "aspect": "Standard",
+        "durationSeconds": 32.021333,
+        "width": 640,
+        "height": 360,
+        "h264Aac": true,
+        "sha256": "5167CBC15D248E91DC5B838E90771E59829B9994F5FA0DA925D7C39383451C5D"
+      }
+    ],
+    "sampleQa": {
+      "verifiedUtc": "2026-10-15T19:00:38.338155+00:00",
+      "framesInspected": true,
+      "frameInspection": "Assistant inspected extracted first scene in both aspects",
+      "captionOverlapCorrected": true,
+      "fullScriptAndCaptionCoverage": true,
+      "segmentCount": 8,
+      "maxSegmentCharacters": 60,
+      "decodedBothH264Aac": true,
+      "audioDecoded": true,
+      "genuineNarrationQualified": false,
+      "humanVisualListeningNativeLanguageReview": false,
+      "fixtureNotice": "Controlled placeholder art and tones, not spoken narration or genuine approval",
+      "results": [
+        {
+          "aspect": "Vertical",
+          "durationSeconds": 32.021333,
+          "peakDb": -23.7,
+          "meanDb": -28.3
+        },
+        {
+          "aspect": "Standard",
+          "durationSeconds": 32.021333,
+          "peakDb": -23.7,
+          "meanDb": -28.3
+        }
+      ]
+    },
+    "postDocumentationSecretGate": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "documentationLinks": {
+      "checkedLinks": 323,
+      "missing": []
+    },
+    "diffCheck": "Pass"
+  },
+  "changedFiles": {
+    "changed": [
+      "src/ContentOS.Application/MediaPorts.cs",
+      "src/ContentOS.Application/WatchPorts.cs",
+      "src/ContentOS.Contracts/MediaContracts.cs",
+      "src/ContentOS.Infrastructure/MediaGeneration.cs",
+      "src/ContentOS.Integrations/WindowsSpeechProvider.cs",
+      "src/GeetaStudio.Api/MediaEndpoints.cs",
+      "src/GeetaStudio.Api/MediaPage.cs",
+      "src/GeetaStudio.Api/WatchEndpoints.cs",
+      "src/GeetaStudio.Api/WatchPage.cs",
+      "tests/ContentOS.Foundation.Tests/SqlWatchTests.cs"
+    ],
+    "added": [
+      "src/ContentOS.Application/WatchNarration.cs",
+      "src/ContentOS.Infrastructure/WatchNarrationPlanning.cs",
+      "src/ContentOS.Integrations/SapiSpeechEngine.cs",
+      "tests/ContentOS.Foundation.Tests/NarrationRuleTests.cs",
+      "tests/ContentOS.Foundation.Tests/SqlNarrationTests.cs",
+      "tests/ContentOS.Foundation.Tests/WindowsSpeechContractTests.cs"
+    ]
+  },
+  "migrationsAdded": 0,
+  "sdkOrDependencyChanges": false,
+  "sourcePermissionsBroadened": false,
+  "databaseReset": false,
+  "paidOrNetworkProviderCalls": 0,
+  "publicDeploymentPublicationOrCommit": false,
+  "actualCommands": [
+    "dotnet build GeetaStudio.sln --no-restore --disable-build-servers -m:1 -p:UseSharedCompilation=false",
+    "dotnet format GeetaStudio.sln --no-restore",
+    "pwsh -NoProfile -File scripts/verify.ps1 -Locked -LowMemory -ResultsDirectory .local/M25-2-prompt6/final-layout-offline",
+    "pwsh -NoProfile -File .local/M25-2-prompt6/verify-affected.ps1 (five fresh SQL processes, 23 cases)",
+    "pwsh -NoProfile -File .local/M25-2-prompt6/verify-final-planner.ps1 (two fresh SQL processes, 10 repeated cases)",
+    "dotnet ef migrations has-pending-model-changes --project src/ContentOS.Infrastructure --startup-project src/ContentOS.Infrastructure --context CoreDbContext --no-build",
+    "dotnet ef migrations has-pending-model-changes --project src/ContentOS.Infrastructure --startup-project src/ContentOS.Infrastructure --context RuntimeDbContext --no-build",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File .local/M25-2-prompt6/development-smoke.ps1",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File .local/M25-2-prompt6/preservation.ps1 (before and -After)",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File .local/M25-2-prompt6/migration-counts.ps1",
+    "Pinned FFprobe stream/duration inspection; FFmpeg audio decode/volumedetect and frame extraction, both aspects",
+    "dotnet test tests/ContentOS.Foundation.Tests --no-build --no-restore --filter FullyQualifiedName~SecretExclusionTests",
+    "git -c safe.directory=C:/dev/GeetaStudio diff --check"
+  ],
+  "attempts": [
+    {
+      "name": "First build",
+      "result": "CA1416 in STA delegate corrected with explicit Windows guard; analyzer not suppressed."
+    },
+    {
+      "name": "Initial contracts",
+      "counts": {
+        "total": 11,
+        "passed": 11,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "result": "11 pass before additional receipt/layout cases; final total156 above."
+    },
+    {
+      "name": "First SQL",
+      "counts": {
+        "total": 2,
+        "passed": 0,
+        "failed": 2,
+        "notExecuted": 0
+      },
+      "result": "2 failed on malformed fractional-length new tone WAV fixture. Corrected caller to integer/sample-aligned seconds; no production media rules weakened."
+    },
+    {
+      "name": "Owned fixture recovery",
+      "result": "Two unfinished own Prompt6 productions cancelled through existing ControlAsync; rows/history retained; no Development reset or changes."
+    },
+    {
+      "name": "Second SQL",
+      "counts": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "result": "2 pass; controlled sample generated."
+    },
+    {
+      "name": "Pre-layout full affected run",
+      "result": "All23 pass,155offline/build/format pass. Frame inspection found caption overlap; original sample retained under sample-before-layout."
+    },
+    {
+      "name": "Final layout correction",
+      "result": "Only planner/layout lookup and unit regression changed; final156offline and10planner/WATCH pass, other13 affected paths unchanged. Latest class results selected without double-counting."
+    }
+  ],
+  "remainingGates": [
+    "Genuine approved character art/guest pack and source/consent evidence",
+    "Permitted exact-language narration voice; installed en-US preview is not en-IN qualification",
+    "Actual visual/listening/native-language/package review and genuine M12 human acceptance",
+    "Prompt7 integrated two-audience/live acceptance and milestone full-suite closure unselected",
+    "Fresh interactive F5/accessibility and OS-process-kill recovery not newly verified",
+    "Matching hosted CI and production release remain unverified; M22 missing; RSS remains disabled per owner"
+  ],
+  "evidenceFiles": [
+    {
+      "path": ".local/M25-2-prompt6/affected-sql/SqlHistoricalTests.trx",
+      "sha256": "2E5E888086C005D933FDFFB4BCBE7EC8EA52E4667A84E03C66F24505EF39E021"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-sql/SqlMediaTests.trx",
+      "sha256": "8E4D004879A68B92D6F96521155E3D5A8C42A26976F2EA3E3E1B0B41E2C12CC6"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-sql/SqlMilestoneReviewFixTests.trx",
+      "sha256": "247ED99BFF9BF879B95D62BFB8740E27C3CB68C5836E4F298F1E5B2C299910DF"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-sql/SqlNarrationTests.trx",
+      "sha256": "9FC6FD2D38E77CC89E6530328EA7297FFC207EAAFB0F9555DAF4E364CF7DC8F2"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-sql/SqlWatchTests.trx",
+      "sha256": "37CF0C281A212FC62D47C19667C9B719A46F6211D38975397276DE529A83DC7D"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-sql.log",
+      "sha256": "0DEDA583CA586573D3C7C68925B1B094EDB9920D701205D0B5C4D2C33DDC396A"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-SqlHistoricalTests.log",
+      "sha256": "D47B866B0DA7514C0EBC0D402CD9CC72ABFE66EAA95F966F63160074F73838BE"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-SqlMediaTests.log",
+      "sha256": "EAD8BF0143B1F1ECD9FD364BB699FB5733DA82219EBC33DD64057D85677BD57A"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-SqlMilestoneReviewFixTests.log",
+      "sha256": "074AB7BAD0F57E72DF6AD23855B27F375973691DF611FC42DA780B34A507EA56"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-SqlNarrationTests.log",
+      "sha256": "BAA40819086F6613FA94196C08CA1EC8F82DF9326C8F80811190B5147098BCB7"
+    },
+    {
+      "path": ".local/M25-2-prompt6/affected-SqlWatchTests.log",
+      "sha256": "2F8CE90589BE6E835EDB56FD67E40A7929EEBC78164525ECD80153CD73DE3C52"
+    },
+    {
+      "path": ".local/M25-2-prompt6/build-final-candidate.log",
+      "sha256": "94E679FEB107AAD36609D50092118BA639189E252D4DF70A365C43B5CA20F52F"
+    },
+    {
+      "path": ".local/M25-2-prompt6/build-first.log",
+      "sha256": "1FE69AD33274FC551C3289940791BF63A9C72F4493779D2B2BCAA4EF033BF357"
+    },
+    {
+      "path": ".local/M25-2-prompt6/build-sql-tests.log",
+      "sha256": "9E937B797E7ECD25F4957C32F137E98B195BE6D4D298645B3FB59E774E68A04B"
+    },
+    {
+      "path": ".local/M25-2-prompt6/build-tests.log",
+      "sha256": "45FAF22B32E6987544A8E4784B1887BFD3803D3C00361F2A046B6A3144FE578C"
+    },
+    {
+      "path": ".local/M25-2-prompt6/contracts-first.log",
+      "sha256": "EF3AD94D82764B0FA9AAD9BE17B32927AF35456E7AF997746D319E79397E1CCA"
+    },
+    {
+      "path": ".local/M25-2-prompt6/CoreDbContext-model.log",
+      "sha256": "C924DA1693AD60EB6A78717DDD333946A8A61A056C2CE2868AE514384F01C866"
+    },
+    {
+      "path": ".local/M25-2-prompt6/development-smoke.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-layout-offline/build.log",
+      "sha256": "B01A846380178287607FFB73648A46286DBA90B9083BFA9B555952FE18B11F2B"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-layout-offline/format.log",
+      "sha256": "1EA5357F7167D2FE328618E7BFEFF97E9F5D89BB7655973C88E9BA7E086389EE"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-layout-offline/offline-tests.log",
+      "sha256": "1B76452595360EA8558A43484123224473C5B54316E0FA773FA1820C86A1B688"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-layout-offline/offline.trx",
+      "sha256": "2795ECE12BCFE2BBE576CE6B318147E86A2A63109A85C3911ABB4C087484DAF6"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-layout-offline/restore.log",
+      "sha256": "62DB98199670A0B5F38AE2394DF52F5FA1CB355DE0047079DFBEDDDDC99ABFBD"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-layout-offline.log",
+      "sha256": "77271450CCE1372662A5F1838F6D04C9894281A0820A01693C4AA9C65C201EE6"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-offline/build.log",
+      "sha256": "AE29782E4EBAF8FF427C0B51A2AAB0D30384A35B6680AC7E1F9FB0D30E41B5A3"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-offline/format.log",
+      "sha256": "1EA5357F7167D2FE328618E7BFEFF97E9F5D89BB7655973C88E9BA7E086389EE"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-offline/offline-tests.log",
+      "sha256": "1D9C3A17D664407EBBF85FA34A96A039A306D3B564DB535D3FA8CC462AF4B0AB"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-offline/offline.trx",
+      "sha256": "AD379378A9237FFE6F3F990DC12B254AF12191A2D375C2226A7018F268497635"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-offline/restore.log",
+      "sha256": "FDD11EEFA3561E7749D549E4CECC74DEB9E2299C0AEF09B0442C1EB7A1AB76BF"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-offline.log",
+      "sha256": "6FCC8FEEF903C161E36F67C24C4693986C4C7EF079A692D2A89EFABECF50674E"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-planner-sql/SqlNarrationTests.trx",
+      "sha256": "9E3356535D8165EC03A2E2ADA658130B3EA62D59EA2DBA7481B250DA1AE9E814"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-planner-sql/SqlWatchTests.trx",
+      "sha256": "73417E49F06765337B3975A58B22B2C29B622CE22E1EDB139FA0CC5452CABDCA"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-planner-sql.log",
+      "sha256": "B90057AED7A06DBE07C4EBC9F227850E759A2A0648486DA492A275BFCA3329C7"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-SqlNarrationTests.log",
+      "sha256": "2F679E8B2538C72A8ABDA80A5DBD5FE3551FD2C3AF54BE25108E0A848CA711E5"
+    },
+    {
+      "path": ".local/M25-2-prompt6/final-SqlWatchTests.log",
+      "sha256": "6F8CB09D118058E305668CFB65870BB6AD628B1E772BAFC7292B871C4024D5D8"
+    },
+    {
+      "path": ".local/M25-2-prompt6/fixture-recovery.log",
+      "sha256": "8AA715535C946D71CE0FB9027DE8083AC59ED63E08324B0D04C977EC57184842"
+    },
+    {
+      "path": ".local/M25-2-prompt6/format-fix.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": ".local/M25-2-prompt6/post-docs/secret-gate.trx",
+      "sha256": "DCE68CA701A8A1C5FFEAECCD78230A0ABF1C48BE1C22F04AAD3940C375027B53"
+    },
+    {
+      "path": ".local/M25-2-prompt6/post-docs-secret.log",
+      "sha256": "D4245F9D36FD146C2615B83295F6BFFE77E095232D9CE9C148A9CAA6CBB65C08"
+    },
+    {
+      "path": ".local/M25-2-prompt6/results/contracts-first.trx",
+      "sha256": "2EF8CF0F98809C72DC3E9EBD888B4F470229449EFB9B923FC0B38D94E088D4DC"
+    },
+    {
+      "path": ".local/M25-2-prompt6/results/sql-narration-first.trx",
+      "sha256": "FCE3F1F88F402847B7AB0C45E767482F638C70E06D9864C2656C5DA5404AA516"
+    },
+    {
+      "path": ".local/M25-2-prompt6/results/sql-narration-second.trx",
+      "sha256": "F6A309B4D99F2D4498694F723412A07EBFBB92D29F60A0E6F2C5A12B517288D4"
+    },
+    {
+      "path": ".local/M25-2-prompt6/RuntimeDbContext-model.log",
+      "sha256": "C924DA1693AD60EB6A78717DDD333946A8A61A056C2CE2868AE514384F01C866"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/audio-Standard.log",
+      "sha256": "00B4647487F11154A750629212F1DDD9E3C4D840DA7480506A4768CB1EAC0385"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/audio-Vertical.log",
+      "sha256": "D04763152E2A493DCD3ED03479B872B6014E4CCAD6079013C41E2EB66A3B8E06"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/captions.srt",
+      "sha256": "F421A5D8C6268C63AF23933CF5DD01F05E364917CF834721E69B7BF8B7D7A42B"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/captions.vtt",
+      "sha256": "B56F0EC48F09307687FC4E51EF71D5080819722314CF9FF48EFE76F3D9BB0CDA"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/frame-Standard.png",
+      "sha256": "0AA69BC2CFC9E81893BD637938D4E389E8F99E5C4F5F91897EB709E0875ABAD9"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/frame-Vertical.png",
+      "sha256": "B19AA1A2129A04CF0F719DF0A1D83AA7A8D5B171CB214D072BC4C9FA78DF0591"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/manifest.json",
+      "sha256": "2E9DA788C25D5E6D2E9758883FF4DDC0E9E6787B96A11E496E132FE8B879D94D"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/probe-Standard.json",
+      "sha256": "B85EDC44E0D12A85005B10062BB60194AC0BEC13E530763D53D293F9856D4FD1"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/probe-Vertical.json",
+      "sha256": "667CBBA1DB1E4322E65B502560F0578630F170ADD72AAD54E11911D1E6C75771"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/qa-after-layout.json",
+      "sha256": "E90ABBC087A0F19FEFCC7861920FAD7E6036B1DC2FD28543CA731A1B3300F4E9"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/Standard-CONTROLLED-TONE-NOT-NARRATION.mp4",
+      "sha256": "5167CBC15D248E91DC5B838E90771E59829B9994F5FA0DA925D7C39383451C5D"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample/Vertical-CONTROLLED-TONE-NOT-NARRATION.mp4",
+      "sha256": "4B4E78CA35CB6F08D7AD20C6D80B227DB72C2642CFD12ABC68EB0ABFF2B71D80"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample-before-layout/audio-Standard.log",
+      "sha256": "C0DFF7697DEF1B6DCE29AD38FCE56DE4C24851420563A1FFA4A43ADEF603F0CD"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sample-before-layout/audio-Vertical.log",
+      "sha256": "06009CA46CB37D772277E426ADA086A4D03C5EA422A89C9A21CCA16604B511F4"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sql-narration-first.log",
+      "sha256": "42F632FCAC1CA3E2B89B23EB7535F760445AF08FA3D823C426417B5FD8C74EDF"
+    },
+    {
+      "path": ".local/M25-2-prompt6/sql-narration-second.log",
+      "sha256": "514443218F7F6D74F5722910BEB160B887636497942100014C7D7256A6867314"
+    }
+  ]
+}

@@ -12,6 +12,18 @@ jobs:
           global-json-file: global.json
           cache: true
           cache-dependency-path: '**/packages.lock.json'
-      - name: Restore, build, focused tests, secret gate, formatting
+      - name: Record SDK and runtime baseline
+        shell: pwsh
+        run: dotnet --info
+      - name: Locked restore, build, offline tests, secret gate, formatting
         shell: pwsh
         run: ./scripts/verify.ps1 -Locked
+      - name: Preserve verification logs and test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-verification-${{ github.sha }}-${{ github.run_attempt }}
+          path: .local/verification/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14

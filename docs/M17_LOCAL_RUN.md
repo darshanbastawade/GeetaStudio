@@ -1,5 +1,7 @@
 # M17 local WATCH run and debug
 
+For exact approved-script narration planning and current voice/qualification limits, see [Prompt 6 local run/debug](M25.2_PROMPT6_LOCAL_RUN.md). The original manual scene flow below remains available.
+
 Run from C:\dev\GeetaStudio in PowerShell. Prerequisites: pinned .NET 10 SDK, local SQL Server and existing dedicated Development/Test databases, VS Code C# extensions. WATCH needs the pinned local FFmpeg tools and Windows Nirmala font. The spoken demo additionally needs an installed English Windows SAPI voice. No paid account/provider is enabled.
 
 ```powershell

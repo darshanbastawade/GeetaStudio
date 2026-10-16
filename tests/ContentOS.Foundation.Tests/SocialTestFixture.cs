@@ -13,9 +13,9 @@ internal static class SocialTestFixture
     });
     internal static async Task<Guid> Account(IServiceProvider s, EditorialTestFixture.Fixture f, string platform = "X", string adapter = "social.fixture.a.v1", int version = 1, string key = "account")
     { var c = SocialChannelProfiles.Catalog.Single(x => x.Platform == platform); return await s.GetRequiredService<ISocialPublishing>().RegisterAccountAsync(f.Owner, f.Universe, new(Guid.NewGuid(), key, version, platform, "fixture:" + platform.ToLowerInvariant(), adapter, "Fixture", c.Key, c.RequiredScopes, null, "fixture:owned-social-test"), default); }
-    internal static async Task<SocialPackageView> Package(IServiceProvider s, EditorialTestFixture.Fixture f, EditorialPacket packet, Guid account, string key = "package", string format = "Link", Guid[]? images = null, Guid? production = null)
+    internal static async Task<SocialPackageView> Package(IServiceProvider s, EditorialTestFixture.Fixture f, EditorialPacket packet, Guid account, string key = "package", string format = "Link", Guid[]? images = null, Guid? production = null, string aspect = "Vertical")
     {
-        var service = s.GetRequiredService<ISocialPublishing>(); var p = await service.PrepareAsync(f.Owner, f.Universe, new(Guid.NewGuid(), key, packet.Id, account, format, "fixture-campaign", "", format == "Link" ? "https://example.invalid/fixture" : "", images ?? [], production), default);
+        var service = s.GetRequiredService<ISocialPublishing>(); var p = await service.PrepareAsync(f.Owner, f.Universe, new(Guid.NewGuid(), key, packet.Id, account, format, "fixture-campaign", "", format == "Link" ? "https://example.invalid/fixture" : "", images ?? [], production, aspect), default);
         await service.ReviewAsync(f.Owner, f.Universe, p.Id, new(Guid.NewGuid(), p.RowVersion, p.PayloadHash, "Approve", "Fixture", "fixture:technical-package-review"), default); return (await service.PackagesAsync(f.Owner, f.Universe, default)).Single(x => x.Id == p.Id);
     }
     internal static async Task<SocialPublicationView> Drain(IServiceProvider s, EditorialTestFixture.Fixture f, Guid id)

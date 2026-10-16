@@ -14,6 +14,8 @@ public sealed record ReviewMedia(Guid OperationId, string ExpectedRowVersion, st
 public sealed record MoveMedia(Guid OperationId, Guid VersionId, string StoreKey);
 public sealed record MediaExport(int SchemaVersion, MediaVersionView Version, byte[] Bytes, string StoreKey);
 public sealed record PronunciationMapping(string Word, string SpeakAs);
+public sealed record SpeechVoiceResource(string Key, string[] Locales);
+public sealed record SpeechAdapterView(string Key, MediaProviderCapabilities Capabilities, SpeechVoiceResource[] Voices);
 public sealed record CharacterMediaRules(Guid ProfileRevisionId, Guid AudienceId, string Locale, string PresentationStyle,
     string VisualAnchor, string VoiceAnchor, string[] Palette, string[] StyleRules, string[] Poses, string[] SceneReferences,
     PronunciationMapping[] Pronunciation, Guid VisualVersionId, Guid VoiceVersionId, Guid[] AdditionalVersionIds,

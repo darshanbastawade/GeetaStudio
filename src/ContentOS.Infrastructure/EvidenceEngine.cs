@@ -40,6 +40,11 @@ public sealed class EvidenceEngine(CoreDbContext db) : IEvidenceEngine
         db.ChangeTracker.Clear(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct);
         await AccessAsync(s, u, level, ct);
         if (operation == Guid.Empty) throw new RuntimeValidationException("Stable operation ID is required.");
+        var id = await CommandInTransaction(s, u, operation, kind, request, action, ct);
+        await SaveAsync(ct); await tx.CommitAsync(ct); return id;
+    }
+    private async Task<Guid> CommandInTransaction<T>(CoreScope s, Guid u, Guid operation, string kind, T request, Func<Task<Guid>> action, CancellationToken ct)
+    {
         var fingerprint = Hash(new { u, request });
         var prior = await db.EvidenceCommands.FromSqlInterpolated($"SELECT * FROM [evidence].[EvidenceCommand] WITH (UPDLOCK,HOLDLOCK) WHERE [TenantId]={s.TenantId} AND [OperationId]={operation}").SingleOrDefaultAsync(ct);
         if (prior != null)
@@ -48,7 +53,7 @@ public sealed class EvidenceEngine(CoreDbContext db) : IEvidenceEngine
             return prior.ResultId;
         }
         var id = await action(); db.EvidenceCommands.Add(new EvidenceCommand { Id = Guid.NewGuid(), TenantId = s.TenantId, OperationId = operation, Actor = s.Actor, Kind = kind, Fingerprint = fingerprint, ResultId = id });
-        Audit(s, id, kind); await SaveAsync(ct); await tx.CommitAsync(ct); return id;
+        Audit(s, id, kind); return id;
     }
     private async Task<ClaimRevision> RevisionAsync(Guid u, Guid id, CancellationToken ct) =>
         await db.ClaimRevisions.SingleOrDefaultAsync(r => r.Id == id && db.Claims.Any(c => c.Id == r.ClaimId && c.UniverseId == u), ct) ?? throw new CoreAccessException();
@@ -63,71 +68,80 @@ public sealed class EvidenceEngine(CoreDbContext db) : IEvidenceEngine
             db.EvidenceRubrics.Add(rubric); return rubric.Id;
         }, ct, 2);
     public Task<Guid> SubmitAsync(CoreScope s, Guid u, SubmitClaim r, CancellationToken ct) =>
-        CommandAsync(s, u, r.OperationId, "evidence.claim-submitted", r, async () =>
+        CommandAsync(s, u, r.OperationId, "evidence.claim-submitted", r, () => SubmitCore(s, u, r, ct), ct);
+    // The factory accepts content, pending labels and its checkpoint atomically. Reuse the
+    // same evidence validation/idempotency; never manufacture a review of generated text.
+    internal async Task<Guid> SubmitInTransaction(CoreScope s, Guid u, SubmitClaim r, CancellationToken ct)
+    {
+        if (db.Database.CurrentTransaction == null || r.OperationId == Guid.Empty) throw new RuntimeValidationException("Owned transaction and stable operation required.");
+        await AccessAsync(s, u, 1, ct);
+        return await CommandInTransaction(s, u, r.OperationId, "evidence.claim-submitted", r, () => SubmitCore(s, u, r, ct), ct);
+    }
+    private async Task<Guid> SubmitCore(CoreScope s, Guid u, SubmitClaim r, CancellationToken ct)
+    {
+        CoreRules.Text(r.Key, 200, "Claim key"); CorpusRules.Exact(r.Statement);
+        EvidenceRules.Classification(r.Type, r.Label, r.Author, r.Tradition, r.Uncertainty);
+        if (r.Author == null || r.Tradition == null || r.Author.Length > 200 || r.Tradition.Length > 200 || r.Evidence == null || r.Evidence.Count > 20 ||
+            !await db.Locales.AnyAsync(l => l.Id == r.Locale, ct)) throw new RuntimeValidationException("Invalid claim metadata/evidence.");
+        if (!await db.EvidenceRubrics.AnyAsync(x => x.Id == r.RubricId && x.UniverseId == u && x.TenantId == s.TenantId, ct)) throw new CoreAccessException();
+        var claim = await db.Claims.FromSqlInterpolated($"SELECT * FROM [evidence].[EvidenceClaim] WITH (UPDLOCK,HOLDLOCK) WHERE [UniverseId]={u} AND [Key]={r.Key}").SingleOrDefaultAsync(ct);
+        if (claim == null)
         {
-            CoreRules.Text(r.Key, 200, "Claim key"); CorpusRules.Exact(r.Statement);
-            EvidenceRules.Classification(r.Type, r.Label, r.Author, r.Tradition, r.Uncertainty);
-            if (r.Author == null || r.Tradition == null || r.Author.Length > 200 || r.Tradition.Length > 200 || r.Evidence == null || r.Evidence.Count > 20 ||
-                !await db.Locales.AnyAsync(l => l.Id == r.Locale, ct)) throw new RuntimeValidationException("Invalid claim metadata/evidence.");
-            if (!await db.EvidenceRubrics.AnyAsync(x => x.Id == r.RubricId && x.UniverseId == u && x.TenantId == s.TenantId, ct)) throw new CoreAccessException();
-            var claim = await db.Claims.FromSqlInterpolated($"SELECT * FROM [evidence].[EvidenceClaim] WITH (UPDLOCK,HOLDLOCK) WHERE [UniverseId]={u} AND [Key]={r.Key}").SingleOrDefaultAsync(ct);
-            if (claim == null)
-            {
-                if (!string.IsNullOrEmpty(r.ExpectedRowVersion) || r.CorrectionId != null) throw new RuntimeValidationException("New claim cannot replace existing history.");
-                claim = new EvidenceClaim { Id = Guid.NewGuid(), TenantId = s.TenantId, UniverseId = u, Key = r.Key }; db.Claims.Add(claim);
-            }
-            else Expected(claim, r.ExpectedRowVersion);
-            var revision = new ClaimRevision
+            if (!string.IsNullOrEmpty(r.ExpectedRowVersion) || r.CorrectionId != null) throw new RuntimeValidationException("New claim cannot replace existing history.");
+            claim = new EvidenceClaim { Id = Guid.NewGuid(), TenantId = s.TenantId, UniverseId = u, Key = r.Key }; db.Claims.Add(claim);
+        }
+        else Expected(claim, r.ExpectedRowVersion);
+        var revision = new ClaimRevision
+        {
+            Id = Guid.NewGuid(),
+            ClaimId = claim.Id,
+            Version = ++claim.CurrentVersion,
+            Type = r.Type,
+            Label = r.Label,
+            Locale = r.Locale,
+            Statement = r.Statement,
+            Author = r.Author,
+            Tradition = r.Tradition,
+            Uncertainty = r.Uncertainty,
+            RubricId = r.RubricId
+        }; db.ClaimRevisions.Add(revision);
+        foreach (var input in r.Evidence)
+        {
+            if (input.Relation is not ("Supporting" or "Contradicting")) throw new RuntimeValidationException("Evidence relation must be explicit.");
+            CoreRules.Text(input.Locator, 1000, "Evidence locator"); CorpusRules.Exact(input.ExactText);
+            var source = await (from snap in db.SourceSnapshots
+                                join e in db.SourceEditions on snap.EditionId equals e.Id
+                                join w in db.SourceWorks on e.WorkId equals w.Id
+                                where snap.Id == input.SnapshotId && w.UniverseId == u && w.TenantId == s.TenantId
+                                select snap).SingleOrDefaultAsync(ct) ?? throw new CoreAccessException();
+            if (source.Text == null) throw new EvidenceBlockedException("EvidenceNotRetained");
+            EvidenceRules.Span(source.Text, input.Start, input.Length);
+            if (source.Text.Substring(input.Start, input.Length) != input.ExactText || input.Length != input.ExactText.Length || !TextHash(input.ExactText).Equals(input.Sha256, StringComparison.OrdinalIgnoreCase))
+                throw new EvidenceBlockedException("InvalidEvidenceSpan");
+            if (input.CorpusTextId is Guid corpusText && !await db.CorpusTexts.AnyAsync(t => t.Id == corpusText && t.SnapshotId == source.Id && db.CorpusVerses.Any(v => v.Id == t.VerseId && db.CorpusManifests.Any(m => m.Id == v.ManifestId && m.UniverseId == u)), ct)) throw new CoreAccessException();
+            db.ClaimSpans.Add(new ClaimEvidenceSpan
             {
                 Id = Guid.NewGuid(),
-                ClaimId = claim.Id,
-                Version = ++claim.CurrentVersion,
-                Type = r.Type,
-                Label = r.Label,
-                Locale = r.Locale,
-                Statement = r.Statement,
-                Author = r.Author,
-                Tradition = r.Tradition,
-                Uncertainty = r.Uncertainty,
-                RubricId = r.RubricId
-            }; db.ClaimRevisions.Add(revision);
-            foreach (var input in r.Evidence)
-            {
-                if (input.Relation is not ("Supporting" or "Contradicting")) throw new RuntimeValidationException("Evidence relation must be explicit.");
-                CoreRules.Text(input.Locator, 1000, "Evidence locator"); CorpusRules.Exact(input.ExactText);
-                var source = await (from snap in db.SourceSnapshots
-                                    join e in db.SourceEditions on snap.EditionId equals e.Id
-                                    join w in db.SourceWorks on e.WorkId equals w.Id
-                                    where snap.Id == input.SnapshotId && w.UniverseId == u && w.TenantId == s.TenantId
-                                    select snap).SingleOrDefaultAsync(ct) ?? throw new CoreAccessException();
-                if (source.Text == null) throw new EvidenceBlockedException("EvidenceNotRetained");
-                EvidenceRules.Span(source.Text, input.Start, input.Length);
-                if (source.Text.Substring(input.Start, input.Length) != input.ExactText || input.Length != input.ExactText.Length || !TextHash(input.ExactText).Equals(input.Sha256, StringComparison.OrdinalIgnoreCase))
-                    throw new EvidenceBlockedException("InvalidEvidenceSpan");
-                if (input.CorpusTextId is Guid corpusText && !await db.CorpusTexts.AnyAsync(t => t.Id == corpusText && t.SnapshotId == source.Id && db.CorpusVerses.Any(v => v.Id == t.VerseId && db.CorpusManifests.Any(m => m.Id == v.ManifestId && m.UniverseId == u)), ct)) throw new CoreAccessException();
-                db.ClaimSpans.Add(new ClaimEvidenceSpan
-                {
-                    Id = Guid.NewGuid(),
-                    ClaimRevisionId = revision.Id,
-                    SnapshotId = source.Id,
-                    CorpusTextId = input.CorpusTextId,
-                    Start = input.Start,
-                    Length = input.Length,
-                    ExactText = input.ExactText,
-                    Sha256 = TextHash(input.ExactText),
-                    Locator = input.Locator,
-                    Relation = input.Relation
-                });
-            }
-            if (r.CorrectionId is Guid correctionId)
-            {
-                await AccessAsync(s, u, 2, ct);
-                var correction = await db.ClaimCorrections.SingleOrDefaultAsync(x => x.Id == correctionId, ct) ?? throw new CoreAccessException();
-                if (correction.Status != "Open" || (await RevisionAsync(u, correction.ClaimRevisionId, ct)).ClaimId != claim.Id) throw new RuntimeConflictException("Correction must replace the same claim.");
-                correction.Status = "Superseded"; correction.ReplacementRevisionId = revision.Id;
-            }
-            return revision.Id;
-        }, ct);
+                ClaimRevisionId = revision.Id,
+                SnapshotId = source.Id,
+                CorpusTextId = input.CorpusTextId,
+                Start = input.Start,
+                Length = input.Length,
+                ExactText = input.ExactText,
+                Sha256 = TextHash(input.ExactText),
+                Locator = input.Locator,
+                Relation = input.Relation
+            });
+        }
+        if (r.CorrectionId is Guid correctionId)
+        {
+            await AccessAsync(s, u, 2, ct);
+            var correction = await db.ClaimCorrections.SingleOrDefaultAsync(x => x.Id == correctionId, ct) ?? throw new CoreAccessException();
+            if (correction.Status != "Open" || (await RevisionAsync(u, correction.ClaimRevisionId, ct)).ClaimId != claim.Id) throw new RuntimeConflictException("Correction must replace the same claim.");
+            correction.Status = "Superseded"; correction.ReplacementRevisionId = revision.Id;
+        }
+        return revision.Id;
+    }
     private async Task<string?> AssessAsync(CoreScope s, ClaimRevision r, IntendedUse use, CancellationToken ct)
     {
         var rubric = await db.EvidenceRubrics.AsNoTracking().SingleAsync(x => x.Id == r.RubricId, ct);

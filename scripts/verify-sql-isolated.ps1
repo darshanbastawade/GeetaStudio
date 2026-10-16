@@ -1,16 +1,23 @@
-param([switch]$SkipBuild)
+param([switch]$SkipBuild, [switch]$LowMemory, [string]$ResultsDirectory = '.local/verification/sql-isolated', [string]$SummaryPath = 'docs/milestones/evidence/M08-sql-isolated.json')
 $ErrorActionPreference='Stop'
 $savedSql=$env:GEETA_SQL_TESTS
+$savedNodeReuse=$env:MSBUILDDISABLENODEREUSE
+$savedBuildServer=$env:DOTNET_CLI_USE_MSBUILD_SERVER
+if($LowMemory){$env:MSBUILDDISABLENODEREUSE='1';$env:DOTNET_CLI_USE_MSBUILD_SERVER='0'}
 Push-Location (Split-Path $PSScriptRoot -Parent)
 try {
  if(!$SkipBuild){
-  & powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1 -Locked
+  $verifyArgs=@('-NoProfile','-ExecutionPolicy','Bypass','-File','.\scripts\verify.ps1','-Locked')
+  if($LowMemory){$verifyArgs += '-LowMemory'}
+  & powershell @verifyArgs
   if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
  }
- & powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\db-update.ps1 -Database GeetaStudio_M1Tests
+ & powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\db-update.ps1 -Database GeetaStudio_M1Tests -NoBuild
  if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
  $env:GEETA_SQL_TESTS='1'
- $listing=@(& dotnet test .\GeetaStudio.sln --no-build --no-restore --filter 'Category=Sql' --list-tests)
+ $testArgs=@('test','.\GeetaStudio.sln','--no-build','--no-restore')
+ if($LowMemory){$testArgs += '-m:1'}
+ $listing=@(& dotnet @testArgs --filter 'Category=Sql' --list-tests)
  if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
  $classes=@{}
  foreach($line in $listing){
@@ -19,12 +26,13 @@ try {
   }
  }
  if($classes.Count -eq 0){throw 'No SQL test classes discovered; refusing a vacuous pass.'}
- $results=Join-Path (Get-Location) '.local\verification\sql-isolated'
+ $results=$ResultsDirectory
+ if(![IO.Path]::IsPathRooted($results)){$results=Join-Path (Get-Location) $results}
  New-Item -ItemType Directory -Path $results -Force|Out-Null
  $total=0;$expected=0;$evidence=@()
  foreach($class in @($classes.Keys|Sort-Object)){
   $expected += $classes[$class];$name=($class -split '\.')[-1]+'.trx'
-  & dotnet test .\GeetaStudio.sln --no-build --no-restore --filter "Category=Sql&FullyQualifiedName~$class." --results-directory $results --logger "trx;LogFileName=$name"
+  & dotnet @testArgs --filter "Category=Sql&FullyQualifiedName~$class." --results-directory $results --logger "trx;LogFileName=$name"
   if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
   [xml]$trx=Get-Content -LiteralPath (Join-Path $results $name) -Raw
   $count=$trx.TestRun.ResultSummary.Counters
@@ -33,6 +41,8 @@ try {
  }
  if($total -ne $expected){throw 'SQL test discovery/execution totals differ.'}
  $summary=@{verifiedUtc=[DateTimeOffset]::UtcNow.ToString('o');mode='fresh-test-process-per-class';database='GeetaStudio_M1Tests';discovered=$expected;passed=$total;failed=0;skipped=0;classes=$evidence;assertionsAndTimeoutsUnchanged=$true;liveCalls=0}
- $summary|ConvertTo-Json -Depth 10|Set-Content -Encoding UTF8 docs\milestones\evidence\M08-sql-isolated.json
+ if(![IO.Path]::IsPathRooted($SummaryPath)){$SummaryPath=Join-Path (Get-Location) $SummaryPath}
+ New-Item -ItemType Directory -Path (Split-Path $SummaryPath -Parent) -Force|Out-Null
+ $summary|ConvertTo-Json -Depth 10|Set-Content -Encoding UTF8 -LiteralPath $SummaryPath
  Write-Host "All $total discovered SQL tests passed in $($classes.Count) fresh class processes. This does not qualify the combined-process SQL run."
-} finally { $env:GEETA_SQL_TESTS=$savedSql;Pop-Location }
+} finally { $env:GEETA_SQL_TESTS=$savedSql;$env:MSBUILDDISABLENODEREUSE=$savedNodeReuse;$env:DOTNET_CLI_USE_MSBUILD_SERVER=$savedBuildServer;Pop-Location }

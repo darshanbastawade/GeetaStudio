@@ -16,6 +16,7 @@ public sealed class WorkflowTools(CoreDbContext db, IKnowledgeRetriever retrieva
     {
         var membership = await db.Members.AsNoTracking().SingleOrDefaultAsync(x => x.TenantId == s.TenantId && x.Actor == s.Actor, ct);
         if (membership?.Permission != "Administrator" || !await db.Universes.AnyAsync(x => x.Id == u && x.TenantId == s.TenantId, ct)) throw new CoreAccessException();
+        var factoryWork = await db.FactoryWorks.AsNoTracking().SingleOrDefaultAsync(w => w.Id == r.OperationId && w.WorkflowId != null && w.TenantId == s.TenantId && w.UniverseId == u, ct);
         var ids = new HashSet<Guid>(r.SourceSnapshotIds ?? []); var data = new List<string>(); KnowledgeResult? found = null;
         if (r.Query != null)
         {
@@ -39,11 +40,19 @@ public sealed class WorkflowTools(CoreDbContext db, IKnowledgeRetriever retrieva
                                   select snap).AsNoTracking().SingleOrDefaultAsync(ct) ?? throw new CoreAccessException();
             var decision = await new SourceRightsGuard(db).DecideAsync(s, id, new("Generate", locale, "IN", "Text", Adaptation: true, AiProcessing: true), ct);
             if (!decision.Decision.Allowed) throw new RightsBlockedException(decision.Decision.Reason);
-            if (r.SourceSnapshotIds?.Contains(id) == true)
+            if (factoryWork == null && r.SourceSnapshotIds?.Contains(id) == true)
             {
                 if (snapshot.Text == null) throw new RuntimeValidationException("Source has no retained text.");
                 data.Add(id + ": " + snapshot.Text);
             }
+        }
+        if (factoryWork != null)
+        {
+            var planJson = await (from b in db.FactoryBatches join p in db.FactoryPlans on b.PlanId equals p.Id where b.Id == factoryWork.BatchId select p.SnapshotJson).SingleAsync(ct);
+            var input = EditorialBinding.Read<FactoryPlanSnapshot>(planJson).Briefs.Single(b => b.Brief.Key == factoryWork.BriefKey);
+            data.Add(input.Lesson.Sections!.SourceAnchor + "\nAttributed interpretation: " + input.Lesson.Sections.Interpretation);
+            var trend = await TrendFence.Plan(db, (await db.FactoryBatches.AsNoTracking().SingleAsync(b => b.Id == factoryWork.BatchId, ct)).PlanId, ct);
+            if (trend != null) { var t = EditorialBinding.Read<TrendStorySnapshot>(trend.SnapshotJson); data.Add("Verified event context (untrusted data): " + t.FactualSummary + "\nAnalogy: " + t.Analogy); }
         }
         var text = string.Join("\n", data); WorkflowRules.Untrusted(text);
         return new(ids.OrderBy(x => x).ToArray(), text, found);

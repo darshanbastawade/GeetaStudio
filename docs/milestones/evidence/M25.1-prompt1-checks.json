@@ -1,0 +1,131 @@
+{
+  "milestoneStatus": "InProgress",
+  "inputPackPreserved": true,
+  "nativeFailureProbe": {
+    "scriptExit": 1,
+    "failureStageRetained": true,
+    "nativeExit": 17,
+    "laterStagesNotRun": true,
+    "applicationAcceptance": false
+  },
+  "date": "2026-10-15",
+  "implementationManifestSha256": "4A355FF8A7442B323F6613DC9B78E728C11CAC414B16B799055EDA542839E076",
+  "publicDeployment": false,
+  "remote": {
+    "head": "82cc55d431367b822300c1d64bbb00986d38ccdd",
+    "exactHistoricalCause": "UnresolvedWithoutJobLog",
+    "runId": 38604099399,
+    "jobLogError": "Connector Transport closed",
+    "latestRunForHead": true,
+    "jobLogAttempts": 2,
+    "annotations": "Node20 deprecation warning and verification process exit1 only",
+    "jobId": 115990433679,
+    "matchingHostedSuccessObserved": false,
+    "conclusion": "failure",
+    "runUrl": "https://github.com/darshanbastawade/GeetaStudio/actions/runs/38604099399"
+  },
+  "final": {
+    "overlay": "Only three implementation/config files in manifest",
+    "priorBinObj": false,
+    "stageLogs": ".local/M25-1-prompt1/final/.local/verification",
+    "buildWarnings": 0,
+    "lockedRestore": "Pass",
+    "buildErrors": 0,
+    "format": "Pass",
+    "nugetGlobalCacheReused": true,
+    "offline": {
+      "total": 111,
+      "failed": 0,
+      "skipped": 0,
+      "passed": 111
+    },
+    "command": "pwsh -NoProfile -File .local/M25-1-prompt1/final/scripts/verify.ps1 -Locked",
+    "shell": "PowerShell7.6.5",
+    "trx": ".local/M25-1-prompt1/final/.local/verification/offline.trx",
+    "freshClone": true,
+    "crlfOrMixedFiles": 0,
+    "log": ".local/M25-1-prompt1/final-verify.log",
+    "sourceFiles": 430,
+    "scriptExit": 0
+  },
+  "verifiedUtc": "2026-10-15T04:25:39.2580074+00:00",
+  "branch": "fix/m25-1-ci-baseline",
+  "initialBranch": "main",
+  "pushed": false,
+  "windowsPowerShellCandidate": "Restore/build111offline/fullformat passed before final log-footer enhancement",
+  "baseline": {
+    "freshClone": true,
+    "formatEndOfLineErrors": 36895,
+    "offlineSkipped": 0,
+    "restore": "Pass",
+    "offlinePassed": 111,
+    "verificationExit": 2,
+    "log": ".local/M25-1-prompt1/baseline-verify.log",
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "offlineFailed": 0,
+    "rootCause": "core.autocrlf=true checkout usesCRLF; editorconfig requiresLF; no repository attributes",
+    "format": "Fail"
+  },
+  "implementationManifest": [
+    {
+      "sha256": "04F1EEACE400CF76834034D3CA46F90F68A95C6CB72A7965153ADCFDCDD77086",
+      "path": ".gitattributes"
+    },
+    {
+      "sha256": "B0BD3A6CBAE520815454D4B1E51CA6814683A5C61AF205DCCC15BC4D3F7A0357",
+      "path": ".github/workflows/verify.yml"
+    },
+    {
+      "sha256": "1140EF1E322C8936AF098A71EA52678DC70693AD11A365F6AF8A1973009C43FD",
+      "path": "scripts/verify.ps1"
+    }
+  ],
+  "dedicatedSql": {
+    "engine": "17.0.1145.4",
+    "runtimeMigrations": 4,
+    "sqlTestsRun": false,
+    "coreMigrations": 31,
+    "access": "ReadOnlyAvailabilityProbe",
+    "database": "GeetaStudio_M1Tests"
+  },
+  "blockers": [
+    "Historical GitHub job log unavailable; exact hosted failure cause unresolved",
+    "Matching successful hosted CI requires owner review/commit/push",
+    "Prompts2-3 and full SQL still pending; milestone not closed"
+  ],
+  "selectedPrompt": 1,
+  "initialDirty": [
+    "?? docs/GeetaStudio_Codex_Implementation_Steps.md"
+  ],
+  "runtime": {
+    "selectedSdk": "10.0.401",
+    "powerShell": "7.6.5",
+    "hostRuntime": "10.0.13",
+    "installedSdks": [
+      "10.0.401",
+      "10.0.402"
+    ],
+    "devDoctor": "Pass",
+    "windowsPowerShell": "5.1.26100.9711"
+  },
+  "commitCreated": false,
+  "prompt1LocalStatus": "OfflineVerified",
+  "inputPackSha256": "C106386C6C1915D4314E845A88B46AB894EDBCADB740B6FFF42BE611BF51383B",
+  "sqlFullSuite": "NotRun;Prompt3",
+  "freshInteractiveDebug": "NotRun",
+  "binaryProbe": "Git clean filters preserve NUL/CRLF/high-byte binary unchanged",
+  "liveCalls": 0,
+  "preserved": [
+    "SDK/runtime/security package pins",
+    "All project and lock files",
+    "Application source and contracts",
+    "Migrations and database contents",
+    "Prior M24 corrections",
+    "M26/M27 private implementation",
+    "Owner-provided prompt pack"
+  ],
+  "head": "82cc55d431367b822300c1d64bbb00986d38ccdd",
+  "prompt2Started": false,
+  "milestone": "M25.1"
+}

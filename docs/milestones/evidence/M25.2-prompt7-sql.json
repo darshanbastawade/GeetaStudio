@@ -1,0 +1,293 @@
+{
+  "assertionsAndTimeoutsUnchanged": true,
+  "verifiedUtc": "2026-10-16T02:05:04.6402777+00:00",
+  "failed": 0,
+  "classes": [
+    {
+      "skipped": 0,
+      "discovered": 10,
+      "failed": 0,
+      "passed": 10,
+      "class": "ContentOS.Foundation.Tests.SqlAiTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 4,
+      "failed": 0,
+      "passed": 4,
+      "class": "ContentOS.Foundation.Tests.SqlAnalyticsContentTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 5,
+      "failed": 0,
+      "passed": 5,
+      "class": "ContentOS.Foundation.Tests.SqlAnalyticsTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 5,
+      "failed": 0,
+      "passed": 5,
+      "class": "ContentOS.Foundation.Tests.SqlCommerceAdmissionTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 4,
+      "failed": 0,
+      "passed": 4,
+      "class": "ContentOS.Foundation.Tests.SqlCommerceTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 14,
+      "failed": 0,
+      "passed": 14,
+      "class": "ContentOS.Foundation.Tests.SqlCoreTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 10,
+      "failed": 0,
+      "passed": 10,
+      "class": "ContentOS.Foundation.Tests.SqlCorpusTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 6,
+      "failed": 0,
+      "passed": 6,
+      "class": "ContentOS.Foundation.Tests.SqlCreationTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 2,
+      "failed": 0,
+      "passed": 2,
+      "class": "ContentOS.Foundation.Tests.SqlCustomerApiTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 3,
+      "failed": 0,
+      "passed": 3,
+      "class": "ContentOS.Foundation.Tests.SqlCustomerIdentityTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 4,
+      "failed": 0,
+      "passed": 4,
+      "class": "ContentOS.Foundation.Tests.SqlCustomerTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 4,
+      "failed": 0,
+      "passed": 4,
+      "class": "ContentOS.Foundation.Tests.SqlEditorialReviewRegressionTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 9,
+      "failed": 0,
+      "passed": 9,
+      "class": "ContentOS.Foundation.Tests.SqlEditorialTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 7,
+      "failed": 0,
+      "passed": 7,
+      "class": "ContentOS.Foundation.Tests.SqlEvaluationTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 9,
+      "failed": 0,
+      "passed": 9,
+      "class": "ContentOS.Foundation.Tests.SqlEvidenceTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 13,
+      "failed": 0,
+      "passed": 13,
+      "class": "ContentOS.Foundation.Tests.SqlFactoryAiTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 10,
+      "failed": 0,
+      "passed": 10,
+      "class": "ContentOS.Foundation.Tests.SqlFactoryTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 1,
+      "failed": 0,
+      "passed": 1,
+      "class": "ContentOS.Foundation.Tests.SqlHardeningPersonaTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 4,
+      "failed": 0,
+      "passed": 4,
+      "class": "ContentOS.Foundation.Tests.SqlHardeningTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 4,
+      "failed": 0,
+      "passed": 4,
+      "class": "ContentOS.Foundation.Tests.SqlHistoricalTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 1,
+      "failed": 0,
+      "passed": 1,
+      "class": "ContentOS.Foundation.Tests.SqlIntegratedPipelineTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 7,
+      "failed": 0,
+      "passed": 7,
+      "class": "ContentOS.Foundation.Tests.SqlKnowledgeTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 7,
+      "failed": 0,
+      "passed": 7,
+      "class": "ContentOS.Foundation.Tests.SqlLessonTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 5,
+      "failed": 0,
+      "passed": 5,
+      "class": "ContentOS.Foundation.Tests.SqlMediaTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 4,
+      "failed": 0,
+      "passed": 4,
+      "class": "ContentOS.Foundation.Tests.SqlMilestoneReviewFixTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 2,
+      "failed": 0,
+      "passed": 2,
+      "class": "ContentOS.Foundation.Tests.SqlNarrationTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 9,
+      "failed": 0,
+      "passed": 9,
+      "class": "ContentOS.Foundation.Tests.SqlOptimizationTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 3,
+      "failed": 0,
+      "passed": 3,
+      "class": "ContentOS.Foundation.Tests.SqlReadTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 10,
+      "failed": 0,
+      "passed": 10,
+      "class": "ContentOS.Foundation.Tests.SqlRegistryTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 17,
+      "failed": 0,
+      "passed": 17,
+      "class": "ContentOS.Foundation.Tests.SqlRuntimeTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 3,
+      "failed": 0,
+      "passed": 3,
+      "class": "ContentOS.Foundation.Tests.SqlSocialRecoveryTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 6,
+      "failed": 0,
+      "passed": 6,
+      "class": "ContentOS.Foundation.Tests.SqlSocialTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 9,
+      "failed": 0,
+      "passed": 9,
+      "class": "ContentOS.Foundation.Tests.SqlSourceTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 1,
+      "failed": 0,
+      "passed": 1,
+      "class": "ContentOS.Foundation.Tests.SqlTalkApiTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 10,
+      "failed": 0,
+      "passed": 10,
+      "class": "ContentOS.Foundation.Tests.SqlTalkTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 4,
+      "failed": 0,
+      "passed": 4,
+      "class": "ContentOS.Foundation.Tests.SqlTrendIntakeTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 3,
+      "failed": 0,
+      "passed": 3,
+      "class": "ContentOS.Foundation.Tests.SqlTrendStoredEvidenceTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 4,
+      "failed": 0,
+      "passed": 4,
+      "class": "ContentOS.Foundation.Tests.SqlTrendTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 8,
+      "failed": 0,
+      "passed": 8,
+      "class": "ContentOS.Foundation.Tests.SqlWatchTests"
+    },
+    {
+      "skipped": 0,
+      "discovered": 15,
+      "failed": 0,
+      "passed": 15,
+      "class": "ContentOS.Foundation.Tests.SqlWorkflowTests"
+    }
+  ],
+  "passed": 256,
+  "liveCalls": 0,
+  "mode": "fresh-test-process-per-class",
+  "skipped": 0,
+  "database": "GeetaStudio_M1Tests",
+  "discovered": 256
+}

@@ -1,45 +1,73 @@
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
 using ContentOS.Application;
 using ContentOS.Contracts;
+using ContentOS.Domain;
 namespace ContentOS.Integrations;
 
-public sealed class WindowsSpeechProvider(string spoolRoot) : ISpeechSynthesisProvider
+public sealed class WindowsSpeechProvider(string spoolRoot, IWindowsSpeechEngine? engine = null) : ISpeechSynthesisProvider
 {
+    private readonly IWindowsSpeechEngine speech = engine ?? new SapiSpeechEngine();
     public string Key => "media.speech.windows-sapi.v1";
-    public MediaProviderCapabilities Capabilities => new("Speech", ["en-US"], false, true, false, true, true, "LocalWindowsPreview", ["InstalledEnglishVoiceOnly", "ExplicitProviderBoundVoiceToken", "SpeakAsSubstitution", "HumanPronunciationAndRedistributionReviewPending", "NoNetwork"]);
-    public static string[] AvailableEnglishVoices()
+    public SpeechVoiceResource[] VoiceResources => speech.Voices();
+    public MediaProviderCapabilities Capabilities => new("Speech", VoiceResources.SelectMany(x => x.Locales).Distinct().Order().ToArray(), false, true, false, true, true, "LocalWindowsPreview", ["ExactInstalledEnglishVoiceLocaleOnly", "ExplicitProviderBoundVoiceToken", "SpeakAsSubstitution", "HumanPronunciationAndRedistributionReviewPending", "NoNetwork", "ReceiptBoundSpeechSegmentsMax160Characters"]);
+    public static string[] AvailableEnglishVoices() => new SapiSpeechEngine().Voices().Where(x => x.Locales.Contains("en-US")).Select(x => x.Key).ToArray();
+    public void ValidateProfile(RegisterMediaProfile profile)
     {
-        if (!OperatingSystem.IsWindows()) return [];
-        object? instance = null; try { instance = Activator.CreateInstance(Type.GetTypeFromProgID("SAPI.SpVoice")!); dynamic voice = instance!; dynamic tokens = voice.GetVoices("Language=409", ""); var values = new List<string>(); for (var i = 0; i < (int)tokens.Count; i++) values.Add((string)tokens.Item(i).Id); return values.ToArray(); } finally { if (instance != null && Marshal.IsComObject(instance)) Marshal.FinalReleaseComObject(instance); }
+        if (profile.AdapterKey != Key || profile.Kind != "Speech" || !VoiceResources.Any(x => x.Key == profile.ResourceKey && x.Locales.Contains(profile.Locale))) throw new EvidenceBlockedException("ExactInstalledSpeechVoiceAndLocaleRequired; no voice or language fallback.");
     }
     private string PathFor(MediaProviderRequest r)
+    { var root = Path.GetFullPath(spoolRoot); Directory.CreateDirectory(root); var binding = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(r.AccountReference + "|" + r.ResourceKey)))[..16]; return Path.Combine(root, binding + "-" + r.OperationId.ToString("N") + ".wav"); }
+    private static string Resource(MediaProviderRequest r) => "local-sapi:" + r.OperationId.ToString("N");
+    private static string Fingerprint(MediaProviderRequest r) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new { Version = "sapi-receipt.v2", Request = r }))));
+    private sealed record Receipt(string Fingerprint, string Sha256, long Length);
+    private static void Input(MediaProviderRequest r)
     {
-        var root = Path.GetFullPath(spoolRoot);
-        Directory.CreateDirectory(root); var binding = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(r.AccountReference + "|" + r.ResourceKey)))[..16]; return Path.Combine(root, binding + "-" + r.OperationId.ToString("N") + ".wav");
+        if (r.OperationId == Guid.Empty || r.PromptOrText.Length is < 1 or > WatchNarration.SegmentLimit || r.ReferenceImages.Length != 0 || r.Pronunciation.Length > 20 || r.MaxBytes is < 1 or > 1048576 || r.Ceiling != 0) throw new RuntimeValidationException("BoundedLocalSpeechSegmentRequired");
+        foreach (var p in r.Pronunciation) { CoreRules.Text(p.Word, 100, "Pronunciation word"); CoreRules.Text(p.SpeakAs, 100, "Pronunciation substitution"); }
+    }
+    private static void Binding(string path, string fingerprint)
+    { if (File.Exists(path + ".request") && File.ReadAllText(path + ".request") != fingerprint) throw new RuntimeConflictException("OriginalSpeechOperationRequestChanged"); }
+    private static async Task<MediaProviderResult> Accepted(MediaProviderRequest r, string path, CancellationToken ct)
+    {
+        var receipt = JsonSerializer.Deserialize<Receipt>(await File.ReadAllTextAsync(path + ".receipt", ct)) ?? throw new RuntimeConflictException("SpeechReceiptUnavailable");
+        if (receipt.Fingerprint != Fingerprint(r)) throw new RuntimeConflictException("OriginalSpeechOperationRequestChanged");
+        var info = new FileInfo(path); if (!info.Exists || info.Length != receipt.Length || info.Length > r.MaxBytes) throw new RuntimeConflictException("OriginalSpeechBytesChanged");
+        var bytes = await File.ReadAllBytesAsync(path, ct); MediaFiles.Inspect(bytes); if (MediaRules.Hash(bytes) != receipt.Sha256) throw new RuntimeConflictException("OriginalSpeechBytesChanged");
+        return new("Completed", Resource(r), bytes, 0, "InstalledVoiceLocalPreviewNotHumanQualified");
     }
     public async Task<MediaProviderResult> SubmitAsync(MediaProviderRequest r, CancellationToken ct)
     {
-        if (!OperatingSystem.IsWindows() || r.Locale != "en-US" || r.PromptOrText.Length > 160 || r.ReferenceImages.Length != 0 || !AvailableEnglishVoices().Contains(r.ResourceKey)) return new("Unsupported", null, null, 0, "ExactInstalledEnglishVoiceAndBoundedTextRequired");
-        var path = PathFor(r); if (File.Exists(path)) return await ReconcileAsync(r, "local-sapi:" + r.OperationId.ToString("N"), ct);
-        var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var thread = new Thread(() =>
+        ct.ThrowIfCancellationRequested(); Input(r); var path = PathFor(r); FileStream held;
+        try { held = new FileStream(path + ".lock", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None); }
+        catch (IOException) { return new("Unknown", Resource(r), null, null, "OriginalSpeechOperationInProgress"); }
+        using (held)
         {
-            if (!OperatingSystem.IsWindows()) { completion.SetException(new PlatformNotSupportedException()); return; }
-            object? instance = null, fileInstance = null; var tmp = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
+            var fingerprint = Fingerprint(r); Binding(path, fingerprint);
+            if (File.Exists(path + ".receipt")) return await Accepted(r, path, ct);
+            if (File.Exists(path + ".request") || File.Exists(path)) return new("Unknown", Resource(r), null, null, "OriginalSpeechReceiptRequiresReconciliationOrReview");
+            if (!VoiceResources.Any(x => x.Key == r.ResourceKey && x.Locales.Contains(r.Locale))) return new("Unsupported", null, null, 0, "ExactInstalledSpeechVoiceAndLocaleRequired");
+            await File.WriteAllTextAsync(path + ".request", fingerprint, Encoding.UTF8, ct);
+            var tmp = path + "." + Guid.NewGuid().ToString("N") + ".tmp"; var receiptTmp = tmp + ".receipt";
             try
             {
-                instance = Activator.CreateInstance(Type.GetTypeFromProgID("SAPI.SpVoice")!); fileInstance = Activator.CreateInstance(Type.GetTypeFromProgID("SAPI.SpFileStream")!); dynamic voice = instance!; dynamic stream = fileInstance!; dynamic tokens = voice.GetVoices("Language=409", "");
-                for (var i = 0; i < (int)tokens.Count; i++) { dynamic token = tokens.Item(i); if ((string)token.Id == r.ResourceKey) { voice.Voice = token; break; } }
-                stream.Format.Type = 18; stream.Open(tmp, 3, false); voice.AudioOutputStream = stream; var text = r.PromptOrText;
-                foreach (var p in r.Pronunciation) text = Regex.Replace(text, "\\b" + Regex.Escape(p.Word) + "\\b", _ => p.SpeakAs, RegexOptions.CultureInvariant, TimeSpan.FromMilliseconds(250));
-                voice.Speak(text, 16); stream.Close(); var bytes = File.ReadAllBytes(tmp); MediaFiles.Inspect(bytes); File.Move(tmp, path, false); completion.SetResult();
+                using var deadline = CancellationTokenSource.CreateLinkedTokenSource(ct); deadline.CancelAfter(TimeSpan.FromSeconds(30));
+                await speech.SynthesizeAsync(r, tmp, deadline.Token);
+                var info = new FileInfo(tmp); if (!info.Exists || info.Length > r.MaxBytes) throw new RuntimeConflictException("SpeechOutputExceededByteLimit");
+                var bytes = await File.ReadAllBytesAsync(tmp, ct); MediaFiles.Inspect(bytes);
+                var receipt = new Receipt(fingerprint, MediaRules.Hash(bytes), bytes.Length);
+                await File.WriteAllTextAsync(receiptTmp, JsonSerializer.Serialize(receipt), Encoding.UTF8, ct);
+                File.Move(tmp, path, false); File.Move(receiptTmp, path + ".receipt", false);
+                return await Accepted(r, path, ct);
             }
-            catch (Exception e) { completion.SetException(e); }
-            finally { if (File.Exists(tmp)) File.Delete(tmp); if (fileInstance != null && Marshal.IsComObject(fileInstance)) Marshal.FinalReleaseComObject(fileInstance); if (instance != null && Marshal.IsComObject(instance)) Marshal.FinalReleaseComObject(instance); }
-        })
-        { IsBackground = true }; thread.SetApartmentState(ApartmentState.STA); thread.Start(); await completion.Task.WaitAsync(ct); return await ReconcileAsync(r, "local-sapi:" + r.OperationId.ToString("N"), ct);
+            finally { if (File.Exists(tmp)) File.Delete(tmp); if (File.Exists(receiptTmp)) File.Delete(receiptTmp); }
+        }
     }
     public async Task<MediaProviderResult> ReconcileAsync(MediaProviderRequest r, string? resource, CancellationToken ct)
-    { var path = PathFor(r); if (!File.Exists(path)) return new("Unknown", resource, null, null, "OriginalLocalVoiceOutputNotYetAvailable"); var bytes = await File.ReadAllBytesAsync(path, ct); MediaFiles.Inspect(bytes); return new("Completed", "local-sapi:" + r.OperationId.ToString("N"), bytes, 0, "InstalledVoiceLocalPreviewNotHumanQualified"); }
+    {
+        ct.ThrowIfCancellationRequested(); Input(r); if (resource != null && resource != Resource(r)) throw new RuntimeConflictException("OriginalSpeechResourceRequired");
+        var path = PathFor(r); Binding(path, Fingerprint(r));
+        return File.Exists(path + ".receipt") ? await Accepted(r, path, ct) : new("Unknown", resource, null, null, "OriginalSpeechOutputNotAccepted; no resubmission.");
+    }
 }

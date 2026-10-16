@@ -1,7 +1,13 @@
 using ContentOS.Contracts;
 namespace ContentOS.Application;
 
-public interface ITrendSource { string Key { get; } TrendDiscovery Discover(TrendDiscoveryRequest request, CancellationToken ct); }
+public interface ITrendSource
+{
+    string Key { get; }
+    TrendDiscovery Discover(TrendDiscoveryRequest request, CancellationToken ct);
+    void Validate(RegisterTrendConnector configuration) { }
+    Task<TrendDiscovery> DiscoverAsync(TrendDiscoveryRequest request, CancellationToken ct) => Task.FromResult(Discover(request, ct));
+}
 public interface ITrendExtractor { string Key { get; } TrendExtraction Extract(TrendExtractionRequest request, CancellationToken ct); }
 public interface ITrendWorkbench
 {

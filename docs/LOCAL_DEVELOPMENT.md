@@ -1,4 +1,12 @@
+Prompt 7: [one-command two-audience private fixture, bounded opt-in live staging and debugging](M25.2_PROMPT7_LOCAL_RUN.md). Genuine event/art/voice/human qualification remains pending; no new migration.
+
+Prompt 6: [narration planning, exact voice catalog, controlled demo and debugging](M25.2_PROMPT6_LOCAL_RUN.md). Approved art/voice and human qualification remain pending; no migration.
+
 For M27 experiments, rollback, bounded automation and debugging, see [M27_LOCAL_RUN](M27_LOCAL_RUN.md).
+
+Prompt 5 configured RSS: [local checks, permitted-source configuration and debugging](M25.2_PROMPT5_LOCAL_RUN.md). Default intake is disabled/unqualified; uploaded/manual paths remain. No new migration is required, and fixtures do not supply publisher permission. No actual live fetch has been performed.
+
+Prompt 4 AI factory: see [M25.2 local run/debug](M25.2_PROMPT4_LOCAL_RUN.md) for the additive migration, controlled SQL demo, compatible prompt/definition setup, usage/recovery behavior and debugger breakpoints. Enable factory/workflow processing only for deliberately configured permitted work. M25.2 and matching hosted CI remain open.
 
 For M25 security/privacy, release gates, isolated recovery, private packaging and debugging, see [M25_LOCAL_RUN](M25_LOCAL_RUN.md).
 
@@ -20,7 +28,7 @@ For M15 trends, source review, controlled fixtures and debugging, see [M15_LOCAL
 
 For the M14 reader, private fixture preview and attach debugging, see [M14_LOCAL_RUN](M14_LOCAL_RUN.md).
 
-# Windows and VS Code development — M0 foundation through M12
+# Windows and VS Code development — current M0–M27 private implementation
 
 For audience lessons, reviewed translation memory and casting, follow [M9_LOCAL_RUN](M9_LOCAL_RUN.md). For current workflows, review and worker restart/debugging, follow [M8_LOCAL_RUN](M8_LOCAL_RUN.md). For AI tasks, provider routes, budget accounting and debugging, follow [M7_LOCAL_RUN](M7_LOCAL_RUN.md). For knowledge retrieval/index migration/debugging, follow [M6_LOCAL_RUN](M6_LOCAL_RUN.md). For claim/evidence setup/demo/debugging, follow [M5_LOCAL_RUN](M5_LOCAL_RUN.md). For corpus setup/demo/debugging, follow [M4_LOCAL_RUN](M4_LOCAL_RUN.md); [M3_LOCAL_RUN](M3_LOCAL_RUN.md) covers sources. For core setup/demo/debugging, follow [M2_LOCAL_RUN](M2_LOCAL_RUN.md); [M1_LOCAL_RUN](M1_LOCAL_RUN.md) covers runtime recovery. The M0 instructions below describe the database-free, runtime-disabled baseline. To select it after M1 provisioning, set `$env:Runtime__Enabled = 'false'` separately in the API and worker terminals; remove that override to return to M1.
 
@@ -41,11 +49,24 @@ The doctor checks SDK selection and loopback ports without installing software o
 ```powershell
 dotnet restore .\GeetaStudio.sln --locked-mode
 dotnet build .\GeetaStudio.sln --no-restore
-dotnet test .\GeetaStudio.sln --no-build --no-restore
+dotnet test .\GeetaStudio.sln --no-build --no-restore --filter 'Category!=Sql'
 dotnet format .\GeetaStudio.sln --verify-no-changes --no-restore
 ```
 
-The latest verification counts and outcomes are in [PROJECT_STATE](PROJECT_STATE.md) and [M09 evidence](milestones/M09.md). Add -Sql for the real local SQL integration suite and -LowMemory to limit build resources on a constrained workstation. No live-provider tests or calls run. Use `verify.ps1` without `-Locked` only for an intentional dependency change, and review the lock-file diff. To fix formatting intentionally: `dotnet format .\GeetaStudio.sln --no-restore`.
+The latest verification counts and outcomes are in [PROJECT_STATE](PROJECT_STATE.md) and [M25.1 evidence](milestones/M25.1.md). Add -Sql for the real local SQL integration suite and -LowMemory to limit build resources on a constrained workstation. No live-provider tests or calls run. Use `verify.ps1` without `-Locked` only for an intentional dependency change, and review the lock-file diff. To fix formatting intentionally: `dotnet format .\GeetaStudio.sln --no-restore`.
+
+Verification now saves separate `restore.log`, `build.log`, `offline-tests.log`, `format.log` and `offline.trx` under `.local/verification`; an explicit `-Sql` run also saves SQL test output and `sql.trx`. Use `-ResultsDirectory <path>` to retain a separate run. A failed stage stops verification and names its log. CI preserves only this generated verification directory as a 14-day artifact, including on failure; it does not upload the entire `.local` directory. Hosted success must be checked on the exact pushed revision.
+
+On a memory-constrained workstation, the documented complete SQL equivalent runs each discovered SQL class in a fresh process. Run it serially after a successful offline build:
+
+```powershell
+pwsh -NoProfile -File scripts/verify.ps1 -Locked -LowMemory -ResultsDirectory .local/verification/offline
+pwsh -NoProfile -File scripts/verify-sql-isolated.ps1 -SkipBuild -LowMemory -ResultsDirectory .local/verification/sql-isolated -SummaryPath .local/verification/sql-isolated-summary.json
+```
+
+`-LowMemory` disables build/node reuse and limits MSBuild to one node; migration tooling reuses the preceding build. Every discovered SQL test must pass with zero skips. A failed class stops the run; no empty discovery or missing-count pass is accepted. `-ResultsDirectory` and `-SummaryPath` preserve separate attempts instead of replacing older evidence. This qualifies the isolated mode only, not a failed combined-process run. See M25.1 for actual attempt results.
+
+The repository's `.gitattributes` enforces LF for text checkouts to match `.editorconfig`, including Windows with `core.autocrlf=true`; automatic text detection preserves binary files. It does not rewrite existing local edits. A fresh checkout needs no global Git configuration change. See [M25.1 Prompt 1 diagnosis](milestones/M25.1.md) for the reproduced baseline failure and remaining hosted-CI limits.
 
 If the workstation's execution policy blocks local scripts, use a process-scoped invocation such as `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1 -Locked`. This does not change machine/user policy. Both Windows PowerShell and PowerShell 7 can run the helpers.
 
