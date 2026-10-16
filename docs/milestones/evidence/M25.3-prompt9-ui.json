@@ -1,0 +1,31 @@
+{
+  "observedUtc": "2026-10-16T09:11:37.261221+00:00",
+  "surface": "Actual Blazor root http://127.0.0.1:15110/ backed by Production runtime-disabled API port15109",
+  "qualification": "Unavailable-library fallback only; not selected content acceptance",
+  "desktop": {
+    "width": 1440,
+    "height": 900,
+    "scrollWidth": 1440,
+    "visualOverflow": false
+  },
+  "phone": {
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 375,
+    "visualOverflow": false
+  },
+  "visibleMessage": "The reading library is temporarily unavailable. Please try again.",
+  "keyboard": {
+    "tabFocusedSkipLink": true,
+    "enterNavigatedTo": "/#reading",
+    "nextTabFocused": "Clear device bookmarks and progress",
+    "actualMainElement": true,
+    "documentLanguage": "en"
+  },
+  "screenReader": "NotRun; native assistive-technology control unavailable; browser accessibility tree is not a screen-reader test",
+  "selectedReadSearchAndExportJourneys": "NotRun; no eligible exact targets and no approved launch resources",
+  "humanParticipants": 0,
+  "screenshots": "Desktop and phone screenshots observed in browser tool output during Prompt9; no persistent image files claimed",
+  "browserOverrideReset": true,
+  "browserTabClosed": true
+}

@@ -1,3 +1,5 @@
+Prompt8: [current release-decision command, exact evidence schema, Production route boundary and debugging](M25.3_LOCAL_RUN.md). Prompt9 now has a blocked acceptance report and scoped local drills; genuine live/human/hosting approval remains open. Development private workbench remains available by default.
+
 Prompt 7: [one-command two-audience private fixture, bounded opt-in live staging and debugging](M25.2_PROMPT7_LOCAL_RUN.md). Genuine event/art/voice/human qualification remains pending; no new migration.
 
 Prompt 6: [narration planning, exact voice catalog, controlled demo and debugging](M25.2_PROMPT6_LOCAL_RUN.md). Approved art/voice and human qualification remain pending; no migration.

@@ -1,0 +1,22 @@
+{
+  "verifiedDate": "2026-10-16",
+  "database": "GeetaStudio_Dev",
+  "core.CharactersCount": 11,
+  "core.CharactersIdsHash": "HAav8Pfi1YSKNa74xJBDt0Z5fOpXpUGGxgRDHXNY1Tk=",
+  "core.UniversesCount": 4,
+  "core.UniversesIdsHash": "mI9KgskhZ0B14uL50Ze1gIR8hrf00EsPv36muozuuUs=",
+  "corpus.CorpusVerseCount": 78,
+  "corpus.CorpusVerseIdsHash": "qun7DlmAE5c18V0+mGEi6pw2nRvKd2gerIBFU2XpGGQ=",
+  "runtime.JobsCount": 10,
+  "runtime.JobsIdsHash": "XF/TBKw0Cf1MF8WIYt1oUWBsEqXTnoUBXXgl6wd/5+U=",
+  "sources.SourcePermissionCount": 9,
+  "sources.SourcePermissionIdsHash": "97mU6RJ5YmfKn6FY/YARa+8h0E32lLYlnUcVBICkDBU=",
+  "permissionsHash": "zxLmKbGzRKWeSUL3tYNMIUYV7Plq02SKriHceX7Rhj0=",
+  "coreMigrations": 32,
+  "dboMigrations": 4,
+  "completeGeetaAndHistoricalBaselinePreserved": true,
+  "existingIdsPreserved": true,
+  "sourcePermissionsUnchanged": true,
+  "databaseReset": false,
+  "liveCalls": 0
+}

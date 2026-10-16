@@ -1,3 +1,5 @@
+Prompt8 release tooling: [evaluate the proposed READ/WATCH/manual-export pilot](docs/M25.3_LOCAL_RUN.md). The decision uses current resource/evidence bindings and enforced Production routes; the current proposal is blocked and unapproved. No deployment or Prompt9.
+
 # Geeta Studio / ContentOS
 
 Geeta Studio runs on a reusable .NET 10 ContentOS modular monolith with separate API, server-interactive Blazor web and worker hosts. The controlled private implementation covers source rights and canonical samples, evidence/retrieval, durable AI workflows, casting, editorial evaluation, READ, trend briefs, media/WATCH, publishing exports, analytics, identity/credits, text TALK, CREATE and digital/institutional commerce. M26 reuses these paths for a private Shivaji historical sample; M27 adds guarded private experiments and selective automation. M22 realtime voice TALK remains missing.

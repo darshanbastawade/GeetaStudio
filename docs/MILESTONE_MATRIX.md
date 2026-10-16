@@ -1,3 +1,9 @@
+## M25.3 Prompt 9 — 16 October 2026
+
+Prompt9 engineering/local acceptance is complete with a **BLOCKED** release decision; M25.3 remains **In Progress**. Owner explicitly keeps scope approval/human acceptance pending. Added read-only corpus inventory, actual reviewer packet and scoped local access/load/alert/SQL-plus-asset drills. No production code/model/migration/package change. Fresh4SQL withdrawal cases pass0fail/skip; local120requests/5minute observation and isolated21-table/two-master restore pass with exact lineage/cast/bindings/balances. Source-verified Prompt8 build/179offline/257distinctSQL/format/models are reused with the existing uninterrupted-full-run limitation. Selected launch journeys/screen reader, genuine reviews/media/providers, final hostedCI/TLS/secrets/realalerts/offsite/log/oldbinary recovery remain pending. No fake approvals, database reset, permission broadening, public action, commit/push or next prompt.
+
+[Prompt9 report](milestones/M25.3-prompt9.md) · [requirements](milestones/evidence/M25.3-prompt9-requirements.json) · [reviewer packet](release/M25.3/REVIEWER_PACKET.md) · [run/debug](M25.3_LOCAL_RUN.md). Historical checkpoints follow.
+
 # M0–M27 execution and coverage matrix
 
 Current selected work: **Prompt 7 independent implementation Offline Verified; M25.2 In Progress**. Final160offline/all256SQL in40fresh class processes pass0fail/skip; build/format/models/demo/Development auth/isolation/preservation pass. Two captioned private fixtures and exact lineage/usage; genuine event, artwork, voice and human/live acceptance pending. No Prompt8. [Report](milestones/evidence/M25.2-prompt7.md) · [run/debug](M25.2_PROMPT7_LOCAL_RUN.md).

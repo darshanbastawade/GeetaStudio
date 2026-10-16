@@ -5,6 +5,8 @@ using ContentOS.Integrations;
 using GeetaStudio.Worker;
 
 var builder = Host.CreateApplicationBuilder(args);
+if (!builder.Environment.IsDevelopment() && builder.Configuration.GetValue<bool>("Runtime:Enabled"))
+    throw new InvalidOperationException("The proposed READ/WATCH manual-export pilot does not enable the execution worker. Keep Runtime:Enabled=false outside Development.");
 if (builder.Configuration.GetValue<bool>("Runtime:Enabled"))
 {
     builder.Services.AddContentRuntime(builder.Configuration, builder.Environment.IsDevelopment());

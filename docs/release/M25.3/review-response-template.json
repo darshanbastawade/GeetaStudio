@@ -1,0 +1,27 @@
+{
+  "templateOnly": true,
+  "importable": false,
+  "scope": {
+    "tenantId": null,
+    "universeId": null,
+    "subjectFingerprint": null,
+    "reviewerEvidencePath": null
+  },
+  "request": {
+    "operationId": null,
+    "datasetId": null,
+    "caseKey": null,
+    "runId": null,
+    "mode": "Human",
+    "faithfulMeaning": null,
+    "usefulness": null,
+    "readability": null,
+    "ageSuitability": null,
+    "characterAppeal": null,
+    "understanding": null,
+    "accept": null,
+    "evidenceReference": null,
+    "rubricVersion": "rubric.v1",
+    "notes": null
+  }
+}

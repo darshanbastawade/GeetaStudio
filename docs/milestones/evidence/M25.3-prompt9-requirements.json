@@ -1,0 +1,78 @@
+{
+  "observedUtc": "2026-10-16T09:20:25.759684+00:00",
+  "baseCommit": "ee777f65e2b472e72f244964d426509ec4e990fc",
+  "codeFingerprint": "7A609D55992CE0AB054B2A37620339F6E2BA467D247F345750B8860E1D3AAD50",
+  "decision": "Blocked",
+  "requirements": [
+    {
+      "requirement": 1,
+      "name": "Revision verified; explicit production scope",
+      "status": "Fail",
+      "evidence": [
+        "docs/milestones/evidence/M25.3-prompt9-baseline.json",
+        "docs/milestones/evidence/M25.3-prompt9-decision.json"
+      ],
+      "limitsAndOwnerAction": "Revision/diff verified. Owner explicitly keeps scope approval pending. Supply exact approved tenant/universe/resource/evaluation IDs and selected audiences/locales."
+    },
+    {
+      "requirement": 2,
+      "name": "Actual local corpus inventory and limits",
+      "status": "Pass",
+      "evidence": [
+        "docs/milestones/evidence/M25.3-prompt9-inventory.json",
+        "docs/milestones/evidence/M25.3-prompt9-reviewer.json"
+      ],
+      "limitsAndOwnerAction": "128 exact stored text hashes verified. No approved launch subset exists. Two versions of 25 Besant verses plus two 14-entry history indexes are not 78 distinct scripture verses. Rights are recorded data, not new legal approval."
+    },
+    {
+      "requirement": 3,
+      "name": "Concrete M12 reviewer packet",
+      "status": "Pass",
+      "evidence": [
+        "docs/release/M25.3/REVIEWER_PACKET.md",
+        "docs/milestones/evidence/M25.3-prompt9-reviewer.json"
+      ],
+      "limitsAndOwnerAction": "Genuine review import NotRun: none supplied, explicitly pending. Reference100 fixture development cases and120 blank coordination slots are not reviewed labels. Need100 genuine Development/20 fresh sealed HeldOut labels, current result acceptance and relevant media/native-language/cast feedback."
+    },
+    {
+      "requirement": 4,
+      "name": "Selected phone/desktop/keyboard/screen-reader journeys",
+      "status": "NotRun",
+      "evidence": [
+        "docs/milestones/evidence/M25.3-prompt9-ui.json",
+        ".local/M25-3-prompt9/withdrawal/withdrawal.trx"
+      ],
+      "limitsAndOwnerAction": "Actual fallback phone390x844 and desktop1440x900 visual/keyboard observations passed. No approved selected READ/WATCH/export targets exist; native screen-reader automation unavailable. Four real-SQL module withdrawal regressions passed, using explicit fixtures, not real launch-user acceptance."
+    },
+    {
+      "requirement": 5,
+      "name": "Representative deployment authentication/TLS/secrets/load/alerts/restore",
+      "status": "NotRun",
+      "evidence": [
+        "docs/milestones/evidence/M25.3-prompt9-local.json",
+        "docs/milestones/evidence/M25.3-prompt9-recovery.json"
+      ],
+      "limitsAndOwnerAction": "Local Windows access,120 bounded requests,307-second observation and local outage alert passed. Runtime-disabled API and Development Web over HTTP cannot qualify TLS, deployed secrets/rotation/retention, realistic selected-content load, external alert delivery or intended hosting. Restore covers fixture SQL+two master assets; not an approved launch, offsite/log/key recovery or old-binary rollback."
+    },
+    {
+      "requirement": 6,
+      "name": "Source/cast IDs, business bindings/balances and redacted-state preservation in local recovery",
+      "status": "Pass",
+      "evidence": [
+        "docs/milestones/evidence/M25.3-prompt9-recovery.json",
+        "docs/milestones/evidence/M25.3-prompt9-preservation.json"
+      ],
+      "limitsAndOwnerAction": "21 tables compared in both directions, current copy-only backup only; both original fixture masters match restored SQL metadata. No old sensitive backup or deleted text restored. Current fixture snapshot consistency is not privacy tombstone replay over historical production backups or an ongoing production RPO."
+    },
+    {
+      "requirement": 7,
+      "name": "Demonstrated fixes, applicable verification and bound report",
+      "status": "Pass",
+      "evidence": [
+        "docs/milestones/evidence/M25.3-prompt9-checks.json",
+        "docs/milestones/evidence/M25.3-prompt9-manifest.json"
+      ],
+      "limitsAndOwnerAction": "No production defect demonstrated or production code changed. Fixed only new harness readiness expectation and disposable restore cleanup. Production release remains BLOCKED; no deployment, provider spend, review fabrication, commit or push."
+    }
+  ]
+}

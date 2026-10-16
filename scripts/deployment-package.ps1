@@ -9,6 +9,8 @@ foreach($name in @('Api','Web','Worker')){
 & dotnet publish "src/GeetaStudio.$name/GeetaStudio.$name.csproj" --no-restore --disable-build-servers -m:1 -p:UseSharedCompilation=false -c Release --self-contained false -o (Join-Path $root $name)
 if($LASTEXITCODE -ne 0){throw "Publish failed:$name"}
 }
+New-Item -ItemType Directory -Path (Join-Path $root 'Api/ops') -Force | Out-Null
+Copy-Item -LiteralPath (Join-Path $repo 'ops/release-baseline.json'),(Join-Path $repo 'ops/release-evidence.json') -Destination (Join-Path $root 'Api/ops')
 Get-ChildItem -LiteralPath $root -File -Recurse|ForEach-Object{@{path=$_.FullName.Substring($root.Length+1);sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash}}|ConvertTo-Json|Set-Content (Join-Path $root 'manifest.json')
 Write-Host "Private pilot binaries packaged:$root. No service installation or deployment performed."
 }finally{Pop-Location}

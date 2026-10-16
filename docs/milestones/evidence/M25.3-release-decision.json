@@ -1,0 +1,153 @@
+{
+  "Release": "Proposed READ/WATCH with manual export pilot \u2014 owner scope approval pending",
+  "EvaluatedUtc": "2026-10-16T03:06:28.2825359+00:00",
+  "CodeFingerprint": "7A609D55992CE0AB054B2A37620339F6E2BA467D247F345750B8860E1D3AAD50",
+  "PolicyFingerprint": "66767AEAC7D77A4F927D536B952E4158E5B34CFB68C1654ABCFE6FFF4B139944",
+  "ConfigurationFingerprint": "C7BA01B494C5AE13F57B92C7FA401F17AE0656C1027EEDA8815974A25449F2A5",
+  "ManifestFingerprint": "A35AA47D4C759F82D13E8C55FC7D2E9E73EE9D4BCED1F0A254630745319DC28D",
+  "ProductionReady": false,
+  "Blocks": [
+    "READ:ExplicitBoundedTargetsRequired",
+    "WATCH:ExplicitBoundedTargetsRequired",
+    "ManualExport:ExplicitBoundedTargetsRequired"
+  ],
+  "Features": [
+    {
+      "Key": "READ",
+      "Selected": true,
+      "Ready": false,
+      "Blocks": [
+        "ExplicitTargetsRequired"
+      ],
+      "Targets": [],
+      "RequiredEvidence": [
+        "CurrentCodeContentPolicyProviderBindings",
+        "CurrentSourceRights",
+        "M12HumanQualification",
+        "CurrentEditorialApproval",
+        "CurrentPublicCollectionAndReaderEvidence",
+        "OwnerScope",
+        "SecurityPrivacy",
+        "Usability",
+        "Hosting",
+        "Monitoring",
+        "Recovery",
+        "MatchingCI",
+        "ProviderSwitch"
+      ]
+    },
+    {
+      "Key": "WATCH",
+      "Selected": true,
+      "Ready": false,
+      "Blocks": [
+        "ExplicitTargetsRequired"
+      ],
+      "Targets": [],
+      "RequiredEvidence": [
+        "CurrentCodeContentPolicyProviderBindings",
+        "CurrentSourceRights",
+        "M12HumanQualification",
+        "CurrentEditorialApproval",
+        "ApprovedArtVoiceAndMediaRights",
+        "ExactEpisodeHumanListeningVisualReview",
+        "CurrentWATCHMaster",
+        "OwnerScope",
+        "SecurityPrivacy",
+        "Usability",
+        "Hosting",
+        "Monitoring",
+        "Recovery",
+        "MatchingCI",
+        "ProviderSwitch"
+      ]
+    },
+    {
+      "Key": "ManualExport",
+      "Selected": true,
+      "Ready": false,
+      "Blocks": [
+        "ExplicitTargetsRequired",
+        "WATCHDependencyBlocked"
+      ],
+      "Targets": [],
+      "RequiredEvidence": [
+        "CurrentCodeContentPolicyProviderBindings",
+        "CurrentSourceRights",
+        "M12HumanQualification",
+        "CurrentEditorialApproval",
+        "ApprovedArtVoiceAndMediaRights",
+        "ExactEpisodeHumanListeningVisualReview",
+        "CurrentWATCHMaster",
+        "OwnerScope",
+        "SecurityPrivacy",
+        "Usability",
+        "Hosting",
+        "Monitoring",
+        "Recovery",
+        "MatchingCI",
+        "ProviderSwitch"
+      ]
+    },
+    {
+      "Key": "TALK",
+      "Selected": false,
+      "Ready": false,
+      "Blocks": [
+        "DisabledByManifest"
+      ],
+      "Targets": [],
+      "RequiredEvidence": null
+    },
+    {
+      "Key": "Payments",
+      "Selected": false,
+      "Ready": false,
+      "Blocks": [
+        "DisabledByManifest"
+      ],
+      "Targets": [],
+      "RequiredEvidence": null
+    },
+    {
+      "Key": "B2B",
+      "Selected": false,
+      "Ready": false,
+      "Blocks": [
+        "DisabledByManifest"
+      ],
+      "Targets": [],
+      "RequiredEvidence": null
+    },
+    {
+      "Key": "AutomaticSocial",
+      "Selected": false,
+      "Ready": false,
+      "Blocks": [
+        "DisabledByManifest"
+      ],
+      "Targets": [],
+      "RequiredEvidence": null
+    },
+    {
+      "Key": "CREATE",
+      "Selected": false,
+      "Ready": false,
+      "Blocks": [
+        "DisabledByManifest"
+      ],
+      "Targets": [],
+      "RequiredEvidence": null
+    },
+    {
+      "Key": "Analytics",
+      "Selected": false,
+      "Ready": false,
+      "Blocks": [
+        "DisabledByManifest"
+      ],
+      "Targets": [],
+      "RequiredEvidence": null
+    }
+  ]
+}

@@ -26,10 +26,21 @@ public static class ReadEndpoints
         {
             Headers(c.HttpContext); var result = await next(c); Requests.Add(1, new KeyValuePair<string, object?>("version", 1)); return result;
         });
-        publicRead.MapGet("", (IPublicRead r, CancellationToken ct) => r.DirectoryAsync(ct));
-        publicRead.MapGet("/{key}", async (string key, IPublicRead r, CancellationToken ct) =>
+        publicRead.MapGet("", async (IPublicRead r, HttpContext context, CancellationToken ct) =>
         {
-            var book = await r.GetAsync(key, ct); return book == null ? Results.NotFound() : Results.Ok(book);
+            var rows = await r.DirectoryAsync(ct);
+            if (context.Items[typeof(ReleaseDecision)] is ReleaseDecision decision)
+            {
+                var ids = decision.Features.Single(x => x.Key == "READ").Targets.Select(x => x.Target.ResourceId).ToArray();
+                rows = rows.Where(x => ids.Contains(x.Id)).ToArray();
+            }
+            return rows;
+        });
+        publicRead.MapGet("/{key}", async (string key, IPublicRead r, HttpContext context, CancellationToken ct) =>
+        {
+            var book = await r.GetAsync(key, ct);
+            if (book != null && context.Items[typeof(ReleaseDecision)] is ReleaseDecision decision && !decision.Features.Single(x => x.Key == "READ").Targets.Any(x => x.Target.ResourceId == book.Collection.Id)) return Results.NotFound();
+            return book == null ? Results.NotFound() : Results.Ok(book);
         });
         publicRead.MapPost("/{key}/events", async (string key, ReadEngagement request, IPublicRead r, HttpContext c, CancellationToken ct) =>
         {

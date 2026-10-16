@@ -1,3 +1,5 @@
+Current release tooling is described in [M25.3 Prompt8](M25.3_LOCAL_RUN.md). It supersedes the historical hardcoded checklist below with current per-resource evidence and effective route enforcement. Packaging remains private and does not grant release authorization.
+
 # M25 hardening and operations
 
 Scope: the existing controlled private product. This is an Offline Verified baseline, not a production authorization. `ops/release-baseline.json` lists each enabled private feature, its evidence and individual production gates. `scripts/release-check.ps1 -RequireProduction` deliberately fails while required qualifications are absent. A small future READ release need only qualify its selected features; do not enable unrelated paid/voice/commerce capabilities.

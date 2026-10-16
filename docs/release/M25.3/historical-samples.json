@@ -1,0 +1,86 @@
+[
+  {
+    "audience": "child",
+    "audienceId": "ce06ae28-5282-4b07-8138-36953bd01390",
+    "locale": "en-IN",
+    "fixtureOnly": true,
+    "currentlyWithdrawn": true,
+    "jsonPath": ".local/M25-2-prompt7/sample/child.json",
+    "jsonSha256": "94CBBFADDF7A1CE5DD51E9A512ABD624578E5C5211E5A47AB189A9814F3EBD2C",
+    "masterPath": ".local/M25-2-prompt7/sample/child-CONTROLLED-TONE-NOT-NARRATION.mp4",
+    "masterSha256": "113723C8F638A69F43315630C637B2D1B69C5CBCBD13465A9545485C34EE0F37",
+    "artifact": {
+      "Id": "7bb60bc5-d7cd-4a3b-950a-102eca4c497a",
+      "Aspect": "Standard",
+      "AssetReferenceId": "25a222a1-8f9f-4559-8559-b9bbaf891397",
+      "StorageAssetId": "71c32557-3375-f874-14e7-26d16b22f503",
+      "Mime": "video/mp4",
+      "Sha256": "113723C8F638A69F43315630C637B2D1B69C5CBCBD13465A9545485C34EE0F37",
+      "Length": 948110,
+      "DurationSeconds": 87.021333,
+      "RendererVersion": "39074F7FDBEB01C6C4006F51E6D877BD778A82376D9F8DD03E1713C849A7B7FC",
+      "Warnings": [
+        "SceneLevelTimingNotWordAlignment",
+        "HumanVisualListeningAndNativeLanguageReviewRequired"
+      ]
+    },
+    "costs": {
+      "ai": {
+        "currency": "USD",
+        "ledgerAmount": 0.001,
+        "actualExternalCharge": 0,
+        "pricingIsSynthetic": true
+      },
+      "media": {
+        "currency": "INR",
+        "ledgerAmount": 0.0
+      },
+      "unknownCosts": 0
+    },
+    "teachingRationale": "The verified gathering theme supports checking context; not a verse endorsing the event.",
+    "productionId": "686d8d93-bae3-48b2-8e52-cca614b296b6",
+    "coreRevisionId": "6cac1427-70c4-42a5-af33-0b9eb3ee05fd"
+  },
+  {
+    "audience": "youth",
+    "audienceId": "f2e16ea7-156a-4a0f-a286-286bb8acd229",
+    "locale": "en-IN",
+    "fixtureOnly": true,
+    "currentlyWithdrawn": true,
+    "jsonPath": ".local/M25-2-prompt7/sample/youth.json",
+    "jsonSha256": "48195F7D52579442C44C1FF3638DF84CAE12FED740BF795FBCFD06028180A87C",
+    "masterPath": ".local/M25-2-prompt7/sample/youth-CONTROLLED-TONE-NOT-NARRATION.mp4",
+    "masterSha256": "3D139C2780E181931655D928C4EA06EB268625F971166BA0FD947F63DD82E01E",
+    "artifact": {
+      "Id": "ef9176c8-c1cd-490b-83cf-7c1a0abaa2c6",
+      "Aspect": "Standard",
+      "AssetReferenceId": "bcd867b3-b87a-487c-a17a-7eb4e8a1a85d",
+      "StorageAssetId": "89580c5a-2082-de09-6f05-4e6543544585",
+      "Mime": "video/mp4",
+      "Sha256": "3D139C2780E181931655D928C4EA06EB268625F971166BA0FD947F63DD82E01E",
+      "Length": 984253,
+      "DurationSeconds": 88.771333,
+      "RendererVersion": "39074F7FDBEB01C6C4006F51E6D877BD778A82376D9F8DD03E1713C849A7B7FC",
+      "Warnings": [
+        "SceneLevelTimingNotWordAlignment",
+        "HumanVisualListeningAndNativeLanguageReviewRequired"
+      ]
+    },
+    "costs": {
+      "ai": {
+        "currency": "USD",
+        "ledgerAmount": 0.00116,
+        "actualExternalCharge": 0,
+        "pricingIsSynthetic": true
+      },
+      "media": {
+        "currency": "INR",
+        "ledgerAmount": 0.0
+      },
+      "unknownCosts": 0
+    },
+    "teachingRationale": "The verified gathering theme supports checking context; not a verse endorsing the event.",
+    "productionId": "6c5cc416-2e86-4d5d-ade3-323f1718dc10",
+    "coreRevisionId": "6597e27e-2708-4849-b84f-0c162b181fa9"
+  }
+]

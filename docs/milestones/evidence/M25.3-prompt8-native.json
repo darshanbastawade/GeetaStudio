@@ -1,0 +1,19 @@
+{
+    "environment":  "Production",
+    "runtimeEnabled":  false,
+    "requestedEnforcementOverride":  false,
+    "loopbackOnly":  true,
+    "live":  200,
+    "anonymousDecision":  401,
+    "operatorDecision":  200,
+    "productionReady":  false,
+    "codeFingerprint":  "7A609D55992CE0AB054B2A37620339F6E2BA467D247F345750B8860E1D3AAD50",
+    "read":  404,
+    "talk":  404,
+    "checkout":  404,
+    "staffSocial":  404,
+    "externalEffects":  0,
+    "interactiveDebuggerVerified":  false,
+    "ownedProcessStopped":  true,
+    "listenerRemoved":  true
+}

@@ -1,0 +1,57 @@
+{
+  "observedUtc": "2026-10-16T09:17:31.7293046+00:00",
+  "status": "Pass",
+  "qualification": "Local fixture SQL plus two-audience asset restore only",
+  "sourceDatabase": "GeetaStudio_M1Tests",
+  "isolatedRestore": "GeetaStudio_P9Restore_f802b1a8ac5a4daab4b881e477bdd3f5",
+  "copyOnlyChecksumBackup": true,
+  "restoredCounts": {
+    "core.Characters": 3702,
+    "core.CharacterRevisions": 3778,
+    "core.Cast": 66,
+    "sources.SourceWork": 8836,
+    "sources.SourceEdition": 8836,
+    "sources.SourceSnapshot": 9610,
+    "sources.SourcePermission": 8750,
+    "sources.ProvenanceEdge": 11493,
+    "reader.ReadOperation": 2513,
+    "editorial.EditorialApproval": 3360,
+    "runtime.Operations": 902,
+    "runtime.Reservations": 1165,
+    "customers.CustomerCredit": 2149,
+    "customers.CustomerReservation": 692,
+    "customers.CustomerOrder": 284,
+    "customers.CustomerPaymentEvent": 520,
+    "commerce.CommerceOrder": 178,
+    "commerce.CommerceEffect": 78,
+    "media.MediaVersion": 1489,
+    "media.MediaGeneration": 522,
+    "watch.WatchArtifact": 436
+  },
+  "exactRowsBothDirections": true,
+  "restoredAssets": [
+    {
+      "length": 948110,
+      "sha256": "113723C8F638A69F43315630C637B2D1B69C5CBCBD13465A9545485C34EE0F37",
+      "id": "71c32557-3375-f874-14e7-26d16b22f503",
+      "originalStore": "watch"
+    },
+    {
+      "length": 984253,
+      "sha256": "3D139C2780E181931655D928C4EA06EB268625F971166BA0FD947F63DD82E01E",
+      "id": "89580c5a-2082-de09-6f05-4e6543544585",
+      "originalStore": "watch"
+    }
+  ],
+  "corruptAssetDetectedAndRecovered": true,
+  "transactionRollback": true,
+  "additiveForwardFix": true,
+  "elapsedSeconds": 48.2160209,
+  "quiescedCopyRpoSeconds": 0,
+  "oldBinaryRollbackQualified": false,
+  "productionOffsiteOrLogRecoveryQualified": false,
+  "genuineReviewOrOperationalReceiptWritten": false,
+  "sensitiveTextRestoredFromHistoricalBackup": false,
+  "developmentDatabaseModified": false,
+  "ownedRestoreAndAssetCopiesRemoved": true
+}

@@ -137,7 +137,7 @@ internal static class TrendTestFixture
         packet = await editorial.ActAsync(f.Owner, f.Universe, packet.Id, EditorialTestFixture.Action(packet, "Evaluate", new(report.Id, c.Key)), default);
         packet = await editorial.ActAsync(f.Owner, f.Universe, packet.Id, EditorialTestFixture.Action(packet, "Review"), default);
         packet = await editorial.ActAsync(f.Owner, f.Universe, packet.Id, EditorialTestFixture.Action(packet, "Approve"), default);
-        return await editorial.ActAsync(f.Owner, f.Universe, packet.Id, new(Guid.NewGuid(), packet.RowVersion, "Schedule", "fixture:M15-scheduled-recheck", "Fixture", ScheduledUtc: DateTimeOffset.UtcNow), default);
+        return await editorial.ActAsync(f.Owner, f.Universe, packet.Id, new(Guid.NewGuid(), packet.RowVersion, "Schedule", "fixture:M15-scheduled-recheck", "Fixture", ScheduledUtc: DateTimeOffset.UtcNow.AddHours(1)), default);
     }
 
 }
